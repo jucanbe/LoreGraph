@@ -1,136 +1,142 @@
-# LoreGraph — Gestor de campañas de rol sobre grafos de conocimiento
+# LoreGraph — Tabletop RPG campaign manager built on knowledge graphs
 
-Toda la información de una campaña (personajes, PNJ, lugares, facciones, objetos,
-eventos, sesiones y tramas) se guarda como **grafo de conocimiento RDF**. El grafo se
-enlaza con datos abiertos (Wikidata, DBpedia) mediante SPARQL federado, y los agentes
-de IA pueden leerlo y **proponer** cambios, que siempre revisa una persona.
+> **English** · [Español](README.es.md)
 
-El sistema es modular: un **núcleo genérico** y **módulos por sistema de juego**. Hay
-dos incluidos: *Vampiro: La Mascarada 5.ª ed.* (no oficial) y *D&D 5e* (SRD 5.1). Un
-módulo no requiere tocar el código del backend ni del frontend.
+Everything in a campaign (player characters, NPCs, places, factions, items, events,
+sessions and plots) is stored as an **RDF knowledge graph**. The graph links to open
+data (Wikidata, DBpedia) through federated SPARQL, and AI agents can read it and
+**propose** changes, which a person always reviews.
+
+The system is modular: a **generic core** plus **one module per game system**. Two are
+included: *Vampire: The Masquerade 5th ed.* (unofficial) and *D&D 5e* (SRD 5.1). Adding
+a module does not require touching the backend or frontend code.
 
 | | |
 |---|---|
-| ![Panel de campaña](docs/capturas/panel.jpg) | ![Ficha de entidad](docs/capturas/ficha.jpg) |
-| ![Vista de grafo](docs/capturas/grafo.jpg) | ![Formulario dinámico](docs/capturas/formulario.jpg) |
+| ![Campaign dashboard](docs/screenshots/dashboard.png) | ![Entity sheet](docs/screenshots/entity.png) |
+| ![Graph centred on a character](docs/screenshots/graph.png) | ![Form generated from SHACL shapes](docs/screenshots/form.png) |
+| ![Proposals inbox with triple diff](docs/screenshots/proposals.png) | ![SPARQL federated with Wikidata](docs/screenshots/sparql.png) |
 
-## Arranque rápido
+The interface is available in English and Spanish. The example campaign's content
+(names, descriptions) is written in Spanish because it is set in Madrid.
 
-Requisitos: **Python 3.12**, [uv](https://docs.astral.sh/uv/) y **Node.js 20+**.
-No hace falta `make`: `python tasks.py <tarea>` hace lo mismo en Linux, macOS y Windows.
+## Quick start
+
+Requirements: **Python 3.12**, [uv](https://docs.astral.sh/uv/) and **Node.js 20+**.
+`make` is optional: `python tasks.py <task>` does the same on Linux, macOS and Windows.
 
 ```bash
-cp .env.example .env        # en Windows: copy .env.example .env
-make install                # o: python tasks.py install
-make seed                   # carga «Noches de Madrid» (Vampiro) y «La Costa de Ceniza» (D&D)
-make dev                    # API en :8765 y la interfaz en http://localhost:5173
+cp .env.example .env        # on Windows: copy .env.example .env
+make install                # or: python tasks.py install
+make seed                   # loads "Noches de Madrid" (Vampire) and "La Costa de Ceniza" (D&D)
+make dev                    # API on :8765 and the UI at http://localhost:5173
 ```
 
-| Tarea | Qué hace |
+| Task | What it does |
 |---|---|
-| `make install` | `uv sync` (backend) y `npm install` (frontend) |
-| `make dev` | Arranca backend y frontend en paralelo (Ctrl+C para ambos) |
-| `make test` | pytest + comprobación de tipos TypeScript + Vitest |
-| `make seed` | Carga las campañas de ejemplo de los módulos (para antes el backend) |
-| `make types` | Regenera `openapi.json` y los tipos TypeScript del cliente |
-| `make lint` | Ruff y oxlint/tsc |
+| `make install` | `uv sync` (backend) and `npm install` (frontend) |
+| `make dev` | Starts backend and frontend together (Ctrl+C stops both) |
+| `make test` | pytest + TypeScript type check + Vitest |
+| `make seed` | Loads the modules' example campaigns (stop the backend first) |
+| `make types` | Regenerates `openapi.json` and the client's TypeScript types |
+| `make lint` | Ruff and oxlint/tsc |
 
-> El almacén RDF (RocksDB) solo admite **un proceso a la vez**. Para `make seed`, para
-> antes el backend.
+> The RDF store (RocksDB) allows **only one process at a time**. Stop the backend
+> before running `make seed`.
 
-La configuración de arranque está en `.env`, documentada en [`.env.example`](.env.example):
-rutas de datos, puertos, endpoints SPARQL externos, timeouts, User-Agent para Wikidata
-y el modelo local del asistente.
+Startup configuration lives in `.env`, documented in [`.env.example`](.env.example):
+data paths, ports, external SPARQL endpoints, timeouts, the User-Agent for Wikidata
+and the assistant's local model.
 
-Lo más habitual se cambia en la página **Ajustes** (icono de engranaje en la cabecera):
-- El modelo de lenguaje, con un botón para probar la conexión y listar los modelos.
-- Tu nombre.
-- Las opciones de Wikidata y DBpedia.
-- Los límites de SPARQL.
+The most common settings can be changed on the **Settings** page (gear icon in the header):
+- The language model, with a button to test the connection and list available models.
+- Your name.
+- Wikidata and DBpedia options.
+- SPARQL limits.
 
-Esos valores se guardan en `data/aux.sqlite`, aparte del almacén RDF, y tienen prioridad
-sobre `.env`. Cada uno se puede restablecer a su valor original.
+These values are stored in `data/aux.sqlite`, separate from the RDF store, and take
+precedence over `.env`. Each one can be reset to its original value.
 
-## Qué incluye
+## Features
 
-- **Ontología base `rpg:`** en inglés, con etiquetas y comentarios en español e inglés
-  ([core.ttl](backend/src/loregraph/ontology/core.ttl)). Reutiliza schema.org, FOAF, SKOS,
-  PROV-O y OWL-Time.
-- **Grafos con nombre** por campaña:
-  - `canon`: el mundo aprobado.
-  - `derived`: lo que deducen las reglas.
-  - `provenance`: quién cambió qué, cuándo y con qué petición (PROV-O).
-  - `proposals/<id>`: lo que proponen los agentes.
-  - `knowledge/<personaje>`: lo que cree saber cada personaje.
-- **Relaciones cualificadas** con tipo, intensidad y vigencia por sesión. La vista de
-  grafo puede mostrar el mundo en cualquier sesión. Ver
-  [docs/arquitectura.md](docs/arquitectura.md).
-- **Temporalidad completa**: al cambiar la ubicación, la facción, las posesiones o el
-  estado de una entidad, se guarda la historia por sesiones. La ficha muestra dónde
-  estuvo y con quién en cada momento.
-- **Detector de incoherencias**: comprobaciones SPARQL del núcleo y de cada módulo
-  (un muerto que reaparece, un objeto con dos dueños, una generación imposible…).
-  Puedes marcar las intencionadas como ignoradas.
-- **Historial con deshacer**: cada cambio tiene procedencia y se puede deshacer
-  (se rechaza si un cambio posterior tocó los mismos datos).
-- **Retratos y mapas propios**: imágenes subidas con procedencia; mapas (plano de la
-  ciudad, mazmorra…) con marcadores enlazados a entidades.
-- **Exportar e importar campañas** en un ZIP (grafos, imágenes, ajustes y consultas),
-  con el mismo id o con otro para duplicarlas.
-- **Formularios generados desde SHACL**. El frontend los pinta sin conocer el módulo:
-  tipos, cardinalidad, `sh:in`, referencias, agrupación, puntos y subformularios
-  anidados. Los errores SHACL del servidor aparecen junto a cada campo.
-- **Vista epistémica**: el mundo como lo conoce un personaje. Sus creencias se marcan
-  como confirmadas, falsas (contradicen el canon) o sin verificar.
-- **Mundo real**: anclas a Wikidata/DBpedia con `rpg:inspiredBy` / `rpg:correspondsTo`,
-  **nunca `owl:sameAs`** (una forma SHACL lo impide). La ficha muestra descripción,
-  imagen, mapa (Leaflet + OpenStreetMap) y hechos destacados, separados de la campaña.
-- **Agentes**:
-  - **Servidor MCP** en `http://localhost:8765/mcp`, para Claude Code, Claude Desktop
-    u otros clientes MCP.
-  - **Asistente interno** con PydanticAI y **modelos locales** (Ollama por defecto).
-  - **Generador con IA**: crea PNJ, lugares, objetos… con historia propia y fichas
-    siempre válidas para el sistema de juego (ver abajo).
-  - **Lore propio de la campaña** (premisa, tono, reglas de la casa, temas a evitar)
-    que se añade al contexto de todos los modelos.
-  - En todos los casos los agentes solo crean propuestas, y tú las apruebas, rechazas
-    o editas en la bandeja.
-- **Interfaz**:
-  - React + TypeScript estricto, Tailwind + shadcn/ui.
-  - Paleta de órdenes **Ctrl/Cmd+K**, modo claro/oscuro y tema visual por módulo.
-  - Responsive (pensada también para tablet) e i18n (español e inglés).
+- **Core `rpg:` ontology** in English, with labels and comments in English and Spanish
+  ([core.ttl](backend/src/loregraph/ontology/core.ttl)). It reuses schema.org, FOAF,
+  SKOS, PROV-O and OWL-Time.
+- **Named graphs** per campaign:
+  - `canon`: the approved world.
+  - `derived`: what the rules infer.
+  - `provenance`: who changed what, when and with which request (PROV-O).
+  - `proposals/<id>`: what agents propose.
+  - `knowledge/<character>`: what each character believes they know.
+- **Qualified relationships** with type, strength and validity by session. The graph
+  view can show the world at any session.
+- **Full temporality**: when an entity's location, faction, possessions or status
+  change, the history is kept by session. The sheet shows where it was and with whom
+  at each point.
+- **Inconsistency detector**: SPARQL checks from the core and from each module (a dead
+  character who reappears, an item with two owners, an impossible vampire generation…).
+  Intentional ones can be marked as ignored.
+- **History with undo**: every change has provenance and can be undone (refused if a
+  later change touched the same data).
+- **Portraits and custom maps**: uploaded images with provenance; maps (a city plan, a
+  dungeon…) with markers linked to entities.
+- **Campaign export and import** as a ZIP (graphs, images, settings and saved
+  queries), under the same id or a new one to duplicate a campaign.
+- **Forms generated from SHACL**. The frontend renders them without knowing the module:
+  types, cardinality, `sh:in`, references, grouping, dots and nested sub-forms. SHACL
+  errors from the server appear next to each field.
+- **Epistemic view**: the world as a character knows it. Their beliefs are marked as
+  confirmed, false (contradicting the canon) or unverified.
+- **Real world**: anchors to Wikidata/DBpedia with `rpg:inspiredBy` /
+  `rpg:correspondsTo`, **never `owl:sameAs`** (a SHACL shape forbids it). The sheet shows
+  the description, image, map (Leaflet + OpenStreetMap) and key facts, kept apart from
+  the campaign data.
+- **Agents**:
+  - **MCP server** at `http://localhost:8765/mcp`, for Claude Code, Claude Desktop or
+    other MCP clients.
+  - **Built-in assistant** using PydanticAI and **local models** (Ollama by default).
+  - **AI generator**: creates NPCs, places, items… with their own backstory and sheets
+    that are always valid for the game system (see below).
+  - **Campaign lore** (premise, tone, house rules, topics to avoid) added to the
+    context of every model.
+  - In every case agents only create proposals, which you approve, reject or edit in
+    the inbox.
+- **Interface**:
+  - React + strict TypeScript, Tailwind + shadcn/ui.
+  - **Ctrl/Cmd+K** command palette, light/dark mode and a visual theme per module.
+  - Responsive (tablet included) and translated (English and Spanish).
 
-## Ejemplo de consulta SPARQL federada
+## Federated SPARQL example
 
-En el editor SPARQL (destino «local»), con la campaña «Noches de Madrid». Los prefijos
-de la campaña ya están declarados:
+In the SPARQL editor (target "local"), with the "Noches de Madrid" campaign. The
+campaign prefixes are already declared:
 
 ```sparql
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
-SELECT ?lugar ?nombre ?nombreReal ?inicio ?imagen WHERE {
-  ?lugar rdfs:label ?nombre ;
+SELECT ?place ?name ?realName ?inception ?image WHERE {
+  ?place rdfs:label ?name ;
          rpg:correspondsTo ?real .
   SERVICE <https://query.wikidata.org/sparql> {
-    ?real rdfs:label ?nombreReal .
-    FILTER (lang(?nombreReal) = "es")
-    OPTIONAL { ?real wdt:P571 ?inicio }
-    OPTIONAL { ?real wdt:P18 ?imagen }
+    ?real rdfs:label ?realName .
+    FILTER (lang(?realName) = "en")
+    OPTIONAL { ?real wdt:P571 ?inception }
+    OPTIONAL { ?real wdt:P18 ?image }
   }
 }
-ORDER BY ?nombre
+ORDER BY ?name
 ```
 
-Devuelve cada lugar de la crónica (Palacio de Linares, Templo de Debod, Malasaña…) con
-su nombre real, fecha de construcción e imagen de Wikidata.
+It returns each place in the chronicle (Palacio de Linares, Temple of Debod,
+Malasaña…) with its real name, construction date and image from Wikidata.
 
-La federación la resuelve el backend, no pyoxigraph:
-1. Obtiene los valores locales de las variables de unión.
-2. Consulta el endpoint por lotes con `VALUES`, con timeout, caché y el User-Agent que
-   exige Wikidata.
-3. Vuelve a unir los resultados.
+The backend resolves the federation itself rather than pyoxigraph:
+1. It gets the local values of the join variables.
+2. It queries the endpoint in batches with `VALUES`, with a timeout, a cache and the
+   User-Agent Wikidata requires.
+3. It joins the results back together.
 
-Solo se permiten los endpoints configurados. También por API:
+Only configured endpoints are allowed. Also available through the API:
 
 ```bash
 curl -X POST http://localhost:8765/campanas/noches-de-madrid/sparql \
@@ -138,80 +144,84 @@ curl -X POST http://localhost:8765/campanas/noches-de-madrid/sparql \
      -d "{\"consulta\": \"SELECT ?n WHERE { ?x a vtm:Vampire ; rdfs:label ?n }\"}"
 ```
 
-## Agentes
+> The REST API, the MCP tools and the CLI use Spanish identifiers (`campanas`,
+> `consulta`, `proponer_triples`…). The OpenAPI documentation is at
+> `http://localhost:8765/docs`.
 
-### MCP (agentes externos)
+## Agents
 
-Con el backend en marcha, añade el servidor a tu cliente MCP. En Claude Code:
+### MCP (external agents)
+
+With the backend running, add the server to your MCP client. In Claude Code:
 
 ```bash
 claude mcp add --transport http loregraph http://localhost:8765/mcp
 ```
 
-**Herramientas**
+**Tools**
 
-| Función | Herramientas |
+| Purpose | Tools |
 |---|---|
-| Descubrir | `listar_campanas`, `listar_tipos`, `esquema_clase`, `leer_instrucciones` |
-| Leer | `buscar_entidades`, `describir_entidad` |
-| Consultar | `consultar_sparql` (solo lectura, con límite), `consultar_mundo_real` (Wikidata/DBpedia) |
-| Proponer | `proponer_triples` (solo escribe en el grafo de propuestas, validando con SHACL), `listar_propuestas` |
+| Discover | `listar_campanas`, `listar_tipos`, `esquema_clase`, `leer_instrucciones` |
+| Read | `buscar_entidades`, `describir_entidad` |
+| Query | `consultar_sparql` (read-only, with a limit), `consultar_mundo_real` (Wikidata/DBpedia) |
+| Propose | `proponer_triples` (writes only to the proposals graph, validated with SHACL), `listar_propuestas` |
 
-Los `prompts/` de cada módulo se publican como prompts MCP. Para clientes que solo
-hablan stdio, `uv run loregraph mcp-stdio` (desde `backend/`, sin la API arrancada).
+Each module's `prompts/` are published as MCP prompts. For clients that only speak
+stdio, run `uv run loregraph mcp-stdio` (from `backend/`, with the API stopped).
 
-### Asistente local (PydanticAI)
+### Local assistant (PydanticAI)
 
-Configura `LOREGRAPH_LLM_*` en `.env`. Por defecto usa Ollama en `http://localhost:11434/v1`
-con `qwen3:8b`; también funciona cualquier servidor compatible con OpenAI (LM Studio,
-llama.cpp, vLLM). Úsalo desde la página **Asistente** o desde la terminal:
+Set `LOREGRAPH_LLM_*` in `.env`. By default it uses Ollama at
+`http://localhost:11434/v1` with `qwen3:8b`; any OpenAI-compatible server also works
+(LM Studio, llama.cpp, vLLM). Use it from the **Assistant** page or from the terminal:
 
 ```bash
-uv run --directory backend loregraph agente noches-de-madrid "Crea un sirviente ghoul para Isabel de Sandoval"
+uv run --directory backend loregraph agente noches-de-madrid "Create a ghoul servant for Isabel de Sandoval"
 ```
 
-Está pensado para modelos pequeños:
-- Usa herramientas de alto nivel y salidas compactas ajustadas al contexto.
-- Propone con JSON estructurado en lugar de Turtle.
-- Si la propuesta no valida, el error vuelve al modelo para que la corrija.
+It is designed for small models:
+- It uses high-level tools and compact outputs sized to the context window.
+- It proposes changes as structured JSON instead of Turtle.
+- If a proposal fails validation, the error goes back to the model to fix it.
 
-### Generador con IA
+### AI generator
 
-`POST /campanas/{id}/generar` (botón **Generar con IA** en el explorador). El esquema de
-salida se construye en tiempo de ejecución a partir de las formas SHACL de la clase:
-rangos (p. ej. hambre 0–5, generación 3–16), valores permitidos, cardinalidad, objetos
-anidados (disciplinas, relaciones) y referencias **solo** a entidades que existen.
-PydanticAI fuerza esa estructura y, después, la ficha pasa la misma validación SHACL
-que cualquier propuesta; si falla (o repite un nombre), el error vuelve al modelo para
-que lo corrija. El resultado queda como propuesta pendiente de revisión.
+`POST /campanas/{id}/generar` (the **Generate with AI** button in Explore and on the
+dashboard). The output schema is built at runtime from the class's SHACL shapes:
+ranges (e.g. hunger 0–5, generation 3–16), allowed values, cardinality, nested objects
+(disciplines, relationships) and references **only** to entities that exist.
+PydanticAI enforces that structure, and the sheet then goes through the same SHACL
+validation as any proposal; if it fails (or repeats a name), the error goes back to the
+model to fix it. The result is saved as a proposal pending review.
 
-`LOREGRAPH_LLM_OUTPUT_MODE` (también en **Ajustes**) elige cómo se pide la salida
-estructurada: `tool` (llamada a herramienta, por defecto), `native` (JSON Schema del
-proveedor, p. ej. `format` de Ollama) o `prompted` (esquema en las instrucciones). Si tu
-modelo local falla con uno, prueba otro.
+`LOREGRAPH_LLM_OUTPUT_MODE` (also in **Settings**) chooses how structured output is
+requested: `tool` (tool call, the default), `native` (the provider's JSON Schema, e.g.
+Ollama's `format`) or `prompted` (schema in the instructions). If your local model fails
+with one, try another.
 
-## Estructura
+## Layout
 
 ```
-backend/   API FastAPI, núcleo RDF (pyoxigraph), SHACL (pySHACL), MCP, agentes, tests (pytest)
+backend/   FastAPI API, RDF core (pyoxigraph), SHACL (pySHACL), MCP, agents, tests (pytest)
 frontend/  React + Vite + TS, TanStack Query, Cytoscape, CodeMirror, Leaflet, tests (Vitest)
-modules/   vtm5/ y dnd5e/: ontología, formas, vocabulario, reglas, consultas, prompts, ejemplos
-docs/      arquitectura.md, modulos.md (cómo escribir un módulo)
+modules/   vtm5/ and dnd5e/: ontology, shapes, vocabulary, rules, queries, checks, prompts, examples
+docs/      arquitectura.md (architecture), modulos.md (how to write a module), both in Spanish
 ```
 
-## Módulos
+## Modules
 
-Lee [docs/modulos.md](docs/modulos.md). Basta con una carpeta en `modules/` que tenga:
-`manifest.yaml`, `ontology.ttl`, `shapes.ttl`, `vocabulary.ttl`, `rules/`, `queries/`,
-`prompts/`, `assets/` y `examples/`.
+Read [docs/modulos.md](docs/modulos.md) (in Spanish). A module is just a folder in
+`modules/` with `manifest.yaml`, `ontology.ttl`, `shapes.ttl`, `vocabulary.ttl`,
+`rules/`, `queries/`, `checks/`, `prompts/`, `context.yaml`, `assets/` and `examples/`.
 
-## Licencias y avisos
+## Licences and notices
 
-- Los datos de cada instalación (`data/`) no se suben al repositorio. Para mover una
-  campaña entre instalaciones usa **Exportar** / **Importar**.
-- El módulo de **Vampiro** no es oficial y no contiene texto de los manuales.
-  *Vampire: The Masquerade* es marca de Paradox Interactive AB.
-- El módulo **D&D 5e** incluye material del SRD 5.1 de Wizards of the Coast LLC, con
-  licencia CC-BY-4.0 (atribución en [modules/dnd5e/README.md](modules/dnd5e/README.md)).
-- Mapas © colaboradores de OpenStreetMap. Datos reales de Wikidata (CC0) y DBpedia
+- Each installation's data (`data/`) is not part of the repository. To move a campaign
+  between installations, use **Export** / **Import**.
+- The **Vampire** module is unofficial and contains no text from the rulebooks.
+  *Vampire: The Masquerade* is a trademark of Paradox Interactive AB.
+- The **D&D 5e** module includes material from the SRD 5.1 by Wizards of the Coast LLC,
+  licensed under CC-BY-4.0 (attribution in [modules/dnd5e/README.md](modules/dnd5e/README.md)).
+- Maps © OpenStreetMap contributors. Real-world data from Wikidata (CC0) and DBpedia
   (CC-BY-SA).

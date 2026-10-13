@@ -41,6 +41,6 @@ Primera versión publicada.
 ### Módulos
 - **Vampiro: La Mascarada 5.ª ed.** (no oficial) con la campaña de ejemplo
   «Noches de Madrid» enlazada a Wikidata.
-- **D&D 5e** basado en el SRD 5.1 (CC BY 4.0) con la campaña de ejemplo «Costa Ceniza».
+- **D&D 5e** basado en el SRD 5.1 (CC BY 4.0) con la campaña de ejemplo «La Costa de Ceniza».
 
 [0.1.0]: https://github.com/OWNER/loregraph/releases/tag/v0.1.0
