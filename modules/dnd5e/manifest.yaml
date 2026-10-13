@@ -1,0 +1,108 @@
+id: dnd5e
+nombre:
+  es: "Dungeons & Dragons 5.ª edición (SRD 5.1)"
+  en: "Dungeons & Dragons 5th edition (SRD 5.1)"
+descripcion:
+  es: >-
+    Aventureros con multiclase, criaturas y bestiario, clases, especies, trasfondos,
+    habilidades y conjuros del System Reference Document 5.1.
+  en: >-
+    Multiclass adventurers, creatures and bestiary, classes, species, backgrounds,
+    skills and spells from the System Reference Document 5.1.
+version: 0.1.0
+categoria: sistema
+iri: https://rpg-modules.example.net/dnd5e/ont#
+prefijo: dnd
+licencia: "CC-BY-4.0 (SRD 5.1)"
+depende_de: { core: ">=0.1" }
+ontologia: ontology.ttl
+formas: shapes.ttl
+vocabulario: [vocabulary.ttl]
+prefijos:
+  dndsh: "https://rpg-modules.example.net/dnd5e/shapes#"
+
+# Pestañas extra del explorador (catálogos navegables).
+clases_principales:
+  - dnd:CharacterClass
+  - dnd:Species
+  - dnd:Spell
+  - dnd:Monster
+
+estilos_tipos:
+  dnd:Adventurer:     { color: "#b45309", forma: ellipse,         icono: sword }
+  dnd:Creature:       { color: "#9f1239", forma: ellipse,         icono: skull }
+  dnd:Monster:        { color: "#be123c", forma: octagon,         icono: skull }
+  dnd:CharacterClass: { color: "#a16207", forma: round-rectangle, icono: swords }
+  dnd:Subclass:       { color: "#ca8a04", forma: round-rectangle, icono: git-branch }
+  dnd:Species:        { color: "#4d7c0f", forma: round-rectangle, icono: footprints }
+  dnd:Background:     { color: "#78716c", forma: round-rectangle, icono: book-open }
+  dnd:Spell:          { color: "#7c3aed", forma: star,            icono: sparkles }
+  dnd:Weapon:         { color: "#64748b", forma: diamond,         icono: sword }
+  dnd:Armor:          { color: "#57534e", forma: diamond,         icono: shield-half }
+  dnd:MagicItem:      { color: "#0e7490", forma: diamond,         icono: wand-sparkles }
+  dnd:Dungeon:        { color: "#57534e", forma: round-rectangle, icono: castle }
+  dnd:Settlement:     { color: "#15803d", forma: round-rectangle, icono: house }
+
+estilos_relaciones:
+  dnd:species:            { color: "#65a30d", linea: dotted }
+  dnd:background:         { color: "#a8a29e", linea: dotted }
+  dnd:statBlock:          { color: "#e11d48", linea: dotted }
+  dnd:knowsSpell:         { color: "#8b5cf6", linea: dotted }
+  dnd:preparedSpell:      { color: "#7c3aed", linea: dashed }
+  dnd:rel-patron:         { color: "#d4a017", linea: solid, ancho: 2 }
+  dnd:rel-party-member:   { color: "#2563eb", linea: solid, ancho: 2 }
+  dnd:rel-sworn-enemy:    { color: "#991b1b", linea: solid, ancho: 3 }
+  dnd:rel-rival-party:    { color: "#ea580c", linea: dashed, ancho: 2 }
+
+# Tema «pergamino»: crema y sepia con tinta marrón y rojo lacre (claro);
+# taberna a la luz de las velas, madera oscura y oro (oscuro).
+tema:
+  radio: "0.25rem"
+  fuentes:
+    titulos: "'Cinzel', 'Trajan Pro', 'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+    texto: "'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+    archivos: []
+  claro:
+    background: "#f4ecd8"
+    foreground: "#3b2a1a"
+    card: "#faf4e4"
+    card-foreground: "#3b2a1a"
+    popover: "#fbf6e9"
+    popover-foreground: "#3b2a1a"
+    primary: "#8b1e1e"
+    primary-foreground: "#fbf3e0"
+    secondary: "#e9dcbc"
+    secondary-foreground: "#4a3420"
+    muted: "#ece2c8"
+    muted-foreground: "#6b5440"
+    accent: "#e2c47e"
+    accent-foreground: "#3b2a1a"
+    destructive: "#a61b1b"
+    destructive-foreground: "#fff8ec"
+    border: "#d4c095"
+    input: "#cdb98c"
+    ring: "#b8862b"
+    sidebar: "#ebdfc1"
+    sidebar-foreground: "#3b2a1a"
+  oscuro:
+    background: "#1a120c"
+    foreground: "#f0e2c4"
+    card: "#241911"
+    card-foreground: "#f0e2c4"
+    popover: "#241911"
+    popover-foreground: "#f0e2c4"
+    primary: "#d9a441"
+    primary-foreground: "#1a120c"
+    secondary: "#34251a"
+    secondary-foreground: "#f0e2c4"
+    muted: "#2c2017"
+    muted-foreground: "#bfa888"
+    accent: "#5c2a1c"
+    accent-foreground: "#f6e7c8"
+    destructive: "#d9483b"
+    destructive-foreground: "#fff8ec"
+    border: "#4a3526"
+    input: "#55402e"
+    ring: "#d9a441"
+    sidebar: "#140d08"
+    sidebar-foreground: "#e8d8b8"

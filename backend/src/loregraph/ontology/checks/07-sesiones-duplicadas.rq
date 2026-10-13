@@ -1,0 +1,12 @@
+# titulo: Número de sesión repetido
+# titulo_en: Duplicate session number
+# severidad: aviso
+# descripcion: Dos sesiones tienen el mismo número, lo que confunde la línea temporal.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?entidad a rpg:Session ; rpg:sessionNumber ?n .
+  ?relacionada a rpg:Session ; rpg:sessionNumber ?n .
+  FILTER (?entidad != ?relacionada)
+  BIND (CONCAT("Otra sesión también tiene el número ", STR(?n), ".") AS ?mensaje)
+}

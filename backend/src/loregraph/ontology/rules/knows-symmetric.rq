@@ -1,0 +1,8 @@
+# rpg:knows es simétrica: si A conoce a B, B conoce a A.
+# rpg:knows is symmetric: if A knows B, B knows A.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+CONSTRUCT { ?b rpg:knows ?a }
+WHERE {
+  ?a rpg:knows ?b .
+  FILTER NOT EXISTS { ?b rpg:knows ?a }
+}

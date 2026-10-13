@@ -1,0 +1,21 @@
+# titulo: Conjuros por escuela y nivel
+# descripcion: Catálogo de conjuros agrupado por escuela de magia, con nivel, concentración, ritual y quién del grupo lo conoce.
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?escuela ?nivel ?conjuro ?concentracion ?ritual
+       (GROUP_CONCAT(DISTINCT ?lanzador; separator=", ") AS ?conocidoPor)
+WHERE {
+  ?s a dnd:Spell ;
+     rdfs:label ?conjuro ;
+     dnd:spellLevel ?nivel ;
+     dnd:spellSchool ?sc .
+  FILTER (lang(?conjuro) = "es" || lang(?conjuro) = "")
+  ?sc skos:prefLabel ?escuela . FILTER (lang(?escuela) = "es")
+  OPTIONAL { ?s dnd:concentration ?concentracion }
+  OPTIONAL { ?s dnd:ritual ?ritual }
+  OPTIONAL { ?pj dnd:knowsSpell ?s ; rdfs:label ?lanzador }
+}
+GROUP BY ?escuela ?nivel ?conjuro ?concentracion ?ritual
+ORDER BY ?escuela ?nivel ?conjuro

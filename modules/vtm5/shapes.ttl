@@ -1,0 +1,360 @@
+@prefix vtm:    <https://rpg-modules.example.net/vtm5/ont#> .
+@prefix vtmsh:  <https://rpg-modules.example.net/vtm5/shapes#> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rpgsh:  <https://loregraph.example.org/ont/core/shapes#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+
+#################################################################
+# Grupos / Groups
+#################################################################
+
+vtmsh:BloodGroup a sh:PropertyGroup ; sh:order 5 ;
+    rdfs:label "Sangre"@es , "Blood"@en .
+vtmsh:SocietyGroup a sh:PropertyGroup ; sh:order 12 ;
+    rdfs:label "Sociedad vástaga"@es , "Kindred society"@en .
+vtmsh:DisciplinesGroup a sh:PropertyGroup ; sh:order 15 ;
+    rdfs:label "Disciplinas"@es , "Disciplines"@en .
+vtmsh:HumanityGroup a sh:PropertyGroup ; sh:order 18 ;
+    rdfs:label "Humanidad y convicciones"@es , "Humanity and convictions"@en .
+vtmsh:BondsGroup a sh:PropertyGroup ; sh:order 22 ;
+    rdfs:label "Vínculos y favores"@es , "Bonds and boons"@en .
+vtmsh:DomainGroup a sh:PropertyGroup ; sh:order 11 ;
+    rdfs:label "Dominio"@es , "Domain"@en .
+vtmsh:ClanGroup a sh:PropertyGroup ; sh:order 5 ;
+    rdfs:label "Rasgos del clan"@es , "Clan traits"@en .
+
+#################################################################
+# Propiedades compartidas / Shared property shapes
+#################################################################
+
+vtmsh:Disciplines a sh:PropertyShape ;
+    sh:path vtm:hasDisciplineRating ;
+    sh:name "disciplinas"@es , "disciplines"@en ;
+    sh:class vtm:DisciplineRating ;
+    sh:node vtmsh:DisciplineRatingShape ;
+    dash:editor dash:DetailsEditor ;
+    rpg:backlink rpg:source ;
+    sh:group vtmsh:DisciplinesGroup ; sh:order 0 .
+
+vtmsh:BloodBonds a sh:PropertyShape ;
+    sh:path vtm:hasBloodBond ;
+    sh:name "vínculos de sangre"@es , "blood bonds"@en ;
+    sh:description "Vínculos en los que este personaje es el siervo."@es ,
+                   "Bonds in which this character is the thrall."@en ;
+    sh:class vtm:BloodBond ;
+    sh:node vtmsh:BloodBondShape ;
+    dash:editor dash:DetailsEditor ;
+    rpg:backlink rpg:source ;
+    sh:group vtmsh:BondsGroup ; sh:order 0 .
+
+vtmsh:Boons a sh:PropertyShape ;
+    sh:path vtm:hasBoon ;
+    sh:name "favores debidos"@es , "boons owed"@en ;
+    sh:class vtm:Boon ;
+    sh:node vtmsh:BoonShape ;
+    dash:editor dash:DetailsEditor ;
+    rpg:backlink rpg:source ;
+    sh:group vtmsh:BondsGroup ; sh:order 1 .
+
+vtmsh:Sect a sh:PropertyShape ;
+    sh:path vtm:sect ;
+    sh:name "secta"@es , "sect"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme vtm:Sects ;
+    sh:maxCount 1 ;
+    sh:group vtmsh:SocietyGroup ; sh:order 0 .
+
+#################################################################
+# Vástago / Kindred
+#################################################################
+
+vtmsh:VampireShape a sh:NodeShape ;
+    sh:targetClass vtm:Vampire ;
+    rdfs:label "Vástago"@es , "Kindred"@en ;
+    sh:property [
+        sh:path vtm:clan ;
+        sh:name "clan"@es , "clan"@en ;
+        sh:class vtm:Clan ; sh:maxCount 1 ;
+        sh:group vtmsh:BloodGroup ; sh:order 0 ;
+    ] , [
+        sh:path vtm:generation ;
+        sh:name "generación"@es , "generation"@en ;
+        sh:description "Normalmente la del sire más uno. Si falta, se deduce del sire."@es ,
+                       "Usually the sire's plus one. If missing, it is derived from the sire."@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ;
+        sh:minInclusive 3 ; sh:maxInclusive 16 ;
+        sh:group vtmsh:BloodGroup ; sh:order 1 ;
+    ] , [
+        sh:path vtm:sire ;
+        sh:name "sire"@es , "sire"@en ;
+        sh:class vtm:Vampire ; sh:maxCount 1 ;
+        sh:group vtmsh:BloodGroup ; sh:order 2 ;
+    ] , [
+        sh:path vtm:embraceYear ;
+        sh:name "año del Abrazo"@es , "year of Embrace"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ;
+        sh:group vtmsh:BloodGroup ; sh:order 3 ;
+    ] , [
+        sh:path vtm:apparentAge ;
+        sh:name "edad aparente"@es , "apparent age"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 150 ;
+        sh:group vtmsh:BloodGroup ; sh:order 4 ;
+    ] , [
+        sh:path vtm:bloodPotency ;
+        sh:name "potencia de sangre"@es , "blood potency"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 10 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group vtmsh:BloodGroup ; sh:order 5 ;
+    ] , [
+        sh:path vtm:hunger ;
+        sh:name "hambre"@es , "hunger"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 5 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group vtmsh:BloodGroup ; sh:order 6 ;
+    ] , [
+        sh:path vtm:predatorType ;
+        sh:name "tipo de depredador"@es , "predator type"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme vtm:PredatorTypes ; sh:maxCount 1 ;
+        sh:group vtmsh:BloodGroup ; sh:order 7 ;
+    ] , vtmsh:Sect , [
+        sh:path vtm:position ;
+        sh:name "cargos"@es , "positions"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme vtm:Positions ;
+        sh:group vtmsh:SocietyGroup ; sh:order 1 ;
+    ] , [
+        sh:path vtm:haven ;
+        sh:name "refugio"@es , "haven"@en ;
+        sh:class rpg:Place ;
+        sh:group vtmsh:SocietyGroup ; sh:order 2 ;
+    ] , vtmsh:Disciplines , [
+        sh:path vtm:humanity ;
+        sh:name "humanidad"@es , "humanity"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 10 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group vtmsh:HumanityGroup ; sh:order 0 ;
+    ] , [
+        sh:path vtm:willpower ;
+        sh:name "fuerza de voluntad"@es , "willpower"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 10 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group vtmsh:HumanityGroup ; sh:order 1 ;
+    ] , [
+        sh:path vtm:ambition ;
+        sh:name "ambición"@es , "ambition"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:group vtmsh:HumanityGroup ; sh:order 2 ;
+    ] , [
+        sh:path vtm:desire ;
+        sh:name "deseo"@es , "desire"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:group vtmsh:HumanityGroup ; sh:order 3 ;
+    ] , [
+        sh:path vtm:hasConviction ;
+        sh:name "convicciones"@es , "convictions"@en ;
+        sh:class vtm:Conviction ;
+        sh:node vtmsh:ConvictionShape ;
+        dash:editor dash:DetailsEditor ;
+        rpg:backlink rpg:source ;
+        sh:group vtmsh:HumanityGroup ; sh:order 4 ;
+    ] , vtmsh:BloodBonds , vtmsh:Boons .
+
+#################################################################
+# Ghoul y mortal / Ghoul and mortal
+#################################################################
+
+vtmsh:GhoulShape a sh:NodeShape ;
+    sh:targetClass vtm:Ghoul ;
+    rdfs:label "Ghoul"@es , "Ghoul"@en ;
+    sh:property [
+        sh:path vtm:domitor ;
+        sh:name "dómitor"@es , "domitor"@en ;
+        sh:class vtm:Vampire ; sh:maxCount 1 ;
+        sh:group vtmsh:BloodGroup ; sh:order 0 ;
+    ] , vtmsh:Sect , vtmsh:Disciplines , vtmsh:BloodBonds , vtmsh:Boons .
+
+vtmsh:MortalShape a sh:NodeShape ;
+    sh:targetClass vtm:Mortal ;
+    rdfs:label "Mortal"@es , "Mortal"@en ;
+    sh:property [
+        sh:path vtm:mortalRole ;
+        sh:name "papel"@es , "role"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme vtm:MortalRoles ;
+        sh:group vtmsh:SocietyGroup ; sh:order 0 ;
+    ] , [
+        sh:path vtm:knowsOfKindred ;
+        sh:name "conoce a los vástagos"@es , "knows of the Kindred"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group vtmsh:SocietyGroup ; sh:order 1 ;
+    ] , [
+        sh:path vtm:apparentAge ;
+        sh:name "edad"@es , "age"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 150 ;
+        sh:group rpgsh:IdentityGroup ; sh:order 4 ;
+    ] .
+
+#################################################################
+# Hechos anidados / Nested facts
+#################################################################
+
+vtmsh:DisciplineRatingShape a sh:NodeShape ;
+    sh:targetClass vtm:DisciplineRating ;
+    rdfs:label "Nivel de disciplina"@es , "Discipline rating"@en ;
+    sh:property [
+        sh:path rpg:source ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:class rpg:Character ;
+        dash:hidden true ; sh:order 0 ;
+    ] , [
+        sh:path vtm:discipline ;
+        sh:name "disciplina"@es , "discipline"@en ;
+        sh:class vtm:Discipline ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 1 ;
+    ] , [
+        sh:path vtm:dots ;
+        sh:name "puntos"@es , "dots"@en ;
+        sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 1 ; sh:maxInclusive 5 ;
+        dash:editor rpg:DotsEditor ;
+        sh:order 2 ;
+    ] .
+
+vtmsh:BloodBondShape a sh:NodeShape ;
+    sh:targetClass vtm:BloodBond ;
+    rdfs:label "Vínculo de sangre"@es , "Blood bond"@en ;
+    sh:property [
+        sh:path rpg:target ;
+        sh:name "regnante"@es , "regnant"@en ;
+        sh:description "Vástago cuya sangre se bebió."@es , "Kindred whose blood was drunk."@en ;
+        sh:class vtm:Vampire ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 1 ;
+    ] , [
+        sh:path vtm:bondLevel ;
+        sh:name "nivel"@es , "level"@en ;
+        sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 1 ; sh:maxInclusive 3 ;
+        dash:editor rpg:DotsEditor ;
+        sh:order 2 ;
+    ] , [
+        sh:path rpg:relationshipType ;
+        sh:hasValue vtm:rel-blood-bond ;
+        sh:defaultValue vtm:rel-blood-bond ;
+        sh:nodeKind sh:IRI ;
+        dash:hidden true ; sh:order 3 ;
+    ] .
+
+vtmsh:BoonShape a sh:NodeShape ;
+    sh:targetClass vtm:Boon ;
+    rdfs:label "Favor"@es , "Boon"@en ;
+    sh:property [
+        sh:path rpg:target ;
+        sh:name "acreedor"@es , "creditor"@en ;
+        sh:description "A quién se debe el favor."@es , "Who is owed the boon."@en ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:or ( [ sh:class rpg:Character ] [ sh:class rpg:Faction ] ) ;
+        sh:order 1 ;
+    ] , [
+        sh:path vtm:boonWeight ;
+        sh:name "peso"@es , "weight"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme vtm:BoonWeights ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 2 ;
+    ] , [
+        sh:path rpg:relationshipType ;
+        sh:hasValue vtm:rel-boon ;
+        sh:defaultValue vtm:rel-boon ;
+        sh:nodeKind sh:IRI ;
+        dash:hidden true ; sh:order 3 ;
+    ] .
+
+vtmsh:ConvictionShape a sh:NodeShape ;
+    sh:targetClass vtm:Conviction ;
+    rdfs:label "Convicción"@es , "Conviction"@en ;
+    sh:property [
+        sh:path rpg:source ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:class rpg:Character ;
+        dash:hidden true ; sh:order 0 ;
+    ] , [
+        sh:path vtm:convictionText ;
+        sh:name "convicción"@es , "conviction"@en ;
+        sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 3 ;
+        sh:order 1 ;
+    ] , [
+        sh:path vtm:touchstone ;
+        sh:name "piedra de toque"@es , "touchstone"@en ;
+        sh:class rpg:Character ; sh:maxCount 1 ;
+        sh:order 2 ;
+    ] .
+
+#################################################################
+# Lugares y facciones / Places and factions
+#################################################################
+
+vtmsh:PlaceExtension a sh:NodeShape ;
+    sh:targetClass rpg:Place ;
+    sh:property [
+        sh:path vtm:isElysium ;
+        sh:name "es Elíseo"@es , "is Elysium"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 2 ;
+    ] , [
+        sh:path vtm:masqueradeRisk ;
+        sh:name "riesgo para la Mascarada"@es , "Masquerade risk"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 5 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group rpgsh:WorldGroup ; sh:order 3 ;
+    ] , [
+        sh:path vtm:huntingQuality ;
+        sh:name "calidad de caza"@es , "hunting quality"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 5 ;
+        dash:editor rpg:DotsEditor ;
+        sh:group rpgsh:WorldGroup ; sh:order 4 ;
+    ] .
+
+vtmsh:DomainShape a sh:NodeShape ;
+    sh:targetClass vtm:Domain ;
+    rdfs:label "Dominio"@es , "Domain"@en ;
+    sh:property [
+        sh:path vtm:domainHolder ;
+        sh:name "titular"@es , "holder"@en ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:class rpg:Character ] [ sh:class rpg:Faction ] ) ;
+        sh:group vtmsh:DomainGroup ; sh:order 0 ;
+    ] .
+
+vtmsh:FactionExtension a sh:NodeShape ;
+    sh:targetClass rpg:Faction ;
+    sh:property vtmsh:Sect , vtmsh:Boons .
+
+#################################################################
+# Catálogos / Catalogs
+#################################################################
+
+vtmsh:ClanShape a sh:NodeShape ;
+    sh:targetClass vtm:Clan ;
+    rdfs:label "Clan"@es , "Clan"@en ;
+    sh:property [
+        sh:path vtm:clanNickname ;
+        sh:name "apodo"@es , "nickname"@en ;
+        sh:datatype xsd:string ;
+        sh:group vtmsh:ClanGroup ; sh:order 0 ;
+    ] , [
+        sh:path vtm:clanDiscipline ;
+        sh:name "disciplinas de clan"@es , "clan disciplines"@en ;
+        sh:class vtm:Discipline ;
+        sh:group vtmsh:ClanGroup ; sh:order 1 ;
+    ] , [
+        sh:path vtm:baneSummary ;
+        sh:name "maldición"@es , "bane"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        dash:editor dash:TextAreaEditor ;
+        sh:group vtmsh:ClanGroup ; sh:order 2 ;
+    ] , [
+        sh:path vtm:compulsionSummary ;
+        sh:name "compulsión"@es , "compulsion"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        dash:editor dash:TextAreaEditor ;
+        sh:group vtmsh:ClanGroup ; sh:order 3 ;
+    ] .

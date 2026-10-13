@@ -1,0 +1,24 @@
+# titulo: En dos sitios a la vez
+# titulo_en: In two places at once
+# severidad: error
+# descripcion: Dos hechos con vigencia de la misma propiedad funcional (ubicación, estado…) se solapan con valores distintos.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?mensaje WHERE {
+  ?entidad rpg:hasHistory ?h1 , ?h2 .
+  FILTER (STR(?h1) < STR(?h2))
+  ?h1 rpg:property ?p ; rpg:value ?v1 .
+  ?h2 rpg:property ?p ; rpg:value ?v2 .
+  ?p a owl:FunctionalProperty .
+  FILTER (?v1 != ?v2)
+  OPTIONAL { ?h1 rpg:validFrom/rpg:sessionNumber ?d1 }
+  OPTIONAL { ?h1 rpg:validUntil/rpg:sessionNumber ?u1 }
+  OPTIONAL { ?h2 rpg:validFrom/rpg:sessionNumber ?d2 }
+  OPTIONAL { ?h2 rpg:validUntil/rpg:sessionNumber ?u2 }
+  # Se solapan si cada uno empieza antes de que acabe el otro.
+  FILTER ((!BOUND(?u1) || !BOUND(?d2) || ?d2 < ?u1) && (!BOUND(?u2) || !BOUND(?d1) || ?d1 < ?u2))
+  ?p rdfs:label ?np . FILTER (lang(?np) = "es")
+  BIND (CONCAT("Dos valores a la vez para «", STR(?np), "».") AS ?mensaje)
+}

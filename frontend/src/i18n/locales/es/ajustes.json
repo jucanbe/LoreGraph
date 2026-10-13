@@ -1,0 +1,79 @@
+{
+  "titulo": "Ajustes",
+  "subtitulo": "Configuración de la aplicación. Lo que cambies aquí tiene prioridad sobre el archivo .env.",
+  "guardado": "Ajustes guardados",
+  "descartar": "Descartar cambios",
+  "restablecer": "Restablecer",
+  "restablecerAyuda": "Volver al valor de .env",
+  "origen": {
+    "env": "de .env",
+    "ajustes": "personalizado",
+    "editado": "sin guardar"
+  },
+  "almacen": {
+    "titulo": "Dónde se guardan",
+    "texto": "En la base de datos auxiliar (data/aux.sqlite), aparte del almacén RDF. La clave de API se guarda sin cifrar en tu equipo y nunca se muestra."
+  },
+  "llm": {
+    "titulo": "Modelo de lenguaje (asistente)",
+    "descripcion": "El asistente interno usa este modelo, normalmente local. Los agentes MCP externos usan el suyo propio.",
+    "presets": "Rellenar para",
+    "preset": {
+      "ollama": "Ollama",
+      "lmstudio": "LM Studio",
+      "llamacpp": "llama.cpp"
+    },
+    "proveedor": "Proveedor",
+    "compatibleOpenAI": "Compatible con OpenAI (LM Studio, llama.cpp, vLLM…)",
+    "url": "URL del servidor",
+    "modelo": "Modelo",
+    "modeloAyuda": "Nombre del modelo tal como lo conoce el servidor (p. ej. qwen3:8b). «Probar conexión» lista los disponibles.",
+    "clave": "Clave de API",
+    "claveAyuda": "Solo para servicios que la pidan. Los servidores locales no la necesitan.",
+    "claveGuardada": "•••••••• (guardada)",
+    "sinClave": "Sin clave",
+    "quitarClave": "Quitar clave",
+    "contexto": "Contexto (tokens)",
+    "contextoAyuda": "Ajusta cuánto lore y datos se le envían.",
+    "timeout": "Tiempo máximo (s)",
+    "reintentos": "Reintentos",
+    "reintentosAyuda": "Si propone datos no válidos, se le pide que los corrija.",
+    "probar": "Probar conexión",
+    "guardaAntes": "Guarda los cambios antes de probar.",
+    "conectado_one": "Conectado: {{count}} modelo disponible",
+    "conectado_other": "Conectado: {{count}} modelos disponibles",
+    "modeloNoEncontrado": "el modelo configurado no está en la lista",
+    "modoSalida": "Modo de salida estructurada",
+    "modoSalidaAyuda": "Cómo pide el generador de IA el JSON estructurado a los modelos (sobre todo a los locales pequeños). Si tu modelo falla al generar, prueba otro modo.",
+    "modo": {
+      "tool": "Herramienta (tool calling)",
+      "native": "Nativo (JSON schema del servidor)",
+      "prompted": "En el prompt (instrucciones de texto)"
+    },
+    "modoDesc": {
+      "tool": "El modelo responde llamando a una herramienta. Lo más compatible con modelos que soportan herramientas.",
+      "native": "El servidor fuerza un JSON que cumple el esquema. Útil si tu servidor lo soporta (Ollama, llama.cpp, vLLM).",
+      "prompted": "El esquema va en las instrucciones y se interpreta el texto. Para modelos sin herramientas ni salida estructurada."
+    }
+  },
+  "identidad": {
+    "titulo": "Identidad",
+    "descripcion": "Cómo aparecen tus cambios en la procedencia.",
+    "nombre": "Tu nombre",
+    "nombreAyuda": "Se registra como autor de cada cambio (PROV-O)."
+  },
+  "mundo": {
+    "titulo": "Mundo real (Wikidata y DBpedia)",
+    "descripcion": "Consultas federadas y panel «Mundo real» de las fichas.",
+    "activo": "Consultas al mundo real activadas",
+    "agente": "User-Agent",
+    "agenteAyuda": "Wikidata exige una URL o un correo de contacto; sin él responde con error 403.",
+    "timeout": "Tiempo máximo por consulta (s)"
+  },
+  "sparql": {
+    "titulo": "Consultas SPARQL",
+    "descripcion": "Límites del editor SPARQL y de la herramienta consultar_sparql de los agentes.",
+    "limite": "Máximo de resultados",
+    "timeout": "Tiempo máximo (s)"
+  }
+}

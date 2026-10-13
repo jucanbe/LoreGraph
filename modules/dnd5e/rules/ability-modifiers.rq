@@ -1,0 +1,21 @@
+# Modificadores de característica: floor((puntuación - 10) / 2).
+# Ability modifiers: floor((score - 10) / 2).
+# Solo para aventureros y criaturas de la campaña (no para el bestiario del módulo).
+# Only for campaign adventurers and creatures (not for the module bestiary).
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?c ?modProp ?mod }
+WHERE {
+  VALUES ?kind { dnd:Adventurer dnd:Creature }
+  ?c a ?kind .
+  VALUES (?scoreProp ?modProp) {
+    (dnd:strength     dnd:strengthModifier)
+    (dnd:dexterity    dnd:dexterityModifier)
+    (dnd:constitution dnd:constitutionModifier)
+    (dnd:intelligence dnd:intelligenceModifier)
+    (dnd:wisdom       dnd:wisdomModifier)
+    (dnd:charisma     dnd:charismaModifier)
+  }
+  ?c ?scoreProp ?score .
+  BIND (xsd:integer(FLOOR((?score - 10) / 2)) AS ?mod)
+}

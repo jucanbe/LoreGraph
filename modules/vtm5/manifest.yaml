@@ -1,0 +1,99 @@
+id: vtm5
+nombre:
+  es: "Vampiro: La Mascarada 5.ª ed."
+  en: "Vampire: The Masquerade 5th ed."
+descripcion:
+  es: >-
+    Módulo no oficial: vástagos, clanes, disciplinas, generación, hambre, potencia de sangre,
+    sectas, dominios, sire y chiquillos, vínculos de sangre, favores, convicciones y piedras de toque.
+  en: >-
+    Unofficial module: Kindred, clans, disciplines, generation, hunger, blood potency, sects,
+    domains, sires and childer, blood bonds, boons, convictions and touchstones.
+version: 0.1.0
+categoria: sistema
+iri: https://rpg-modules.example.net/vtm5/ont#
+prefijo: vtm
+licencia: "Módulo no oficial; sin texto de los manuales. Vampire: The Masquerade es marca de Paradox Interactive AB."
+depende_de:
+  core: ">=0.1"
+prefijos:
+  vtmsh: https://rpg-modules.example.net/vtm5/shapes#
+
+clases_principales:
+  - vtm:Domain
+  - vtm:Clan
+  - vtm:Discipline
+
+estilos_tipos:
+  vtm:Vampire:    { color: "#b91c1c", forma: ellipse,         icono: droplet }
+  vtm:Ghoul:      { color: "#c2410c", forma: ellipse,         icono: droplets }
+  vtm:Mortal:     { color: "#78716c", forma: ellipse,         icono: heart-pulse }
+  vtm:Domain:     { color: "#15803d", forma: round-rectangle, icono: map }
+  vtm:Haven:      { color: "#4d7c0f", forma: barrel,          icono: bed-double }
+  vtm:Coterie:    { color: "#a16207", forma: hexagon,         icono: users }
+  vtm:Clan:       { color: "#7e22ce", forma: octagon,         icono: crown }
+  vtm:Discipline: { color: "#be185d", forma: vee,             icono: sparkles }
+
+estilos_relaciones:
+  vtm:sire:               { color: "#7f1d1d", linea: solid,  ancho: 3 }
+  vtm:clan:               { color: "#7e22ce", linea: dotted }
+  vtm:domitor:            { color: "#c2410c", linea: solid,  ancho: 2 }
+  vtm:haven:              { color: "#4d7c0f", linea: dotted }
+  vtm:domainHolder:       { color: "#15803d", linea: solid,  ancho: 2 }
+  vtm:rel-blood-bond:     { color: "#dc2626", linea: dashed, ancho: 3 }
+  vtm:rel-boon:           { color: "#ca8a04", linea: dashed, ancho: 2 }
+  vtm:rel-herd:           { color: "#9f1239", linea: dotted }
+  vtm:rel-prestation-rival: { color: "#f97316", linea: dashed }
+
+tema:
+  radio: "0.125rem"
+  fuentes:
+    titulos: "'Cinzel', 'Cormorant Garamond', 'Times New Roman', serif"
+    texto: "'EB Garamond', Georgia, 'Times New Roman', serif"
+    google:
+      - "Cinzel:wght@400;600;700"
+      - "EB+Garamond:ital,wght@0,400;0,600;1,400"
+  claro:
+    background: "#f6f1ea"
+    foreground: "#1c1012"
+    card: "#fbf8f3"
+    card-foreground: "#1c1012"
+    popover: "#fbf8f3"
+    popover-foreground: "#1c1012"
+    primary: "#8b0a1a"
+    primary-foreground: "#fdf2f2"
+    secondary: "#ece3d8"
+    secondary-foreground: "#3b1a1f"
+    muted: "#ece3d8"
+    muted-foreground: "#6b5457"
+    accent: "#f1dcdc"
+    accent-foreground: "#5c0a14"
+    destructive: "#b91c1c"
+    destructive-foreground: "#ffffff"
+    border: "#dccfc2"
+    input: "#d4c4b5"
+    ring: "#8b0a1a"
+    sidebar: "#1a0b0e"
+    sidebar-foreground: "#f1e4e4"
+  oscuro:
+    background: "#0b0708"
+    foreground: "#eadede"
+    card: "#140c0e"
+    card-foreground: "#eadede"
+    popover: "#140c0e"
+    popover-foreground: "#eadede"
+    primary: "#c1121f"
+    primary-foreground: "#fff5f5"
+    secondary: "#24151a"
+    secondary-foreground: "#eadede"
+    muted: "#1d1215"
+    muted-foreground: "#a68f93"
+    accent: "#3a1219"
+    accent-foreground: "#ffe4e6"
+    destructive: "#ef4444"
+    destructive-foreground: "#ffffff"
+    border: "#2e1a1f"
+    input: "#3a2228"
+    ring: "#c1121f"
+    sidebar: "#070405"
+    sidebar-foreground: "#e8d6d8"

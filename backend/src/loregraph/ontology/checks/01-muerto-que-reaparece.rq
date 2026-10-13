@@ -1,0 +1,15 @@
+# titulo: Personaje muerto que reaparece
+# titulo_en: Dead character reappearing
+# severidad: error
+# descripcion: Un personaje murió en una sesión pero aparece en una sesión posterior.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?entidad rpg:hasHistory ?h .
+  ?h rpg:property rpg:vitalStatus ; rpg:value rpg:vital-dead ; rpg:validFrom/rpg:sessionNumber ?muerte .
+  ?entidad rpg:appearsInSession ?relacionada .
+  ?relacionada rpg:sessionNumber ?n ; rdfs:label ?sesion .
+  FILTER (?n > ?muerte)
+  BIND (CONCAT("Murió en la sesión ", STR(?muerte), " pero aparece en «", STR(?sesion), "».") AS ?mensaje)
+}

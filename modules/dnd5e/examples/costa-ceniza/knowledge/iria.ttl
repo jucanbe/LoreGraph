@@ -1,0 +1,22 @@
+@prefix :    <__CAMPAIGN__/entity/> .
+@prefix rpg: <https://loregraph.example.org/ont/core#> .
+@prefix dnd: <https://rpg-modules.example.net/dnd5e/ont#> .
+
+# Lo que Iria Salitre cree saber. Algunas creencias coinciden con el canon,
+# otra es un rumor falso y otra no se puede verificar todavía.
+
+# Cierto: la dragona vive en la montaña.
+:calcinaria rpg:locatedIn :montana-fuego-dormido .
+
+# Cierto: Gruk manda en los Colmillos de Basalto.
+:gruk rpg:memberOf :colmillos-basalto .
+
+# FALSO (rumor de la taberna): el Ojo de Basalto estaría guardado en la Alcazaba.
+# En el canon está en el Laberinto del Toro de Basalto (rpg:locatedIn es funcional).
+:ojo-basalto rpg:locatedIn :alcazaba-gibra .
+
+# FALSO: cree que Gruk se refugia en los Túneles Verdes (en el canon, en los Campos de Malpaís).
+:gruk rpg:locatedIn :tuneles-verdes .
+
+# Sin verificar: sospecha que la alcaidesa conoce al minotauro.
+:velasca rpg:knows :toro-basalto .

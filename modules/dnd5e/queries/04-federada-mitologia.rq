@@ -1,0 +1,19 @@
+# titulo: Criaturas inspiradas en la mitología (federada con Wikidata)
+# descripcion: Criaturas de la campaña y del bestiario ancladas con rpg:inspiredBy a una entrada de Wikidata: muestra su nombre y descripción reales en español.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?criatura ?nombre ?real ?nombreReal ?descripcionReal WHERE {
+  { ?criatura a dnd:Creature } UNION { ?criatura a dnd:Monster }
+  ?criatura rdfs:label ?nombre ;
+            rpg:inspiredBy ?real .
+  FILTER (lang(?nombre) = "es" || lang(?nombre) = "")
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?real rdfs:label ?nombreReal .
+    FILTER (lang(?nombreReal) = "es")
+    OPTIONAL { ?real schema:description ?descripcionReal . FILTER (lang(?descripcionReal) = "es") }
+  }
+}
+ORDER BY ?nombre

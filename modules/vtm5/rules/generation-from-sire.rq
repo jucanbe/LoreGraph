@@ -1,0 +1,11 @@
+# Generación deducida: si falta, la del sire más uno.
+# Derived generation: if missing, the sire's plus one.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?childe vtm:generation ?gen }
+WHERE {
+  ?childe vtm:sire ?sire .
+  ?sire vtm:generation ?sireGen .
+  FILTER NOT EXISTS { ?childe vtm:generation ?any }
+  BIND (xsd:integer(?sireGen + 1) AS ?gen)
+}

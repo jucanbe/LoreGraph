@@ -1,0 +1,68 @@
+{
+  "titulo": "Ajustes de campaña",
+  "subtitulo": "Datos generales, lore para la IA, modelo propio, sesión en curso, exportación y borrado.",
+  "guardado": "Ajustes de la campaña guardados",
+  "descartar": "Descartar cambios",
+  "sinGuardar": "Hay cambios sin guardar",
+  "general": {
+    "titulo": "General",
+    "descripcion": "Nombre, descripción y módulos de juego de la campaña.",
+    "id": "Identificador",
+    "idAyuda": "Forma parte de las URL y de los IRI; no se puede cambiar.",
+    "nombre": "Nombre",
+    "descripcionCampo": "Descripción",
+    "modulos": "Módulos de juego",
+    "modulosAyuda": "Quitar un módulo no borra los datos ya creados con sus tipos, pero dejarán de tener formulario propio.",
+    "sinModulos": "No hay módulos instalados además del núcleo.",
+    "extension": "extensión",
+    "guardar": "Guardar datos generales",
+    "guardado": "Datos de la campaña guardados"
+  },
+  "lore": {
+    "titulo": "Lore para la IA",
+    "descripcion": "Contexto que el asistente y los agentes reciben siempre antes de proponer cambios.",
+    "resumen": "Resumen",
+    "resumenAyuda": "Premisa, historia reciente y situación actual.",
+    "tono": "Tono",
+    "tonoPlaceholder": "p. ej. horror personal, intriga política, noir",
+    "reglasCasa": "Reglas de la casa",
+    "reglasCasaAyuda": "Reglas propias o ajustes al sistema de juego.",
+    "evitar": "Evitar",
+    "evitarAyuda": "Temas o elementos que no deben aparecer.",
+    "notas": "Notas",
+    "notasAyuda": "Cualquier otro dato útil para la IA.",
+    "nuevoElemento": "Añadir un elemento…",
+    "quitarElemento": "Quitar «{{texto}}»",
+    "listaVacia": "Ninguno todavía."
+  },
+  "asistente": {
+    "titulo": "Modelo del asistente",
+    "descripcion": "Solo para esta campaña. Vacío = usar los ajustes globales.",
+    "modelo": "Modelo",
+    "contexto": "Contexto (tokens)",
+    "global": "Global: {{valor}}",
+    "irGlobales": "Ajustes globales"
+  },
+  "sesion": {
+    "titulo": "Sesión en curso",
+    "descripcion": "Los cambios temporales (dónde está alguien, a qué facción pertenece, su estado…) se fechan en esta sesión.",
+    "campo": "Sesión actual",
+    "auto": "Automática (la de número más alto)",
+    "opcion": "Sesión {{n}} · {{nombre}}",
+    "sinSesiones": "La campaña aún no tiene sesiones."
+  },
+  "exportar": {
+    "titulo": "Exportar",
+    "descripcion": "Descarga un ZIP con todos los datos (RDF), imágenes y ajustes. Se puede importar en otra instalación desde la lista de campañas.",
+    "accion": "Descargar ZIP"
+  },
+  "peligro": {
+    "titulo": "Zona peligrosa",
+    "descripcion": "Borrar la campaña elimina permanentemente sus datos, propuestas, historial e imágenes.",
+    "accion": "Borrar campaña",
+    "dialogoTitulo": "¿Borrar «{{nombre}}»?",
+    "dialogoAviso": "No se puede deshacer. Exporta antes la campaña si quieres conservar una copia.",
+    "escribe": "Escribe <1>{{id}}</1> para confirmar",
+    "hecho": "Campaña borrada"
+  }
+}

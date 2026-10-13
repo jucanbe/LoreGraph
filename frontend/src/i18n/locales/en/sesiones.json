@@ -1,0 +1,23 @@
+{
+  "titulo": "Sessions",
+  "total_one": "{{count}} session",
+  "total_other": "{{count}} sessions",
+  "nueva": "New session",
+  "orden": {
+    "recientes": "Newest first",
+    "antiguas": "Oldest first"
+  },
+  "numero": "Session {{n}}",
+  "sinNumero": "Unnumbered session",
+  "fechaReal": "Play date",
+  "fechaMundo": "In-world date",
+  "aparecen": "Appearing",
+  "otros": "Others",
+  "sinEntidades": "No entities linked to this session.",
+  "verMas": "Show more",
+  "verMenos": "Show less",
+  "vacio": {
+    "titulo": "No sessions yet",
+    "desc": "Record the first session to start the campaign chronicle."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "titulo": "Assistant",
+  "subtitulo": "Ask in natural language to a model running on your machine. It queries the graph and prepares proposals for you to review.",
+  "limpiar": "Clear conversation",
+  "conversacion": "Conversation with the assistant",
+  "formulario": {
+    "etiqueta": "What do you want the assistant to do?",
+    "placeholder": "For example: create an NPC who runs the harbour inn and knows the protagonists…",
+    "atajo": "Ctrl + Enter (⌘ + Enter on Mac) to send. Each message is an independent request.",
+    "enviar": "Send"
+  },
+  "modelo": {
+    "titulo": "Local model",
+    "cargando": "Loading model configuration…",
+    "error": "Could not read the model configuration.",
+    "proveedor": "Provider",
+    "modelo": "Model",
+    "url": "URL",
+    "contexto": "Context",
+    "tokens_one": "{{count}} token",
+    "tokens_other": "{{count}} tokens"
+  },
+  "contexto": {
+    "titulo": "What it knows about the system",
+    "explicacion": "Lore summary, statistics, rules and glossary the model receives, trimmed to its context size. Modules define it in context.yaml.",
+    "ver_one": "Show the context ({{count}} character)",
+    "ver_other": "Show the context ({{count}} characters)",
+    "recortado": "trimmed",
+    "error": "Could not load the context."
+  },
+  "seguridad": {
+    "titulo": "It only proposes, never writes",
+    "texto": "The assistant can read the graph, but any change becomes a pending proposal: nothing reaches the canon without your approval.",
+    "enlace": "Go to the proposal inbox"
+  },
+  "vacio": {
+    "titulo": "Start a conversation",
+    "texto": "Describe what you need. If it involves changes, the assistant will create proposals for you to review.",
+    "ejemplos": [
+      "Summarise what we know about the main factions",
+      "Which plots are still open and who is involved?",
+      "Propose a new NPC related to the last session"
+    ]
+  },
+  "turno": {
+    "tu": "You:",
+    "asistente": "Assistant:",
+    "pensando": "Thinking… local models can take a while.",
+    "segundos_one": "{{count}} s",
+    "segundos_other": "{{count}} s",
+    "propuestas_one": "Created {{count}} proposal pending review:",
+    "propuestas_other": "Created {{count}} proposals pending review:",
+    "sinPropuestas": "No proposals were created.",
+    "verPropuesta": "View proposal {{id}}",
+    "herramientas": "Tools used"
+  },
+  "error": {
+    "titulo": "The assistant could not answer",
+    "sinModelo": "Could not reach the model",
+    "ayudaModelo": "Is Ollama running? Check LOREGRAPH_LLM_* in .env",
+    "reintentar": "Retry"
+  }
+}

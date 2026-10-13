@@ -1,0 +1,16 @@
+# titulo: Objeto en un sitio distinto del de su dueño
+# titulo_en: Item located away from its owner
+# severidad: aviso
+# descripcion: Un objeto está ubicado en un lugar distinto del de quien lo posee (puede ser intencionado: un escondite).
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?relacionada rpg:possesses ?entidad ; rpg:locatedIn ?l1 .
+  ?entidad rpg:locatedIn ?l2 .
+  FILTER (?l1 != ?l2)
+  FILTER NOT EXISTS { ?l2 rpg:locatedIn+ ?l1 }
+  FILTER NOT EXISTS { ?l1 rpg:locatedIn+ ?l2 }
+  ?relacionada rdfs:label ?dueno . ?l1 rdfs:label ?n1 . ?l2 rdfs:label ?n2 .
+  BIND (CONCAT("Está en «", STR(?n2), "» pero su dueño, «", STR(?dueno), "», está en «", STR(?n1), "».") AS ?mensaje)
+}

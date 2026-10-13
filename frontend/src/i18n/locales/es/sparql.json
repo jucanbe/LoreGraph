@@ -1,0 +1,68 @@
+{
+  "titulo": "SPARQL",
+  "subtitulo": "Consulta el grafo de la campaña o fuentes externas. Los prefijos de la campaña ya están declarados.",
+  "editor": {
+    "etiqueta": "Editor de consultas SPARQL",
+    "placeholder": "Escribe una consulta SPARQL…"
+  },
+  "destino": {
+    "etiqueta": "Destino",
+    "local": "Campaña (local)",
+    "wikidata": "Wikidata",
+    "dbpedia": "DBpedia",
+    "ayudaLocal": "Se ejecuta sobre la campaña. Puedes federar con SERVICE <https://query.wikidata.org/sparql> { … }.",
+    "ayudaRemoto": "Consulta federada contra {{destino}} (resultados en caché durante un tiempo)."
+  },
+  "limite": "Límite",
+  "prefijos": {
+    "insertar": "Insertar PREFIX",
+    "desc": "Añade al principio las declaraciones PREFIX de los prefijos usados (o de todos)"
+  },
+  "ejecutar": "Ejecutar",
+  "ejecutando": "Ejecutando consulta…",
+  "error": "La consulta ha fallado",
+  "ayuda": "Escribe una consulta y pulsa Ejecutar ({{atajo}}). También puedes cargar un ejemplo.",
+  "consultas": {
+    "titulo": "Consultas",
+    "guardadas": "Guardadas",
+    "sinGuardadas": "Aún no has guardado consultas.",
+    "ejemplos": "Ejemplos",
+    "sinEjemplos": "No hay ejemplos.",
+    "cargar": "Cargar en el editor",
+    "borrar": "Borrar «{{titulo}}»",
+    "confirmarBorrar": "Borrar",
+    "borrada": "Consulta borrada"
+  },
+  "guardar": {
+    "boton": "Guardar consulta",
+    "titulo": "Guardar consulta",
+    "desc": "Quedará disponible en la lista de consultas guardadas de esta campaña.",
+    "campoTitulo": "Título",
+    "campoDescripcion": "Descripción",
+    "hecho": "Consulta guardada"
+  },
+  "resultados": {
+    "titulo": "Resultados",
+    "tabla": "Resultados de la consulta",
+    "tripletas": "Tripletas construidas",
+    "filas_one": "{{count}} resultado",
+    "filas_other": "{{count}} resultados",
+    "cache": "En caché",
+    "cacheDesc": "Resultado servido desde la caché",
+    "truncado": "Truncado",
+    "truncadoDesc": "Hay más resultados que el límite indicado",
+    "verdadero": "Verdadero",
+    "falso": "Falso",
+    "vacio": "La consulta no devolvió resultados",
+    "recortadas": "Se muestran {{visibles}} de {{total}} filas; exporta a CSV para verlas todas.",
+    "sujeto": "sujeto",
+    "predicado": "predicado",
+    "objeto": "objeto"
+  },
+  "csv": {
+    "modo": "Contenido del CSV",
+    "etiquetas": "Etiquetas",
+    "valores": "Valores (IRIs)",
+    "exportar": "Exportar CSV"
+  }
+}

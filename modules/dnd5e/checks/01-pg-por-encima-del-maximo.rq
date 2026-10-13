@@ -1,0 +1,11 @@
+# titulo: Puntos de golpe por encima del máximo
+# titulo_en: Hit points above maximum
+# severidad: error
+# descripcion: Los puntos de golpe actuales superan el máximo.
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+
+SELECT ?entidad ?mensaje WHERE {
+  ?entidad dnd:currentHitPoints ?pg ; dnd:hitPointMax ?max .
+  FILTER (?pg > ?max)
+  BIND (CONCAT("Tiene ", STR(?pg), " PG con un máximo de ", STR(?max), ".") AS ?mensaje)
+}

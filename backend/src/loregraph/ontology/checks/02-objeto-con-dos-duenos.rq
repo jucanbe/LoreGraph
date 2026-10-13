@@ -1,0 +1,16 @@
+# titulo: Objeto con dos dueños a la vez
+# titulo_en: Item with two owners at once
+# severidad: error
+# descripcion: Un objeto lo posee más de una entidad en el estado actual.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?a rpg:possesses ?entidad .
+  ?b rpg:possesses ?entidad .
+  FILTER (STR(?a) < STR(?b))
+  ?a rdfs:label ?na . ?b rdfs:label ?nb .
+  VALUES ?k { 1 2 }
+  BIND (IF(?k = 1, ?a, ?b) AS ?relacionada)
+  BIND (CONCAT("Lo poseen a la vez «", STR(?na), "» y «", STR(?nb), "».") AS ?mensaje)
+}

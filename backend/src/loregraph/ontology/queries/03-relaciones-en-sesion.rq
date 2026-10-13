@@ -1,0 +1,18 @@
+# titulo: Relaciones vigentes en la sesión 3
+# descripcion: Estado de las relaciones cualificadas en una sesión concreta (cambia el 3).
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?origen ?tipo ?destino ?intensidad WHERE {
+  ?r a rpg:Relationship ;
+     rpg:source/rdfs:label ?origen ;
+     rpg:target/rdfs:label ?destino ;
+     rpg:relationshipType/skos:prefLabel ?tipo .
+  FILTER (lang(?tipo) = "es")
+  OPTIONAL { ?r rpg:strength ?intensidad }
+  OPTIONAL { ?r rpg:validFrom/rpg:sessionNumber ?desde }
+  OPTIONAL { ?r rpg:validUntil/rpg:sessionNumber ?hasta }
+  FILTER ((!BOUND(?desde) || ?desde <= 3) && (!BOUND(?hasta) || 3 < ?hasta))
+}
+ORDER BY ?origen

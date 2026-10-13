@@ -1,0 +1,17 @@
+# titulo: Lugares con datos reales (federada con Wikidata)
+# descripcion: Une los lugares ficticios con su lugar real en Wikidata: nombre en español y coordenadas.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?lugar ?nombre ?real ?nombreReal ?coordenadas WHERE {
+  ?lugar a/rdfs:subClassOf* rpg:Place ;
+         rdfs:label ?nombre ;
+         rpg:correspondsTo ?real .
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?real rdfs:label ?nombreReal .
+    FILTER (lang(?nombreReal) = "es")
+    OPTIONAL { ?real wdt:P625 ?coordenadas }
+  }
+}
+ORDER BY ?nombre

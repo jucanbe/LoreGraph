@@ -1,0 +1,335 @@
+@prefix vtm:    <https://rpg-modules.example.net/vtm5/ont#> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+#################################################################
+# Módulo Vampiro: La Mascarada 5.ª edición (no oficial)
+# Vampire: The Masquerade 5th edition module (unofficial)
+#
+# Las mecánicas se describen con palabras propias y de forma mínima.
+# Mechanics are described in our own words and minimally.
+#################################################################
+
+<https://rpg-modules.example.net/vtm5/ont> a owl:Ontology ;
+    rdfs:label "Vampiro: La Mascarada 5.ª ed. (módulo no oficial)"@es ,
+               "Vampire: The Masquerade 5th ed. (unofficial module)"@en ;
+    rdfs:comment "Extiende la ontología base con vástagos, clanes, disciplinas, sangre, sectas, dominios y vínculos."@es ,
+                 "Extends the core ontology with Kindred, clans, disciplines, blood, sects, domains and bonds."@en ;
+    owl:imports <https://loregraph.example.org/ont/core> ;
+    owl:versionInfo "0.1.0" .
+
+#################################################################
+# Clases: tipos de criatura (variantes) / Creature kinds (variants)
+#################################################################
+
+vtm:Vampire a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rpg:variantOf rpg:Character ;
+    rdfs:label "Vástago"@es , "Kindred"@en ;
+    rdfs:comment "Vampiro: un muerto que se alimenta de sangre y oculta su existencia a los mortales."@es ,
+                 "Vampire: a dead being who feeds on blood and hides its existence from mortals."@en .
+
+vtm:Ghoul a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rpg:variantOf rpg:Character ;
+    rdfs:label "Ghoul"@es , "Ghoul"@en ;
+    rdfs:comment "Mortal que bebe con regularidad sangre de un vástago (su dómitor) y obtiene a cambio algunos de sus dones."@es ,
+                 "Mortal who regularly drinks the blood of a Kindred (their domitor) and gains some of their gifts."@en .
+
+vtm:Mortal a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rpg:variantOf rpg:Character ;
+    rdfs:label "Mortal"@es , "Mortal"@en ;
+    rdfs:comment "Ser humano corriente: piedra de toque, rebaño, contacto o cazador."@es ,
+                 "Ordinary human: touchstone, herd, contact or hunter."@en .
+
+#################################################################
+# Catálogos / Catalogs
+#################################################################
+
+vtm:Clan a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Clan"@es , "Clan"@en ;
+    rdfs:comment "Linaje de vástagos con disciplinas afines, una maldición y una compulsión propias."@es ,
+                 "Kindred lineage with its own affine disciplines, bane and compulsion."@en .
+
+vtm:Discipline a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Disciplina"@es , "Discipline"@en ;
+    rdfs:comment "Poder sobrenatural alimentado por la sangre, que se mide en puntos."@es ,
+                 "Supernatural power fuelled by blood, rated in dots."@en .
+
+#################################################################
+# Lugares y grupos / Places and groups
+#################################################################
+
+vtm:Domain a owl:Class ;
+    rdfs:subClassOf rpg:Place ;
+    rdfs:label "Dominio"@es , "Domain"@en ;
+    rdfs:comment "Territorio reclamado por un vástago o una facción: quién puede cazar en él y bajo qué normas."@es ,
+                 "Territory claimed by a Kindred or a faction: who may hunt there and under which rules."@en .
+
+vtm:Haven a owl:Class ;
+    rdfs:subClassOf rpg:Place ;
+    rdfs:label "Refugio"@es , "Haven"@en ;
+    rdfs:comment "Lugar donde un vástago pasa el día a salvo del sol."@es ,
+                 "Place where a Kindred spends the day safe from the sun."@en .
+
+vtm:Coterie a owl:Class ;
+    rdfs:subClassOf rpg:Faction ;
+    rdfs:label "Coterie"@es , "Coterie"@en ;
+    rdfs:comment "Pequeño grupo de vástagos unidos por intereses comunes; suele ser el grupo de los personajes jugadores."@es ,
+                 "Small group of Kindred bound by shared interests; usually the player characters' group."@en .
+
+#################################################################
+# Hechos cualificados / Qualified facts
+#################################################################
+
+vtm:DisciplineRating a owl:Class ;
+    rdfs:subClassOf rpg:Fact ;
+    rdfs:label "Nivel de disciplina"@es , "Discipline rating"@en ;
+    rdfs:comment "Puntos que un personaje tiene en una disciplina. Es un hecho con vigencia: puede subir con la experiencia."@es ,
+                 "Dots a character has in a discipline. A fact with validity: it may grow with experience."@en .
+
+vtm:BloodBond a owl:Class ;
+    rdfs:subClassOf rpg:Relationship ;
+    rdfs:label "Vínculo de sangre"@es , "Blood bond"@en ;
+    rdfs:comment "Atadura emocional sobrenatural de quien bebe (origen, siervo) hacia el vástago cuya sangre bebió (destino, regnante). Tiene niveles."@es ,
+                 "Supernatural emotional bond from the drinker (source, thrall) to the Kindred whose blood they drank (target, regnant). It has levels."@en .
+
+vtm:Boon a owl:Class ;
+    rdfs:subClassOf rpg:Relationship ;
+    rdfs:label "Favor"@es , "Boon"@en ;
+    rdfs:comment "Deuda de prestación: el origen debe un favor al destino. Su peso indica su importancia."@es ,
+                 "Prestation debt: the source owes the target a favour. Its weight indicates its importance."@en .
+
+vtm:Conviction a owl:Class ;
+    rdfs:subClassOf rpg:Fact ;
+    rdfs:label "Convicción"@es , "Conviction"@en ;
+    rdfs:comment "Principio moral que ancla la humanidad de un vástago, asociado a una piedra de toque mortal."@es ,
+                 "Moral principle anchoring a Kindred's humanity, tied to a mortal touchstone."@en .
+
+#################################################################
+# Propiedades de los vástagos / Kindred properties
+#################################################################
+
+vtm:clan a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Character ; rdfs:range vtm:Clan ;
+    rdfs:label "clan"@es , "clan"@en ;
+    rdfs:comment "Clan del vástago."@es , "Kindred's clan."@en .
+
+vtm:generation a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Vampire ; rdfs:range xsd:integer ;
+    rdfs:label "generación"@es , "generation"@en ;
+    rdfs:comment "Distancia al primer vampiro: cuanto menor, más poderosa la sangre. Normalmente, la del sire más uno."@es ,
+                 "Distance from the first vampire: the lower, the more potent the blood. Usually the sire's plus one."@en .
+
+vtm:sire a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Vampire ; rdfs:range vtm:Vampire ;
+    rdfs:label "sire"@es , "sire"@en ;
+    rdfs:comment "Vástago que dio el Abrazo a este personaje."@es , "Kindred who Embraced this character."@en .
+
+vtm:childe a owl:ObjectProperty ;
+    owl:inverseOf vtm:sire ;
+    rdfs:label "chiquillo"@es , "childe"@en ;
+    rdfs:comment "Vástago al que este personaje dio el Abrazo (se deduce de vtm:sire)."@es ,
+                 "Kindred this character Embraced (derived from vtm:sire)."@en .
+
+vtm:embraceYear a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Vampire ; rdfs:range xsd:integer ;
+    rdfs:label "año del Abrazo"@es , "year of Embrace"@en ;
+    rdfs:comment "Año en que el personaje fue convertido."@es , "Year the character was turned."@en .
+
+vtm:apparentAge a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:integer ;
+    rdfs:label "edad aparente"@es , "apparent age"@en ;
+    rdfs:comment "Edad que aparenta el personaje."@es , "Age the character appears to be."@en .
+
+vtm:hunger a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:domain vtm:Vampire ; rdfs:range xsd:integer ;
+    rdfs:label "hambre"@es , "hunger"@en ;
+    rdfs:comment "Ansia de sangre actual, de 0 a 5. Cuanto más alta, más difícil controlar a la Bestia."@es ,
+                 "Current craving for blood, from 0 to 5. The higher, the harder to restrain the Beast."@en .
+
+vtm:bloodPotency a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Vampire ; rdfs:range xsd:integer ;
+    rdfs:label "potencia de sangre"@es , "blood potency"@en ;
+    rdfs:comment "Fuerza de la vitae del vástago, de 0 a 10; crece con la edad y depende de la generación."@es ,
+                 "Strength of the Kindred's vitae, from 0 to 10; grows with age and depends on generation."@en .
+
+vtm:humanity a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:integer ;
+    rdfs:label "humanidad"@es , "humanity"@en ;
+    rdfs:comment "Cuánto conserva el personaje de su naturaleza humana, de 0 a 10."@es ,
+                 "How much of their human nature the character retains, from 0 to 10."@en .
+
+vtm:willpower a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:integer ;
+    rdfs:label "fuerza de voluntad"@es , "willpower"@en ;
+    rdfs:comment "Reserva de determinación del personaje."@es , "The character's reserve of determination."@en .
+
+vtm:predatorType a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Vampire ; rdfs:range skos:Concept ;
+    rdfs:label "tipo de depredador"@es , "predator type"@en ;
+    rdfs:comment "Forma habitual de alimentarse (esquema vtm:PredatorTypes)."@es ,
+                 "Usual way of feeding (vtm:PredatorTypes scheme)."@en .
+
+vtm:sect a owl:ObjectProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:range skos:Concept ;
+    rdfs:label "secta"@es , "sect"@en ;
+    rdfs:comment "Secta a la que se adscribe un personaje o facción (esquema vtm:Sects)."@es ,
+                 "Sect a character or faction adheres to (vtm:Sects scheme)."@en .
+
+vtm:position a owl:ObjectProperty ;
+    rpg:isTemporal true ;
+    rdfs:domain rpg:Character ; rdfs:range skos:Concept ;
+    rdfs:label "cargo"@es , "position"@en ;
+    rdfs:comment "Cargo en la sociedad vástaga (esquema vtm:Positions)."@es ,
+                 "Office in Kindred society (vtm:Positions scheme)."@en .
+
+vtm:haven a owl:ObjectProperty ;
+    rdfs:domain rpg:Character ; rdfs:range rpg:Place ;
+    rdfs:label "refugio"@es , "haven"@en ;
+    rdfs:comment "Lugar donde el personaje descansa durante el día."@es , "Place where the character rests during the day."@en .
+
+vtm:ambition a owl:DatatypeProperty ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:string ;
+    rdfs:label "ambición"@es , "ambition"@en ;
+    rdfs:comment "Meta a largo plazo del personaje."@es , "The character's long-term goal."@en .
+
+vtm:desire a owl:DatatypeProperty ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:string ;
+    rdfs:label "deseo"@es , "desire"@en ;
+    rdfs:comment "Meta inmediata, para esta sesión o la siguiente."@es , "Immediate goal, for this or the next session."@en .
+
+vtm:domitor a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Ghoul ; rdfs:range vtm:Vampire ;
+    rdfs:label "dómitor"@es , "domitor"@en ;
+    rdfs:comment "Vástago que alimenta con su sangre a este ghoul."@es , "Kindred who feeds this ghoul with their blood."@en .
+
+vtm:mortalRole a owl:ObjectProperty ;
+    rdfs:domain rpg:Character ; rdfs:range skos:Concept ;
+    rdfs:label "papel mortal"@es , "mortal role"@en ;
+    rdfs:comment "Papel de un mortal respecto a los vástagos (esquema vtm:MortalRoles)."@es ,
+                 "Role of a mortal regarding the Kindred (vtm:MortalRoles scheme)."@en .
+
+vtm:knowsOfKindred a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Character ; rdfs:range xsd:boolean ;
+    rdfs:label "conoce a los vástagos"@es , "knows of the Kindred"@en ;
+    rdfs:comment "El personaje sabe que los vampiros existen."@es , "The character knows vampires exist."@en .
+
+# --- Hechos cualificados anidados / Nested qualified facts ---
+
+vtm:hasDisciplineRating a owl:ObjectProperty ;
+    rdfs:domain rpg:Character ; rdfs:range vtm:DisciplineRating ;
+    rdfs:label "disciplinas"@es , "disciplines"@en ;
+    rdfs:comment "Niveles del personaje en cada disciplina."@es , "The character's rating in each discipline."@en .
+
+vtm:discipline a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:DisciplineRating ; rdfs:range vtm:Discipline ;
+    rdfs:label "disciplina"@es , "discipline"@en .
+
+vtm:dots a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:DisciplineRating ; rdfs:range xsd:integer ;
+    rdfs:label "puntos"@es , "dots"@en ;
+    rdfs:comment "Nivel de 1 a 5."@es , "Rating from 1 to 5."@en .
+
+vtm:hasBloodBond a owl:ObjectProperty ;
+    rdfs:subPropertyOf rpg:hasRelationship ;
+    rdfs:domain rpg:Character ; rdfs:range vtm:BloodBond ;
+    rdfs:label "vínculos de sangre"@es , "blood bonds"@en ;
+    rdfs:comment "Vínculos de sangre en los que el personaje es el siervo."@es ,
+                 "Blood bonds in which the character is the thrall."@en .
+
+vtm:bondLevel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:BloodBond ; rdfs:range xsd:integer ;
+    rdfs:label "nivel del vínculo"@es , "bond level"@en ;
+    rdfs:comment "De 1 (afecto) a 3 (vínculo completo)."@es , "From 1 (affection) to 3 (full bond)."@en .
+
+vtm:hasBoon a owl:ObjectProperty ;
+    rdfs:subPropertyOf rpg:hasRelationship ;
+    rdfs:domain rpg:Entity ; rdfs:range vtm:Boon ;
+    rdfs:label "favores debidos"@es , "boons owed"@en ;
+    rdfs:comment "Favores que el personaje o facción debe a otros."@es , "Boons the character or faction owes to others."@en .
+
+vtm:boonWeight a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Boon ; rdfs:range skos:Concept ;
+    rdfs:label "peso del favor"@es , "boon weight"@en ;
+    rdfs:comment "Importancia del favor (esquema vtm:BoonWeights)."@es , "Importance of the boon (vtm:BoonWeights scheme)."@en .
+
+vtm:hasConviction a owl:ObjectProperty ;
+    rdfs:domain rpg:Character ; rdfs:range vtm:Conviction ;
+    rdfs:label "convicciones"@es , "convictions"@en ;
+    rdfs:comment "Convicciones del personaje con su piedra de toque."@es , "The character's convictions with their touchstone."@en .
+
+vtm:convictionText a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Conviction ; rdfs:range xsd:string ;
+    rdfs:label "convicción"@es , "conviction"@en .
+
+vtm:touchstone a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain vtm:Conviction ; rdfs:range rpg:Character ;
+    rdfs:label "piedra de toque"@es , "touchstone"@en ;
+    rdfs:comment "Mortal que encarna la convicción. Si sufre daño, la humanidad del vástago peligra."@es ,
+                 "Mortal embodying the conviction. If they come to harm, the Kindred's humanity is at risk."@en .
+
+vtm:touchstoneOf a owl:ObjectProperty ;
+    rdfs:label "piedra de toque de"@es , "touchstone of"@en ;
+    rdfs:comment "Vástago para el que este mortal es piedra de toque (se deduce)."@es ,
+                 "Kindred for whom this mortal is a touchstone (derived)."@en .
+
+#################################################################
+# Lugares y catálogos / Places and catalogs
+#################################################################
+
+vtm:isElysium a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Place ; rdfs:range xsd:boolean ;
+    rdfs:label "es Elíseo"@es , "is Elysium"@en ;
+    rdfs:comment "Lugar neutral donde la violencia entre vástagos está prohibida."@es ,
+                 "Neutral ground where violence among Kindred is forbidden."@en .
+
+vtm:domainHolder a owl:ObjectProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:domain vtm:Domain ;
+    rdfs:label "titular del dominio"@es , "domain holder"@en ;
+    rdfs:comment "Personaje o facción que reclama el dominio."@es , "Character or faction claiming the domain."@en .
+
+vtm:masqueradeRisk a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Place ; rdfs:range xsd:integer ;
+    rdfs:label "riesgo para la Mascarada"@es , "Masquerade risk"@en ;
+    rdfs:comment "Vigilancia y peligro de exposición en el lugar, de 0 a 5."@es ,
+                 "Surveillance and exposure danger in the place, from 0 to 5."@en .
+
+vtm:huntingQuality a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Place ; rdfs:range xsd:integer ;
+    rdfs:label "calidad de caza"@es , "hunting quality"@en ;
+    rdfs:comment "Facilidad para alimentarse en el lugar, de 0 a 5."@es ,
+                 "Ease of feeding in the place, from 0 to 5."@en .
+
+vtm:clanDiscipline a owl:ObjectProperty ;
+    rdfs:domain vtm:Clan ; rdfs:range vtm:Discipline ;
+    rdfs:label "disciplina de clan"@es , "clan discipline"@en ;
+    rdfs:comment "Disciplina afín al clan."@es , "Discipline affine to the clan."@en .
+
+vtm:clanNickname a owl:DatatypeProperty ;
+    rdfs:domain vtm:Clan ; rdfs:range xsd:string ;
+    rdfs:label "apodo"@es , "nickname"@en .
+
+vtm:baneSummary a owl:DatatypeProperty ;
+    rdfs:domain vtm:Clan ; rdfs:range xsd:string ;
+    rdfs:label "maldición (resumen)"@es , "bane (summary)"@en ;
+    rdfs:comment "Resumen breve, con palabras propias; completa los detalles con tu manual."@es ,
+                 "Short summary in our own words; complete details from your rulebook."@en .
+
+vtm:compulsionSummary a owl:DatatypeProperty ;
+    rdfs:domain vtm:Clan ; rdfs:range xsd:string ;
+    rdfs:label "compulsión (resumen)"@es , "compulsion (summary)"@en ;
+    rdfs:comment "Resumen breve, con palabras propias; completa los detalles con tu manual."@es ,
+                 "Short summary in our own words; complete details from your rulebook."@en .

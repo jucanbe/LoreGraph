@@ -1,0 +1,107 @@
+id: core
+nombre:
+  es: Núcleo
+  en: Core
+descripcion:
+  es: Ontología y formas genéricas, comunes a todos los sistemas de juego.
+  en: Generic ontology and shapes shared by every game system.
+version: 0.1.0
+categoria: nucleo
+iri: https://loregraph.example.org/ont/core#
+prefijo: rpg
+licencia: CC-BY-4.0
+ontologia: core.ttl
+formas: core-shapes.ttl
+vocabulario: []
+
+clases_principales:
+  - rpg:PlayerCharacter
+  - rpg:NonPlayerCharacter
+  - rpg:Place
+  - rpg:Faction
+  - rpg:Item
+  - rpg:Event
+  - rpg:Session
+  - rpg:Plot
+  - rpg:Player
+
+estilos_tipos:
+  rpg:PlayerCharacter:    { color: "#2563eb", forma: ellipse,          icono: user-round }
+  rpg:NonPlayerCharacter: { color: "#7c3aed", forma: ellipse,          icono: users-round }
+  rpg:Character:          { color: "#6d28d9", forma: ellipse,          icono: user }
+  rpg:Place:              { color: "#059669", forma: round-rectangle,  icono: map-pin }
+  rpg:Faction:            { color: "#d97706", forma: hexagon,          icono: shield }
+  rpg:Item:               { color: "#0891b2", forma: diamond,          icono: gem }
+  rpg:Event:              { color: "#dc2626", forma: star,             icono: zap }
+  rpg:Session:            { color: "#64748b", forma: tag,              icono: calendar-days }
+  rpg:Plot:               { color: "#db2777", forma: triangle,         icono: scroll-text }
+  rpg:Player:             { color: "#475569", forma: round-rectangle,  icono: gamepad-2 }
+
+estilos_relaciones:
+  rpg:memberOf:          { color: "#d97706", linea: solid }
+  rpg:locatedIn:         { color: "#059669", linea: dashed }
+  rpg:knows:             { color: "#94a3b8", linea: dotted }
+  rpg:possesses:         { color: "#0891b2", linea: solid }
+  rpg:participatesIn:    { color: "#dc2626", linea: dashed }
+  rpg:occursIn:          { color: "#059669", linea: dotted }
+  rpg:involves:          { color: "#db2777", linea: dotted }
+  rpg:playedBy:          { color: "#475569", linea: dotted }
+  rpg:rel-ally:          { color: "#16a34a", linea: solid, ancho: 2 }
+  rpg:rel-friend:        { color: "#22c55e", linea: solid }
+  rpg:rel-family:        { color: "#a16207", linea: solid, ancho: 2 }
+  rpg:rel-lover:         { color: "#e11d48", linea: solid, ancho: 2 }
+  rpg:rel-rival:         { color: "#f97316", linea: dashed }
+  rpg:rel-enemy:         { color: "#b91c1c", linea: solid, ancho: 3 }
+  rpg:rel-debt:          { color: "#ca8a04", linea: dashed }
+  rpg:rel-employer:      { color: "#0f766e", linea: solid }
+  rpg:rel-mentor:        { color: "#4f46e5", linea: solid }
+
+tema:
+  radio: "0.5rem"
+  fuentes:
+    titulos: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+    texto: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+  claro:
+    background: "#ffffff"
+    foreground: "#0f172a"
+    card: "#ffffff"
+    card-foreground: "#0f172a"
+    popover: "#ffffff"
+    popover-foreground: "#0f172a"
+    primary: "#1e293b"
+    primary-foreground: "#f8fafc"
+    secondary: "#f1f5f9"
+    secondary-foreground: "#1e293b"
+    muted: "#f1f5f9"
+    muted-foreground: "#64748b"
+    accent: "#f1f5f9"
+    accent-foreground: "#1e293b"
+    destructive: "#dc2626"
+    destructive-foreground: "#ffffff"
+    border: "#e2e8f0"
+    input: "#e2e8f0"
+    ring: "#94a3b8"
+    sidebar: "#f8fafc"
+    sidebar-foreground: "#0f172a"
+  oscuro:
+    background: "#0b1120"
+    foreground: "#e2e8f0"
+    card: "#111827"
+    card-foreground: "#e2e8f0"
+    popover: "#111827"
+    popover-foreground: "#e2e8f0"
+    primary: "#e2e8f0"
+    primary-foreground: "#0f172a"
+    secondary: "#1e293b"
+    secondary-foreground: "#e2e8f0"
+    muted: "#1e293b"
+    muted-foreground: "#94a3b8"
+    accent: "#1e293b"
+    accent-foreground: "#e2e8f0"
+    destructive: "#ef4444"
+    destructive-foreground: "#ffffff"
+    border: "#1e293b"
+    input: "#334155"
+    ring: "#64748b"
+    sidebar: "#0f172a"
+    sidebar-foreground: "#e2e8f0"

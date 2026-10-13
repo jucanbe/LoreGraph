@@ -1,0 +1,35 @@
+{
+  "boton": "Generar con IA",
+  "titulo": "Generar con IA",
+  "descripcion": "El modelo local creará fichas alineadas con el sistema de juego. El resultado llega como propuesta: nada entra en el canon hasta que lo apruebes.",
+  "clase": "Tipo",
+  "variante": "Variante",
+  "sinVariante": "Sin variante",
+  "peticion": "¿Qué quieres?",
+  "peticionPlaceholder": "Concepto, tono, relaciones con otras entidades… (opcional)",
+  "cantidad": "Cantidad",
+  "historia": "Escribir una historia propia",
+  "historiaAyuda": "Añade un trasfondo (rpg:backstory) a cada entidad.",
+  "generar": "Generar",
+  "generando": "Generando con el modelo local…",
+  "generandoAyuda": "Con modelos locales puede tardar varios minutos. Puedes dejar de esperar: la generación seguirá en el servidor y la propuesta aparecerá en la bandeja.",
+  "dejarDeEsperar": "Dejar de esperar",
+  "esperaCancelada": "Has dejado de esperar. Si la generación termina, la propuesta aparecerá en la bandeja de propuestas.",
+  "verBandeja": "Ir a propuestas",
+  "resultado": {
+    "titulo_one": "{{count}} entidad generada",
+    "titulo_other": "{{count}} entidades generadas",
+    "revisar": "Se ha creado una propuesta pendiente. Revísala y apruébala para incorporarla al canon.",
+    "verPropuesta": "Revisar la propuesta",
+    "modelo": "Modelo: {{modelo}}",
+    "reintentos_zero": "La salida del modelo fue válida a la primera",
+    "reintentos_one": "Hubo que corregir la salida del modelo {{count}} vez",
+    "reintentos_other": "Hubo que corregir la salida del modelo {{count}} veces",
+    "otra": "Generar otra vez"
+  },
+  "error": {
+    "titulo": "No se pudo generar",
+    "modelo": "El modelo no respondió o su salida no era válida. Revisa los ajustes del modelo (LLM) y prueba otro modo de salida (llm_output_mode: tool, native o prompted).",
+    "irAjustes": "Abrir ajustes"
+  }
+}

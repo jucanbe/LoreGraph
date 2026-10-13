@@ -1,0 +1,15 @@
+# titulo: Ciclo de lugares o facciones
+# titulo_en: Place or faction cycle
+# severidad: error
+# descripcion: Un lugar está dentro de sí mismo, o una facción forma parte de sí misma, a través de una cadena.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+
+SELECT DISTINCT ?entidad ?mensaje WHERE {
+  {
+    ?entidad a rpg:Place ; rpg:locatedIn+ ?entidad .
+    BIND ("El lugar acaba dentro de sí mismo." AS ?mensaje)
+  } UNION {
+    ?entidad a rpg:Faction ; rpg:memberOf+ ?entidad .
+    BIND ("La facción acaba formando parte de sí misma." AS ?mensaje)
+  }
+}

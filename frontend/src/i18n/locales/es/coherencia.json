@@ -1,0 +1,40 @@
+{
+  "titulo": "Coherencia",
+  "subtitulo": "Comprobaciones automáticas de las reglas del núcleo y de los módulos activos sobre el mundo de la campaña.",
+  "resumen": {
+    "etiqueta": "Resumen",
+    "errores_one": "{{count}} error",
+    "errores_other": "{{count}} errores",
+    "avisos_one": "{{count}} aviso",
+    "avisos_other": "{{count}} avisos",
+    "ignoradas_one": "{{count}} ignorada",
+    "ignoradas_other": "{{count}} ignoradas",
+    "reglas_one": "{{count}} regla comprobada",
+    "reglas_other": "{{count}} reglas comprobadas"
+  },
+  "filtro": {
+    "etiqueta": "Filtrar por gravedad",
+    "todas": "Todas",
+    "error": "Errores",
+    "aviso": "Avisos"
+  },
+  "mostrarIgnoradas": "Mostrar ignoradas",
+  "severidad": {
+    "error": "Error",
+    "aviso": "Aviso"
+  },
+  "ignorada": "Ignorada",
+  "entidad": "Entidad",
+  "relacionadas": "Relacionadas",
+  "ignorar": "Ignorar (intencionado)",
+  "restaurar": "Restaurar",
+  "ignorarAyuda": "Márcala como intencionada si la contradicción forma parte de la historia.",
+  "hechoIgnorar": "Incoherencia marcada como intencionada",
+  "hechoRestaurar": "Incoherencia restaurada",
+  "vacio": {
+    "titulo": "El mundo es coherente",
+    "descripcion_one": "Ninguna de las {{count}} reglas ha encontrado contradicciones. ¡Buen trabajo de cronista!",
+    "descripcion_other": "Ninguna de las {{count}} reglas ha encontrado contradicciones. ¡Buen trabajo de cronista!"
+  },
+  "sinFiltro": "No hay incoherencias con este filtro."
+}

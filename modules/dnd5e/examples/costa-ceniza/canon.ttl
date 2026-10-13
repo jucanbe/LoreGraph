@@ -1,0 +1,559 @@
+@prefix :       <__CAMPAIGN__/entity/> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix dnd:    <https://rpg-modules.example.net/dnd5e/ont#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+#################################################################
+# La Costa de Ceniza — campaña de ejemplo (ambientación original)
+# Sistema: D&D 5.ª edición, solo contenido del SRD 5.1.
+#################################################################
+
+#################################################################
+# Sesiones
+#################################################################
+
+:sesion-01 a rpg:Session ;
+    rdfs:label "Sesión 1: El naufragio del Pez Plata" ;
+    rpg:sessionNumber 1 ;
+    rpg:sessionDate "2026-09-05"^^xsd:date ;
+    rpg:inWorldDateLabel "3 de Brumal del año 1207 del Sello de Sal" ;
+    rpg:sessionNotes "Los cuatro supervivientes del Pez Plata llegan a nado a las Islas de Ceniza. Rescatan la carga de sal, se refugian en los Túneles Verdes y la capitana Leonor los contrata a su regreso a Puerto Brasa." .
+
+:sesion-02 a rpg:Session ;
+    rdfs:label "Sesión 2: Sal y colmillos" ;
+    rpg:sessionNumber 2 ;
+    rpg:sessionDate "2026-09-19"^^xsd:date ;
+    rpg:inWorldDateLabel "9 de Brumal del año 1207" ;
+    rpg:sessionNotes "Los Colmillos de Basalto asaltan la caravana de la Cofradía en los Campos de Malpaís. Gruk hiere a Iria y huye. Sira y sus Gaviotas Negras aparecen al final para llevarse el mérito." .
+
+:sesion-03 a rpg:Session ;
+    rdfs:label "Sesión 3: Humo en la cumbre" ;
+    rpg:sessionNumber 3 ;
+    rpg:sessionDate "2026-10-03"^^xsd:date ;
+    rpg:inWorldDateLabel "15 de Brumal del año 1207" ;
+    rpg:sessionNotes "La Montaña del Fuego Dormido vuelve a humear. Nuño sueña con una voz de brasas que le ofrece un trato y acepta. En la Alcazaba, la alcaidesa Velasca niega cualquier peligro." .
+
+#################################################################
+# Jugadores
+#################################################################
+
+:jugadora-marta a rpg:Player ; rdfs:label "Marta" ;
+    schema:description "Juega desde la primera sesión; le encantan los combates tácticos." .
+:jugador-diego a rpg:Player ; rdfs:label "Diego" ;
+    schema:description "Veterano de la mesa; lleva siempre al sanador del grupo." .
+:jugadora-lucia a rpg:Player ; rdfs:label "Lucía" ;
+    schema:description "Disfruta investigando los secretos del mundo." .
+:jugador-andres a rpg:Player ; rdfs:label "Andrés" ;
+    schema:description "Prefiere los personajes con pactos turbios y dilemas morales." .
+
+#################################################################
+# Personajes jugadores
+#################################################################
+
+:iria a rpg:PlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Iria Salitre" ;
+    skos:altLabel "la Gaviota" ;
+    schema:description "Antigua marinera del Pez Plata, curtida en abordajes. Guerrera con trucos de contrabandista." ;
+    rpg:playedBy :jugadora-marta ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:memberOf :cofradia-sal ;
+    rpg:possesses :espada-salitre , :carta-corso ;
+    rpg:participatesIn :naufragio-pez-plata , :asalto-caravana ;
+    rpg:knows :tome , :aelis , :nuno , :leonor ;
+    dnd:species dnd:species-human ;
+    dnd:alignment dnd:align-cg ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/iria/n/c1> , <__CAMPAIGN__/entity/iria/n/c2> ;
+    dnd:experiencePoints 2900 ;
+    dnd:inspiration true ;
+    dnd:strength 16 ; dnd:dexterity 14 ; dnd:constitution 14 ;
+    dnd:intelligence 10 ; dnd:wisdom 12 ; dnd:charisma 8 ;
+    dnd:armorClass 16 ; dnd:hitPointMax 35 ; dnd:currentHitPoints 21 ; dnd:speed 30 ;
+    dnd:skillProficiency dnd:skill-athletics , dnd:skill-perception , dnd:skill-stealth , dnd:skill-intimidation ;
+    dnd:skillExpertise dnd:skill-stealth , dnd:skill-athletics ;
+    dnd:savingThrowProficiency dnd:ability-str , dnd:ability-con ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/iria/n/r1> , <__CAMPAIGN__/entity/iria/n/r2> , <__CAMPAIGN__/entity/iria/n/r3> ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 , :sesion-03 .
+
+<__CAMPAIGN__/entity/iria/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :iria ;
+    dnd:characterClass dnd:class-fighter ; dnd:levels 3 ; dnd:subclass dnd:subclass-champion .
+<__CAMPAIGN__/entity/iria/n/c2> a dnd:ClassLevel ; dnd:classLevelOf :iria ;
+    dnd:characterClass dnd:class-rogue ; dnd:levels 1 .
+
+:tome a rpg:PlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Tomé Fuelleroto" ;
+    schema:description "Enano de las colinas, sacerdote de la Llama Serena. Iba a bordo del Pez Plata para bendecir la carga." ;
+    rpg:playedBy :jugador-diego ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:memberOf :orden-llama-serena ;
+    rpg:possesses :cota-malla-tome , :escudo-tome ;
+    rpg:participatesIn :naufragio-pez-plata , :asalto-caravana ;
+    rpg:knows :iria , :aelis , :nuno , :anselmo ;
+    dnd:species dnd:species-hill-dwarf ;
+    dnd:background dnd:background-acolyte ;
+    dnd:alignment dnd:align-lg ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/tome/n/c1> ;
+    dnd:experiencePoints 2900 ;
+    dnd:strength 14 ; dnd:dexterity 8 ; dnd:constitution 16 ;
+    dnd:intelligence 10 ; dnd:wisdom 17 ; dnd:charisma 12 ;
+    dnd:armorClass 18 ; dnd:hitPointMax 39 ; dnd:currentHitPoints 39 ; dnd:speed 25 ;
+    dnd:skillProficiency dnd:skill-insight , dnd:skill-religion , dnd:skill-medicine , dnd:skill-persuasion ;
+    dnd:savingThrowProficiency dnd:ability-wis , dnd:ability-cha ;
+    dnd:spellcastingAbility dnd:ability-wis ; dnd:spellSaveDC 13 ; dnd:spellAttackBonus 5 ;
+    dnd:knowsSpell dnd:spell-sacred-flame , dnd:spell-guidance , dnd:spell-light ;
+    dnd:preparedSpell dnd:spell-cure-wounds , dnd:spell-bless , dnd:spell-healing-word ,
+                      dnd:spell-spiritual-weapon , dnd:spell-hold-person ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 , :sesion-03 .
+
+<__CAMPAIGN__/entity/tome/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :tome ;
+    dnd:characterClass dnd:class-cleric ; dnd:levels 4 ; dnd:subclass dnd:subclass-life .
+
+:aelis a rpg:PlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Aelis Vientoverde" ;
+    schema:description "Alta elfa erudita que viajaba en el Pez Plata para estudiar los volcanes de las Islas de Ceniza." ;
+    rpg:playedBy :jugadora-lucia ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:possesses :baston-ascuas ;
+    rpg:participatesIn :naufragio-pez-plata , :asalto-caravana ;
+    rpg:knows :iria , :tome , :nuno , :sira ;
+    dnd:species dnd:species-high-elf ;
+    dnd:alignment dnd:align-ng ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/aelis/n/c1> ;
+    dnd:experiencePoints 2900 ;
+    dnd:strength 8 ; dnd:dexterity 14 ; dnd:constitution 14 ;
+    dnd:intelligence 18 ; dnd:wisdom 12 ; dnd:charisma 10 ;
+    dnd:armorClass 12 ; dnd:hitPointMax 26 ; dnd:currentHitPoints 26 ; dnd:speed 30 ;
+    dnd:skillProficiency dnd:skill-arcana , dnd:skill-history , dnd:skill-investigation , dnd:skill-perception ;
+    dnd:savingThrowProficiency dnd:ability-int , dnd:ability-wis ;
+    dnd:spellcastingAbility dnd:ability-int ; dnd:spellSaveDC 14 ; dnd:spellAttackBonus 6 ;
+    dnd:knowsSpell dnd:spell-fire-bolt , dnd:spell-mage-hand , dnd:spell-prestidigitation , dnd:spell-light ,
+                   dnd:spell-magic-missile , dnd:spell-shield , dnd:spell-sleep , dnd:spell-detect-magic ,
+                   dnd:spell-thunderwave , dnd:spell-identify , dnd:spell-misty-step , dnd:spell-invisibility ;
+    dnd:preparedSpell dnd:spell-magic-missile , dnd:spell-shield , dnd:spell-sleep ,
+                      dnd:spell-thunderwave , dnd:spell-misty-step , dnd:spell-detect-magic ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/aelis/n/r1> ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 , :sesion-03 .
+
+<__CAMPAIGN__/entity/aelis/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :aelis ;
+    dnd:characterClass dnd:class-wizard ; dnd:levels 4 ; dnd:subclass dnd:subclass-evocation .
+
+:nuno a rpg:PlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Nuño Brasaoscura" ;
+    schema:description "Tiflin buscavidas de los muelles de Puerto Brasa. Brujo de un pacto infernal y, desde hace poco, algo más: la sangre le arde cuando la montaña humea." ;
+    rpg:playedBy :jugador-andres ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :taberna-ancla-tiznada ;
+    rpg:participatesIn :naufragio-pez-plata , :asalto-caravana ;
+    rpg:knows :iria , :tome , :aelis , :orban ;
+    dnd:species dnd:species-tiefling ;
+    dnd:alignment dnd:align-cn ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/nuno/n/c1> , <__CAMPAIGN__/entity/nuno/n/c2> ;
+    dnd:experiencePoints 2900 ;
+    dnd:strength 8 ; dnd:dexterity 14 ; dnd:constitution 14 ;
+    dnd:intelligence 10 ; dnd:wisdom 10 ; dnd:charisma 17 ;
+    dnd:armorClass 13 ; dnd:hitPointMax 30 ; dnd:currentHitPoints 30 ; dnd:speed 30 ;
+    dnd:damageResistance dnd:dmg-fire ;
+    dnd:skillProficiency dnd:skill-deception , dnd:skill-intimidation , dnd:skill-arcana , dnd:skill-persuasion ;
+    dnd:savingThrowProficiency dnd:ability-wis , dnd:ability-cha ;
+    dnd:spellcastingAbility dnd:ability-cha ; dnd:spellSaveDC 13 ; dnd:spellAttackBonus 5 ;
+    dnd:knowsSpell dnd:spell-eldritch-blast , dnd:spell-fire-bolt , dnd:spell-prestidigitation ,
+                   dnd:spell-charm-person , dnd:spell-hold-person , dnd:spell-misty-step ,
+                   dnd:spell-shield , dnd:spell-magic-missile ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/nuno/n/r1> ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 , :sesion-03 .
+
+<__CAMPAIGN__/entity/nuno/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :nuno ;
+    dnd:characterClass dnd:class-warlock ; dnd:levels 3 ; dnd:subclass dnd:subclass-fiend .
+<__CAMPAIGN__/entity/nuno/n/c2> a dnd:ClassLevel ; dnd:classLevelOf :nuno ;
+    dnd:characterClass dnd:class-sorcerer ; dnd:levels 1 ; dnd:subclass dnd:subclass-draconic .
+
+#################################################################
+# PNJ aventureros
+#################################################################
+
+:leonor a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Leonor Barrenechea" ;
+    skos:altLabel "la Capitana" ;
+    schema:description "Capitana del puerto y armadora del Pez Plata. Dura, justa y endeudada hasta las cejas con la Cofradía." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:memberOf :cofradia-sal ;
+    rpg:knows :velasca , :orban ;
+    dnd:species dnd:species-human ;
+    dnd:alignment dnd:align-ln ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/leonor/n/c1> ;
+    dnd:strength 15 ; dnd:dexterity 13 ; dnd:constitution 14 ;
+    dnd:intelligence 12 ; dnd:wisdom 13 ; dnd:charisma 14 ;
+    dnd:armorClass 17 ; dnd:hitPointMax 52 ; dnd:speed 30 ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 .
+
+<__CAMPAIGN__/entity/leonor/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :leonor ;
+    dnd:characterClass dnd:class-fighter ; dnd:levels 6 ; dnd:subclass dnd:subclass-champion .
+
+:anselmo a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Fray Anselmo de la Brasa" ;
+    schema:description "Prior del Templo de la Llama Serena. Fue maestro de Tomé y teme que la profecía del fuego dormido sea cierta." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :templo-llama-serena ;
+    rpg:memberOf :orden-llama-serena ;
+    dnd:species dnd:species-human ;
+    dnd:background dnd:background-acolyte ;
+    dnd:alignment dnd:align-lg ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/anselmo/n/c1> ;
+    dnd:wisdom 16 ; dnd:charisma 13 ;
+    dnd:armorClass 15 ; dnd:hitPointMax 38 ;
+    dnd:spellcastingAbility dnd:ability-wis ; dnd:spellSaveDC 14 ; dnd:spellAttackBonus 6 ;
+    dnd:knowsSpell dnd:spell-sacred-flame , dnd:spell-light ;
+    dnd:preparedSpell dnd:spell-revivify , dnd:spell-dispel-magic , dnd:spell-bless ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/anselmo/n/r1> ;
+    rpg:appearsInSession :sesion-01 , :sesion-03 .
+
+<__CAMPAIGN__/entity/anselmo/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :anselmo ;
+    dnd:characterClass dnd:class-cleric ; dnd:levels 5 ; dnd:subclass dnd:subclass-life .
+
+:sira a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Sira la Mareada" ;
+    schema:description "Semielfa barda, cabecilla de las Gaviotas Negras. Encantadora, mentirosa y siempre un paso por delante." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :taberna-ancla-tiznada ;
+    rpg:memberOf :gaviotas-negras ;
+    dnd:species dnd:species-half-elf ;
+    dnd:alignment dnd:align-cn ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/sira/n/c1> ;
+    dnd:dexterity 15 ; dnd:charisma 18 ;
+    dnd:armorClass 14 ; dnd:hitPointMax 33 ;
+    dnd:skillProficiency dnd:skill-deception , dnd:skill-performance , dnd:skill-persuasion , dnd:skill-sleight-of-hand ;
+    dnd:skillExpertise dnd:skill-deception , dnd:skill-persuasion ;
+    dnd:spellcastingAbility dnd:ability-cha ; dnd:spellSaveDC 15 ; dnd:spellAttackBonus 7 ;
+    dnd:knowsSpell dnd:spell-vicious-mockery , dnd:spell-charm-person , dnd:spell-healing-word ,
+                   dnd:spell-invisibility , dnd:spell-dispel-magic ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/sira/n/r1> ;
+    rpg:appearsInSession :sesion-02 .
+
+<__CAMPAIGN__/entity/sira/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :sira ;
+    dnd:characterClass dnd:class-bard ; dnd:levels 5 ; dnd:subclass dnd:subclass-lore .
+
+:gruk a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Gruk Mandíbularrota" ;
+    schema:description "Semiorco bárbaro, jefe de los Colmillos de Basalto. Asalta las caravanas de sal y odia a la Cofradía desde que ahorcaron a su hermano." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :campos-malpais ;
+    rpg:memberOf :colmillos-basalto ;
+    rpg:participatesIn :asalto-caravana ;
+    dnd:species dnd:species-half-orc ;
+    dnd:alignment dnd:align-ce ;
+    dnd:hasClassLevel <__CAMPAIGN__/entity/gruk/n/c1> ;
+    dnd:strength 18 ; dnd:dexterity 14 ; dnd:constitution 16 ;
+    dnd:intelligence 8 ; dnd:wisdom 10 ; dnd:charisma 9 ;
+    dnd:armorClass 15 ; dnd:hitPointMax 55 ; dnd:currentHitPoints 30 ; dnd:speed 40 ;
+    dnd:skillProficiency dnd:skill-athletics , dnd:skill-intimidation , dnd:skill-survival ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/gruk/n/r1> ;
+    rpg:appearsInSession :sesion-02 .
+
+<__CAMPAIGN__/entity/gruk/n/c1> a dnd:ClassLevel ; dnd:classLevelOf :gruk ;
+    dnd:characterClass dnd:class-barbarian ; dnd:levels 5 ; dnd:subclass dnd:subclass-berserker .
+
+:velasca a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Velasca Ordóñez" ;
+    skos:altLabel "la Alcaidesa" ;
+    schema:description "Alcaidesa de la Alcazaba de Gibra. Asegura que el volcán no es un peligro; en secreto, ha pactado con lo que duerme en él." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :alcazaba-gibra ;
+    rpg:memberOf :cofradia-sal ;
+    dnd:species dnd:species-human ;
+    dnd:alignment dnd:align-le ;
+    dnd:intelligence 15 ; dnd:charisma 16 ;
+    rpg:hasRelationship <__CAMPAIGN__/entity/velasca/n/r1> ;
+    rpg:appearsInSession :sesion-03 .
+
+:orban a rpg:NonPlayerCharacter , dnd:Adventurer ;
+    rdfs:label "Maese Orbán Tizne" ;
+    schema:description "Gnomo de las rocas, prestamista y vendedor de cachivaches mágicos en la Taberna del Ancla Tiznada. Sabe más de lo que cuenta." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :taberna-ancla-tiznada ;
+    rpg:memberOf :cofradia-sal ;
+    dnd:species dnd:species-rock-gnome ;
+    dnd:alignment dnd:align-n ;
+    dnd:intelligence 16 ;
+    rpg:appearsInSession :sesion-01 , :sesion-03 .
+
+#################################################################
+# PNJ criaturas (bloque de estadísticas del bestiario)
+#################################################################
+
+:calcinaria a rpg:NonPlayerCharacter , dnd:Creature ;
+    rdfs:label "Calcinaria" ;
+    skos:altLabel "la Brasa Durmiente" ;
+    schema:description "Dragona roja joven que durmió veinte años en el corazón de la montaña tras la gran erupción. Ahora despierta, hambrienta de oro y de vasallos." ;
+    rpg:inspiredBy wd:Q7559 ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :montana-fuego-dormido ;
+    rpg:participatesIn :erupcion-fuego-dormido ;
+    dnd:statBlock dnd:monster-young-red-dragon ;
+    dnd:alignment dnd:align-ce ;
+    dnd:currentHitPoints 178 ;
+    rpg:appearsInSession :sesion-03 .
+
+:toro-basalto a rpg:NonPlayerCharacter , dnd:Creature ;
+    rdfs:label "El Toro de Basalto" ;
+    schema:description "Minotauro de piel negra como la lava enfriada que guarda el Ojo de Basalto en su laberinto." ;
+    rpg:inspiredBy wd:Q129866 ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :laberinto-toro ;
+    rpg:possesses :ojo-basalto ;
+    dnd:statBlock dnd:monster-minotaur ;
+    dnd:hitPointMax 95 ;
+    dnd:damageResistance dnd:dmg-fire .
+
+:tarasca-mareas a rpg:NonPlayerCharacter , dnd:Creature ;
+    rdfs:label "La Tarasca de las Mareas" ;
+    schema:description "Leyenda de los pescadores: un coloso acorazado duerme bajo el estrecho y despertará si el dragón vuelve a reinar." ;
+    rpg:inspiredBy wd:Q1063874 ;
+    rpg:vitalStatus rpg:vital-unknown ;
+    dnd:statBlock dnd:monster-tarrasque .
+
+#################################################################
+# Relaciones cualificadas
+#################################################################
+
+<__CAMPAIGN__/entity/iria/n/r1> a rpg:Relationship ;
+    rpg:source :iria ; rpg:target :leonor ;
+    rpg:relationshipType dnd:rel-patron ; rpg:strength 2 ;
+    schema:description "Leonor le dio una carta de corso a cambio de proteger las caravanas de sal." ;
+    rpg:validFrom :sesion-01 .
+
+<__CAMPAIGN__/entity/iria/n/r2> a rpg:Relationship ;
+    rpg:source :iria ; rpg:target :gruk ;
+    rpg:relationshipType dnd:rel-sworn-enemy ; rpg:strength -3 ;
+    schema:description "Gruk casi la mata en el asalto; Iria ha jurado cobrárselo." ;
+    rpg:validFrom :sesion-02 .
+
+<__CAMPAIGN__/entity/iria/n/r3> a rpg:Relationship ;
+    rpg:source :iria ; rpg:target :tome ;
+    rpg:relationshipType dnd:rel-party-member ; rpg:strength 3 ;
+    rpg:validFrom :sesion-01 .
+
+<__CAMPAIGN__/entity/aelis/n/r1> a rpg:Relationship ;
+    rpg:source :aelis ; rpg:target :sira ;
+    rpg:relationshipType dnd:rel-rival-party ; rpg:strength -1 ;
+    schema:description "Sira se atribuyó la victoria en la caravana." ;
+    rpg:validFrom :sesion-02 .
+
+<__CAMPAIGN__/entity/sira/n/r1> a rpg:Relationship ;
+    rpg:source :sira ; rpg:target :aelis ;
+    rpg:relationshipType rpg:rel-ally ; rpg:strength 1 ;
+    schema:description "Alianza de conveniencia que duró hasta el reparto del botín." ;
+    rpg:validFrom :sesion-01 ; rpg:validUntil :sesion-02 .
+
+<__CAMPAIGN__/entity/nuno/n/r1> a rpg:Relationship ;
+    rpg:source :nuno ; rpg:target :calcinaria ;
+    rpg:relationshipType rpg:rel-debt ; rpg:strength -2 ;
+    schema:description "Aceptó en sueños un don de fuego de la dragona; ella le cobrará el favor." ;
+    rpg:validFrom :sesion-03 .
+
+<__CAMPAIGN__/entity/anselmo/n/r1> a rpg:Relationship ;
+    rpg:source :anselmo ; rpg:target :tome ;
+    rpg:relationshipType rpg:rel-mentor ; rpg:strength 2 ;
+    rpg:validFrom :sesion-01 .
+
+<__CAMPAIGN__/entity/gruk/n/r1> a rpg:Relationship ;
+    rpg:source :gruk ; rpg:target :leonor ;
+    rpg:relationshipType rpg:rel-enemy ; rpg:strength -2 ;
+    rpg:validFrom :sesion-01 .
+
+<__CAMPAIGN__/entity/velasca/n/r1> a rpg:Relationship ;
+    rpg:source :velasca ; rpg:target :calcinaria ;
+    rpg:relationshipType rpg:rel-employer ; rpg:strength 1 ;
+    schema:description "Le sirve en secreto a cambio de que la dragona respete la Alcazaba." ;
+    rpg:validFrom :sesion-03 .
+
+#################################################################
+# Lugares
+#################################################################
+
+:costa-ceniza a rpg:Place ;
+    rdfs:label "La Costa de Ceniza" ;
+    schema:description "Litoral volcánico de salinas, puertos y fortalezas, frente a un archipiélago de lava." .
+
+:puerto-brasa a dnd:Settlement ;
+    rdfs:label "Puerto Brasa" ;
+    schema:description "Ciudad portuaria amurallada que vive del comercio de la sal. Sede de la Cofradía." ;
+    rpg:locatedIn :costa-ceniza ;
+    rpg:correspondsTo wd:Q15682 ;
+    dnd:population 18000 ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 , :sesion-03 .
+
+:taberna-ancla-tiznada a rpg:Place ;
+    rdfs:label "Taberna del Ancla Tiznada" ;
+    schema:description "Taberna de los muelles, oscura y llena de humo, donde se cierran tratos y se reclutan espadas." ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:appearsInSession :sesion-01 , :sesion-03 .
+
+:templo-llama-serena a rpg:Place ;
+    rdfs:label "Templo de la Llama Serena" ;
+    schema:description "Santuario de una llama que lleva siglos encendida; sus monjes vigilan la montaña." ;
+    rpg:locatedIn :puerto-brasa .
+
+:alcazaba-gibra a rpg:Place ;
+    rdfs:label "Alcazaba de Gibra" ;
+    schema:description "Fortaleza sobre un cerro que domina la bahía; residencia de la alcaidesa." ;
+    rpg:locatedIn :costa-ceniza ;
+    rpg:correspondsTo wd:Q1049197 ;
+    rpg:appearsInSession :sesion-03 .
+
+:islas-ceniza a rpg:Place ;
+    rdfs:label "Islas de Ceniza" ;
+    schema:description "Archipiélago de malpaíses y conos volcánicos; pocas aldeas, muchos naufragios." ;
+    rpg:locatedIn :costa-ceniza ;
+    rpg:correspondsTo wd:Q182432 ;
+    rpg:appearsInSession :sesion-01 .
+
+:campos-malpais a rpg:Place ;
+    rdfs:label "Campos de Malpaís" ;
+    schema:description "Mar de lava petrificada cruzado por la ruta de la sal; guarida de los Colmillos de Basalto." ;
+    rpg:locatedIn :islas-ceniza ;
+    rpg:correspondsTo wd:Q1480521 ;
+    rpg:appearsInSession :sesion-02 .
+
+:tuneles-verdes a dnd:Dungeon ;
+    rdfs:label "Túneles Verdes" ;
+    schema:description "Red de tubos volcánicos de paredes verdosas; refugio de contrabandistas y algo peor en lo más hondo." ;
+    rpg:locatedIn :islas-ceniza ;
+    rpg:correspondsTo wd:Q899513 ;
+    dnd:recommendedLevel 3 ;
+    rpg:appearsInSession :sesion-01 .
+
+:laberinto-toro a dnd:Dungeon ;
+    rdfs:label "Laberinto del Toro de Basalto" ;
+    schema:description "Galerías que cambian de forma con cada temblor, excavadas bajo los Túneles Verdes." ;
+    rpg:locatedIn :tuneles-verdes ;
+    rpg:inspiredBy wd:Q129866 ;
+    dnd:recommendedLevel 5 .
+
+:montana-fuego-dormido a rpg:Place ;
+    rdfs:label "Montaña del Fuego Dormido" ;
+    schema:description "Volcán solitario en su propia isla, frente a la costa. Lleva veinte años en calma… hasta ahora." ;
+    rpg:locatedIn :costa-ceniza ;
+    rpg:correspondsTo wd:Q38954 ;
+    rpg:appearsInSession :sesion-03 .
+
+#################################################################
+# Facciones
+#################################################################
+
+:cofradia-sal a rpg:Faction ;
+    rdfs:label "Cofradía de la Sal" ;
+    schema:description "Gremio de salineros y armadores que gobierna de hecho Puerto Brasa." ;
+    rpg:locatedIn :puerto-brasa ;
+    rpg:appearsInSession :sesion-01 , :sesion-02 .
+
+:colmillos-basalto a rpg:Faction ;
+    rdfs:label "Colmillos de Basalto" ;
+    schema:description "Banda de salteadores de las islas, mezcla de semiorcos, trasgos y desertores." ;
+    rpg:locatedIn :campos-malpais ;
+    rpg:appearsInSession :sesion-02 .
+
+:orden-llama-serena a rpg:Faction ;
+    rdfs:label "Orden de la Llama Serena" ;
+    schema:description "Orden clerical que custodia la llama eterna y las profecías sobre la montaña." ;
+    rpg:locatedIn :templo-llama-serena .
+
+:gaviotas-negras a rpg:Faction ;
+    rdfs:label "Gaviotas Negras" ;
+    schema:description "Grupo de aventureros rival, más famoso que competente, que trabaja para el mejor postor." ;
+    rpg:locatedIn :taberna-ancla-tiznada ;
+    rpg:appearsInSession :sesion-02 .
+
+#################################################################
+# Objetos
+#################################################################
+
+:espada-salitre a dnd:Weapon ;
+    rdfs:label "Espada larga «Salitre»" ;
+    schema:description "Espada de abordaje con la empuñadura incrustada de sal; nunca se oxida." ;
+    dnd:weaponCategory dnd:weapon-martial-melee ;
+    dnd:damageDice "1d8" ; dnd:damageType dnd:dmg-slashing ;
+    dnd:weight 3.0 ; dnd:costGp 15.0 .
+
+:cota-malla-tome a dnd:Armor ;
+    rdfs:label "Cota de malla de Tomé" ;
+    schema:description "Cota heredada de su abuelo, con el símbolo de la llama grabado en el pecho." ;
+    dnd:armorCategory dnd:armor-heavy ; dnd:baseArmorClass 16 ;
+    dnd:weight 55.0 ; dnd:costGp 75.0 .
+
+:escudo-tome a dnd:Armor ;
+    rdfs:label "Escudo de la Llama" ;
+    schema:description "Escudo de roble con el borde de bronce." ;
+    dnd:armorCategory dnd:armor-shield ; dnd:baseArmorClass 2 ;
+    dnd:weight 6.0 ; dnd:costGp 10.0 .
+
+:baston-ascuas a dnd:MagicItem ;
+    rdfs:label "Bastón de ascuas" ;
+    schema:description "Bastón de madera petrificada cuya punta brilla como un carbón. Recuperado de los Túneles Verdes." ;
+    dnd:rarity dnd:rarity-uncommon ; dnd:requiresAttunement true ;
+    rpg:appearsInSession :sesion-01 .
+
+:ojo-basalto a dnd:MagicItem ;
+    rdfs:label "El Ojo de Basalto" ;
+    schema:description "Gema negra que late con calor propio. Dicen que quien la posea podrá ordenar a la dragona… o despertarla del todo." ;
+    rpg:locatedIn :laberinto-toro ;
+    dnd:rarity dnd:rarity-artifact ; dnd:requiresAttunement true .
+
+:carta-corso a rpg:Item ;
+    rdfs:label "Carta de corso de la Cofradía" ;
+    schema:description "Documento sellado que autoriza a Iria a perseguir a los salteadores en nombre de la Cofradía." ;
+    rpg:appearsInSession :sesion-01 .
+
+#################################################################
+# Eventos
+#################################################################
+
+:erupcion-fuego-dormido a rpg:Event ;
+    rdfs:label "La Gran Erupción" ;
+    schema:description "La montaña escupió fuego durante nueve días y la dragona se retiró a dormir en su cráter." ;
+    rpg:occursIn :montana-fuego-dormido ;
+    rpg:inWorldDateLabel "Año 1187 del Sello de Sal" .
+
+:naufragio-pez-plata a rpg:Event ;
+    rdfs:label "Naufragio del Pez Plata" ;
+    schema:description "Una ola de ceniza caliente hizo encallar al Pez Plata frente a las Islas de Ceniza." ;
+    rpg:occursIn :islas-ceniza ;
+    rpg:inWorldDateLabel "3 de Brumal de 1207" ;
+    rpg:appearsInSession :sesion-01 .
+
+:asalto-caravana a rpg:Event ;
+    rdfs:label "Asalto a la caravana de sal" ;
+    schema:description "Los Colmillos de Basalto emboscaron la caravana de la Cofradía; el grupo la defendió a duras penas." ;
+    rpg:occursIn :campos-malpais ;
+    rpg:inWorldDateLabel "9 de Brumal de 1207" ;
+    rpg:appearsInSession :sesion-02 .
+
+#################################################################
+# Tramas
+#################################################################
+
+:trama-naufragio a rpg:Plot ;
+    rdfs:label "Los supervivientes del Pez Plata" ;
+    schema:description "Sobrevivir al naufragio, rescatar la carga y volver a Puerto Brasa." ;
+    rpg:plotStatus rpg:plot-resolved ;
+    rpg:involves :iria , :tome , :aelis , :nuno , :leonor , :naufragio-pez-plata ;
+    rpg:appearsInSession :sesion-01 .
+
+:trama-calcinaria a rpg:Plot ;
+    rdfs:label "El despertar de Calcinaria" ;
+    schema:description "La dragona despierta y busca vasallos. ¿Quién en la costa ya trabaja para ella?" ;
+    rpg:plotStatus rpg:plot-open ;
+    rpg:involves :calcinaria , :montana-fuego-dormido , :nuno , :velasca , :anselmo , :tarasca-mareas ;
+    rpg:appearsInSession :sesion-03 .
+
+:trama-ojo-basalto a rpg:Plot ;
+    rdfs:label "El Ojo de Basalto" ;
+    schema:description "Una gema capaz de dominar a la dragona espera en el laberinto del minotauro. Las Gaviotas Negras también la buscan." ;
+    rpg:plotStatus rpg:plot-open ;
+    rpg:involves :ojo-basalto , :toro-basalto , :laberinto-toro , :sira , :gaviotas-negras , :orban .

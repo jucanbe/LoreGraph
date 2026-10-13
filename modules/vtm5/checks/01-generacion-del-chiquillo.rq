@@ -1,0 +1,13 @@
+# titulo: Generación incoherente con el sire
+# titulo_en: Generation inconsistent with the sire
+# severidad: error
+# descripcion: Un chiquillo no puede tener una generación igual o más baja que la de su sire.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?entidad vtm:sire ?relacionada ; vtm:generation ?g .
+  ?relacionada vtm:generation ?gs ; rdfs:label ?n .
+  FILTER (?g <= ?gs)
+  BIND (CONCAT("Generación ", STR(?g), " con un sire («", STR(?n), "») de generación ", STR(?gs), ".") AS ?mensaje)
+}

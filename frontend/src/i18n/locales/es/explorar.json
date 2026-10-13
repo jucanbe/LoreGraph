@@ -1,0 +1,18 @@
+{
+  "todas": "Todas las entidades",
+  "buscar": "Buscar por nombre o descripción…",
+  "faccion": "Facción",
+  "cualquierFaccion": "Cualquier facción",
+  "orden": {
+    "etiqueta": "Ordenar por",
+    "nombre": "Nombre",
+    "reciente": "Más recientes",
+    "relevancia": "Relevancia"
+  },
+  "sinResultados": "Ninguna entidad coincide con la búsqueda",
+  "vacio": "Aún no hay {{tipo}}",
+  "paginacion": "Paginación",
+  "nuevo": "Nuevo: {{tipo}}",
+  "variante": "Variante",
+  "sinVariante": "Sin variante"
+}

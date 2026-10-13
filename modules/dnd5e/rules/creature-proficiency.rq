@@ -1,0 +1,16 @@
+# Bonificador de competencia de las criaturas según su valor de desafío (VD):
+# VD < 5 → +2; luego +1 cada 4 VD (5-8 → +3 … 29-30 → +9).
+# Usa el VD propio de la criatura o, si no tiene, el de su entrada del bestiario.
+# Creature proficiency bonus from challenge rating (CR): CR < 5 → +2, then +1
+# every 4 CR. Uses the creature's own CR or, failing that, its stat block's.
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?c dnd:proficiencyBonus ?bonus }
+WHERE {
+  ?c a dnd:Creature .
+  OPTIONAL { ?c dnd:challengeRating ?own }
+  OPTIONAL { ?c dnd:statBlock/dnd:challengeRating ?base }
+  BIND (COALESCE(?own, ?base) AS ?cr)
+  FILTER (BOUND(?cr))
+  BIND (IF(?cr < 1, 2, xsd:integer(2 + FLOOR((?cr - 1) / 4))) AS ?bonus)
+}

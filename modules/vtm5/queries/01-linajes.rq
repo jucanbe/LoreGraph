@@ -1,0 +1,13 @@
+# titulo: Linajes (sire → chiquillo)
+# descripcion: Cada vástago con su sire, clan y generación (afirmada o deducida).
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?vastago ?nombre ?clan ?generacion ?sire WHERE {
+  ?vastago a vtm:Vampire ;
+           rdfs:label ?nombre .
+  OPTIONAL { ?vastago vtm:clan/rdfs:label ?clan . FILTER (lang(?clan) = "es") }
+  OPTIONAL { ?vastago vtm:generation ?generacion }
+  OPTIONAL { ?vastago vtm:sire/rdfs:label ?sire }
+}
+ORDER BY ?generacion ?nombre

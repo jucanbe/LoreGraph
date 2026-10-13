@@ -1,0 +1,307 @@
+@prefix vtm:    <https://rpg-modules.example.net/vtm5/ont#> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+
+#################################################################
+# Vocabulario del módulo Vampiro 5.ª ed.
+# Descripciones mínimas y con palabras propias: completa los detalles
+# con tus manuales. Los nombres propios (clanes, disciplinas) se usan
+# solo como identificadores.
+#################################################################
+
+# ---------------------------------------------------------------
+# Disciplinas / Disciplines
+# ---------------------------------------------------------------
+
+vtm:discipline-animalism a vtm:Discipline ;
+    rdfs:label "Animalismo"@es , "Animalism"@en ;
+    schema:description "Vínculo con las bestias y con la propia Bestia interior."@es .
+vtm:discipline-auspex a vtm:Discipline ;
+    rdfs:label "Auspex"@es , "Auspex"@en ;
+    schema:description "Sentidos agudizados y percepción de lo oculto."@es .
+vtm:discipline-blood-sorcery a vtm:Discipline ;
+    rdfs:label "Hechicería de Sangre"@es , "Blood Sorcery"@en ;
+    schema:description "Magia que manipula la propia vitae y la de otros."@es .
+vtm:discipline-celerity a vtm:Discipline ;
+    rdfs:label "Celeridad"@es , "Celerity"@en ;
+    schema:description "Velocidad y reflejos sobrehumanos."@es .
+vtm:discipline-dominate a vtm:Discipline ;
+    rdfs:label "Dominación"@es , "Dominate"@en ;
+    schema:description "Control de la mente y la memoria ajenas."@es .
+vtm:discipline-fortitude a vtm:Discipline ;
+    rdfs:label "Fortaleza"@es , "Fortitude"@en ;
+    schema:description "Resistencia física y mental fuera de lo común."@es .
+vtm:discipline-obfuscate a vtm:Discipline ;
+    rdfs:label "Ofuscación"@es , "Obfuscate"@en ;
+    schema:description "Pasar inadvertido y engañar a la percepción."@es .
+vtm:discipline-oblivion a vtm:Discipline ;
+    rdfs:label "Olvido"@es , "Oblivion"@en ;
+    schema:description "Dominio de las sombras y de lo que hay más allá de la muerte."@es .
+vtm:discipline-potence a vtm:Discipline ;
+    rdfs:label "Potencia"@es , "Potence"@en ;
+    schema:description "Fuerza física sobrenatural."@es .
+vtm:discipline-presence a vtm:Discipline ;
+    rdfs:label "Presencia"@es , "Presence"@en ;
+    schema:description "Atracción, temor y fascinación sobre los demás."@es .
+vtm:discipline-protean a vtm:Discipline ;
+    rdfs:label "Proteísmo"@es , "Protean"@en ;
+    schema:description "Cambios de forma y de cuerpo."@es .
+vtm:discipline-thin-blood-alchemy a vtm:Discipline ;
+    rdfs:label "Alquimia de Sangre Débil"@es , "Thin-Blood Alchemy"@en ;
+    schema:description "Preparados que imitan otros poderes, propios de la sangre débil."@es .
+
+# ---------------------------------------------------------------
+# Clanes / Clans
+# Maldición y compulsión: resumen mínimo, completa con tu manual.
+# ---------------------------------------------------------------
+
+vtm:clan-banu-haqim a vtm:Clan ;
+    rdfs:label "Banu Haqim"@es , "Banu Haqim"@en ;
+    vtm:clanNickname "Jueces"@es ;
+    vtm:clanDiscipline vtm:discipline-blood-sorcery , vtm:discipline-celerity , vtm:discipline-obfuscate ;
+    vtm:baneSummary "Atracción peligrosa por la sangre de otros vástagos."@es ;
+    vtm:compulsionSummary "Necesidad de juzgar y castigar."@es ;
+    schema:description "Linaje de jueces y guardianes con fama de asesinos."@es .
+
+vtm:clan-brujah a vtm:Clan ;
+    rdfs:label "Brujah"@es , "Brujah"@en ;
+    vtm:clanNickname "Chusma"@es ;
+    vtm:clanDiscipline vtm:discipline-celerity , vtm:discipline-potence , vtm:discipline-presence ;
+    vtm:baneSummary "Temperamento difícil de contener."@es ;
+    vtm:compulsionSummary "Rebeldía contra la autoridad."@es ;
+    schema:description "Idealistas y rebeldes de pasión volcánica."@es .
+
+vtm:clan-gangrel a vtm:Clan ;
+    rdfs:label "Gangrel"@es , "Gangrel"@en ;
+    vtm:clanNickname "Animales"@es ;
+    vtm:clanDiscipline vtm:discipline-animalism , vtm:discipline-fortitude , vtm:discipline-protean ;
+    vtm:baneSummary "La Bestia deja marcas animales en su cuerpo."@es ;
+    vtm:compulsionSummary "Regresión a instintos salvajes."@es ;
+    schema:description "Errantes y supervivientes cercanos a la naturaleza."@es .
+
+vtm:clan-hecata a vtm:Clan ;
+    rdfs:label "Hecata"@es , "Hecata"@en ;
+    vtm:clanDiscipline vtm:discipline-auspex , vtm:discipline-fortitude , vtm:discipline-oblivion ;
+    vtm:baneSummary "Su mordisco resulta doloroso en lugar de placentero."@es ;
+    vtm:compulsionSummary "Obsesión por lo que hay tras la muerte."@es ;
+    schema:description "Clan de familias nigromantes."@es .
+
+vtm:clan-lasombra a vtm:Clan ;
+    rdfs:label "Lasombra"@es , "Lasombra"@en ;
+    vtm:clanDiscipline vtm:discipline-dominate , vtm:discipline-oblivion , vtm:discipline-potence ;
+    vtm:baneSummary "Sin reflejo y con problemas ante la tecnología que capta imágenes."@es ;
+    vtm:compulsionSummary "Ansia de imponerse."@es ;
+    schema:description "Ambiciosos señores de las sombras."@es .
+
+vtm:clan-malkavian a vtm:Clan ;
+    rdfs:label "Malkavian"@es , "Malkavian"@en ;
+    vtm:clanNickname "Lunáticos"@es ;
+    vtm:clanDiscipline vtm:discipline-auspex , vtm:discipline-dominate , vtm:discipline-obfuscate ;
+    vtm:baneSummary "Una perturbación mental acompaña al vástago."@es ;
+    vtm:compulsionSummary "Visiones y percepciones desbordadas."@es ;
+    schema:description "Visionarios cuya locura esconde verdades."@es .
+
+vtm:clan-ministry a vtm:Clan ;
+    rdfs:label "Ministerio"@es , "The Ministry"@en ;
+    vtm:clanNickname "Serpientes"@es ;
+    vtm:clanDiscipline vtm:discipline-obfuscate , vtm:discipline-presence , vtm:discipline-protean ;
+    vtm:baneSummary "Especial vulnerabilidad a la luz intensa."@es ;
+    vtm:compulsionSummary "Empujar a otros a la tentación."@es ;
+    schema:description "Seductores que predican la liberación por el deseo."@es .
+
+vtm:clan-nosferatu a vtm:Clan ;
+    rdfs:label "Nosferatu"@es , "Nosferatu"@en ;
+    vtm:clanNickname "Ratas de alcantarilla"@es ;
+    vtm:clanDiscipline vtm:discipline-animalism , vtm:discipline-obfuscate , vtm:discipline-potence ;
+    vtm:baneSummary "Aspecto monstruoso que no pueden mostrar a los mortales."@es ;
+    vtm:compulsionSummary "Necesidad de saber secretos."@es ;
+    schema:description "Deformes guardianes de la información, ocultos bajo la ciudad."@es .
+
+vtm:clan-ravnos a vtm:Clan ;
+    rdfs:label "Ravnos"@es , "Ravnos"@en ;
+    vtm:clanDiscipline vtm:discipline-animalism , vtm:discipline-obfuscate , vtm:discipline-presence ;
+    vtm:baneSummary "No pueden permanecer mucho tiempo en el mismo refugio."@es ;
+    vtm:compulsionSummary "Tentación de asumir riesgos."@es ;
+    schema:description "Viajeros y embaucadores, siempre en movimiento."@es .
+
+vtm:clan-salubri a vtm:Clan ;
+    rdfs:label "Salubri"@es , "Salubri"@en ;
+    vtm:clanDiscipline vtm:discipline-auspex , vtm:discipline-dominate , vtm:discipline-fortitude ;
+    vtm:baneSummary "Un tercer ojo que los delata y una sangre codiciada."@es ;
+    vtm:compulsionSummary "Impulso de aliviar el sufrimiento ajeno."@es ;
+    schema:description "Sanadores perseguidos, escasos y misteriosos."@es .
+
+vtm:clan-toreador a vtm:Clan ;
+    rdfs:label "Toreador"@es , "Toreador"@en ;
+    vtm:clanNickname "Artistas"@es ;
+    vtm:clanDiscipline vtm:discipline-auspex , vtm:discipline-celerity , vtm:discipline-presence ;
+    vtm:baneSummary "La fealdad del entorno les afecta."@es ;
+    vtm:compulsionSummary "Fascinación por la belleza."@es ;
+    schema:description "Amantes del arte y de la belleza, figuras centrales de la alta sociedad vástaga."@es .
+
+vtm:clan-tremere a vtm:Clan ;
+    rdfs:label "Tremere"@es , "Tremere"@en ;
+    vtm:clanNickname "Brujos"@es ;
+    vtm:clanDiscipline vtm:discipline-auspex , vtm:discipline-blood-sorcery , vtm:discipline-dominate ;
+    vtm:baneSummary "Su sangre no crea vínculos como la de otros."@es ;
+    vtm:compulsionSummary "Perfeccionismo obsesivo."@es ;
+    schema:description "Hechiceros de la sangre, organizados en capillas."@es .
+
+vtm:clan-tzimisce a vtm:Clan ;
+    rdfs:label "Tzimisce"@es , "Tzimisce"@en ;
+    vtm:clanDiscipline vtm:discipline-animalism , vtm:discipline-dominate , vtm:discipline-protean ;
+    vtm:baneSummary "Atados a la tierra o a aquello que consideran suyo."@es ;
+    vtm:compulsionSummary "Afán de poseer."@es ;
+    schema:description "Señores celosos de su territorio y moldeadores de la carne."@es .
+
+vtm:clan-ventrue a vtm:Clan ;
+    rdfs:label "Ventrue"@es , "Ventrue"@en ;
+    vtm:clanNickname "Sangre azul"@es ;
+    vtm:clanDiscipline vtm:discipline-dominate , vtm:discipline-fortitude , vtm:discipline-presence ;
+    vtm:baneSummary "Solo pueden alimentarse de un tipo concreto de presa."@es ;
+    vtm:compulsionSummary "Necesidad de mandar."@es ;
+    schema:description "Aristócratas y gobernantes de la sociedad vástaga."@es .
+
+vtm:clan-caitiff a vtm:Clan ;
+    rdfs:label "Caitiff"@es , "Caitiff"@en ;
+    vtm:clanNickname "Sin clan"@es ;
+    vtm:baneSummary "Despreciados por la sociedad vástaga."@es ;
+    schema:description "Vástagos sin rasgos de clan reconocibles."@es .
+
+vtm:clan-thin-blood a vtm:Clan ;
+    rdfs:label "Sangre débil"@es , "Thin-blood"@en ;
+    vtm:clanDiscipline vtm:discipline-thin-blood-alchemy ;
+    vtm:baneSummary "A medio camino entre la vida y la muerte."@es ;
+    schema:description "Vástagos de generación muy alta, con dones y carencias propios."@es .
+
+# ---------------------------------------------------------------
+# Sectas / Sects
+# ---------------------------------------------------------------
+
+vtm:Sects a skos:ConceptScheme ;
+    skos:prefLabel "Sectas"@es , "Sects"@en .
+vtm:sect-camarilla a skos:Concept ; skos:inScheme vtm:Sects ;
+    skos:prefLabel "Camarilla"@es , "Camarilla"@en ;
+    skos:definition "Secta conservadora que defiende la Mascarada y el orden de los Antiguos."@es .
+vtm:sect-anarch a skos:Concept ; skos:inScheme vtm:Sects ;
+    skos:prefLabel "Movimiento Anarquista"@es , "Anarch Movement"@en ;
+    skos:definition "Vástagos que rechazan el gobierno de los Antiguos."@es .
+vtm:sect-sabbat a skos:Concept ; skos:inScheme vtm:Sects ;
+    skos:prefLabel "Sabbat"@es , "Sabbat"@en ;
+    skos:definition "Secta militante enfrentada a las demás."@es .
+vtm:sect-independent a skos:Concept ; skos:inScheme vtm:Sects ;
+    skos:prefLabel "Independiente"@es , "Independent"@en ;
+    skos:definition "Sin lealtad a ninguna secta."@es .
+vtm:sect-autarkis a skos:Concept ; skos:inScheme vtm:Sects ;
+    skos:prefLabel "Autarkis"@es , "Autarkis"@en ;
+    skos:definition "Solitarios que viven al margen de toda secta."@es .
+
+# ---------------------------------------------------------------
+# Cargos / Positions
+# ---------------------------------------------------------------
+
+vtm:Positions a skos:ConceptScheme ;
+    skos:prefLabel "Cargos"@es , "Positions"@en .
+vtm:position-prince a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Príncipe"@es , "Prince"@en .
+vtm:position-seneschal a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Senescal"@es , "Seneschal"@en .
+vtm:position-sheriff a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Sheriff"@es , "Sheriff"@en .
+vtm:position-scourge a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Azote"@es , "Scourge"@en .
+vtm:position-keeper a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Guardián del Elíseo"@es , "Keeper of Elysium"@en .
+vtm:position-harpy a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Arpía"@es , "Harpy"@en .
+vtm:position-primogen a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Primogénito"@es , "Primogen"@en .
+vtm:position-baron a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Barón"@es , "Baron"@en .
+vtm:position-regent a skos:Concept ; skos:inScheme vtm:Positions ;
+    skos:prefLabel "Regente de capilla"@es , "Chantry regent"@en .
+
+# ---------------------------------------------------------------
+# Tipos de depredador / Predator types (resumen propio)
+# ---------------------------------------------------------------
+
+vtm:PredatorTypes a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de depredador"@es , "Predator types"@en .
+vtm:predator-alleycat a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Gato callejero"@es , "Alleycat"@en ;
+    skos:definition "Caza por la fuerza y la intimidación."@es .
+vtm:predator-bagger a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Bolsero"@es , "Bagger"@en ;
+    skos:definition "Se alimenta de sangre almacenada o robada."@es .
+vtm:predator-blood-leech a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Sanguijuela"@es , "Blood Leech"@en ;
+    skos:definition "Bebe de otros vástagos."@es .
+vtm:predator-cleaver a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Cuchilla"@es , "Cleaver"@en ;
+    skos:definition "Se alimenta en secreto de su propia familia o círculo cercano."@es .
+vtm:predator-consensualist a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Consensual"@es , "Consensualist"@en ;
+    skos:definition "Solo bebe con el permiso de la presa."@es .
+vtm:predator-farmer a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Granjero"@es , "Farmer"@en ;
+    skos:definition "Evita la sangre humana y bebe de animales."@es .
+vtm:predator-osiris a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Osiris"@es , "Osiris"@en ;
+    skos:definition "Se alimenta de sus seguidores o admiradores."@es .
+vtm:predator-sandman a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Hombre de arena"@es , "Sandman"@en ;
+    skos:definition "Bebe de presas dormidas."@es .
+vtm:predator-scene-queen a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Reina de la escena"@es , "Scene Queen"@en ;
+    skos:definition "Caza dentro de una subcultura o ambiente que domina."@es .
+vtm:predator-siren a skos:Concept ; skos:inScheme vtm:PredatorTypes ;
+    skos:prefLabel "Sirena"@es , "Siren"@en ;
+    skos:definition "Seduce a sus presas."@es .
+
+# ---------------------------------------------------------------
+# Pesos de favor / Boon weights
+# ---------------------------------------------------------------
+
+vtm:BoonWeights a skos:ConceptScheme ;
+    skos:prefLabel "Pesos de favor"@es , "Boon weights"@en .
+vtm:boon-trivial a skos:Concept ; skos:inScheme vtm:BoonWeights ;
+    skos:prefLabel "trivial"@es , "trivial"@en .
+vtm:boon-minor a skos:Concept ; skos:inScheme vtm:BoonWeights ;
+    skos:prefLabel "menor"@es , "minor"@en .
+vtm:boon-major a skos:Concept ; skos:inScheme vtm:BoonWeights ;
+    skos:prefLabel "mayor"@es , "major"@en .
+vtm:boon-life a skos:Concept ; skos:inScheme vtm:BoonWeights ;
+    skos:prefLabel "de vida"@es , "life"@en .
+
+# ---------------------------------------------------------------
+# Papeles mortales / Mortal roles
+# ---------------------------------------------------------------
+
+vtm:MortalRoles a skos:ConceptScheme ;
+    skos:prefLabel "Papeles mortales"@es , "Mortal roles"@en .
+vtm:role-touchstone a skos:Concept ; skos:inScheme vtm:MortalRoles ;
+    skos:prefLabel "piedra de toque"@es , "touchstone"@en .
+vtm:role-retainer a skos:Concept ; skos:inScheme vtm:MortalRoles ;
+    skos:prefLabel "sirviente"@es , "retainer"@en .
+vtm:role-herd a skos:Concept ; skos:inScheme vtm:MortalRoles ;
+    skos:prefLabel "rebaño"@es , "herd"@en .
+vtm:role-contact a skos:Concept ; skos:inScheme vtm:MortalRoles ;
+    skos:prefLabel "contacto"@es , "contact"@en .
+vtm:role-hunter a skos:Concept ; skos:inScheme vtm:MortalRoles ;
+    skos:prefLabel "cazador"@es , "hunter"@en .
+
+# ---------------------------------------------------------------
+# Tipos de relación del módulo (en el esquema del núcleo)
+# Module relationship types (in the core scheme)
+# ---------------------------------------------------------------
+
+vtm:rel-blood-bond a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "vínculo de sangre"@es , "blood bond"@en .
+vtm:rel-boon a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "debe un favor a"@es , "owes a boon to"@en .
+vtm:rel-herd a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "se alimenta de"@es , "feeds on"@en .
+vtm:rel-prestation-rival a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "rival en el Elíseo"@es , "Elysium rival"@en .

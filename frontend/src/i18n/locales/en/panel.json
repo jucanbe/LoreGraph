@@ -1,0 +1,15 @@
+{
+  "recuentos": "Count by type",
+  "tramas": "Open plots",
+  "nuevaTrama": "New plot",
+  "sinTramas": "No open plots",
+  "propuestas": "Proposals",
+  "pendientes_one": "{{count}} pending review",
+  "pendientes_other": "{{count}} pending review",
+  "revisar": "Review",
+  "ultimaSesion": "Last session",
+  "sinSesiones": "No sessions recorded yet.",
+  "verSesiones": "See all sessions",
+  "recientes": "Recent changes",
+  "sinRecientes": "No changes yet."
+}

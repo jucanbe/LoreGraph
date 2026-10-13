@@ -1,0 +1,7 @@
+id: costa-ceniza
+nombre: "La Costa de Ceniza"
+descripcion: >-
+  Campaña de ejemplo para D&D 5.ª edición (SRD 5.1). Una costa volcánica de puertos
+  salineros, islas de lava y un dragón rojo que despierta tras veinte años de sueño.
+  Ambientación original, inspirada libremente en las costas andaluzas y en Lanzarote.
+modulos: [dnd5e]

@@ -1,0 +1,57 @@
+[project]
+name = "loregraph"
+version = "0.1.0"
+description = "Gestor de campañas de rol basado en grafos de conocimiento RDF (backend)"
+readme = "README.md"
+authors = [
+    { name = "Juan Cano" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.143.0",
+    "httpx>=0.28.1",
+    "mcp>=2.3.0",
+    "packaging>=26.3",
+    "pydantic-ai-slim[openai]>=2.55.0",
+    "pydantic-settings>=2.15.0",
+    "pyoxigraph>=0.5.11",
+    "pyshacl>=0.40.1",
+    "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
+    "rdflib>=7.6.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+loregraph = "loregraph.cli:main"
+loregraph-api = "loregraph.main:run"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.17.0",
+    "types-pyyaml>=6.0.12.20260906",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 130
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["B008", "SIM103", "SIM105", "SIM108"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true

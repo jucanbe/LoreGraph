@@ -1,0 +1,68 @@
+{
+  "titulo": "SPARQL",
+  "subtitulo": "Query the campaign graph or external sources. Campaign prefixes are already declared.",
+  "editor": {
+    "etiqueta": "SPARQL query editor",
+    "placeholder": "Write a SPARQL query…"
+  },
+  "destino": {
+    "etiqueta": "Target",
+    "local": "Campaign (local)",
+    "wikidata": "Wikidata",
+    "dbpedia": "DBpedia",
+    "ayudaLocal": "Runs against the campaign. You can federate with SERVICE <https://query.wikidata.org/sparql> { … }.",
+    "ayudaRemoto": "Federated query against {{destino}} (results are cached for a while)."
+  },
+  "limite": "Limit",
+  "prefijos": {
+    "insertar": "Insert PREFIX",
+    "desc": "Prepend PREFIX declarations for the prefixes used (or all of them)"
+  },
+  "ejecutar": "Run",
+  "ejecutando": "Running query…",
+  "error": "The query failed",
+  "ayuda": "Write a query and press Run ({{atajo}}). You can also load an example.",
+  "consultas": {
+    "titulo": "Queries",
+    "guardadas": "Saved",
+    "sinGuardadas": "You have not saved any query yet.",
+    "ejemplos": "Examples",
+    "sinEjemplos": "No examples.",
+    "cargar": "Load into editor",
+    "borrar": "Delete “{{titulo}}”",
+    "confirmarBorrar": "Delete",
+    "borrada": "Query deleted"
+  },
+  "guardar": {
+    "boton": "Save query",
+    "titulo": "Save query",
+    "desc": "It will be available in this campaign's saved queries.",
+    "campoTitulo": "Title",
+    "campoDescripcion": "Description",
+    "hecho": "Query saved"
+  },
+  "resultados": {
+    "titulo": "Results",
+    "tabla": "Query results",
+    "tripletas": "Constructed triples",
+    "filas_one": "{{count}} result",
+    "filas_other": "{{count}} results",
+    "cache": "Cached",
+    "cacheDesc": "Result served from cache",
+    "truncado": "Truncated",
+    "truncadoDesc": "There are more results than the limit",
+    "verdadero": "True",
+    "falso": "False",
+    "vacio": "The query returned no results",
+    "recortadas": "Showing {{visibles}} of {{total}} rows; export to CSV to see them all.",
+    "sujeto": "subject",
+    "predicado": "predicate",
+    "objeto": "object"
+  },
+  "csv": {
+    "modo": "CSV content",
+    "etiquetas": "Labels",
+    "valores": "Values (IRIs)",
+    "exportar": "Export CSV"
+  }
+}

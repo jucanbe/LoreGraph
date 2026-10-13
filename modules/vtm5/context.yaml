@@ -1,0 +1,89 @@
+# Contexto para modelos de lenguaje (resúmenes propios; completa con tus manuales).
+# Las estadísticas con rango y valores se generan solas desde shapes.ttl;
+# aquí solo se explica qué significan.
+
+resumen:
+  es: >-
+    Horror personal en el mundo actual. Los vástagos (vampiros) son personas muertas que
+    siguen en pie gracias a la sangre que roban a los vivos. Viven ocultos en las ciudades
+    bajo la Mascarada, la ley que prohíbe revelar su existencia a los mortales. Cada vástago
+    lucha contra la Bestia, el impulso depredador que crece con el hambre, y contra la pérdida
+    de su humanidad. La sociedad vástaga es feudal y llena de intrigas: los Antiguos gobiernan
+    las ciudades (el Príncipe y su corte en la Camarilla), los anarquistas los desafían y una
+    red de cazadores mortales amenaza a todos. Las deudas de favores (prestación), los vínculos
+    de sangre y los linajes (sire y chiquillos) determinan quién tiene poder sobre quién.
+  en: >-
+    Personal horror in the modern world. Kindred (vampires) are dead people kept going by
+    blood stolen from the living. They hide in cities under the Masquerade, the law forbidding
+    them to reveal themselves to mortals. Every Kindred struggles against the Beast, the
+    predatory urge that grows with hunger, and against the loss of their humanity. Kindred
+    society is feudal and full of intrigue: Elders rule the cities (the Prince and court of the
+    Camarilla), Anarchs defy them and mortal hunters threaten everyone. Debts of favours
+    (prestation), blood bonds and lineages (sire and childer) decide who holds power over whom.
+
+estadisticas:
+  - clave: vtm:hunger
+    explicacion: { es: "Cuánta sangre necesita ahora. Sube al usar poderes y baja al alimentarse.", en: "How badly they need blood now. Rises when using powers, drops when feeding." }
+    escala: { es: "0 = saciado; 3 = irritable y peligroso; 5 = al borde de perder el control", en: "0 = sated; 3 = irritable and dangerous; 5 = about to lose control" }
+  - clave: vtm:humanity
+    explicacion: { es: "Cuánto conserva de su naturaleza humana. Baja al cometer actos monstruosos.", en: "How much human nature remains. Drops after monstrous acts." }
+    escala: { es: "7 = típico de un neonato; 4 o menos = frío y desconectado; 1–2 = casi una bestia", en: "7 = typical neonate; 4 or less = cold and detached; 1–2 = almost a beast" }
+  - clave: vtm:generation
+    explicacion: { es: "Distancia al primer vampiro. Cuanto más baja, más poderosa la sangre y más antiguo el linaje.", en: "Distance from the first vampire. The lower, the more potent the blood and older the lineage." }
+    escala: { es: "12–13 = neonatos habituales; 9–10 = Antiguos con poder en la ciudad; 14–16 = sangre débil", en: "12–13 = usual neonates; 9–10 = Elders with power in the city; 14–16 = thin-blooded" }
+  - clave: vtm:bloodPotency
+    explicacion: { es: "Fuerza de su sangre: potencia sus poderes pero lo vuelve más exigente al alimentarse.", en: "Strength of their blood: empowers abilities but makes feeding harder." }
+    escala: { es: "0–1 = neonato; 2–3 = ancilla; 4 o más = Antiguo", en: "0–1 = neonate; 2–3 = ancilla; 4+ = Elder" }
+  - clave: vtm:dots
+    explicacion: { es: "Nivel en una disciplina (poder vampírico).", en: "Rating in a discipline (vampiric power)." }
+    escala: { es: "1–2 = principiante; 3 = competente; 4–5 = maestría propia de Antiguos", en: "1–2 = novice; 3 = competent; 4–5 = Elder-level mastery" }
+  - clave: vtm:bondLevel
+    explicacion: { es: "Fuerza del vínculo de sangre: cuánto ama y obedece el siervo al regnante.", en: "Strength of the blood bond: how much the thrall loves and obeys the regnant." }
+    escala: { es: "1 = afecto; 2 = devoción; 3 = vínculo completo, casi esclavitud emocional", en: "1 = fondness; 2 = devotion; 3 = full bond, near emotional slavery" }
+  - clave: vtm:willpower
+    explicacion: { es: "Reserva de determinación para resistir impulsos y presiones.", en: "Reserve of resolve to resist urges and pressure." }
+  - clave: vtm:masqueradeRisk
+    explicacion: { es: "Peligro de ser descubierto actuando en ese lugar (cámaras, policía, cazadores).", en: "Danger of exposure when acting there (cameras, police, hunters)." }
+  - clave: vtm:huntingQuality
+    explicacion: { es: "Facilidad para encontrar presas sin llamar la atención.", en: "Ease of finding prey without drawing attention." }
+  - clave: vtm:boonWeight
+    explicacion: { es: "Importancia de un favor debido; los favores mayores se cobran con servicios peligrosos.", en: "Importance of a boon owed; major boons are repaid with dangerous services." }
+
+reglas:
+  - { es: "Romper la Mascarada es el peor crimen: los Príncipes castigan con la Muerte Definitiva.", en: "Breaking the Masquerade is the worst crime: Princes punish it with Final Death." }
+  - { es: "Los vástagos no soportan el sol ni el fuego; descansan de día en su refugio.", en: "Kindred cannot endure sunlight or fire; they rest by day in their haven." }
+  - { es: "Beber tres veces la sangre del mismo vástago en noches distintas crea un vínculo de sangre completo.", en: "Drinking the same Kindred's blood on three separate nights creates a full blood bond." }
+  - { es: "Un chiquillo suele tener la generación de su sire más uno.", en: "A childe usually has their sire's generation plus one." }
+  - { es: "Cada clan tiene tres disciplinas afines, una maldición y una compulsión propias.", en: "Each clan has three affine disciplines, a bane and a compulsion." }
+  - { es: "En el Elíseo está prohibida la violencia entre vástagos.", en: "Violence among Kindred is forbidden in Elysium." }
+  - { es: "Las piedras de toque son mortales que anclan la humanidad del vástago; si sufren daño, su humanidad peligra.", en: "Touchstones are mortals anchoring a Kindred's humanity; harm to them endangers it." }
+
+glosario:
+  - { termino: Abrazo, definicion: { es: "Convertir a un mortal en vástago.", en: "Turning a mortal into Kindred." } }
+  - { termino: Sire, clave: vtm:sire, definicion: { es: "Vástago que dio el Abrazo.", en: "The Kindred who gave the Embrace." } }
+  - { termino: Chiquillo, clave: vtm:childe, definicion: { es: "Vástago abrazado por otro.", en: "Kindred Embraced by another." } }
+  - { termino: Neonato, definicion: { es: "Vástago joven, con pocos años o décadas.", en: "Young Kindred, a few years or decades old." } }
+  - { termino: Antiguo, definicion: { es: "Vástago de siglos con gran poder político.", en: "Centuries-old Kindred with great political power." } }
+  - { termino: Mascarada, definicion: { es: "Ley y práctica de ocultar a los vampiros ante los mortales.", en: "Law and practice of hiding vampires from mortals." } }
+  - { termino: Bestia, definicion: { es: "El instinto depredador interior; puede provocar frenesí.", en: "The inner predatory instinct; it can cause frenzy." } }
+  - { termino: Frenesí, definicion: { es: "Pérdida de control en la que la Bestia toma el mando.", en: "Loss of control where the Beast takes over." } }
+  - { termino: Elíseo, clave: vtm:isElysium, definicion: { es: "Lugar neutral de reunión, normalmente cultural.", en: "Neutral meeting place, usually cultural." } }
+  - { termino: Dominio, clave: vtm:Domain, definicion: { es: "Territorio de caza reclamado por alguien.", en: "Hunting territory claimed by someone." } }
+  - { termino: Prestación, clave: vtm:Boon, definicion: { es: "Economía de favores entre vástagos.", en: "Economy of favours among Kindred." } }
+  - { termino: Ghoul, clave: vtm:Ghoul, definicion: { es: "Mortal alimentado con sangre vampírica, leal a su dómitor.", en: "Mortal fed vampire blood, loyal to their domitor." } }
+  - { termino: Coterie, clave: vtm:Coterie, definicion: { es: "Grupo pequeño de vástagos aliados.", en: "Small group of allied Kindred." } }
+  - { termino: Muerte Definitiva, definicion: { es: "La destrucción permanente de un vástago.", en: "The permanent destruction of a Kindred." } }
+
+tono:
+  es: >-
+    Gótico-punk y personal: decadencia, culpa, deseo y política. Los conflictos se resuelven
+    más con favores, chantajes y secretos que con violencia abierta. Los PNJ tienen agendas propias.
+  en: >-
+    Gothic-punk and personal: decadence, guilt, desire and politics. Conflicts are solved more
+    through favours, blackmail and secrets than open violence. NPCs have their own agendas.
+
+evitar:
+  - { es: "Vampiros que se muestran abiertamente a los mortales sin consecuencias.", en: "Vampires showing themselves openly to mortals without consequences." }
+  - { es: "Mezclar elementos de otros juegos (hombres lobo, magos) salvo que la campaña ya los tenga.", en: "Mixing in other games' elements (werewolves, mages) unless the campaign already has them." }
+  - { es: "Generaciones por debajo de 8 para PNJ corrientes: son figuras casi míticas.", en: "Generations below 8 for ordinary NPCs: they are near-mythical figures." }
+  - { es: "Copiar texto de los manuales; describe con tus palabras.", en: "Copying rulebook text; describe in your own words." }

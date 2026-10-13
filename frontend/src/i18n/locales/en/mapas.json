@@ -1,0 +1,46 @@
+{
+  "titulo": "Maps",
+  "total_one": "{{count}} map",
+  "total_other": "{{count}} maps",
+  "marcadores_one": "{{count}} marker",
+  "marcadores_other": "{{count}} markers",
+  "vacio": {
+    "titulo": "No maps yet",
+    "desc": "Upload an image of a city plan, a dungeon or a region and place characters, locations and any other campaign entity on it."
+  },
+  "nuevo": {
+    "boton": "New map",
+    "titulo": "New map",
+    "desc": "Upload an image; you can then place entity markers on it.",
+    "nombre": "Name",
+    "descripcion": "Description (optional)",
+    "imagen": "Image",
+    "imagenAyuda": "PNG, JPEG, WebP or GIF.",
+    "preview": "Image preview",
+    "tipoInvalido": "Unsupported format: use PNG, JPEG, WebP or GIF.",
+    "faltan": "Enter a name and choose an image.",
+    "creado": "Map “{{nombre}}” created"
+  },
+  "vista": {
+    "ficha": "Open entity page",
+    "editar": "Edit markers",
+    "ayudaEdicion": "Click the map to place a marker and choose its entity; drag markers to move them. Save when you are done.",
+    "guardado": "Markers saved",
+    "region": "Map {{nombre}}",
+    "sinImagen": "This map has no image",
+    "cargandoImagen": "Loading image…",
+    "errorImagen": "The map image could not be loaded.",
+    "sinMarcadores": "This map has no markers yet.",
+    "sinMarcadoresEdicion": "Click the map to add the first one.",
+    "quitar": "Remove marker for {{nombre}}",
+    "mostrar": "Show",
+    "ocultar": "Hide"
+  },
+  "picker": {
+    "titulo": "Choose entity",
+    "desc": "Which entity does this marker represent?",
+    "buscar": "Search entities…",
+    "buscando": "Searching…",
+    "sinResultados": "No results."
+  }
+}

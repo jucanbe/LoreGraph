@@ -1,0 +1,21 @@
+{
+  "titulo": "Real world — external data",
+  "aviso": "Information from Wikidata/DBpedia. It is not part of the campaign: reference or inspiration only.",
+  "cargando": "Loading external data…",
+  "fuente": {
+    "wikidata": "Wikidata",
+    "dbpedia": "DBpedia"
+  },
+  "relacion": {
+    "inspiradoEn": "Inspired by",
+    "correspondeA": "Corresponds to"
+  },
+  "verEn": "View on {{fuente}}",
+  "nuevaPestana": "opens in a new tab",
+  "error": "Some external data could not be retrieved: {{detalle}}",
+  "imagenAlt": "Image of {{nombre}}",
+  "mapa": "Map of {{nombre}}",
+  "hechos": "Highlighted facts",
+  "verMas": "Show more",
+  "verMenos": "Show less"
+}

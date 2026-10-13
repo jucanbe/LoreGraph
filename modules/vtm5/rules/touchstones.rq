@@ -1,0 +1,8 @@
+# Piedras de toque: el mortal sabe (en el grafo) de quién es piedra de toque.
+# Touchstones: the mortal points to the Kindred they anchor.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+CONSTRUCT { ?mortal vtm:touchstoneOf ?kindred }
+WHERE {
+  ?kindred vtm:hasConviction ?c .
+  ?c vtm:touchstone ?mortal .
+}

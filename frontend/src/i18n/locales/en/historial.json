@@ -1,0 +1,29 @@
+{
+  "titulo": "History",
+  "subtitulo": "Every change in the campaign, newest first. Each one can be undone.",
+  "vacio": {
+    "titulo": "No changes yet",
+    "desc": "Whenever something is created, edited or deleted (by hand or through proposals), it will be recorded here."
+  },
+  "agente": "AI agent",
+  "humano": "human",
+  "propuesta": "see proposal",
+  "detalle": "{{a}} added · {{e}} removed",
+  "deshace": "Reverts change",
+  "deshecho": "Undone",
+  "deshechoPor": "Undone by change",
+  "cambio": "Change {{id}}",
+  "paginacion": {
+    "rango": "Changes {{desde}}–{{hasta}}",
+    "anterior": "Newer",
+    "siguiente": "Older"
+  },
+  "deshacer": {
+    "accion": "Undo",
+    "titulo": "Undo this change?",
+    "aviso": "The inverse change will be applied: what was added ({{a}}) will be removed and what was removed ({{e}}) will be restored. The undo is recorded as a new change, so it can be reverted too.",
+    "confirmar": "Undo change",
+    "hecho": "Change undone",
+    "conflicto": "Cannot undo"
+  }
+}

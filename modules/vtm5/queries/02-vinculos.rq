@@ -1,0 +1,14 @@
+# titulo: Vínculos de sangre activos
+# descripcion: Quién está vinculado a quién y en qué nivel (sin fecha de fin).
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?siervo ?regnante ?nivel WHERE {
+  ?v a vtm:BloodBond ;
+     rpg:source/rdfs:label ?siervo ;
+     rpg:target/rdfs:label ?regnante ;
+     vtm:bondLevel ?nivel .
+  FILTER NOT EXISTS { ?v rpg:validUntil ?fin }
+}
+ORDER BY DESC(?nivel)

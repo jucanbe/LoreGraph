@@ -1,0 +1,13 @@
+# titulo: Tramas abiertas
+# descripcion: Tramas con estado «abierta» y las entidades implicadas.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?trama ?nombre (GROUP_CONCAT(?implicado; separator=", ") AS ?implicados) WHERE {
+  ?trama a rpg:Plot ;
+         rdfs:label ?nombre ;
+         rpg:plotStatus rpg:plot-open .
+  OPTIONAL { ?trama rpg:involves/rdfs:label ?implicado }
+}
+GROUP BY ?trama ?nombre
+ORDER BY ?nombre

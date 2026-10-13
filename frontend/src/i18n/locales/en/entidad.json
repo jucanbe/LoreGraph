@@ -1,0 +1,74 @@
+{
+  "pestanas": {
+    "ficha": "Sheet",
+    "relaciones": "Relationships",
+    "conocimiento": "What they know",
+    "mundoReal": "Real world",
+    "procedencia": "Provenance",
+    "historia": "History"
+  },
+  "modificada": "Modified {{tiempo}}",
+  "vecindario": "Neighbourhood",
+  "si": "Yes",
+  "no": "No",
+  "relaciones": {
+    "vacio": "This entity has no relationships yet",
+    "salientes": "Outgoing",
+    "entrantes": "Incoming",
+    "ninguna": "None",
+    "desde": "since {{s}}",
+    "hasta": "until {{s}}"
+  },
+  "procedencia": {
+    "agente": "AI agent",
+    "humano": "human",
+    "propuesta": "see proposal",
+    "detalle": "{{a}} added · {{e}} removed"
+  },
+  "conocimiento": {
+    "explicacion": "The character's beliefs compared with the campaign canon.",
+    "verGrafo": "See the world as they know it",
+    "canon": "in canon",
+    "estado": {
+      "confirmado": "Matches canon",
+      "falso": "Contradicts canon",
+      "no_verificado": "Not in canon"
+    }
+  },
+  "retrato": {
+    "alt": "Portrait of {{nombre}}",
+    "vacio": "No portrait",
+    "pista": "Add an image in the “image” field (foaf:depiction).",
+    "soltar": "Drop the image to upload it",
+    "formatoNoValido": "Unsupported format: use PNG, JPEG, WebP or GIF.",
+    "errorSubir": "Could not upload the portrait",
+    "subiendo": "Uploading…",
+    "subir": "Upload portrait",
+    "pistaSubir": "Click or drag an image (PNG, JPEG, WebP or GIF).",
+    "subido": "Portrait updated",
+    "cambiar": "Change portrait",
+    "quitado": "Portrait removed",
+    "quitar": "Remove portrait"
+  },
+  "borrar": {
+    "titulo": "Delete “{{nombre}}”?",
+    "aviso": "References to this entity and its qualified relationships will also be removed. The change is recorded in provenance.",
+    "hecho": "“{{nombre}}” deleted"
+  },
+  "coherencia": {
+    "titulo_one": "{{count}} inconsistency in this entity",
+    "titulo_other": "{{count}} inconsistencies in this entity",
+    "ver": "See consistency report"
+  },
+  "historia": {
+    "actual": "now",
+    "explicacion": "Values this entity has had across sessions.",
+    "inicio": "the beginning",
+    "tramo": "From {{desde}} to {{hasta}}",
+    "vigente": "Current"
+  },
+  "mapas": {
+    "titulo": "Appears on maps",
+    "ver": "Open map {{nombre}}"
+  }
+}

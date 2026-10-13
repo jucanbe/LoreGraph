@@ -1,0 +1,139 @@
+{
+  "agente": "generador-pnj",
+  "peticion": "Crea dos PNJ para la próxima sesión en los Campos de Malpaís: un explorador trasgo de los Colmillos y una exploradora humana que pueda guiar al grupo.",
+  "resumen": "Añade a Yago Ceniciento (trasgo, basado en la entrada «Trasgo» del bestiario) al servicio de Gruk y a Dalia Espumarrota (humana, exploradora de nivel 2), que conoce a Maese Orbán y a Yago.",
+  "destino": "canon",
+  "entidades": [
+    {
+      "ref": "nuevo:yago",
+      "clases": [
+        "rpg:NonPlayerCharacter",
+        "dnd:Creature"
+      ],
+      "valores": {
+        "rdfs:label": [
+          "Yago Ceniciento"
+        ],
+        "schema:description": [
+          "Trasgo vigía de los Colmillos de Basalto; vende información a quien pague en sal."
+        ],
+        "dnd:statBlock": [
+          "dnd:monster-goblin"
+        ],
+        "dnd:currentHitPoints": [
+          7
+        ],
+        "rpg:vitalStatus": [
+          "rpg:vital-alive"
+        ],
+        "rpg:locatedIn": [
+          "campos-malpais"
+        ],
+        "rpg:memberOf": [
+          "colmillos-basalto"
+        ],
+        "rpg:hasRelationship": [
+          {
+            "valores": {
+              "rpg:target": [
+                "gruk"
+              ],
+              "rpg:relationshipType": [
+                "rpg:rel-employer"
+              ],
+              "rpg:strength": [
+                1
+              ],
+              "rpg:validFrom": [
+                "sesion-03"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ref": "nuevo:dalia",
+      "clases": [
+        "rpg:NonPlayerCharacter",
+        "dnd:Adventurer"
+      ],
+      "valores": {
+        "rdfs:label": [
+          "Dalia Espumarrota"
+        ],
+        "schema:description": [
+          "Exploradora humana que conoce cada grieta del malpaís; busca a su hermano, desaparecido en los Túneles Verdes."
+        ],
+        "dnd:species": [
+          "dnd:species-human"
+        ],
+        "dnd:alignment": [
+          "dnd:align-ng"
+        ],
+        "dnd:hasClassLevel": [
+          {
+            "valores": {
+              "dnd:characterClass": [
+                "dnd:class-ranger"
+              ],
+              "dnd:levels": [
+                2
+              ]
+            }
+          }
+        ],
+        "dnd:strength": [
+          12
+        ],
+        "dnd:dexterity": [
+          16
+        ],
+        "dnd:constitution": [
+          13
+        ],
+        "dnd:intelligence": [
+          10
+        ],
+        "dnd:wisdom": [
+          15
+        ],
+        "dnd:charisma": [
+          9
+        ],
+        "dnd:armorClass": [
+          14
+        ],
+        "dnd:hitPointMax": [
+          18
+        ],
+        "dnd:speed": [
+          30
+        ],
+        "dnd:skillProficiency": [
+          "dnd:skill-survival",
+          "dnd:skill-stealth",
+          "dnd:skill-perception"
+        ],
+        "dnd:savingThrowProficiency": [
+          "dnd:ability-str",
+          "dnd:ability-dex"
+        ],
+        "dnd:spellcastingAbility": [
+          "dnd:ability-wis"
+        ],
+        "dnd:knowsSpell": [
+          "dnd:spell-hunters-mark",
+          "dnd:spell-cure-wounds"
+        ],
+        "rpg:locatedIn": [
+          "campos-malpais"
+        ],
+        "rpg:knows": [
+          "orban",
+          "nuevo:yago"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,587 @@
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+#################################################################
+# Ontología base del gestor de campañas de rol
+# Core ontology of the role-playing campaign manager
+#################################################################
+
+<https://loregraph.example.org/ont/core> a owl:Ontology ;
+    rdfs:label "Ontología base de campañas de rol"@es , "Role-playing campaign core ontology"@en ;
+    rdfs:comment "Clases y propiedades genéricas, independientes del sistema de juego. Los módulos la extienden."@es ,
+                 "Generic, game-system independent classes and properties. Game modules extend it."@en ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+
+#################################################################
+# Anotaciones propias / Custom annotations
+#################################################################
+
+rpg:isTemporal a owl:AnnotationProperty ;
+    rdfs:label "es temporal"@es , "is temporal"@en ;
+    rdfs:comment "Marca una propiedad cuyo valor cambia con el tiempo. Su fuente de verdad es un rpg:Fact con vigencia; la tripleta directa se deriva."@es ,
+                 "Marks a property whose value changes over time. Its source of truth is an rpg:Fact with validity; the direct triple is derived."@en ;
+    rdfs:range xsd:boolean .
+
+rpg:qualifiedBy a owl:AnnotationProperty ;
+    rdfs:label "cualificada por"@es , "qualified by"@en ;
+    rdfs:comment "Clase de rpg:Fact que cualifica esta propiedad directa."@es ,
+                 "rpg:Fact subclass that qualifies this direct property."@en .
+
+rpg:variantOf a owl:AnnotationProperty ;
+    rdfs:label "variante de"@es , "variant of"@en ;
+    rdfs:comment "Indica que una clase de módulo es una variante opcional (p. ej. tipo de criatura) que se combina con una clase principal del núcleo."@es ,
+                 "States that a module class is an optional variant (e.g. creature kind) combined with a core main class."@en .
+
+rpg:conceptScheme a owl:AnnotationProperty ;
+    rdfs:label "esquema de conceptos"@es , "concept scheme"@en ;
+    rdfs:comment "En una forma SHACL, limita los valores a los conceptos SKOS de este esquema."@es ,
+                 "In a SHACL shape, restricts values to the SKOS concepts of this scheme."@en .
+
+rpg:backlink a owl:AnnotationProperty ;
+    rdfs:label "enlace inverso"@es , "backlink"@en ;
+    rdfs:comment "En una forma SHACL anidada, propiedad del nodo anidado que apunta automáticamente a la entidad propietaria."@es ,
+                 "In a nested SHACL shape, property of the nested node automatically pointing back to the owner entity."@en .
+
+rpg:DotsEditor a owl:NamedIndividual ;
+    rdfs:label "editor de puntos"@es , "dots editor"@en ;
+    rdfs:comment "Pista de formulario (dash:editor): valor entero mostrado como fila de puntos o casillas."@es ,
+                 "Form hint (dash:editor): integer value shown as a row of dots or boxes."@en .
+
+#################################################################
+# Clases / Classes
+#################################################################
+
+rpg:Campaign a owl:Class ;
+    rdfs:subClassOf schema:CreativeWork ;
+    rdfs:label "Campaña"@es , "Campaign"@en ;
+    rdfs:comment "Una campaña de rol: un mundo compartido jugado a lo largo de varias sesiones."@es ,
+                 "A role-playing campaign: a shared world played over several sessions."@en .
+
+rpg:Entity a owl:Class ;
+    rdfs:label "Entidad"@es , "Entity"@en ;
+    rdfs:comment "Superclase de todo lo que se registra en una campaña."@es ,
+                 "Superclass of everything recorded in a campaign."@en .
+
+rpg:Character a owl:Class ;
+    rdfs:subClassOf rpg:Entity , foaf:Agent ;
+    rdfs:label "Personaje"@es , "Character"@en ;
+    rdfs:comment "Cualquier ser con voluntad propia en el mundo de ficción. Clase abstracta: usa rpg:PlayerCharacter o rpg:NonPlayerCharacter."@es ,
+                 "Any being with its own will in the fictional world. Abstract: use rpg:PlayerCharacter or rpg:NonPlayerCharacter."@en .
+
+rpg:PlayerCharacter a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    owl:disjointWith rpg:NonPlayerCharacter ;
+    rdfs:label "Personaje jugador"@es , "Player character"@en ;
+    rdfs:comment "Personaje controlado por un jugador."@es ,
+                 "Character controlled by a player."@en .
+
+rpg:NonPlayerCharacter a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rdfs:label "PNJ"@es , "NPC"@en ;
+    rdfs:comment "Personaje no jugador, controlado por quien dirige la partida."@es ,
+                 "Non-player character, controlled by the game master."@en .
+
+rpg:Player a owl:Class ;
+    rdfs:subClassOf rpg:Entity , prov:Person ;
+    rdfs:label "Jugador"@es , "Player"@en ;
+    rdfs:comment "Persona real que participa en la campaña. No es parte del mundo de ficción."@es ,
+                 "Real person taking part in the campaign. Not part of the fictional world."@en .
+
+rpg:Place a owl:Class ;
+    rdfs:subClassOf rpg:Entity , schema:Place ;
+    rdfs:label "Lugar"@es , "Place"@en ;
+    rdfs:comment "Ubicación del mundo de ficción, de cualquier escala: de un continente a una habitación."@es ,
+                 "Location in the fictional world, at any scale: from a continent to a room."@en .
+
+rpg:Faction a owl:Class ;
+    rdfs:subClassOf rpg:Entity , foaf:Organization ;
+    rdfs:label "Facción"@es , "Faction"@en ;
+    rdfs:comment "Grupo organizado con intereses propios: gremio, secta, familia, gobierno."@es ,
+                 "Organised group with its own interests: guild, sect, family, government."@en .
+
+rpg:Item a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Objeto"@es , "Item"@en ;
+    rdfs:comment "Cosa material o artefacto relevante para la historia."@es ,
+                 "Material thing or artefact relevant to the story."@en .
+
+rpg:Event a owl:Class ;
+    rdfs:subClassOf rpg:Entity , schema:Event ;
+    rdfs:label "Evento"@es , "Event"@en ;
+    rdfs:comment "Suceso dentro del mundo de ficción."@es ,
+                 "Occurrence within the fictional world."@en .
+
+rpg:Session a owl:Class ;
+    rdfs:subClassOf rpg:Entity , schema:Event ;
+    rdfs:label "Sesión"@es , "Session"@en ;
+    rdfs:comment "Sesión de juego real. Ordena el tiempo de la campaña y sirve de referencia para la vigencia de los hechos."@es ,
+                 "Real-world play session. Orders campaign time and anchors the validity of facts."@en .
+
+rpg:Plot a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Trama"@es , "Plot"@en ;
+    rdfs:comment "Hilo argumental. Su estado (abierta, resuelta, abandonada) se indica con rpg:plotStatus."@es ,
+                 "Story thread. Its status (open, resolved, abandoned) is given by rpg:plotStatus."@en .
+
+rpg:Fact a owl:Class ;
+    rdfs:label "Hecho"@es , "Fact"@en ;
+    rdfs:comment "Afirmación cualificada (patrón n-ario) con vigencia y procedencia propias."@es ,
+                 "Qualified statement (n-ary pattern) with its own validity and provenance."@en .
+
+rpg:Relationship a owl:Class ;
+    rdfs:subClassOf rpg:Fact ;
+    rdfs:label "Relación"@es , "Relationship"@en ;
+    rdfs:comment "Relación cualificada entre personajes o facciones: tipo, intensidad y vigencia."@es ,
+                 "Qualified relationship between characters or factions: type, strength and validity."@en .
+
+rpg:TemporalStatement a owl:Class ;
+    rdfs:subClassOf rpg:Fact ;
+    rdfs:label "Hecho con vigencia"@es , "Temporal statement"@en ;
+    rdfs:comment "Historia de una propiedad temporal (rpg:isTemporal): «origen tuvo valor V en la propiedad P desde la sesión X hasta la Y». Se crea y se cierra sola al cambiar el valor actual."@es ,
+                 "History of a temporal property (rpg:isTemporal): “source had value V for property P from session X until Y”. Opened and closed automatically when the current value changes."@en .
+
+rpg:Membership a owl:Class ;
+    rdfs:subClassOf rpg:TemporalStatement ;
+    rdfs:label "Pertenencia"@es , "Membership"@en ;
+    rdfs:comment "Pertenencia a una facción durante un intervalo."@es ,
+                 "Faction membership over an interval."@en .
+
+rpg:Location a owl:Class ;
+    rdfs:subClassOf rpg:TemporalStatement ;
+    rdfs:label "Ubicación"@es , "Location"@en ;
+    rdfs:comment "Ubicación de una entidad durante un intervalo."@es ,
+                 "Location of an entity over an interval."@en .
+
+rpg:Possession a owl:Class ;
+    rdfs:subClassOf rpg:TemporalStatement ;
+    rdfs:label "Posesión"@es , "Possession"@en ;
+    rdfs:comment "Posesión de un objeto durante un intervalo."@es ,
+                 "Possession of an item over an interval."@en .
+
+rpg:Map a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Mapa"@es , "Map"@en ;
+    rdfs:comment "Plano o mapa propio de la campaña (imagen) con marcadores de lugares y otras entidades."@es ,
+                 "Campaign map or plan (image) with markers for places and other entities."@en .
+
+rpg:MapMarker a owl:Class ;
+    rdfs:label "Marcador de mapa"@es , "Map marker"@en ;
+    rdfs:comment "Posición de una entidad en un mapa, en coordenadas relativas (0–1) de la imagen."@es ,
+                 "Position of an entity on a map, in relative (0–1) image coordinates."@en .
+
+rpg:Inconsistency a owl:Class ;
+    rdfs:label "Incoherencia"@es , "Inconsistency"@en ;
+    rdfs:comment "Problema de coherencia del mundo detectado por una comprobación (no se guarda en el canon)."@es ,
+                 "World consistency problem found by a check (not stored in canon)."@en .
+
+rpg:Image a owl:Class ;
+    rdfs:subClassOf schema:ImageObject , prov:Entity ;
+    rdfs:label "Imagen"@es , "Image"@en ;
+    rdfs:comment "Imagen (p. ej. retrato) enlazada con foaf:depiction, con su procedencia."@es ,
+                 "Image (e.g. portrait) linked with foaf:depiction, with its provenance."@en .
+
+# --- Procedencia / Provenance ---
+
+rpg:Change a owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "Cambio"@es , "Change"@en ;
+    rdfs:comment "Operación de escritura: registra las tripletas añadidas y eliminadas, quién la hizo y cuándo."@es ,
+                 "Write operation: records added and removed triples, who made it and when."@en .
+
+rpg:Proposal a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Propuesta"@es , "Proposal"@en ;
+    rdfs:comment "Conjunto de cambios generado por un agente, pendiente de revisión humana."@es ,
+                 "Set of changes generated by an agent, pending human review."@en .
+
+rpg:HumanUser a owl:Class ;
+    rdfs:subClassOf prov:Person ;
+    rdfs:label "Usuario humano"@es , "Human user"@en ;
+    rdfs:comment "Persona que edita la campaña."@es , "Person editing the campaign."@en .
+
+rpg:AIAgent a owl:Class ;
+    rdfs:subClassOf prov:SoftwareAgent ;
+    rdfs:label "Agente de IA"@es , "AI agent"@en ;
+    rdfs:comment "Agente de software (modelo de lenguaje) que lee el grafo y propone cambios."@es ,
+                 "Software agent (language model) that reads the graph and proposes changes."@en .
+
+#################################################################
+# Propiedades de objeto / Object properties
+#################################################################
+
+rpg:property a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:TemporalStatement ; rdfs:range rdf:Property ;
+    rdfs:label "propiedad"@es , "property"@en ;
+    rdfs:comment "Propiedad directa a la que se refiere el hecho con vigencia."@es ,
+                 "Direct property the temporal statement refers to."@en .
+
+rpg:hasHistory a owl:ObjectProperty ;
+    rdfs:domain rpg:Entity ; rdfs:range rpg:TemporalStatement ;
+    rdfs:label "historia temporal"@es , "temporal history"@en ;
+    rdfs:comment "Hechos con vigencia que guardan la evolución de las propiedades temporales de la entidad."@es ,
+                 "Temporal statements recording how the entity's temporal properties evolved."@en .
+
+rpg:value a rdf:Property ;
+    rdfs:domain rpg:TemporalStatement ;
+    rdfs:label "valor"@es , "value"@en ;
+    rdfs:comment "Valor (entidad, concepto o literal) que tuvo la propiedad durante la vigencia."@es ,
+                 "Value (entity, concept or literal) the property had during the validity."@en .
+
+rpg:hasDepiction a owl:ObjectProperty ;
+    rdfs:subPropertyOf foaf:depiction ;
+    rdfs:range rpg:Image ;
+    rdfs:label "retrato"@es , "portrait"@en .
+
+rpg:mapImage a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Map ; rdfs:range rpg:Image ;
+    rdfs:label "imagen del mapa"@es , "map image"@en .
+
+rpg:hasMarker a owl:ObjectProperty ;
+    rdfs:domain rpg:Map ; rdfs:range rpg:MapMarker ;
+    rdfs:label "marcadores"@es , "markers"@en .
+
+rpg:markerOf a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:MapMarker ; rdfs:range rpg:Entity ;
+    rdfs:label "entidad marcada"@es , "marked entity"@en .
+
+rpg:imageOrigin a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Image ; rdfs:range xsd:string ;
+    rdfs:label "origen de la imagen"@es , "image origin"@en ;
+    rdfs:comment "«subida», «generada» o «enlace»."@es , "“subida” (uploaded), “generada” (generated) or “enlace” (link)."@en .
+
+rpg:generationPrompt a owl:DatatypeProperty ;
+    rdfs:domain rpg:Image ; rdfs:range xsd:string ;
+    rdfs:label "petición de generación"@es , "generation prompt"@en ;
+    rdfs:comment "Petición con la que se generó la imagen, si es generada."@es , "Prompt the image was generated with, if generated."@en .
+
+rpg:usesModule a owl:ObjectProperty ;
+    rdfs:domain rpg:Campaign ;
+    rdfs:label "usa módulo"@es , "uses module"@en ;
+    rdfs:comment "Módulo de sistema de juego activo en la campaña."@es ,
+                 "Game-system module active in the campaign."@en .
+
+rpg:inCampaign a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Entity ; rdfs:range rpg:Campaign ;
+    rdfs:label "en campaña"@es , "in campaign"@en ;
+    rdfs:comment "Campaña a la que pertenece la entidad."@es ,
+                 "Campaign the entity belongs to."@en .
+
+rpg:locatedIn a owl:ObjectProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ; rpg:qualifiedBy rpg:Location ;
+    rdfs:domain rpg:Entity ; rdfs:range rpg:Place ;
+    rdfs:label "ubicado en"@es , "located in"@en ;
+    rdfs:comment "Lugar donde se encuentra la entidad actualmente (o lugar que contiene a otro lugar)."@es ,
+                 "Place where the entity currently is (or place containing another place)."@en .
+
+rpg:memberOf a owl:ObjectProperty ;
+    rpg:isTemporal true ; rpg:qualifiedBy rpg:Membership ;
+    rdfs:range rpg:Faction ;
+    rdfs:label "miembro de"@es , "member of"@en ;
+    rdfs:comment "Facción a la que pertenece un personaje (o facción madre de otra facción)."@es ,
+                 "Faction a character belongs to (or parent faction of another faction)."@en .
+
+rpg:knows a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:subPropertyOf foaf:knows ;
+    rdfs:domain rpg:Character ; rdfs:range rpg:Character ;
+    rdfs:label "conoce a"@es , "knows"@en ;
+    rdfs:comment "Los dos personajes se conocen."@es ,
+                 "The two characters know each other."@en .
+
+rpg:relatedTo a owl:ObjectProperty ;
+    rpg:isTemporal true ; rpg:qualifiedBy rpg:Relationship ;
+    rdfs:label "relacionado con"@es , "related to"@en ;
+    rdfs:comment "Atajo derivado: se cumple mientras exista una rpg:Relationship vigente entre ambos."@es ,
+                 "Derived shortcut: holds while a valid rpg:Relationship exists between both."@en .
+
+rpg:hasRelationship a owl:ObjectProperty ;
+    rdfs:range rpg:Relationship ;
+    rdfs:label "tiene relación"@es , "has relationship"@en ;
+    rdfs:comment "Enlaza una entidad con una relación cualificada de la que es origen."@es ,
+                 "Links an entity with a qualified relationship it is the source of."@en .
+
+rpg:source a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Fact ;
+    rdfs:label "origen"@es , "source"@en ;
+    rdfs:comment "Sujeto del hecho cualificado."@es , "Subject of the qualified fact."@en .
+
+rpg:target a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Fact ;
+    rdfs:label "destino"@es , "target"@en ;
+    rdfs:comment "Objeto del hecho cualificado."@es , "Object of the qualified fact."@en .
+
+rpg:relationshipType a owl:ObjectProperty ;
+    rdfs:domain rpg:Relationship ; rdfs:range skos:Concept ;
+    rdfs:label "tipo de relación"@es , "relationship type"@en ;
+    rdfs:comment "Concepto SKOS del esquema rpg:RelationshipTypes (ampliable por módulos)."@es ,
+                 "SKOS concept from the rpg:RelationshipTypes scheme (extensible by modules)."@en .
+
+rpg:validFrom a owl:ObjectProperty ;
+    rdfs:domain rpg:Fact ;
+    rdfs:label "vigente desde"@es , "valid from"@en ;
+    rdfs:comment "Sesión (rpg:Session) o instante (time:Instant) desde el que el hecho es cierto (incluido)."@es ,
+                 "Session (rpg:Session) or instant (time:Instant) from which the fact holds (inclusive)."@en .
+
+rpg:validUntil a owl:ObjectProperty ;
+    rdfs:domain rpg:Fact ;
+    rdfs:label "vigente hasta"@es , "valid until"@en ;
+    rdfs:comment "Sesión o instante en que el hecho deja de ser cierto (excluido). Sin valor: sigue vigente."@es ,
+                 "Session or instant at which the fact stops holding (exclusive). No value: still valid."@en .
+
+rpg:participatesIn a owl:ObjectProperty ;
+    rdfs:domain rpg:Entity ; rdfs:range rpg:Event ;
+    rdfs:label "participa en"@es , "participates in"@en ;
+    rdfs:comment "Evento en el que participa la entidad."@es , "Event the entity takes part in."@en .
+
+rpg:possesses a owl:ObjectProperty ;
+    rpg:isTemporal true ; rpg:qualifiedBy rpg:Possession ;
+    rdfs:range rpg:Item ;
+    rdfs:label "posee"@es , "possesses"@en ;
+    rdfs:comment "Objeto que posee actualmente un personaje o facción."@es ,
+                 "Item currently possessed by a character or faction."@en .
+
+rpg:occursIn a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Event ; rdfs:range rpg:Place ;
+    rdfs:label "ocurre en"@es , "occurs in"@en ;
+    rdfs:comment "Lugar donde ocurre un evento."@es , "Place where an event occurs."@en .
+
+rpg:appearsInSession a owl:ObjectProperty ;
+    rdfs:domain rpg:Entity ; rdfs:range rpg:Session ;
+    rdfs:label "aparece en sesión"@es , "appears in session"@en ;
+    rdfs:comment "Sesión de juego en la que aparece o se menciona la entidad."@es ,
+                 "Play session in which the entity appears or is mentioned."@en .
+
+rpg:playedBy a owl:ObjectProperty ;
+    rdfs:domain rpg:PlayerCharacter ; rdfs:range rpg:Player ;
+    rdfs:label "jugado por"@es , "played by"@en ;
+    rdfs:comment "Jugador que controla el personaje."@es , "Player controlling the character."@en .
+
+rpg:plotStatus a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Plot ; rdfs:range skos:Concept ;
+    rdfs:label "estado de la trama"@es , "plot status"@en ;
+    rdfs:comment "Concepto del esquema rpg:PlotStatuses."@es , "Concept from the rpg:PlotStatuses scheme."@en .
+
+rpg:involves a owl:ObjectProperty ;
+    rdfs:domain rpg:Plot ; rdfs:range rpg:Entity ;
+    rdfs:label "implica a"@es , "involves"@en ;
+    rdfs:comment "Entidad implicada en una trama."@es , "Entity involved in a plot."@en .
+
+rpg:vitalStatus a owl:ObjectProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:domain rpg:Character ; rdfs:range skos:Concept ;
+    rdfs:label "estado vital"@es , "vital status"@en ;
+    rdfs:comment "Concepto del esquema rpg:VitalStatuses (vivo, muerto…). Base para detectar incoherencias."@es ,
+                 "Concept from the rpg:VitalStatuses scheme (alive, dead…). Basis for inconsistency detection."@en .
+
+# --- Enlace con el mundo real / Real-world anchoring ---
+
+rpg:realWorldAnchor a owl:ObjectProperty ;
+    rdfs:domain rpg:Entity ;
+    rdfs:label "ancla real"@es , "real-world anchor"@en ;
+    rdfs:comment "Recurso real (Wikidata, DBpedia) relacionado con la entidad ficticia. NO es owl:sameAs: los hechos de la campaña nunca se afirman del recurso real."@es ,
+                 "Real resource (Wikidata, DBpedia) related to the fictional entity. NOT owl:sameAs: campaign facts are never asserted about the real resource."@en .
+
+rpg:inspiredBy a owl:ObjectProperty ;
+    rdfs:subPropertyOf rpg:realWorldAnchor ;
+    rdfs:label "inspirado en"@es , "inspired by"@en ;
+    rdfs:comment "La entidad ficticia toma inspiración del recurso real."@es ,
+                 "The fictional entity draws inspiration from the real resource."@en .
+
+rpg:correspondsTo a owl:ObjectProperty ;
+    rdfs:subPropertyOf rpg:realWorldAnchor ;
+    rdfs:domain rpg:Place ;
+    rdfs:label "corresponde a"@es , "corresponds to"@en ;
+    rdfs:comment "El lugar ficticio está situado en el lugar real indicado (se usan sus coordenadas)."@es ,
+                 "The fictional place is situated at the given real place (its coordinates are used)."@en .
+
+# --- Procedencia / Provenance ---
+
+rpg:added a owl:ObjectProperty ;
+    rdfs:domain rpg:Change ; rdfs:range rdf:Statement ;
+    rdfs:label "añade"@es , "adds"@en ;
+    rdfs:comment "Tripleta (reificada) añadida por el cambio."@es , "(Reified) triple added by the change."@en .
+
+rpg:removed a owl:ObjectProperty ;
+    rdfs:range rdf:Statement ;
+    rdfs:label "elimina"@es , "removes"@en ;
+    rdfs:comment "Tripleta (reificada) eliminada por el cambio o propuesta para eliminar."@es ,
+                 "(Reified) triple removed by the change or proposed for removal."@en .
+
+rpg:aboutEntity a owl:ObjectProperty ;
+    rdfs:label "sobre la entidad"@es , "about entity"@en ;
+    rdfs:comment "Entidad afectada por un cambio o propuesta (índice para consultar la procedencia)."@es ,
+                 "Entity affected by a change or proposal (index to query provenance)."@en .
+
+rpg:reverts a owl:ObjectProperty ;
+    rdfs:domain rpg:Change ; rdfs:range rpg:Change ;
+    rdfs:label "deshace"@es , "reverts"@en ;
+    rdfs:comment "Cambio anterior que este cambio deshace."@es , "Earlier change this change undoes."@en .
+
+rpg:targetGraph a owl:ObjectProperty ;
+    rdfs:label "grafo destino"@es , "target graph"@en ;
+    rdfs:comment "Grafo con nombre en el que escribe el cambio o propuesta."@es ,
+                 "Named graph the change or proposal writes to."@en .
+
+rpg:proposalStatus a owl:ObjectProperty ;
+    rdfs:domain rpg:Proposal ;
+    rdfs:label "estado de la propuesta"@es , "proposal status"@en ;
+    rdfs:comment "Pendiente, aprobada o rechazada (esquema rpg:ProposalStatuses)."@es ,
+                 "Pending, approved or rejected (rpg:ProposalStatuses scheme)."@en .
+
+rpg:proposalGraph a owl:ObjectProperty ;
+    rdfs:domain rpg:Proposal ;
+    rdfs:label "grafo de la propuesta"@es , "proposal graph"@en ;
+    rdfs:comment "Grafo con nombre que contiene las tripletas añadidas por la propuesta."@es ,
+                 "Named graph holding the triples added by the proposal."@en .
+
+#################################################################
+# Propiedades de datos / Datatype properties
+#################################################################
+
+rpg:backstory a owl:DatatypeProperty ;
+    rdfs:domain rpg:Entity ; rdfs:range xsd:string ;
+    rdfs:label "historia"@es , "backstory"@en ;
+    rdfs:comment "Trasfondo o historia de la entidad, en prosa."@es , "Background or history of the entity, in prose."@en .
+
+rpg:markerX a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:MapMarker ; rdfs:range xsd:decimal ;
+    rdfs:label "x"@es , "x"@en ;
+    rdfs:comment "Posición horizontal relativa (0 = izquierda, 1 = derecha)."@es , "Relative horizontal position (0 = left, 1 = right)."@en .
+
+rpg:markerY a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:MapMarker ; rdfs:range xsd:decimal ;
+    rdfs:label "y"@es , "y"@en ;
+    rdfs:comment "Posición vertical relativa (0 = arriba, 1 = abajo)."@es , "Relative vertical position (0 = top, 1 = bottom)."@en .
+
+rpg:strength a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Relationship ; rdfs:range xsd:integer ;
+    rdfs:label "intensidad"@es , "strength"@en ;
+    rdfs:comment "De -3 (hostilidad extrema) a +3 (lealtad absoluta)."@es ,
+                 "From -3 (extreme hostility) to +3 (absolute loyalty)."@en .
+
+rpg:sessionNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Session ; rdfs:range xsd:integer ;
+    rdfs:label "número de sesión"@es , "session number"@en ;
+    rdfs:comment "Ordinal de la sesión dentro de la campaña (1, 2, 3…). Ordena el tiempo de juego."@es ,
+                 "Ordinal of the session within the campaign (1, 2, 3…). Orders play time."@en .
+
+rpg:sessionDate a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rpg:Session ; rdfs:range xsd:date ;
+    rdfs:label "fecha de juego"@es , "play date"@en ;
+    rdfs:comment "Fecha real en que se jugó la sesión."@es , "Real date the session was played."@en .
+
+rpg:sessionNotes a owl:DatatypeProperty ;
+    rdfs:domain rpg:Session ; rdfs:range xsd:string ;
+    rdfs:label "notas de sesión"@es , "session notes"@en ;
+    rdfs:comment "Resumen y notas de lo ocurrido en la sesión."@es , "Summary and notes of what happened in the session."@en .
+
+rpg:inWorldDate a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:date ;
+    rdfs:label "fecha en el mundo"@es , "in-world date"@en ;
+    rdfs:comment "Fecha dentro de la ficción, si el mundo usa el calendario gregoriano. Atajo de time:Instant."@es ,
+                 "Date within the fiction, if the world uses the Gregorian calendar. Shortcut for time:Instant."@en .
+
+rpg:inWorldDateLabel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "fecha en el mundo (texto)"@es , "in-world date (text)"@en ;
+    rdfs:comment "Fecha dentro de la ficción como texto libre, para calendarios inventados."@es ,
+                 "Date within the fiction as free text, for invented calendars."@en .
+
+rpg:inWorldTime a owl:ObjectProperty ;
+    rdfs:range time:TemporalEntity ;
+    rdfs:label "tiempo en el mundo"@es , "in-world time"@en ;
+    rdfs:comment "Instante o intervalo OWL-Time en la cronología de la ficción (forma completa, para calendarios no gregorianos)."@es ,
+                 "OWL-Time instant or interval in the fiction's chronology (full form, for non-Gregorian calendars)."@en .
+
+rpg:request a owl:DatatypeProperty ;
+    rdfs:label "petición"@es , "request"@en ;
+    rdfs:comment "Petición o instrucción que originó el cambio o la propuesta de un agente."@es ,
+                 "Request or instruction that originated an agent's change or proposal."@en .
+
+rpg:reviewNote a owl:DatatypeProperty ;
+    rdfs:domain rpg:Proposal ;
+    rdfs:label "nota de revisión"@es , "review note"@en ;
+    rdfs:comment "Motivo de aprobación o rechazo indicado por la persona revisora."@es ,
+                 "Reason for approval or rejection given by the reviewer."@en .
+
+rpg:moduleId a owl:DatatypeProperty ;
+    rdfs:label "identificador de módulo"@es , "module identifier"@en ;
+    rdfs:comment "Identificador corto del módulo (p. ej. vtm5)."@es , "Short module identifier (e.g. vtm5)."@en .
+
+#################################################################
+# Vocabularios SKOS / SKOS vocabularies
+#################################################################
+
+rpg:RelationshipTypes a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de relación"@es , "Relationship types"@en .
+
+rpg:rel-ally a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "aliado"@es , "ally"@en .
+rpg:rel-friend a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "amistad"@es , "friend"@en .
+rpg:rel-family a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "familia"@es , "family"@en .
+rpg:rel-lover a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "amante"@es , "lover"@en .
+rpg:rel-rival a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "rival"@es , "rival"@en .
+rpg:rel-enemy a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "enemigo"@es , "enemy"@en .
+rpg:rel-debt a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "deuda"@es , "debt"@en ;
+    skos:definition "El origen le debe un favor al destino."@es , "The source owes the target a favour."@en .
+rpg:rel-employer a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "trabaja para"@es , "works for"@en .
+rpg:rel-mentor a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "mentor de"@es , "mentor of"@en .
+
+rpg:PlotStatuses a skos:ConceptScheme ;
+    skos:prefLabel "Estados de trama"@es , "Plot statuses"@en .
+rpg:plot-open a skos:Concept ; skos:inScheme rpg:PlotStatuses ;
+    skos:prefLabel "abierta"@es , "open"@en .
+rpg:plot-resolved a skos:Concept ; skos:inScheme rpg:PlotStatuses ;
+    skos:prefLabel "resuelta"@es , "resolved"@en .
+rpg:plot-abandoned a skos:Concept ; skos:inScheme rpg:PlotStatuses ;
+    skos:prefLabel "abandonada"@es , "abandoned"@en .
+
+rpg:VitalStatuses a skos:ConceptScheme ;
+    skos:prefLabel "Estados vitales"@es , "Vital statuses"@en .
+rpg:vital-alive a skos:Concept ; skos:inScheme rpg:VitalStatuses ;
+    skos:prefLabel "vivo"@es , "alive"@en .
+rpg:vital-dead a skos:Concept ; skos:inScheme rpg:VitalStatuses ;
+    skos:prefLabel "muerto"@es , "dead"@en .
+rpg:vital-missing a skos:Concept ; skos:inScheme rpg:VitalStatuses ;
+    skos:prefLabel "desaparecido"@es , "missing"@en .
+rpg:vital-unknown a skos:Concept ; skos:inScheme rpg:VitalStatuses ;
+    skos:prefLabel "desconocido"@es , "unknown"@en .
+
+rpg:ProposalStatuses a skos:ConceptScheme ;
+    skos:prefLabel "Estados de propuesta"@es , "Proposal statuses"@en .
+rpg:proposal-pending a skos:Concept ; skos:inScheme rpg:ProposalStatuses ;
+    skos:prefLabel "pendiente"@es , "pending"@en .
+rpg:proposal-approved a skos:Concept ; skos:inScheme rpg:ProposalStatuses ;
+    skos:prefLabel "aprobada"@es , "approved"@en .
+rpg:proposal-rejected a skos:Concept ; skos:inScheme rpg:ProposalStatuses ;
+    skos:prefLabel "rechazada"@es , "rejected"@en .
+
+#################################################################
+# Términos externos usados (etiquetas para la interfaz)
+# External terms used (labels for the UI)
+#################################################################
+
+rdfs:label rdfs:label "nombre"@es , "name"@en .
+skos:altLabel rdfs:label "alias"@es , "aliases"@en .
+schema:description rdfs:label "descripción"@es , "description"@en .
+foaf:depiction rdfs:label "imagen"@es , "depiction"@en .
+schema:latitude rdfs:label "latitud"@es , "latitude"@en .
+schema:longitude rdfs:label "longitud"@es , "longitude"@en .
+rdf:type rdfs:label "tipo"@es , "type"@en .

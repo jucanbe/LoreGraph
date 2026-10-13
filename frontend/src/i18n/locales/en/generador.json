@@ -1,0 +1,35 @@
+{
+  "boton": "Generate with AI",
+  "titulo": "Generate with AI",
+  "descripcion": "The local model will create sheets aligned with the game system. The result arrives as a proposal: nothing enters canon until you approve it.",
+  "clase": "Type",
+  "variante": "Variant",
+  "sinVariante": "No variant",
+  "peticion": "What do you want?",
+  "peticionPlaceholder": "Concept, tone, relationships with other entities… (optional)",
+  "cantidad": "Quantity",
+  "historia": "Write their own backstory",
+  "historiaAyuda": "Adds a backstory (rpg:backstory) to each entity.",
+  "generar": "Generate",
+  "generando": "Generating with the local model…",
+  "generandoAyuda": "Local models can take several minutes. You can stop waiting: generation will continue on the server and the proposal will show up in the inbox.",
+  "dejarDeEsperar": "Stop waiting",
+  "esperaCancelada": "You stopped waiting. If generation finishes, the proposal will show up in the proposals inbox.",
+  "verBandeja": "Go to proposals",
+  "resultado": {
+    "titulo_one": "{{count}} entity generated",
+    "titulo_other": "{{count}} entities generated",
+    "revisar": "A pending proposal has been created. Review and approve it to add it to canon.",
+    "verPropuesta": "Review the proposal",
+    "modelo": "Model: {{modelo}}",
+    "reintentos_zero": "The model output was valid on the first try",
+    "reintentos_one": "The model output had to be corrected {{count}} time",
+    "reintentos_other": "The model output had to be corrected {{count}} times",
+    "otra": "Generate again"
+  },
+  "error": {
+    "titulo": "Generation failed",
+    "modelo": "The model did not respond or its output was not valid. Check the model (LLM) settings and try another output mode (llm_output_mode: tool, native or prompted).",
+    "irAjustes": "Open settings"
+  }
+}

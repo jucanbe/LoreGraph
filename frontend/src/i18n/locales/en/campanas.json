@@ -1,0 +1,42 @@
+{
+  "titulo": "Campaigns",
+  "subtitulo": "Pick a chronicle or start a new one.",
+  "nueva": "New campaign",
+  "entidades_one": "{{count}} entity",
+  "entidades_other": "{{count}} entities",
+  "vacio": {
+    "titulo": "No campaigns yet",
+    "descripcion": "Create a campaign or load the examples with “make seed”."
+  },
+  "crear": {
+    "titulo": "New campaign",
+    "descripcion": "Choose the name and the game-system modules it will use.",
+    "nombre": "Name",
+    "resumen": "Description",
+    "modulos": "Game modules",
+    "sinModulos": "No modules installed: the campaign will use only the generic core.",
+    "nucleo": "The generic core (characters, places, factions…) is always included.",
+    "extension": "extension",
+    "hecho": "Campaign “{{nombre}}” created"
+  },
+  "borrar": {
+    "accion": "Delete campaign {{nombre}}",
+    "titulo": "Delete “{{nombre}}”?",
+    "aviso": "All its data, proposals and history will be permanently removed. This cannot be undone.",
+    "hecho": "Campaign deleted"
+  },
+  "importar": {
+    "accion": "Import campaign",
+    "titulo": "Import campaign",
+    "descripcion": "Upload a ZIP exported from LoreGraph. You can give it another identifier or name so it does not clash with an existing campaign.",
+    "archivo": "ZIP file",
+    "id": "New identifier (optional)",
+    "idAyuda": "Leave it empty to use the one in the file.",
+    "nombre": "New name (optional)",
+    "enviar": "Import",
+    "hecho": "Campaign “{{nombre}}” imported",
+    "resultado": "{{tripletas}} triples · {{imagenes}} images",
+    "avisos": "Warnings",
+    "conflicto": "A campaign with that identifier already exists. Type another one in “New identifier”."
+  }
+}

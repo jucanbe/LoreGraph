@@ -1,0 +1,13 @@
+# titulo: Dominios, titulares y riesgo
+# descripcion: Dominios de la ciudad con su titular, calidad de caza y riesgo para la Mascarada.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dominio ?nombre ?titular ?caza ?riesgo WHERE {
+  ?dominio a vtm:Domain ;
+           rdfs:label ?nombre .
+  OPTIONAL { ?dominio vtm:domainHolder/rdfs:label ?titular }
+  OPTIONAL { ?dominio vtm:huntingQuality ?caza }
+  OPTIONAL { ?dominio vtm:masqueradeRisk ?riesgo }
+}
+ORDER BY DESC(?riesgo)

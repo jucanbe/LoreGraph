@@ -1,0 +1,22 @@
+@prefix :       <__CAMPAIGN__/entity/> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix vtm:    <https://rpg-modules.example.net/vtm5/ont#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Lo que Lucía cree saber (incluye rumores falsos).
+
+# Cierto: Darío dirige a los Libres de Lavapiés.
+:dario-requena rpg:memberOf :libres-lavapies .
+:dario-requena vtm:position vtm:position-baron .
+
+# Rumor falso: el Príncipe se oculta en el Teatro Real (en realidad, en el Palacio de Linares).
+:fermin-arteaga rpg:locatedIn :teatro-real .
+
+# Rumor falso: Ferrer no está muerto, se esconde.
+:gonzalo-ferrer rpg:vitalStatus rpg:vital-missing .
+
+# Sospecha sin confirmar: el nuevo Sheriff estuvo en la muerte de Ferrer.
+:bruno-calvo rpg:participatesIn :muerte-ferrer .
+
+# Cierto: el padre Larra participó en la redada.
+:ignacio-larra rpg:participatesIn :redada-gran-via .

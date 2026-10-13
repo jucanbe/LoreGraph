@@ -1,0 +1,68 @@
+{
+  "titulo": "Campaign settings",
+  "subtitulo": "General data, lore for the AI, own model, current session, export and deletion.",
+  "guardado": "Campaign settings saved",
+  "descartar": "Discard changes",
+  "sinGuardar": "There are unsaved changes",
+  "general": {
+    "titulo": "General",
+    "descripcion": "Name, description and game modules of the campaign.",
+    "id": "Identifier",
+    "idAyuda": "Part of URLs and IRIs; it cannot be changed.",
+    "nombre": "Name",
+    "descripcionCampo": "Description",
+    "modulos": "Game modules",
+    "modulosAyuda": "Removing a module does not delete data already created with its types, but they will lose their own form.",
+    "sinModulos": "No modules installed besides the core.",
+    "extension": "extension",
+    "guardar": "Save general data",
+    "guardado": "Campaign data saved"
+  },
+  "lore": {
+    "titulo": "Lore for the AI",
+    "descripcion": "Context the assistant and agents always receive before proposing changes.",
+    "resumen": "Summary",
+    "resumenAyuda": "Premise, recent history and current situation.",
+    "tono": "Tone",
+    "tonoPlaceholder": "e.g. personal horror, political intrigue, noir",
+    "reglasCasa": "House rules",
+    "reglasCasaAyuda": "Your own rules or tweaks to the game system.",
+    "evitar": "Avoid",
+    "evitarAyuda": "Topics or elements that must not appear.",
+    "notas": "Notes",
+    "notasAyuda": "Any other useful information for the AI.",
+    "nuevoElemento": "Add an item…",
+    "quitarElemento": "Remove “{{texto}}”",
+    "listaVacia": "None yet."
+  },
+  "asistente": {
+    "titulo": "Assistant model",
+    "descripcion": "Only for this campaign. Empty = use the global settings.",
+    "modelo": "Model",
+    "contexto": "Context (tokens)",
+    "global": "Global: {{valor}}",
+    "irGlobales": "Global settings"
+  },
+  "sesion": {
+    "titulo": "Current session",
+    "descripcion": "Temporal changes (where someone is, which faction they belong to, their status…) are dated in this session.",
+    "campo": "Current session",
+    "auto": "Automatic (highest number)",
+    "opcion": "Session {{n}} · {{nombre}}",
+    "sinSesiones": "The campaign has no sessions yet."
+  },
+  "exportar": {
+    "titulo": "Export",
+    "descripcion": "Download a ZIP with all data (RDF), images and settings. It can be imported into another installation from the campaign list.",
+    "accion": "Download ZIP"
+  },
+  "peligro": {
+    "titulo": "Danger zone",
+    "descripcion": "Deleting the campaign permanently removes its data, proposals, history and images.",
+    "accion": "Delete campaign",
+    "dialogoTitulo": "Delete “{{nombre}}”?",
+    "dialogoAviso": "This cannot be undone. Export the campaign first if you want to keep a copy.",
+    "escribe": "Type <1>{{id}}</1> to confirm",
+    "hecho": "Campaign deleted"
+  }
+}

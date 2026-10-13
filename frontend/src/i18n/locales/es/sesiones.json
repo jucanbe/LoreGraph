@@ -1,0 +1,23 @@
+{
+  "titulo": "Sesiones",
+  "total_one": "{{count}} sesión",
+  "total_other": "{{count}} sesiones",
+  "nueva": "Nueva sesión",
+  "orden": {
+    "recientes": "Más recientes primero",
+    "antiguas": "Más antiguas primero"
+  },
+  "numero": "Sesión {{n}}",
+  "sinNumero": "Sesión sin número",
+  "fechaReal": "Fecha de juego",
+  "fechaMundo": "Fecha en el mundo",
+  "aparecen": "Aparecen",
+  "otros": "Otros",
+  "sinEntidades": "No hay entidades vinculadas a esta sesión.",
+  "verMas": "Ver más",
+  "verMenos": "Ver menos",
+  "vacio": {
+    "titulo": "Aún no hay sesiones",
+    "desc": "Registra la primera sesión para empezar la crónica de la campaña."
+  }
+}

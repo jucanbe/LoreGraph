@@ -1,0 +1,13 @@
+# titulo: Relación activa con alguien muerto
+# titulo_en: Active relationship with a dead character
+# severidad: aviso
+# descripcion: Una relación sigue vigente aunque uno de los dos esté muerto.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?r a/rdfs:subClassOf* rpg:Relationship ; rpg:source ?entidad ; rpg:target ?relacionada .
+  FILTER NOT EXISTS { ?r rpg:validUntil ?u }
+  ?relacionada rpg:vitalStatus rpg:vital-dead ; rdfs:label ?n .
+  BIND (CONCAT("Mantiene una relación vigente con «", STR(?n), "», que está muerto.") AS ?mensaje)
+}

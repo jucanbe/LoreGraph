@@ -1,0 +1,38 @@
+# titulo: Criaturas y bestiario por valor de desafío
+# descripcion: Monstruos del bestiario y criaturas de la campaña ordenados por VD, con tipo, tamaño, CA y PG (las criaturas heredan de su bloque de estadísticas lo que no tengan).
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?nombre ?origen ?vd ?tipo ?tamano ?ca ?pg ?lugar WHERE {
+  {
+    ?x a dnd:Monster ; rdfs:label ?nombre .
+    FILTER (lang(?nombre) = "es")
+    BIND ("bestiario" AS ?origen)
+    BIND (?x AS ?base)
+  } UNION {
+    ?x a dnd:Creature ; rdfs:label ?nombre .
+    BIND ("campaña" AS ?origen)
+    OPTIONAL { ?x dnd:statBlock ?base }
+    OPTIONAL { ?x rpg:locatedIn/rdfs:label ?lugar }
+  }
+  OPTIONAL { ?x dnd:challengeRating ?vdPropio }
+  OPTIONAL { ?base dnd:challengeRating ?vdBase }
+  OPTIONAL { ?x dnd:armorClass ?caPropia }
+  OPTIONAL { ?base dnd:armorClass ?caBase }
+  OPTIONAL { ?x dnd:hitPointMax ?pgPropios }
+  OPTIONAL { ?base dnd:hitPointMax ?pgBase }
+  OPTIONAL { ?x dnd:creatureType ?t1 }
+  OPTIONAL { ?base dnd:creatureType ?t2 }
+  OPTIONAL { ?x dnd:size ?s1 }
+  OPTIONAL { ?base dnd:size ?s2 }
+  BIND (COALESCE(?vdPropio, ?vdBase) AS ?vd)
+  BIND (COALESCE(?caPropia, ?caBase) AS ?ca)
+  BIND (COALESCE(?pgPropios, ?pgBase) AS ?pg)
+  BIND (COALESCE(?t1, ?t2) AS ?tc)
+  BIND (COALESCE(?s1, ?s2) AS ?sz)
+  OPTIONAL { ?tc skos:prefLabel ?tipo . FILTER (lang(?tipo) = "es") }
+  OPTIONAL { ?sz skos:prefLabel ?tamano . FILTER (lang(?tamano) = "es") }
+}
+ORDER BY DESC(?vd) ?nombre

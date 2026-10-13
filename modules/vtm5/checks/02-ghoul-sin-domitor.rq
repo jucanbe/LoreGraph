@@ -1,0 +1,14 @@
+# titulo: Ghoul con dómitor muerto
+# titulo_en: Ghoul with a dead domitor
+# severidad: aviso
+# descripcion: Sin la sangre de su dómitor, un ghoul envejece de golpe o busca otro amo.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?entidad a vtm:Ghoul ; vtm:domitor ?relacionada .
+  ?relacionada rpg:vitalStatus rpg:vital-dead ; rdfs:label ?n .
+  FILTER NOT EXISTS { ?entidad rpg:vitalStatus rpg:vital-dead }
+  BIND (CONCAT("Su dómitor, «", STR(?n), "», está muerto.") AS ?mensaje)
+}

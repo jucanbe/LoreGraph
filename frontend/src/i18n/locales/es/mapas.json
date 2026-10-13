@@ -1,0 +1,46 @@
+{
+  "titulo": "Mapas",
+  "total_one": "{{count}} mapa",
+  "total_other": "{{count}} mapas",
+  "marcadores_one": "{{count}} marcador",
+  "marcadores_other": "{{count}} marcadores",
+  "vacio": {
+    "titulo": "Aún no hay mapas",
+    "desc": "Sube la imagen de un plano de ciudad, una mazmorra o una región y sitúa en ella personajes, lugares y cualquier otra entidad de la campaña."
+  },
+  "nuevo": {
+    "boton": "Nuevo mapa",
+    "titulo": "Nuevo mapa",
+    "desc": "Sube una imagen; después podrás colocar marcadores de entidades sobre ella.",
+    "nombre": "Nombre",
+    "descripcion": "Descripción (opcional)",
+    "imagen": "Imagen",
+    "imagenAyuda": "PNG, JPEG, WebP o GIF.",
+    "preview": "Vista previa de la imagen",
+    "tipoInvalido": "Formato no admitido: usa PNG, JPEG, WebP o GIF.",
+    "faltan": "Indica un nombre y elige una imagen.",
+    "creado": "Mapa «{{nombre}}» creado"
+  },
+  "vista": {
+    "ficha": "Ver ficha",
+    "editar": "Editar marcadores",
+    "ayudaEdicion": "Haz clic en el mapa para colocar un marcador y elegir su entidad; arrastra los marcadores para moverlos. Guarda al terminar.",
+    "guardado": "Marcadores guardados",
+    "region": "Mapa {{nombre}}",
+    "sinImagen": "Este mapa no tiene imagen",
+    "cargandoImagen": "Cargando imagen…",
+    "errorImagen": "No se pudo cargar la imagen del mapa.",
+    "sinMarcadores": "Este mapa aún no tiene marcadores.",
+    "sinMarcadoresEdicion": "Haz clic en el mapa para añadir el primero.",
+    "quitar": "Quitar marcador de {{nombre}}",
+    "mostrar": "Mostrar",
+    "ocultar": "Ocultar"
+  },
+  "picker": {
+    "titulo": "Elegir entidad",
+    "desc": "¿Qué entidad representa este marcador?",
+    "buscar": "Buscar entidades…",
+    "buscando": "Buscando…",
+    "sinResultados": "No hay resultados."
+  }
+}

@@ -1,0 +1,29 @@
+# Datos locales
+data/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+data-*/
+
+# Copia preparada para publicar
+to_github/

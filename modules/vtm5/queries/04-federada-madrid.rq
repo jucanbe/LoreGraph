@@ -1,0 +1,19 @@
+# titulo: Elíseos y refugios con su lugar real (Wikidata)
+# descripcion: Consulta federada: une los lugares de la campaña con Wikidata para traer el nombre real, el año de construcción y la imagen.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?lugar ?nombre ?eliseo ?nombreReal ?inicio ?imagen WHERE {
+  ?lugar rdfs:label ?nombre ;
+         rpg:correspondsTo ?real .
+  OPTIONAL { ?lugar vtm:isElysium ?eliseo }
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?real rdfs:label ?nombreReal .
+    FILTER (lang(?nombreReal) = "es")
+    OPTIONAL { ?real wdt:P571 ?inicio }
+    OPTIONAL { ?real wdt:P18 ?imagen }
+  }
+}
+ORDER BY ?nombre

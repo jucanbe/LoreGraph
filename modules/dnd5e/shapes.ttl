@@ -1,0 +1,567 @@
+@prefix dnd:    <https://rpg-modules.example.net/dnd5e/ont#> .
+@prefix dndsh:  <https://rpg-modules.example.net/dnd5e/shapes#> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rpgsh:  <https://loregraph.example.org/ont/core/shapes#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+
+# Formas SHACL del módulo D&D 5.ª edición (SRD 5.1): validación y formularios.
+# SHACL shapes of the D&D 5th edition module (SRD 5.1): validation and forms.
+#
+# Las propiedades compartidas (características, combate…) se declaran una vez como
+# sh:PropertyShape con nombre y se reutilizan en aventureros, criaturas y bestiario.
+# Shared properties (abilities, combat…) are declared once as named property
+# shapes and reused by adventurers, creatures and bestiary entries.
+
+#################################################################
+# Grupos / Groups  (núcleo: Identidad 0, Mundo 10, Relaciones 20…)
+#################################################################
+
+dndsh:OriginGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Origen y clase"@es , "Origin and class"@en .
+dndsh:StatBlockGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Bloque de estadísticas"@es , "Stat block"@en .
+dndsh:AbilitiesGroup a sh:PropertyGroup ; sh:order 3 ;
+    rdfs:label "Características"@es , "Ability scores"@en .
+dndsh:CombatGroup a sh:PropertyGroup ; sh:order 4 ;
+    rdfs:label "Combate"@es , "Combat"@en .
+dndsh:DefensesGroup a sh:PropertyGroup ; sh:order 5 ;
+    rdfs:label "Defensas"@es , "Defenses"@en .
+dndsh:ProficiencyGroup a sh:PropertyGroup ; sh:order 6 ;
+    rdfs:label "Competencias"@es , "Proficiencies"@en .
+dndsh:SpellcastingGroup a sh:PropertyGroup ; sh:order 7 ;
+    rdfs:label "Conjuros"@es , "Spellcasting"@en .
+dndsh:RulesGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Reglas"@es , "Rules"@en .
+dndsh:SpellDetailsGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Datos del conjuro"@es , "Spell details"@en .
+dndsh:EquipmentGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Datos de juego"@es , "Game data"@en .
+dndsh:PlaceDetailsGroup a sh:PropertyGroup ; sh:order 2 ;
+    rdfs:label "Datos de juego"@es , "Game data"@en .
+
+#################################################################
+# Propiedades compartidas: características (1–30)
+# Shared properties: ability scores (1–30)
+#################################################################
+
+dndsh:strength a sh:PropertyShape ; sh:path dnd:strength ;
+    sh:name "Fuerza (FUE)"@es , "Strength (STR)"@en ;
+    sh:description "Puntuación de 1 a 30 (10 = media humana)."@es , "Score from 1 to 30 (10 = human average)."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 0 .
+dndsh:dexterity a sh:PropertyShape ; sh:path dnd:dexterity ;
+    sh:name "Destreza (DES)"@es , "Dexterity (DEX)"@en ;
+    sh:description "Puntuación de 1 a 30."@es , "Score from 1 to 30."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 1 .
+dndsh:constitution a sh:PropertyShape ; sh:path dnd:constitution ;
+    sh:name "Constitución (CON)"@es , "Constitution (CON)"@en ;
+    sh:description "Puntuación de 1 a 30."@es , "Score from 1 to 30."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 2 .
+dndsh:intelligence a sh:PropertyShape ; sh:path dnd:intelligence ;
+    sh:name "Inteligencia (INT)"@es , "Intelligence (INT)"@en ;
+    sh:description "Puntuación de 1 a 30."@es , "Score from 1 to 30."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 3 .
+dndsh:wisdom a sh:PropertyShape ; sh:path dnd:wisdom ;
+    sh:name "Sabiduría (SAB)"@es , "Wisdom (WIS)"@en ;
+    sh:description "Puntuación de 1 a 30."@es , "Score from 1 to 30."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 4 .
+dndsh:charisma a sh:PropertyShape ; sh:path dnd:charisma ;
+    sh:name "Carisma (CAR)"@es , "Charisma (CHA)"@en ;
+    sh:description "Puntuación de 1 a 30."@es , "Score from 1 to 30."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:AbilitiesGroup ; sh:order 5 .
+
+#################################################################
+# Propiedades compartidas: combate y defensas
+# Shared properties: combat and defenses
+#################################################################
+
+dndsh:armorClass a sh:PropertyShape ; sh:path dnd:armorClass ;
+    sh:name "clase de armadura (CA)"@es , "armor class (AC)"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 30 ;
+    sh:group dndsh:CombatGroup ; sh:order 0 .
+dndsh:hitPointMax a sh:PropertyShape ; sh:path dnd:hitPointMax ;
+    sh:name "PG máximos"@es , "max HP"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ;
+    sh:group dndsh:CombatGroup ; sh:order 1 .
+dndsh:currentHitPoints a sh:PropertyShape ; sh:path dnd:currentHitPoints ;
+    sh:name "PG actuales"@es , "current HP"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+    sh:group dndsh:CombatGroup ; sh:order 2 .
+dndsh:temporaryHitPoints a sh:PropertyShape ; sh:path dnd:temporaryHitPoints ;
+    sh:name "PG temporales"@es , "temporary HP"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+    sh:group dndsh:CombatGroup ; sh:order 3 .
+dndsh:speed a sh:PropertyShape ; sh:path dnd:speed ;
+    sh:name "velocidad (pies)"@es , "speed (feet)"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+    sh:group dndsh:CombatGroup ; sh:order 4 .
+dndsh:currentCondition a sh:PropertyShape ; sh:path dnd:currentCondition ;
+    sh:name "estados actuales"@es , "current conditions"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Conditions ;
+    sh:group dndsh:CombatGroup ; sh:order 5 .
+dndsh:exhaustionLevel a sh:PropertyShape ; sh:path dnd:exhaustionLevel ;
+    sh:name "cansancio"@es , "exhaustion"@en ;
+    sh:description "Niveles de cansancio (0–6)."@es , "Exhaustion levels (0–6)."@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 6 ;
+    dash:editor rpg:DotsEditor ;
+    sh:group dndsh:CombatGroup ; sh:order 6 .
+dndsh:deathSaveSuccesses a sh:PropertyShape ; sh:path dnd:deathSaveSuccesses ;
+    sh:name "salvaciones contra la muerte: éxitos"@es , "death saves: successes"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 3 ;
+    dash:editor rpg:DotsEditor ;
+    sh:group dndsh:CombatGroup ; sh:order 7 .
+dndsh:deathSaveFailures a sh:PropertyShape ; sh:path dnd:deathSaveFailures ;
+    sh:name "salvaciones contra la muerte: fallos"@es , "death saves: failures"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 3 ;
+    dash:editor rpg:DotsEditor ;
+    sh:group dndsh:CombatGroup ; sh:order 8 .
+
+dndsh:size a sh:PropertyShape ; sh:path dnd:size ;
+    sh:name "tamaño"@es , "size"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Sizes ; sh:maxCount 1 ;
+    sh:group dndsh:StatBlockGroup ; sh:order 2 .
+dndsh:creatureType a sh:PropertyShape ; sh:path dnd:creatureType ;
+    sh:name "tipo de criatura"@es , "creature type"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:CreatureTypes ; sh:maxCount 1 ;
+    sh:group dndsh:StatBlockGroup ; sh:order 1 .
+dndsh:alignment a sh:PropertyShape ; sh:path dnd:alignment ;
+    sh:name "alineamiento"@es , "alignment"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Alignments ; sh:maxCount 1 ;
+    sh:group dndsh:StatBlockGroup ; sh:order 3 .
+dndsh:challengeRating a sh:PropertyShape ; sh:path dnd:challengeRating ;
+    sh:name "valor de desafío (VD)"@es , "challenge rating (CR)"@en ;
+    sh:description "De 0 a 30; usa 0.125, 0.25 o 0.5 para 1/8, 1/4 y 1/2."@es ,
+                   "From 0 to 30; use 0.125, 0.25 or 0.5 for 1/8, 1/4 and 1/2."@en ;
+    sh:datatype xsd:decimal ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 30 ;
+    sh:group dndsh:StatBlockGroup ; sh:order 4 .
+
+dndsh:damageResistance a sh:PropertyShape ; sh:path dnd:damageResistance ;
+    sh:name "resistencias al daño"@es , "damage resistances"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ;
+    sh:group dndsh:DefensesGroup ; sh:order 0 .
+dndsh:damageImmunity a sh:PropertyShape ; sh:path dnd:damageImmunity ;
+    sh:name "inmunidades al daño"@es , "damage immunities"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ;
+    sh:group dndsh:DefensesGroup ; sh:order 1 .
+dndsh:damageVulnerability a sh:PropertyShape ; sh:path dnd:damageVulnerability ;
+    sh:name "vulnerabilidades al daño"@es , "damage vulnerabilities"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ;
+    sh:group dndsh:DefensesGroup ; sh:order 2 .
+dndsh:conditionImmunity a sh:PropertyShape ; sh:path dnd:conditionImmunity ;
+    sh:name "inmunidades a estados"@es , "condition immunities"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Conditions ;
+    sh:group dndsh:DefensesGroup ; sh:order 3 .
+
+#################################################################
+# Propiedades compartidas: competencias y conjuros
+# Shared properties: proficiencies and spellcasting
+#################################################################
+
+dndsh:skillProficiency a sh:PropertyShape ; sh:path dnd:skillProficiency ;
+    sh:name "habilidades competentes"@es , "proficient skills"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Skills ;
+    sh:group dndsh:ProficiencyGroup ; sh:order 0 .
+dndsh:skillExpertise a sh:PropertyShape ; sh:path dnd:skillExpertise ;
+    sh:name "pericia"@es , "expertise"@en ;
+    sh:description "Habilidades con el bonificador de competencia doble."@es , "Skills with double proficiency bonus."@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Skills ;
+    sh:group dndsh:ProficiencyGroup ; sh:order 1 .
+dndsh:savingThrowProficiency a sh:PropertyShape ; sh:path dnd:savingThrowProficiency ;
+    sh:name "salvaciones competentes"@es , "saving throw proficiencies"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Abilities ;
+    sh:group dndsh:ProficiencyGroup ; sh:order 2 .
+
+dndsh:spellcastingAbility a sh:PropertyShape ; sh:path dnd:spellcastingAbility ;
+    sh:name "característica de lanzamiento"@es , "spellcasting ability"@en ;
+    sh:class skos:Concept ; rpg:conceptScheme dnd:Abilities ; sh:maxCount 1 ;
+    sh:group dndsh:SpellcastingGroup ; sh:order 0 .
+dndsh:spellSaveDC a sh:PropertyShape ; sh:path dnd:spellSaveDC ;
+    sh:name "CD de salvación de conjuros"@es , "spell save DC"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 30 ;
+    sh:group dndsh:SpellcastingGroup ; sh:order 1 .
+dndsh:spellAttackBonus a sh:PropertyShape ; sh:path dnd:spellAttackBonus ;
+    sh:name "ataque de conjuro"@es , "spell attack bonus"@en ;
+    sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive -5 ; sh:maxInclusive 20 ;
+    sh:group dndsh:SpellcastingGroup ; sh:order 2 .
+dndsh:knowsSpell a sh:PropertyShape ; sh:path dnd:knowsSpell ;
+    sh:name "conjuros conocidos"@es , "known spells"@en ;
+    sh:description "Incluye trucos y conjuros del libro."@es , "Includes cantrips and spellbook spells."@en ;
+    sh:class dnd:Spell ;
+    sh:group dndsh:SpellcastingGroup ; sh:order 3 .
+dndsh:preparedSpell a sh:PropertyShape ; sh:path dnd:preparedSpell ;
+    sh:name "conjuros preparados"@es , "prepared spells"@en ;
+    sh:class dnd:Spell ;
+    sh:group dndsh:SpellcastingGroup ; sh:order 4 .
+
+#################################################################
+# Aventurero / Adventurer   (extiende rpg:Character + rol PJ/PNJ)
+#################################################################
+
+dndsh:AdventurerShape a sh:NodeShape ;
+    sh:targetClass dnd:Adventurer ;
+    rdfs:label "Aventurero"@es , "Adventurer"@en ;
+    rdfs:comment "Campos de D&D que se añaden a un PJ o PNJ aventurero."@es ,
+                 "D&D fields added to an adventurer PC or NPC."@en ;
+    sh:property [
+        sh:path dnd:species ;
+        sh:name "especie"@es , "species"@en ;
+        sh:class dnd:Species ; sh:maxCount 1 ;
+        sh:group dndsh:OriginGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:background ;
+        sh:name "trasfondo"@es , "background"@en ;
+        sh:class dnd:Background ; sh:maxCount 1 ;
+        sh:group dndsh:OriginGroup ; sh:order 1 ;
+    ] , [
+        sh:path dnd:alignment ;
+        sh:name "alineamiento"@es , "alignment"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Alignments ; sh:maxCount 1 ;
+        sh:group dndsh:OriginGroup ; sh:order 2 ;
+    ] , [
+        sh:path dnd:hasClassLevel ;
+        sh:name "clases y niveles"@es , "classes and levels"@en ;
+        sh:description "Un elemento por clase (multiclase). El nivel total y el bonificador de competencia se calculan solos."@es ,
+                       "One entry per class (multiclassing). Total level and proficiency bonus are computed automatically."@en ;
+        sh:class dnd:ClassLevel ;
+        sh:node dndsh:ClassLevelShape ;
+        dash:editor dash:DetailsEditor ;
+        rpg:backlink dnd:classLevelOf ;
+        sh:group dndsh:OriginGroup ; sh:order 3 ;
+    ] , [
+        sh:path dnd:experiencePoints ;
+        sh:name "puntos de experiencia"@es , "experience points"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+        sh:group dndsh:OriginGroup ; sh:order 4 ;
+    ] , [
+        sh:path dnd:inspiration ;
+        sh:name "inspiración"@es , "inspiration"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group dndsh:OriginGroup ; sh:order 5 ;
+    ] ,
+    dndsh:strength , dndsh:dexterity , dndsh:constitution ,
+    dndsh:intelligence , dndsh:wisdom , dndsh:charisma ,
+    dndsh:armorClass , dndsh:hitPointMax , dndsh:currentHitPoints , dndsh:temporaryHitPoints ,
+    dndsh:speed , dndsh:currentCondition , dndsh:exhaustionLevel ,
+    dndsh:deathSaveSuccesses , dndsh:deathSaveFailures ,
+    dndsh:skillProficiency , dndsh:skillExpertise , dndsh:savingThrowProficiency ,
+    dndsh:spellcastingAbility , dndsh:spellSaveDC , dndsh:spellAttackBonus ,
+    dndsh:knowsSpell , dndsh:preparedSpell .
+
+# Restricciones globales en formas aparte (un sh:sparql por forma para que el
+# mensaje mostrado sea el de la restricción que falla).
+# Global constraints in separate shapes (one sh:sparql per shape so the message
+# shown is the one of the failing constraint).
+
+dndsh:AdventurerMaxLevelShape a sh:NodeShape ;
+    sh:targetClass dnd:Adventurer ;
+    rdfs:label "Nivel total máximo"@es , "Maximum total level"@en ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "La suma de niveles de clase no puede superar 20."@es ,
+                   "The sum of class levels cannot exceed 20."@en ;
+        sh:select """
+            SELECT $this (SUM(?n) AS ?value) WHERE {
+                $this <https://rpg-modules.example.net/dnd5e/ont#hasClassLevel>/<https://rpg-modules.example.net/dnd5e/ont#levels> ?n .
+            }
+            GROUP BY $this
+            HAVING (SUM(?n) > 20)""" ;
+    ] .
+
+dndsh:AdventurerDistinctClassShape a sh:NodeShape ;
+    sh:targetClass dnd:Adventurer ;
+    rdfs:label "Clases sin repetir"@es , "No repeated classes"@en ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Hay dos entradas de nivel para la misma clase: súmalas en una."@es ,
+                   "There are two level entries for the same class: merge them into one."@en ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <https://rpg-modules.example.net/dnd5e/ont#hasClassLevel> ?a , ?b .
+                ?a <https://rpg-modules.example.net/dnd5e/ont#characterClass> ?value .
+                ?b <https://rpg-modules.example.net/dnd5e/ont#characterClass> ?value .
+                FILTER (STR(?a) < STR(?b))
+            }""" ;
+    ] .
+
+dndsh:ClassLevelShape a sh:NodeShape ;
+    sh:targetClass dnd:ClassLevel ;
+    rdfs:label "Nivel de clase"@es , "Class level"@en ;
+    sh:property [
+        sh:path dnd:classLevelOf ;
+        sh:name "personaje"@es , "character"@en ;
+        sh:class dnd:Adventurer ; sh:maxCount 1 ;
+        dash:hidden true ;
+        sh:order 0 ;
+    ] , [
+        sh:path dnd:characterClass ;
+        sh:name "clase"@es , "class"@en ;
+        sh:class dnd:CharacterClass ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 1 ;
+    ] , [
+        sh:path dnd:levels ;
+        sh:name "niveles"@es , "levels"@en ;
+        sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 1 ; sh:maxInclusive 20 ;
+        sh:order 2 ;
+    ] , [
+        sh:path dnd:subclass ;
+        sh:name "subclase"@es , "subclass"@en ;
+        sh:class dnd:Subclass ; sh:maxCount 1 ;
+        sh:order 3 ;
+    ] .
+
+#################################################################
+# Criatura (variante de personaje) / Creature (character variant)
+#################################################################
+
+dndsh:CreatureShape a sh:NodeShape ;
+    sh:targetClass dnd:Creature ;
+    rdfs:label "Criatura"@es , "Creature"@en ;
+    rdfs:comment "Campos de bloque de estadísticas para un PNJ monstruoso."@es ,
+                 "Stat-block fields for a monstrous NPC."@en ;
+    sh:property [
+        sh:path dnd:statBlock ;
+        sh:name "basada en (bestiario)"@es , "based on (bestiary)"@en ;
+        sh:description "Entrada del bestiario de la que parte. Rellena solo lo que cambie."@es ,
+                       "Bestiary entry it starts from. Fill in only what differs."@en ;
+        sh:class dnd:Monster ; sh:maxCount 1 ;
+        sh:group dndsh:StatBlockGroup ; sh:order 0 ;
+    ] ,
+    dndsh:creatureType , dndsh:size , dndsh:alignment , dndsh:challengeRating ,
+    dndsh:strength , dndsh:dexterity , dndsh:constitution ,
+    dndsh:intelligence , dndsh:wisdom , dndsh:charisma ,
+    dndsh:armorClass , dndsh:hitPointMax , dndsh:currentHitPoints , dndsh:speed , dndsh:currentCondition ,
+    dndsh:damageResistance , dndsh:damageImmunity , dndsh:damageVulnerability , dndsh:conditionImmunity .
+
+#################################################################
+# Catálogos / Catalogs
+#################################################################
+
+dndsh:MonsterShape a sh:NodeShape ;
+    sh:targetClass dnd:Monster ;
+    rdfs:label "Monstruo (bestiario)"@es , "Monster (bestiary)"@en ;
+    sh:property
+        [ sh:path dnd:creatureType ;
+          sh:name "tipo de criatura"@es , "creature type"@en ;
+          sh:class skos:Concept ; rpg:conceptScheme dnd:CreatureTypes ; sh:minCount 1 ; sh:maxCount 1 ;
+          sh:group dndsh:StatBlockGroup ; sh:order 1 ] ,
+        [ sh:path dnd:challengeRating ;
+          sh:name "valor de desafío (VD)"@es , "challenge rating (CR)"@en ;
+          sh:datatype xsd:decimal ; sh:minCount 1 ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 30 ;
+          sh:group dndsh:StatBlockGroup ; sh:order 4 ] ,
+        dndsh:size , dndsh:alignment ,
+        dndsh:strength , dndsh:dexterity , dndsh:constitution ,
+        dndsh:intelligence , dndsh:wisdom , dndsh:charisma ,
+        dndsh:armorClass , dndsh:hitPointMax , dndsh:speed ,
+        dndsh:damageResistance , dndsh:damageImmunity , dndsh:damageVulnerability , dndsh:conditionImmunity .
+
+dndsh:CharacterClassShape a sh:NodeShape ;
+    sh:targetClass dnd:CharacterClass ;
+    rdfs:label "Clase"@es , "Character class"@en ;
+    sh:property [
+        sh:path dnd:hitDie ;
+        sh:name "dado de golpe"@es , "hit die"@en ;
+        sh:datatype xsd:integer ; sh:in ( 6 8 10 12 ) ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:group dndsh:RulesGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:primaryAbility ;
+        sh:name "característica principal"@es , "primary ability"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Abilities ;
+        sh:group dndsh:RulesGroup ; sh:order 1 ;
+    ] , [
+        sh:path dnd:classSavingThrow ;
+        sh:name "salvaciones de clase"@es , "class saving throws"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Abilities ; sh:maxCount 2 ;
+        sh:group dndsh:RulesGroup ; sh:order 2 ;
+    ] , dndsh:spellcastingAbility .
+
+dndsh:SubclassShape a sh:NodeShape ;
+    sh:targetClass dnd:Subclass ;
+    rdfs:label "Subclase"@es , "Subclass"@en ;
+    sh:property [
+        sh:path dnd:subclassOf ;
+        sh:name "subclase de"@es , "subclass of"@en ;
+        sh:class dnd:CharacterClass ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:group dndsh:RulesGroup ; sh:order 0 ;
+    ] .
+
+dndsh:SpeciesShape a sh:NodeShape ;
+    sh:targetClass dnd:Species ;
+    rdfs:label "Especie"@es , "Species"@en ;
+    sh:property [
+        sh:path dnd:subspeciesOf ;
+        sh:name "subraza de"@es , "subrace of"@en ;
+        sh:class dnd:Species ; sh:maxCount 1 ;
+        sh:group dndsh:RulesGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:size ;
+        sh:name "tamaño"@es , "size"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Sizes ; sh:maxCount 1 ;
+        sh:group dndsh:RulesGroup ; sh:order 1 ;
+    ] , [
+        sh:path dnd:speed ;
+        sh:name "velocidad (pies)"@es , "speed (feet)"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+        sh:group dndsh:RulesGroup ; sh:order 2 ;
+    ] , [
+        sh:path dnd:damageResistance ;
+        sh:name "resistencias al daño"@es , "damage resistances"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ;
+        sh:group dndsh:RulesGroup ; sh:order 3 ;
+    ] .
+
+dndsh:BackgroundShape a sh:NodeShape ;
+    sh:targetClass dnd:Background ;
+    rdfs:label "Trasfondo"@es , "Background"@en ;
+    sh:property [
+        sh:path dnd:skillProficiency ;
+        sh:name "habilidades que otorga"@es , "granted skills"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Skills ;
+        sh:group dndsh:RulesGroup ; sh:order 0 ;
+    ] .
+
+dndsh:SpellShape a sh:NodeShape ;
+    sh:targetClass dnd:Spell ;
+    rdfs:label "Conjuro"@es , "Spell"@en ;
+    sh:property [
+        sh:path dnd:spellLevel ;
+        sh:name "nivel"@es , "level"@en ;
+        sh:description "0 para los trucos."@es , "0 for cantrips."@en ;
+        sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 9 ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:spellSchool ;
+        sh:name "escuela"@es , "school"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:SpellSchools ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 1 ;
+    ] , [
+        sh:path dnd:castingTime ;
+        sh:name "tiempo de lanzamiento"@es , "casting time"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 2 ;
+    ] , [
+        sh:path dnd:concentration ;
+        sh:name "concentración"@es , "concentration"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 3 ;
+    ] , [
+        sh:path dnd:ritual ;
+        sh:name "ritual"@es , "ritual"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 4 ;
+    ] , [
+        sh:path dnd:damageType ;
+        sh:name "tipo de daño"@es , "damage type"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 5 ;
+    ] , [
+        sh:path dnd:spellOfClass ;
+        sh:name "clases que lo tienen"@es , "classes with it"@en ;
+        sh:class dnd:CharacterClass ;
+        sh:group dndsh:SpellDetailsGroup ; sh:order 6 ;
+    ] .
+
+#################################################################
+# Objetos / Items
+#################################################################
+
+dndsh:ItemExtraShape a sh:NodeShape ;
+    sh:targetClass rpg:Item ;
+    rdfs:label "Objeto (D&D)"@es , "Item (D&D)"@en ;
+    sh:property [
+        sh:path dnd:weight ;
+        sh:name "peso (lb)"@es , "weight (lb)"@en ;
+        sh:datatype xsd:decimal ; sh:maxCount 1 ; sh:minInclusive 0 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 20 ;
+    ] , [
+        sh:path dnd:costGp ;
+        sh:name "precio (po)"@es , "cost (gp)"@en ;
+        sh:datatype xsd:decimal ; sh:maxCount 1 ; sh:minInclusive 0 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 21 ;
+    ] .
+
+dndsh:WeaponShape a sh:NodeShape ;
+    sh:targetClass dnd:Weapon ;
+    rdfs:label "Arma"@es , "Weapon"@en ;
+    sh:property [
+        sh:path dnd:weaponCategory ;
+        sh:name "categoría"@es , "category"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:WeaponCategories ; sh:maxCount 1 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:damageDice ;
+        sh:name "dados de daño"@es , "damage dice"@en ;
+        sh:description "Notación NdM, p. ej. 1d8."@es , "NdM notation, e.g. 1d8."@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ; sh:pattern "^[0-9]+d[0-9]+$" ;
+        sh:group dndsh:EquipmentGroup ; sh:order 1 ;
+    ] , [
+        sh:path dnd:damageType ;
+        sh:name "tipo de daño"@es , "damage type"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:DamageTypes ; sh:maxCount 1 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 2 ;
+    ] .
+
+dndsh:ArmorShape a sh:NodeShape ;
+    sh:targetClass dnd:Armor ;
+    rdfs:label "Armadura"@es , "Armor"@en ;
+    sh:property [
+        sh:path dnd:armorCategory ;
+        sh:name "categoría"@es , "category"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:ArmorCategories ; sh:maxCount 1 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 0 ;
+    ] , [
+        sh:path dnd:baseArmorClass ;
+        sh:name "CA base (o bonificación del escudo)"@es , "base AC (or shield bonus)"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 30 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 1 ;
+    ] .
+
+dndsh:MagicItemShape a sh:NodeShape ;
+    sh:targetClass dnd:MagicItem ;
+    rdfs:label "Objeto mágico"@es , "Magic item"@en ;
+    sh:property [
+        sh:path dnd:rarity ;
+        sh:name "rareza"@es , "rarity"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme dnd:Rarities ; sh:maxCount 1 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 5 ;
+    ] , [
+        sh:path dnd:requiresAttunement ;
+        sh:name "requiere vinculación"@es , "requires attunement"@en ;
+        sh:datatype xsd:boolean ; sh:maxCount 1 ;
+        sh:group dndsh:EquipmentGroup ; sh:order 6 ;
+    ] .
+
+#################################################################
+# Lugares / Places
+#################################################################
+
+dndsh:SettlementShape a sh:NodeShape ;
+    sh:targetClass dnd:Settlement ;
+    rdfs:label "Asentamiento"@es , "Settlement"@en ;
+    sh:property [
+        sh:path dnd:population ;
+        sh:name "población"@es , "population"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 0 ;
+        sh:group dndsh:PlaceDetailsGroup ; sh:order 0 ;
+    ] .
+
+dndsh:DungeonShape a sh:NodeShape ;
+    sh:targetClass dnd:Dungeon ;
+    rdfs:label "Mazmorra"@es , "Dungeon"@en ;
+    sh:property [
+        sh:path dnd:recommendedLevel ;
+        sh:name "nivel recomendado"@es , "recommended level"@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ; sh:minInclusive 1 ; sh:maxInclusive 20 ;
+        sh:group dndsh:PlaceDetailsGroup ; sh:order 0 ;
+    ] .

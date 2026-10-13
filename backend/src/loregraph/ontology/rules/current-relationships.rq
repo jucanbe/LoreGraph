@@ -1,0 +1,11 @@
+# Atajo de estado actual: rpg:relatedTo para cada relación cualificada sin fecha de fin.
+# Current-state shortcut: rpg:relatedTo for each qualified relationship with no end.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+CONSTRUCT { ?a rpg:relatedTo ?b }
+WHERE {
+  ?r a/rdfs:subClassOf* rpg:Relationship ;
+     rpg:source ?a ;
+     rpg:target ?b .
+  FILTER NOT EXISTS { ?r rpg:validUntil ?end }
+}

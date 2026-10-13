@@ -1,0 +1,14 @@
+# titulo: Piedra de toque muerta
+# titulo_en: Dead touchstone
+# severidad: aviso
+# descripcion: La piedra de toque de una convicción ha muerto; la humanidad del vástago debería verse afectada.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?entidad vtm:hasConviction ?c .
+  ?c vtm:touchstone ?relacionada .
+  ?relacionada rpg:vitalStatus rpg:vital-dead ; rdfs:label ?n .
+  BIND (CONCAT("Su piedra de toque, «", STR(?n), "», ha muerto.") AS ?mensaje)
+}

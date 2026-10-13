@@ -1,0 +1,40 @@
+{
+  "titulo": "Consistency",
+  "subtitulo": "Automatic checks of the core and active module rules over the campaign world.",
+  "resumen": {
+    "etiqueta": "Summary",
+    "errores_one": "{{count}} error",
+    "errores_other": "{{count}} errors",
+    "avisos_one": "{{count}} warning",
+    "avisos_other": "{{count}} warnings",
+    "ignoradas_one": "{{count}} ignored",
+    "ignoradas_other": "{{count}} ignored",
+    "reglas_one": "{{count}} rule checked",
+    "reglas_other": "{{count}} rules checked"
+  },
+  "filtro": {
+    "etiqueta": "Filter by severity",
+    "todas": "All",
+    "error": "Errors",
+    "aviso": "Warnings"
+  },
+  "mostrarIgnoradas": "Show ignored",
+  "severidad": {
+    "error": "Error",
+    "aviso": "Warning"
+  },
+  "ignorada": "Ignored",
+  "entidad": "Entity",
+  "relacionadas": "Related",
+  "ignorar": "Ignore (intentional)",
+  "restaurar": "Restore",
+  "ignorarAyuda": "Mark it as intentional if the contradiction is part of the story.",
+  "hechoIgnorar": "Inconsistency marked as intentional",
+  "hechoRestaurar": "Inconsistency restored",
+  "vacio": {
+    "titulo": "The world is consistent",
+    "descripcion_one": "None of the {{count}} rules found contradictions. Great chronicling!",
+    "descripcion_other": "None of the {{count}} rules found contradictions. Great chronicling!"
+  },
+  "sinFiltro": "No inconsistencies match this filter."
+}

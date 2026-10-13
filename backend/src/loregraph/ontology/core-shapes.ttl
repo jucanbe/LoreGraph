@@ -1,0 +1,409 @@
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rpgsh:  <https://loregraph.example.org/ont/core/shapes#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+
+# Formas SHACL del núcleo. Sirven para validar y para generar formularios.
+# Core SHACL shapes. Used for validation and to generate forms.
+# __DATA_BASE__ se sustituye al cargar por la IRI base de datos configurada.
+
+#################################################################
+# Grupos de campos / Field groups
+#################################################################
+
+rpgsh:IdentityGroup a sh:PropertyGroup ; sh:order 0 ;
+    rdfs:label "Identidad"@es , "Identity"@en .
+rpgsh:WorldGroup a sh:PropertyGroup ; sh:order 10 ;
+    rdfs:label "En el mundo"@es , "In the world"@en .
+rpgsh:RelationsGroup a sh:PropertyGroup ; sh:order 20 ;
+    rdfs:label "Relaciones"@es , "Relationships"@en .
+rpgsh:TimeGroup a sh:PropertyGroup ; sh:order 30 ;
+    rdfs:label "Tiempo"@es , "Time"@en .
+rpgsh:SessionsGroup a sh:PropertyGroup ; sh:order 80 ;
+    rdfs:label "Sesiones"@es , "Sessions"@en .
+rpgsh:RealWorldGroup a sh:PropertyGroup ; sh:order 90 ;
+    rdfs:label "Mundo real"@es , "Real world"@en .
+
+#################################################################
+# Entidad / Entity
+#################################################################
+
+rpgsh:EntityShape a sh:NodeShape ;
+    sh:targetClass rpg:Entity ;
+    rdfs:label "Entidad"@es , "Entity"@en ;
+    sh:property rpgsh:Entity-label , rpgsh:Entity-altLabel , rpgsh:Entity-description , rpgsh:Entity-backstory ,
+                rpgsh:Entity-appearsInSession , rpgsh:Entity-inspiredBy , rpgsh:Entity-depiction ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "No se permite owl:sameAs hacia recursos externos: usa rpg:inspiredBy o rpg:correspondsTo."@es ,
+                   "owl:sameAs to external resources is not allowed: use rpg:inspiredBy or rpg:correspondsTo."@en ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <http://www.w3.org/2002/07/owl#sameAs> ?value .
+                FILTER (!STRSTARTS(STR(?value), "__DATA_BASE__"))
+            }""" ;
+    ] .
+
+rpgsh:Entity-label a sh:PropertyShape ;
+    sh:path rdfs:label ;
+    sh:name "nombre"@es , "name"@en ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ;
+    sh:group rpgsh:IdentityGroup ; sh:order 0 .
+
+rpgsh:Entity-altLabel a sh:PropertyShape ;
+    sh:path skos:altLabel ;
+    sh:name "alias"@es , "aliases"@en ;
+    sh:description "Otros nombres por los que se conoce."@es , "Other names it is known by."@en ;
+    sh:datatype xsd:string ;
+    sh:group rpgsh:IdentityGroup ; sh:order 1 .
+
+rpgsh:Entity-description a sh:PropertyShape ;
+    sh:path schema:description ;
+    sh:name "descripción"@es , "description"@en ;
+    sh:datatype xsd:string ; sh:maxCount 1 ;
+    dash:editor dash:TextAreaEditor ;
+    sh:group rpgsh:IdentityGroup ; sh:order 2 .
+
+rpgsh:Entity-backstory a sh:PropertyShape ;
+    sh:path rpg:backstory ;
+    sh:name "historia"@es , "backstory"@en ;
+    sh:description "Trasfondo en prosa: origen, motivaciones, secretos."@es ,
+                   "Background in prose: origin, motivations, secrets."@en ;
+    sh:datatype xsd:string ; sh:maxCount 1 ;
+    dash:editor dash:TextAreaEditor ;
+    sh:group rpgsh:IdentityGroup ; sh:order 3 .
+
+rpgsh:Entity-appearsInSession a sh:PropertyShape ;
+    sh:path rpg:appearsInSession ;
+    sh:name "aparece en sesión"@es , "appears in session"@en ;
+    sh:class rpg:Session ;
+    sh:group rpgsh:SessionsGroup ; sh:order 0 .
+
+rpgsh:Entity-inspiredBy a sh:PropertyShape ;
+    sh:path rpg:inspiredBy ;
+    sh:name "inspirado en"@es , "inspired by"@en ;
+    sh:description "IRI de Wikidata o DBpedia (p. ej. http://www.wikidata.org/entity/Q2807). Nunca owl:sameAs."@es ,
+                   "Wikidata or DBpedia IRI (e.g. http://www.wikidata.org/entity/Q2807). Never owl:sameAs."@en ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^https?://(www\\.wikidata\\.org/entity/Q[0-9]+|([a-z]+\\.)?dbpedia\\.org/resource/.+)$" ;
+    sh:group rpgsh:RealWorldGroup ; sh:order 0 .
+
+rpgsh:Entity-depiction a sh:PropertyShape ;
+    sh:path foaf:depiction ;
+    sh:name "imagen"@es , "image"@en ;
+    sh:nodeKind sh:IRI ;
+    dash:editor dash:URIEditor ;
+    sh:group rpgsh:IdentityGroup ; sh:order 5 .
+
+#################################################################
+# Personajes / Characters
+#################################################################
+
+rpgsh:CharacterShape a sh:NodeShape ;
+    sh:targetClass rpg:Character ;
+    rdfs:label "Personaje"@es , "Character"@en ;
+    sh:property [
+        sh:path rpg:vitalStatus ;
+        sh:name "estado vital"@es , "vital status"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme rpg:VitalStatuses ;
+        sh:maxCount 1 ;
+        sh:group rpgsh:IdentityGroup ; sh:order 3 ;
+    ] , [
+        sh:path rpg:locatedIn ;
+        sh:name "ubicado en"@es , "located in"@en ;
+        sh:class rpg:Place ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] , [
+        sh:path rpg:memberOf ;
+        sh:name "miembro de"@es , "member of"@en ;
+        sh:class rpg:Faction ;
+        sh:group rpgsh:WorldGroup ; sh:order 1 ;
+    ] , [
+        sh:path rpg:possesses ;
+        sh:name "posee"@es , "possesses"@en ;
+        sh:class rpg:Item ;
+        sh:group rpgsh:WorldGroup ; sh:order 2 ;
+    ] , [
+        sh:path rpg:participatesIn ;
+        sh:name "participa en"@es , "participates in"@en ;
+        sh:class rpg:Event ;
+        sh:group rpgsh:WorldGroup ; sh:order 3 ;
+    ] , [
+        sh:path rpg:knows ;
+        sh:name "conoce a"@es , "knows"@en ;
+        sh:class rpg:Character ;
+        sh:group rpgsh:RelationsGroup ; sh:order 0 ;
+    ] , rpgsh:hasRelationshipProperty .
+
+rpgsh:hasRelationshipProperty a sh:PropertyShape ;
+    sh:path rpg:hasRelationship ;
+    sh:name "relaciones"@es , "relationships"@en ;
+    sh:description "Relaciones cualificadas con tipo, intensidad y vigencia."@es ,
+                   "Qualified relationships with type, strength and validity."@en ;
+    sh:class rpg:Relationship ;
+    sh:node rpgsh:RelationshipShape ;
+    dash:editor dash:DetailsEditor ;
+    rpg:backlink rpg:source ;
+    sh:group rpgsh:RelationsGroup ; sh:order 1 .
+
+rpgsh:PlayerCharacterShape a sh:NodeShape ;
+    sh:targetClass rpg:PlayerCharacter ;
+    rdfs:label "Personaje jugador"@es , "Player character"@en ;
+    sh:property [
+        sh:path rpg:playedBy ;
+        sh:name "jugado por"@es , "played by"@en ;
+        sh:class rpg:Player ; sh:maxCount 1 ;
+        sh:group rpgsh:IdentityGroup ; sh:order 4 ;
+    ] .
+
+#################################################################
+# Relación cualificada / Qualified relationship
+#################################################################
+
+rpgsh:RelationshipShape a sh:NodeShape ;
+    sh:targetClass rpg:Relationship ;
+    rdfs:label "Relación"@es , "Relationship"@en ;
+    sh:property [
+        sh:path rpg:source ;
+        sh:name "origen"@es , "source"@en ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:or ( [ sh:class rpg:Character ] [ sh:class rpg:Faction ] ) ;
+        dash:hidden true ;
+        sh:order 0 ;
+    ] , [
+        sh:path rpg:target ;
+        sh:name "con"@es , "with"@en ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:or ( [ sh:class rpg:Character ] [ sh:class rpg:Faction ] ) ;
+        sh:order 1 ;
+    ] , [
+        sh:path rpg:relationshipType ;
+        sh:name "tipo"@es , "type"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme rpg:RelationshipTypes ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 2 ;
+    ] , [
+        sh:path rpg:strength ;
+        sh:name "intensidad"@es , "strength"@en ;
+        sh:description "De -3 (hostilidad extrema) a +3 (lealtad absoluta)."@es ,
+                       "From -3 (extreme hostility) to +3 (absolute loyalty)."@en ;
+        sh:datatype xsd:integer ; sh:maxCount 1 ;
+        sh:minInclusive -3 ; sh:maxInclusive 3 ;
+        sh:order 3 ;
+    ] , [
+        sh:path schema:description ;
+        sh:name "notas"@es , "notes"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:order 4 ;
+    ] , [
+        sh:path rpg:validFrom ;
+        sh:name "vigente desde"@es , "valid from"@en ;
+        sh:class rpg:Session ; sh:maxCount 1 ;
+        sh:order 5 ;
+    ] , [
+        sh:path rpg:validUntil ;
+        sh:name "vigente hasta"@es , "valid until"@en ;
+        sh:class rpg:Session ; sh:maxCount 1 ;
+        sh:order 6 ;
+    ] .
+
+#################################################################
+# Lugares, facciones, objetos / Places, factions, items
+#################################################################
+
+rpgsh:PlaceShape a sh:NodeShape ;
+    sh:targetClass rpg:Place ;
+    rdfs:label "Lugar"@es , "Place"@en ;
+    sh:property [
+        sh:path rpg:locatedIn ;
+        sh:name "dentro de"@es , "within"@en ;
+        sh:class rpg:Place ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] , [
+        sh:path schema:latitude ;
+        sh:name "latitud"@es , "latitude"@en ;
+        sh:datatype xsd:decimal ; sh:maxCount 1 ;
+        sh:minInclusive -90 ; sh:maxInclusive 90 ;
+        sh:group rpgsh:WorldGroup ; sh:order 5 ;
+    ] , [
+        sh:path schema:longitude ;
+        sh:name "longitud"@es , "longitude"@en ;
+        sh:datatype xsd:decimal ; sh:maxCount 1 ;
+        sh:minInclusive -180 ; sh:maxInclusive 180 ;
+        sh:group rpgsh:WorldGroup ; sh:order 6 ;
+    ] , [
+        sh:path rpg:correspondsTo ;
+        sh:name "corresponde a (lugar real)"@es , "corresponds to (real place)"@en ;
+        sh:description "IRI de Wikidata del lugar real donde se sitúa. Aporta coordenadas y datos."@es ,
+                       "Wikidata IRI of the real place where it is situated. Provides coordinates and data."@en ;
+        sh:nodeKind sh:IRI ; sh:maxCount 1 ;
+        sh:pattern "^https?://(www\\.wikidata\\.org/entity/Q[0-9]+|([a-z]+\\.)?dbpedia\\.org/resource/.+)$" ;
+        sh:group rpgsh:RealWorldGroup ; sh:order 1 ;
+    ] .
+
+rpgsh:FactionShape a sh:NodeShape ;
+    sh:targetClass rpg:Faction ;
+    rdfs:label "Facción"@es , "Faction"@en ;
+    sh:property [
+        sh:path rpg:locatedIn ;
+        sh:name "sede"@es , "headquarters"@en ;
+        sh:class rpg:Place ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] , [
+        sh:path rpg:memberOf ;
+        sh:name "forma parte de"@es , "part of"@en ;
+        sh:class rpg:Faction ;
+        sh:group rpgsh:WorldGroup ; sh:order 1 ;
+    ] , [
+        sh:path rpg:possesses ;
+        sh:name "posee"@es , "possesses"@en ;
+        sh:class rpg:Item ;
+        sh:group rpgsh:WorldGroup ; sh:order 2 ;
+    ] , rpgsh:hasRelationshipProperty .
+
+rpgsh:ItemShape a sh:NodeShape ;
+    sh:targetClass rpg:Item ;
+    rdfs:label "Objeto"@es , "Item"@en ;
+    sh:property [
+        sh:path rpg:locatedIn ;
+        sh:name "ubicado en"@es , "located in"@en ;
+        sh:class rpg:Place ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] .
+
+#################################################################
+# Eventos, sesiones, tramas / Events, sessions, plots
+#################################################################
+
+rpgsh:EventShape a sh:NodeShape ;
+    sh:targetClass rpg:Event ;
+    rdfs:label "Evento"@es , "Event"@en ;
+    sh:property [
+        sh:path rpg:occursIn ;
+        sh:name "ocurre en"@es , "occurs in"@en ;
+        sh:class rpg:Place ; sh:maxCount 1 ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] , [
+        sh:path rpg:inWorldDate ;
+        sh:name "fecha en el mundo"@es , "in-world date"@en ;
+        sh:datatype xsd:date ; sh:maxCount 1 ;
+        sh:group rpgsh:TimeGroup ; sh:order 0 ;
+    ] , [
+        sh:path rpg:inWorldDateLabel ;
+        sh:name "fecha en el mundo (texto)"@es , "in-world date (text)"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:group rpgsh:TimeGroup ; sh:order 1 ;
+    ] .
+
+rpgsh:SessionShape a sh:NodeShape ;
+    sh:targetClass rpg:Session ;
+    rdfs:label "Sesión"@es , "Session"@en ;
+    sh:property [
+        sh:path rpg:sessionNumber ;
+        sh:name "número"@es , "number"@en ;
+        sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 0 ;
+        sh:group rpgsh:IdentityGroup ; sh:order 3 ;
+    ] , [
+        sh:path rpg:sessionDate ;
+        sh:name "fecha de juego"@es , "play date"@en ;
+        sh:datatype xsd:date ; sh:maxCount 1 ;
+        sh:group rpgsh:TimeGroup ; sh:order 0 ;
+    ] , [
+        sh:path rpg:inWorldDateLabel ;
+        sh:name "fecha en el mundo"@es , "in-world date"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        sh:group rpgsh:TimeGroup ; sh:order 1 ;
+    ] , [
+        sh:path rpg:sessionNotes ;
+        sh:name "notas de sesión"@es , "session notes"@en ;
+        sh:datatype xsd:string ; sh:maxCount 1 ;
+        dash:editor dash:TextAreaEditor ;
+        sh:group rpgsh:IdentityGroup ; sh:order 4 ;
+    ] .
+
+rpgsh:MapShape a sh:NodeShape ;
+    sh:targetClass rpg:Map ;
+    rdfs:label "Mapa"@es , "Map"@en ;
+    sh:property [
+        sh:path rpg:mapImage ;
+        sh:name "imagen"@es , "image"@en ;
+        sh:class rpg:Image ; sh:maxCount 1 ;
+        dash:hidden true ;
+    ] , [
+        sh:path rpg:hasMarker ;
+        sh:name "marcadores"@es , "markers"@en ;
+        sh:class rpg:MapMarker ;
+        sh:node rpgsh:MapMarkerShape ;
+        dash:editor dash:DetailsEditor ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] .
+
+rpgsh:MapMarkerShape a sh:NodeShape ;
+    sh:targetClass rpg:MapMarker ;
+    sh:property [
+        sh:path rpg:markerOf ;
+        sh:name "entidad"@es , "entity"@en ;
+        sh:class rpg:Entity ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:order 0 ;
+    ] , [
+        sh:path rpg:markerX ;
+        sh:name "x"@es , "x"@en ;
+        sh:datatype xsd:decimal ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 0 ; sh:maxInclusive 1 ;
+        sh:order 1 ;
+    ] , [
+        sh:path rpg:markerY ;
+        sh:name "y"@es , "y"@en ;
+        sh:datatype xsd:decimal ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minInclusive 0 ; sh:maxInclusive 1 ;
+        sh:order 2 ;
+    ] .
+
+rpgsh:ImageShape a sh:NodeShape ;
+    sh:targetClass rpg:Image ;
+    sh:property [
+        sh:path <https://schema.org/contentUrl> ;
+        sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ;
+    ] , [
+        sh:path rpg:imageOrigin ;
+        sh:in ( "subida" "generada" "enlace" ) ; sh:maxCount 1 ;
+    ] .
+
+rpgsh:TemporalStatementShape a sh:NodeShape ;
+    sh:targetClass rpg:TemporalStatement ;
+    sh:property [
+        sh:path rpg:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+    ] , [
+        sh:path rpg:property ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+    ] , [
+        sh:path rpg:value ; sh:minCount 1 ; sh:maxCount 1 ;
+    ] , [
+        sh:path rpg:validFrom ; sh:maxCount 1 ; sh:class rpg:Session ;
+    ] , [
+        sh:path rpg:validUntil ; sh:maxCount 1 ; sh:class rpg:Session ;
+    ] .
+
+rpgsh:PlotShape a sh:NodeShape ;
+    sh:targetClass rpg:Plot ;
+    rdfs:label "Trama"@es , "Plot"@en ;
+    sh:property [
+        sh:path rpg:plotStatus ;
+        sh:name "estado"@es , "status"@en ;
+        sh:class skos:Concept ; rpg:conceptScheme rpg:PlotStatuses ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:group rpgsh:IdentityGroup ; sh:order 3 ;
+    ] , [
+        sh:path rpg:involves ;
+        sh:name "implica a"@es , "involves"@en ;
+        sh:class rpg:Entity ;
+        sh:group rpgsh:WorldGroup ; sh:order 0 ;
+    ] .

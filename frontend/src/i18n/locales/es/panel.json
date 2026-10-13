@@ -1,0 +1,15 @@
+{
+  "recuentos": "Recuento por tipo",
+  "tramas": "Tramas abiertas",
+  "nuevaTrama": "Nueva trama",
+  "sinTramas": "No hay tramas abiertas",
+  "propuestas": "Propuestas",
+  "pendientes_one": "{{count}} pendiente de revisión",
+  "pendientes_other": "{{count}} pendientes de revisión",
+  "revisar": "Revisar",
+  "ultimaSesion": "Última sesión",
+  "sinSesiones": "Aún no hay sesiones registradas.",
+  "verSesiones": "Ver todas las sesiones",
+  "recientes": "Cambios recientes",
+  "sinRecientes": "Todavía no hay cambios."
+}

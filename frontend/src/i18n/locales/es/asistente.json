@@ -1,0 +1,63 @@
+{
+  "titulo": "Asistente",
+  "subtitulo": "Pide cosas en lenguaje natural a un modelo que se ejecuta en tu equipo. Consulta el grafo y prepara propuestas para que las revises.",
+  "limpiar": "Limpiar conversación",
+  "conversacion": "Conversación con el asistente",
+  "formulario": {
+    "etiqueta": "¿Qué quieres que haga el asistente?",
+    "placeholder": "Por ejemplo: crea un PNJ que regente la posada del puerto y conozca a los protagonistas…",
+    "atajo": "Ctrl + Intro (⌘ + Intro en Mac) para enviar. Cada mensaje es una petición independiente.",
+    "enviar": "Enviar"
+  },
+  "modelo": {
+    "titulo": "Modelo local",
+    "cargando": "Cargando la configuración del modelo…",
+    "error": "No se pudo leer la configuración del modelo.",
+    "proveedor": "Proveedor",
+    "modelo": "Modelo",
+    "url": "URL",
+    "contexto": "Contexto",
+    "tokens_one": "{{count}} token",
+    "tokens_other": "{{count}} tokens"
+  },
+  "contexto": {
+    "titulo": "Lo que sabe del sistema",
+    "explicacion": "Resumen del lore, estadísticas, reglas y glosario que el modelo recibe, recortado a su tamaño de contexto. Lo definen los módulos en context.yaml.",
+    "ver_one": "Ver el contexto ({{count}} carácter)",
+    "ver_other": "Ver el contexto ({{count}} caracteres)",
+    "recortado": "recortado",
+    "error": "No se pudo cargar el contexto."
+  },
+  "seguridad": {
+    "titulo": "Solo propone, nunca escribe",
+    "texto": "El asistente puede leer el grafo, pero cualquier cambio queda como propuesta pendiente: nada entra en el canon sin tu aprobación.",
+    "enlace": "Ir a la bandeja de propuestas"
+  },
+  "vacio": {
+    "titulo": "Empieza una conversación",
+    "texto": "Describe lo que necesitas. Si implica cambios, el asistente creará propuestas para que las revises.",
+    "ejemplos": [
+      "Resume qué sabemos de las facciones principales",
+      "¿Qué tramas siguen abiertas y quién está implicado?",
+      "Propón un PNJ nuevo relacionado con la última sesión"
+    ]
+  },
+  "turno": {
+    "tu": "Tú:",
+    "asistente": "Asistente:",
+    "pensando": "Pensando… con modelos locales puede tardar un rato.",
+    "segundos_one": "{{count}} s",
+    "segundos_other": "{{count}} s",
+    "propuestas_one": "Ha creado {{count}} propuesta pendiente de revisión:",
+    "propuestas_other": "Ha creado {{count}} propuestas pendientes de revisión:",
+    "sinPropuestas": "No ha creado ninguna propuesta.",
+    "verPropuesta": "Ver propuesta {{id}}",
+    "herramientas": "Herramientas usadas"
+  },
+  "error": {
+    "titulo": "El asistente no pudo responder",
+    "sinModelo": "No se pudo contactar con el modelo",
+    "ayudaModelo": "¿Está arrancado Ollama? Revisa LOREGRAPH_LLM_* en .env",
+    "reintentar": "Reintentar"
+  }
+}

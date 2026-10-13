@@ -1,0 +1,99 @@
+{
+  "titulo": "Grafo",
+  "resumen": "{{nodos}} nodos · {{aristas}} relaciones",
+  "lienzo": "Grafo de la campaña con {{nodos}} nodos y {{aristas}} relaciones",
+  "actualizando": "Actualizando…",
+  "truncado": "Grafo recortado: se muestran los nodos más conectados",
+  "exportar": {
+    "png": "Exportar PNG",
+    "hecho": "Imagen exportada",
+    "error": "No se pudo exportar la imagen"
+  },
+  "filtros": {
+    "titulo": "Filtros del grafo",
+    "tipos": "Tipos",
+    "faccion": "Facción",
+    "todasFacciones": "Todas las facciones",
+    "relaciones": "Relaciones",
+    "etiquetasAristas": "Etiquetas de relaciones",
+    "limpiar": "Quitar filtros",
+    "ninguno": "Ninguno",
+    "sinOpciones": "No hay opciones"
+  },
+  "buscar": {
+    "etiqueta": "Buscar un nodo",
+    "placeholder": "Buscar en el grafo…",
+    "resultados": "Nodos encontrados"
+  },
+  "layout": {
+    "titulo": "Disposición",
+    "fcose": "Orgánica",
+    "concentric": "Concéntrica",
+    "dagre": "Jerárquica",
+    "circle": "Círculo",
+    "grid": "Cuadrícula"
+  },
+  "epistemico": {
+    "verComo": "Ver como…",
+    "canon": "Canon (lo que es cierto)",
+    "comoPersonaje": "Ver como {{nombre}}",
+    "chip": "Lo que cree {{nombre}}",
+    "quitar": "Volver al canon",
+    "leyenda": "Lo que difiere del canon",
+    "falso": "Falso",
+    "falsoDesc": "lo cree, pero contradice el canon",
+    "no_verificado": "Sin verificar",
+    "noVerificadoDesc": "lo cree, pero el canon no lo confirma ni lo desmiente",
+    "desconocido": "Desconocido",
+    "desconocidoDesc": "solo existe en su cabeza: no está en el canon",
+    "confirmado": "Confirmado",
+    "confirmadoDesc": "coincide con el canon"
+  },
+  "centro": {
+    "chip": "Centrado en {{nombre}}",
+    "profundidad": "Profundidad",
+    "saltos_one": "{{count}} salto",
+    "saltos_other": "{{count}} saltos",
+    "quitar": "Quitar el centrado"
+  },
+  "tiempo": {
+    "titulo": "Momento de la campaña",
+    "sinSesiones": "Barra temporal: registra sesiones numeradas para ver la evolución del mundo.",
+    "enSesion": "Tras la sesión {{n}}: {{titulo}}",
+    "actual": "Actual",
+    "ahora": "Hoy",
+    "anterior": "Sesión anterior",
+    "siguiente": "Sesión siguiente",
+    "noEnVista": "La barra temporal no se aplica a la vista de un personaje."
+  },
+  "vacio": {
+    "titulo": "El grafo está vacío",
+    "desc": "Crea entidades y relaciones para verlas aquí.",
+    "filtrado": "Ningún nodo coincide",
+    "filtradoDesc": "Prueba a quitar algún filtro o a cambiar de sesión."
+  },
+  "leyenda": {
+    "titulo": "Leyenda",
+    "tipos": "Tipos",
+    "relaciones": "Relaciones"
+  },
+  "panel": {
+    "titulo": "Entidad seleccionada",
+    "centrar": "Centrar aquí",
+    "noEntidad": "Este nodo no es una entidad de la campaña.",
+    "sinDescripcion": "Sin descripción.",
+    "relaciones": "Relaciones",
+    "saliente": "saliente",
+    "entrante": "entrante",
+    "masRelaciones_one": "y {{count}} relación más en su ficha",
+    "masRelaciones_other": "y {{count}} relaciones más en su ficha"
+  },
+  "mini": {
+    "titulo": "Vecindario",
+    "profundidad": "Profundidad del vecindario",
+    "abrir": "Abrir en el grafo",
+    "vacio": "Sin relaciones",
+    "vacioDesc": "Esta entidad aún no está conectada con otras.",
+    "lienzo": "Vecindario de la entidad ({{nodos}} nodos)"
+  }
+}

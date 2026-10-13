@@ -1,0 +1,29 @@
+{
+  "titulo": "Historial",
+  "subtitulo": "Todos los cambios de la campaña, del más reciente al más antiguo. Cada uno se puede deshacer.",
+  "vacio": {
+    "titulo": "Todavía no hay cambios",
+    "desc": "Cuando se cree, edite o borre algo (a mano o mediante propuestas), quedará registrado aquí."
+  },
+  "agente": "agente de IA",
+  "humano": "humano",
+  "propuesta": "ver propuesta",
+  "detalle": "{{a}} añadidas · {{e}} eliminadas",
+  "deshace": "Revierte el cambio",
+  "deshecho": "Deshecho",
+  "deshechoPor": "Deshecho por el cambio",
+  "cambio": "Cambio {{id}}",
+  "paginacion": {
+    "rango": "Cambios {{desde}}–{{hasta}}",
+    "anterior": "Más recientes",
+    "siguiente": "Más antiguos"
+  },
+  "deshacer": {
+    "accion": "Deshacer",
+    "titulo": "¿Deshacer este cambio?",
+    "aviso": "Se aplicará el cambio inverso: se quitará lo que se añadió ({{a}}) y se restaurará lo que se eliminó ({{e}}). El deshacer queda registrado como un cambio nuevo, así que también se puede revertir.",
+    "confirmar": "Deshacer cambio",
+    "hecho": "Cambio deshecho",
+    "conflicto": "No se puede deshacer"
+  }
+}

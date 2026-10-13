@@ -1,0 +1,14 @@
+# titulo: Personajes y sus facciones
+# descripcion: Lista cada personaje con las facciones a las que pertenece.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?personaje ?nombre ?faccion ?nombreFaccion WHERE {
+  ?personaje a/rdfs:subClassOf* rpg:Character ;
+             rdfs:label ?nombre .
+  OPTIONAL {
+    ?personaje rpg:memberOf ?faccion .
+    ?faccion rdfs:label ?nombreFaccion .
+  }
+}
+ORDER BY ?nombre

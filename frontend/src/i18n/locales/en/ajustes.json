@@ -1,0 +1,79 @@
+{
+  "titulo": "Settings",
+  "subtitulo": "Application configuration. Whatever you change here takes precedence over the .env file.",
+  "guardado": "Settings saved",
+  "descartar": "Discard changes",
+  "restablecer": "Reset",
+  "restablecerAyuda": "Back to the .env value",
+  "origen": {
+    "env": "from .env",
+    "ajustes": "custom",
+    "editado": "unsaved"
+  },
+  "almacen": {
+    "titulo": "Where they are stored",
+    "texto": "In the auxiliary database (data/aux.sqlite), separate from the RDF store. The API key is stored unencrypted on your machine and is never shown."
+  },
+  "llm": {
+    "titulo": "Language model (assistant)",
+    "descripcion": "The internal assistant uses this model, usually a local one. External MCP agents use their own.",
+    "presets": "Fill in for",
+    "preset": {
+      "ollama": "Ollama",
+      "lmstudio": "LM Studio",
+      "llamacpp": "llama.cpp"
+    },
+    "proveedor": "Provider",
+    "compatibleOpenAI": "OpenAI-compatible (LM Studio, llama.cpp, vLLM…)",
+    "url": "Server URL",
+    "modelo": "Model",
+    "modeloAyuda": "Model name as the server knows it (e.g. qwen3:8b). “Test connection” lists the available ones.",
+    "clave": "API key",
+    "claveAyuda": "Only for services that require it. Local servers don't.",
+    "claveGuardada": "•••••••• (saved)",
+    "sinClave": "No key",
+    "quitarClave": "Remove key",
+    "contexto": "Context (tokens)",
+    "contextoAyuda": "Sets how much lore and data is sent to it.",
+    "timeout": "Timeout (s)",
+    "reintentos": "Retries",
+    "reintentosAyuda": "If it proposes invalid data, it is asked to fix it.",
+    "probar": "Test connection",
+    "guardaAntes": "Save your changes before testing.",
+    "conectado_one": "Connected: {{count}} model available",
+    "conectado_other": "Connected: {{count}} models available",
+    "modeloNoEncontrado": "the configured model is not in the list",
+    "modoSalida": "Structured output mode",
+    "modoSalidaAyuda": "How the AI generator asks models (especially small local ones) for structured JSON. If your model fails when generating, try another mode.",
+    "modo": {
+      "tool": "Tool (tool calling)",
+      "native": "Native (server JSON schema)",
+      "prompted": "Prompted (text instructions)"
+    },
+    "modoDesc": {
+      "tool": "The model answers by calling a tool. Most compatible with models that support tools.",
+      "native": "The server enforces JSON matching the schema. Useful if your server supports it (Ollama, llama.cpp, vLLM).",
+      "prompted": "The schema goes in the instructions and the text is parsed. For models without tools or structured output."
+    }
+  },
+  "identidad": {
+    "titulo": "Identity",
+    "descripcion": "How your changes appear in provenance.",
+    "nombre": "Your name",
+    "nombreAyuda": "Recorded as the author of each change (PROV-O)."
+  },
+  "mundo": {
+    "titulo": "Real world (Wikidata and DBpedia)",
+    "descripcion": "Federated queries and the “Real world” panel on entity sheets.",
+    "activo": "Real-world lookups enabled",
+    "agente": "User-Agent",
+    "agenteAyuda": "Wikidata requires a contact URL or e-mail; without it, it answers 403.",
+    "timeout": "Timeout per query (s)"
+  },
+  "sparql": {
+    "titulo": "SPARQL queries",
+    "descripcion": "Limits for the SPARQL editor and the agents' consultar_sparql tool.",
+    "limite": "Maximum results",
+    "timeout": "Timeout (s)"
+  }
+}

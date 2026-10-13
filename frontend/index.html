@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gestor de campañas de rol basado en grafos de conocimiento RDF" />
+    <title>LoreGraph — Campañas de rol</title>
+    <script>
+      // Evita el destello de tema claro al cargar en modo oscuro.
+      try {
+        var m = localStorage.getItem('loregraph.tema') || 'system'
+        if (m === 'dark' || (m === 'system' && matchMedia('(prefers-color-scheme: dark)').matches))
+          document.documentElement.classList.add('dark')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

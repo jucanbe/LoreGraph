@@ -1,0 +1,84 @@
+{
+  "app": {
+    "nombre": "LoreGraph",
+    "lema": "Role-playing campaigns as knowledge graphs"
+  },
+  "nav": {
+    "campanas": "Campaigns",
+    "panel": "Dashboard",
+    "explorar": "Explore",
+    "grafo": "Graph",
+    "sesiones": "Sessions",
+    "propuestas": "Proposals",
+    "sparql": "SPARQL",
+    "asistente": "Assistant",
+    "tipos": "Types",
+    "volver": "Back",
+    "mapas": "Maps",
+    "coherencia": "Consistency",
+    "historial": "History",
+    "ajustesCampana": "Campaign settings"
+  },
+  "acciones": {
+    "guardar": "Save",
+    "cancelar": "Cancel",
+    "crear": "Create",
+    "editar": "Edit",
+    "borrar": "Delete",
+    "cerrar": "Close",
+    "buscar": "Search",
+    "nuevo": "New",
+    "abrir": "Open",
+    "reintentar": "Retry",
+    "copiar": "Copy",
+    "exportar": "Export",
+    "anadir": "Add",
+    "quitar": "Remove",
+    "confirmar": "Confirm",
+    "verFicha": "Open sheet",
+    "limpiar": "Clear"
+  },
+  "estado": {
+    "cargando": "Loading…",
+    "vacio": "Nothing here yet",
+    "error": "Something went wrong",
+    "sinResultados": "No results",
+    "guardado": "Saved",
+    "borrado": "Deleted"
+  },
+  "errores": {
+    "red": "Could not reach the server. Is the backend running?",
+    "desconocido": "Unknown error",
+    "noEncontrado": "Not found"
+  },
+  "tema": {
+    "claro": "Light",
+    "oscuro": "Dark",
+    "sistema": "System",
+    "cambiar": "Change theme"
+  },
+  "idioma": {
+    "cambiar": "Language",
+    "es": "Español",
+    "en": "English"
+  },
+  "paleta": {
+    "abrir": "Search or go to…",
+    "placeholder": "Search entities or type an action…",
+    "entidades": "Entities",
+    "acciones": "Actions",
+    "irA": "Go to",
+    "nuevaEntidad": "New entity: {{tipo}}",
+    "atajo": "Ctrl K"
+  },
+  "comun": {
+    "deModulo": "From module {{modulo}}",
+    "soloLectura": "Read only",
+    "total": "{{count}} in total",
+    "pagina": "Page {{page}} of {{pages}}",
+    "anterior": "Previous",
+    "siguiente": "Next",
+    "sesion": "Session {{n}}",
+    "hace": "{{tiempo}} ago"
+  }
+}

@@ -1,0 +1,8 @@
+id: noches-de-madrid
+nombre: Noches de Madrid
+descripcion: >-
+  Crónica de ejemplo ambientada en el Madrid actual. Una coterie recién presentada ante el Príncipe
+  investiga la destrucción del antiguo Sheriff mientras la Camarilla y los anarquistas de Lavapiés
+  se disputan la ciudad y una sociedad de cazadores estrecha el cerco.
+modulos:
+  - vtm5

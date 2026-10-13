@@ -1,0 +1,84 @@
+{
+  "app": {
+    "nombre": "LoreGraph",
+    "lema": "Campañas de rol como grafos de conocimiento"
+  },
+  "nav": {
+    "campanas": "Campañas",
+    "panel": "Panel",
+    "explorar": "Explorar",
+    "grafo": "Grafo",
+    "sesiones": "Sesiones",
+    "propuestas": "Propuestas",
+    "sparql": "SPARQL",
+    "asistente": "Asistente",
+    "tipos": "Tipos",
+    "volver": "Volver",
+    "mapas": "Mapas",
+    "coherencia": "Coherencia",
+    "historial": "Historial",
+    "ajustesCampana": "Ajustes de campaña"
+  },
+  "acciones": {
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "crear": "Crear",
+    "editar": "Editar",
+    "borrar": "Borrar",
+    "cerrar": "Cerrar",
+    "buscar": "Buscar",
+    "nuevo": "Nuevo",
+    "abrir": "Abrir",
+    "reintentar": "Reintentar",
+    "copiar": "Copiar",
+    "exportar": "Exportar",
+    "anadir": "Añadir",
+    "quitar": "Quitar",
+    "confirmar": "Confirmar",
+    "verFicha": "Ver ficha",
+    "limpiar": "Limpiar"
+  },
+  "estado": {
+    "cargando": "Cargando…",
+    "vacio": "No hay nada todavía",
+    "error": "Algo ha fallado",
+    "sinResultados": "Sin resultados",
+    "guardado": "Guardado",
+    "borrado": "Borrado"
+  },
+  "errores": {
+    "red": "No se pudo contactar con el servidor. ¿Está arrancado el backend?",
+    "desconocido": "Error desconocido",
+    "noEncontrado": "No encontrado"
+  },
+  "tema": {
+    "claro": "Claro",
+    "oscuro": "Oscuro",
+    "sistema": "Sistema",
+    "cambiar": "Cambiar tema"
+  },
+  "idioma": {
+    "cambiar": "Idioma",
+    "es": "Español",
+    "en": "English"
+  },
+  "paleta": {
+    "abrir": "Buscar o ir a…",
+    "placeholder": "Busca entidades o escribe una acción…",
+    "entidades": "Entidades",
+    "acciones": "Acciones",
+    "irA": "Ir a",
+    "nuevaEntidad": "Nueva entidad: {{tipo}}",
+    "atajo": "Ctrl K"
+  },
+  "comun": {
+    "deModulo": "Del módulo {{modulo}}",
+    "soloLectura": "Solo lectura",
+    "total": "{{count}} en total",
+    "pagina": "Página {{page}} de {{pages}}",
+    "anterior": "Anterior",
+    "siguiente": "Siguiente",
+    "sesion": "Sesión {{n}}",
+    "hace": "hace {{tiempo}}"
+  }
+}

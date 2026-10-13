@@ -1,0 +1,11 @@
+# titulo: Relación consigo mismo
+# titulo_en: Self relationship
+# severidad: aviso
+# descripcion: Una entidad se conoce o se relaciona consigo misma.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+
+SELECT DISTINCT ?entidad ?mensaje WHERE {
+  { ?entidad rpg:knows ?entidad . BIND ("Se conoce a sí misma." AS ?mensaje) }
+  UNION
+  { ?r rpg:source ?entidad ; rpg:target ?entidad . BIND ("Tiene una relación consigo misma." AS ?mensaje) }
+}

@@ -1,0 +1,21 @@
+{
+  "titulo": "Mundo real — datos externos",
+  "aviso": "Información de Wikidata/DBpedia. No forma parte de la campaña: es solo referencia o inspiración.",
+  "cargando": "Cargando datos externos…",
+  "fuente": {
+    "wikidata": "Wikidata",
+    "dbpedia": "DBpedia"
+  },
+  "relacion": {
+    "inspiradoEn": "Inspirado en",
+    "correspondeA": "Corresponde a"
+  },
+  "verEn": "Ver en {{fuente}}",
+  "nuevaPestana": "se abre en una pestaña nueva",
+  "error": "No se pudieron obtener todos los datos externos: {{detalle}}",
+  "imagenAlt": "Imagen de {{nombre}}",
+  "mapa": "Mapa de {{nombre}}",
+  "hechos": "Datos destacados",
+  "verMas": "Ver más",
+  "verMenos": "Ver menos"
+}

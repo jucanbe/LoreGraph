@@ -1,0 +1,141 @@
+{
+  "titulo": "Proposals",
+  "subtitulo": "Changes proposed by agents and people. Nothing reaches the canon without your approval.",
+  "pendientesTotal_one": "{{count}} pending",
+  "pendientesTotal_other": "{{count}} pending",
+  "filtro": {
+    "etiqueta": "Filter by status",
+    "pendiente": "Pending",
+    "aprobada": "Approved",
+    "rechazada": "Rejected",
+    "todas": "All"
+  },
+  "estado": {
+    "pendiente": "Pending",
+    "aprobada": "Approved",
+    "rechazada": "Rejected"
+  },
+  "lista": {
+    "titulo": "Proposal list",
+    "marcar": "Select proposal “{{peticion}}”",
+    "masEntidades_one": "and {{count}} more",
+    "masEntidades_other": "and {{count}} more"
+  },
+  "lote": {
+    "marcarTodas": "Select all pending",
+    "aprobar_one": "Approve selected ({{count}})",
+    "aprobar_other": "Approve selected ({{count}})",
+    "resultado": "Batch reviewed: {{aprobadas}} approved, {{fallidas}} with errors",
+    "aprobadas_one": "Approved:",
+    "aprobadas_other": "Approved:",
+    "fallidas_one": "Could not be approved:",
+    "fallidas_other": "Could not be approved:",
+    "cerrarResultado": "Close batch summary"
+  },
+  "vacio": {
+    "pendiente": "No pending proposals",
+    "aprobada": "No approved proposals",
+    "rechazada": "No rejected proposals",
+    "todas": "No proposals yet",
+    "ayuda": "Agents create proposals with the MCP tool <code>proponer_triples</code> or from the <enlace>Assistant</enlace> page."
+  },
+  "detalle": {
+    "region": "Proposal detail",
+    "ninguna": "Select a proposal",
+    "ningunaAyuda": "You will see its changes in readable form and be able to approve, edit or reject it.",
+    "volver": "Back to the list",
+    "cargando": "Loading proposal…",
+    "tituloSinResumen": "Proposal {{id}}",
+    "peticion": "Request",
+    "destino": "Target",
+    "cambios": "Changes",
+    "entidades": "Entities",
+    "revisada": "Reviewed",
+    "notaRevision": "Review note"
+  },
+  "agente": {
+    "ia": "AI agent",
+    "humano": "Person",
+    "canal": {
+      "mcp": "MCP",
+      "local": "local model"
+    }
+  },
+  "destino": {
+    "canon": "Canon",
+    "canonAyuda": "The campaign truth: what really happened.",
+    "conocimientoDe": "Knowledge of",
+    "conocimientoAyuda": "What a character believes to know (may be false)."
+  },
+  "conteo": {
+    "anadidas_one": "{{count}} triple added",
+    "anadidas_other": "{{count}} triples added",
+    "eliminadas_one": "{{count}} triple removed",
+    "eliminadas_other": "{{count}} triples removed"
+  },
+  "severidad": {
+    "violacion": "Error",
+    "aviso": "Warning",
+    "info": "Info"
+  },
+  "errores": {
+    "valor": "Value",
+    "tituloValidacion": "The changes are not valid",
+    "tituloRevision": "The review could not be completed",
+    "tituloPendiente_one": "This proposal has {{count}} problem with the current canon",
+    "tituloPendiente_other": "This proposal has {{count}} problems with the current canon",
+    "ayudaPendiente": "The canon may have changed since it was created. Fix it with “Edit and approve” or reject it."
+  },
+  "acciones": {
+    "grupo": "Review actions",
+    "aprobar": "Approve",
+    "rechazar": "Reject",
+    "editarAprobar": "Edit and approve",
+    "aprobarBloqueado": "It cannot be approved as is while it has errors."
+  },
+  "diff": {
+    "titulo": "Changes",
+    "verIris": "Show IRIs",
+    "vacio": "This proposal contains no changes.",
+    "anadidas_one": "{{count}} triple added",
+    "anadidas_other": "{{count}} triples added",
+    "eliminadas_one": "{{count}} triple removed",
+    "eliminadas_other": "{{count}} triples removed",
+    "marca": {
+      "anadida": "(added)",
+      "eliminada": "(removed)"
+    },
+    "nueva": "New"
+  },
+  "revision": {
+    "tituloAprobar": "Approve proposal",
+    "tituloRechazar": "Reject proposal",
+    "ayudaAprobar": "The changes will be applied to the target and recorded with their provenance.",
+    "ayudaRechazar": "The proposal will be archived as rejected. Explaining why helps agents propose better.",
+    "nota": "Note (optional)",
+    "motivo": "Reason",
+    "notaPlaceholder": "Why you approve it, nuances…",
+    "motivoPlaceholder": "Why it does not fit the campaign…"
+  },
+  "avisos": {
+    "aprobada": "Proposal approved",
+    "aprobadaEditada": "Proposal edited and approved",
+    "rechazada": "Proposal rejected"
+  },
+  "edicion": {
+    "titulo": "Edit and approve",
+    "ayuda": "Remove the triples you do not want and fix literal values before approving.",
+    "anadir_one": "Triple to add ({{count}})",
+    "anadir_other": "Triples to add ({{count}})",
+    "eliminar_one": "Triple to remove ({{count}})",
+    "eliminar_other": "Triples to remove ({{count}})",
+    "nadaQueAprobar": "No triples left: there is nothing to approve.",
+    "aprobar_one": "Approve {{count}} change",
+    "aprobar_other": "Approve {{count}} changes",
+    "valorDe": "Value of {{descripcion}}",
+    "quitar": "Remove: {{descripcion}}",
+    "restaurar": "Restore: {{descripcion}}",
+    "quitarCorto": "Remove",
+    "restaurarCorto": "Restore"
+  }
+}

@@ -1,0 +1,5 @@
+# Chiquillos: inversa de vtm:sire.
+# Childer: inverse of vtm:sire.
+PREFIX vtm: <https://rpg-modules.example.net/vtm5/ont#>
+CONSTRUCT { ?sire vtm:childe ?childe }
+WHERE { ?childe vtm:sire ?sire }

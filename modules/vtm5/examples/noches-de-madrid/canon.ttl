@@ -1,0 +1,611 @@
+@prefix :       <__CAMPAIGN__/entity/> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix vtm:    <https://rpg-modules.example.net/vtm5/ont#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+#################################################################
+# Noches de Madrid — crónica de ejemplo (contenido original)
+#################################################################
+
+# ---------------------------------------------------------------
+# Jugadores / Players
+# ---------------------------------------------------------------
+
+:marta a rpg:Player ; rdfs:label "Marta" .
+:javi  a rpg:Player ; rdfs:label "Javi" .
+:sara  a rpg:Player ; rdfs:label "Sara" .
+:dani  a rpg:Player ; rdfs:label "Dani" .
+
+# ---------------------------------------------------------------
+# Sesiones / Sessions
+# ---------------------------------------------------------------
+
+:sesion-1 a rpg:Session ;
+    rdfs:label "Sesión 1: El Elíseo de Linares" ;
+    rpg:sessionNumber 1 ;
+    rpg:sessionDate "2026-09-05"^^xsd:date ;
+    rpg:inWorldDateLabel "Noche del 12 de octubre" ;
+    rpg:sessionNotes "La coterie es presentada ante el Príncipe Arteaga en el Palacio de Linares. Isabel de Sandoval humilla públicamente a Teo. Un mensajero anuncia que el antiguo Sheriff, Gonzalo Ferrer, sufrió la Muerte Definitiva en el Retiro hace tres meses y nadie ha encontrado al culpable." .
+
+:sesion-2 a rpg:Session ;
+    rdfs:label "Sesión 2: Sangre en la Gran Vía" ;
+    rpg:sessionNumber 2 ;
+    rpg:sessionDate "2026-09-19"^^xsd:date ;
+    rpg:inWorldDateLabel "Noche del 15 de octubre" ;
+    rpg:sessionNotes "Una redada de la Sociedad de San Lorenzo en un local de la Gran Vía casi expone a Lucía. Teo bebe por primera vez de la sangre de Isabel a cambio de su protección. Isabel y Bruno rompen su relación tras una discusión en el Círculo de Bellas Artes." .
+
+:sesion-3 a rpg:Session ;
+    rdfs:label "Sesión 3: La capilla bajo el templo" ;
+    rpg:sessionNumber 3 ;
+    rpg:sessionDate "2026-10-03"^^xsd:date ;
+    rpg:inWorldDateLabel "Noche del 20 de octubre" ;
+    rpg:sessionNotes "El regente Benavente recibe a la coterie en la capilla tremere bajo el Templo de Debod. El Sordo habla de un cuaderno perdido. El padre Ignacio Larra identifica a Lucía y la convierte en su objetivo." .
+
+# ---------------------------------------------------------------
+# Lugares / Places
+# ---------------------------------------------------------------
+
+:madrid a rpg:Place ;
+    rdfs:label "Madrid" ;
+    schema:description "La ciudad. De noche, un tablero dividido entre la Camarilla, los anarquistas y quienes los cazan." ;
+    rpg:correspondsTo wd:Q2807 ;
+    schema:latitude 40.4169 ; schema:longitude -3.7033 .
+
+:palacio-linares a rpg:Place ;
+    rdfs:label "Palacio de Linares" ;
+    schema:description "Elíseo de la ciudad. Sus salones esconden más fantasmas de los que cuentan las leyendas." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q2628455 ;
+    vtm:isElysium true ;
+    vtm:masqueradeRisk 1 ;
+    rpg:appearsInSession :sesion-1 .
+
+:teatro-real a rpg:Place ;
+    rdfs:label "Teatro Real" ;
+    schema:description "Coto de caza de la alta sociedad Toreador durante la temporada de ópera." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q211250 ;
+    vtm:huntingQuality 3 ; vtm:masqueradeRisk 2 .
+
+:templo-debod a rpg:Place ;
+    rdfs:label "Templo de Debod" ;
+    schema:description "Bajo el templo egipcio se oculta la capilla de los Tremere de Madrid." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q1140249 ;
+    rpg:appearsInSession :sesion-3 .
+
+:capilla-debod a vtm:Haven ;
+    rdfs:label "Capilla tremere de Debod" ;
+    schema:description "Salas excavadas bajo el parque del Cuartel de la Montaña. Solo se entra por invitación." ;
+    rpg:locatedIn :templo-debod ;
+    rpg:appearsInSession :sesion-3 .
+
+:ermita-florida a rpg:Place ;
+    rdfs:label "Ermita de San Antonio de la Florida" ;
+    schema:description "Bajo los frescos de su cúpula reside el Malkavian conocido como El Sordo." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q3109752 .
+
+:viaducto a rpg:Place ;
+    rdfs:label "Viaducto de Segovia" ;
+    schema:description "Punto de encuentro de la coterie, por encima del tráfico de la calle de Segovia." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q6160850 .
+
+:circulo-bellas-artes a rpg:Place ;
+    rdfs:label "Círculo de Bellas Artes" ;
+    schema:description "Salón de la arpía Isabel de Sandoval; aquí se hacen y se deshacen reputaciones." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q41323951 ;
+    rpg:appearsInSession :sesion-2 .
+
+:cementerio-almudena a rpg:Place ;
+    rdfs:label "Cementerio de la Almudena" ;
+    schema:description "Territorio neutral de la familia Monforte, de clan Hecata." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q1053320 ;
+    vtm:huntingQuality 0 ; vtm:masqueradeRisk 1 .
+
+:tuneles-chamberi a rpg:Place ;
+    rdfs:label "Túneles de la estación fantasma" ;
+    schema:description "Galerías abandonadas del metro donde los Nosferatu comercian con secretos." ;
+    rpg:locatedIn :madrid ;
+    vtm:masqueradeRisk 0 .
+
+:lavapies a vtm:Domain ;
+    rdfs:label "Dominio de Lavapiés" ;
+    schema:description "Barrio reclamado por los anarquistas de Darío Requena. La Camarilla no entra sin permiso." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q2566034 ;
+    vtm:domainHolder :libres-lavapies ;
+    vtm:huntingQuality 4 ; vtm:masqueradeRisk 2 .
+
+:malasana a vtm:Domain ;
+    rdfs:label "Dominio de Malasaña" ;
+    schema:description "Noches de bares y conciertos; dominio disputado tras el pacto de Malasaña." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q2521757 ;
+    vtm:domainHolder :isabel-sandoval ;
+    vtm:huntingQuality 4 ; vtm:masqueradeRisk 3 .
+
+:gran-via a vtm:Domain ;
+    rdfs:label "Dominio de la Gran Vía" ;
+    schema:description "Escaparate de la ciudad y coto del Príncipe. Desde la redada, vigilado por cazadores." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q1324163 ;
+    vtm:domainHolder :fermin-arteaga ;
+    vtm:huntingQuality 3 ; vtm:masqueradeRisk 4 ;
+    rpg:appearsInSession :sesion-2 .
+
+:retiro a vtm:Domain ;
+    rdfs:label "Dominio del Retiro" ;
+    schema:description "Parque sin titular desde la muerte del Sheriff Ferrer. De noche, nadie caza allí." ;
+    rpg:locatedIn :madrid ;
+    rpg:correspondsTo wd:Q1131807 ;
+    vtm:huntingQuality 2 ; vtm:masqueradeRisk 3 .
+
+:refugio-lucia a vtm:Haven ;
+    rdfs:label "Ático de la calle del Pez" ;
+    schema:description "Refugio de Lucía: un ático con las ventanas tapiadas en Malasaña." ;
+    rpg:locatedIn :malasana .
+
+# ---------------------------------------------------------------
+# Facciones / Factions
+# ---------------------------------------------------------------
+
+:camarilla-madrid a rpg:Faction ;
+    rdfs:label "Camarilla de Madrid" ;
+    schema:description "La corte del Príncipe Arteaga: orden, etiqueta y la Mascarada por encima de todo." ;
+    vtm:sect vtm:sect-camarilla ;
+    rpg:locatedIn :palacio-linares .
+
+:capilla-tremere a rpg:Faction ;
+    rdfs:label "Capilla Tremere de Madrid" ;
+    schema:description "Los brujos de la sangre de la ciudad, leales al Príncipe… mientras les convenga." ;
+    rpg:memberOf :camarilla-madrid ;
+    vtm:sect vtm:sect-camarilla ;
+    rpg:locatedIn :capilla-debod .
+
+:libres-lavapies a rpg:Faction ;
+    rdfs:label "Los Libres de Lavapiés" ;
+    schema:description "Baronía anarquista que rechaza la autoridad del Príncipe." ;
+    vtm:sect vtm:sect-anarch ;
+    rpg:locatedIn :lavapies .
+
+:cuadrilla-viaducto a vtm:Coterie ;
+    rdfs:label "La Cuadrilla del Viaducto" ;
+    schema:description "La coterie de los personajes: neonatos de lealtades dudosas al servicio del Príncipe." ;
+    rpg:locatedIn :viaducto .
+
+:sociedad-san-lorenzo a rpg:Faction ;
+    rdfs:label "Sociedad de San Lorenzo" ;
+    schema:description "Hermandad mortal de cazadores con contactos en la Iglesia y la policía." .
+
+:familia-monforte a rpg:Faction ;
+    rdfs:label "Familia Monforte" ;
+    schema:description "Familia Hecata que custodia el cementerio y comercia con los muertos." ;
+    vtm:sect vtm:sect-independent ;
+    rpg:locatedIn :cementerio-almudena .
+
+# ---------------------------------------------------------------
+# Personajes jugadores / Player characters
+# ---------------------------------------------------------------
+
+:lucia-vega a rpg:PlayerCharacter , vtm:Vampire ;
+    rdfs:label "Lucía Vega" ;
+    schema:description "Antigua sindicalista abrazada por Darío Requena. Furia contenida y lealtades divididas." ;
+    rpg:playedBy :marta ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :malasana ;
+    rpg:memberOf :cuadrilla-viaducto ;
+    vtm:clan vtm:clan-brujah ;
+    vtm:sire :dario-requena ;
+    vtm:embraceYear 2019 ; vtm:apparentAge 31 ;
+    vtm:bloodPotency 1 ; vtm:hunger 2 ; vtm:humanity 7 ; vtm:willpower 5 ;
+    vtm:predatorType vtm:predator-alleycat ;
+    vtm:sect vtm:sect-anarch ;
+    vtm:haven :refugio-lucia ;
+    vtm:ambition "Que nadie vuelva a decidir por los de abajo, ni vivos ni muertos." ;
+    vtm:desire "Averiguar quién mató a Ferrer antes que la Camarilla." ;
+    vtm:hasDisciplineRating :lucia-vega\/n\/d1 , :lucia-vega\/n\/d2 , :lucia-vega\/n\/d3 ;
+    vtm:hasConviction :lucia-vega\/n\/c1 ;
+    vtm:hasBoon :lucia-vega\/n\/b1 ;
+    rpg:hasRelationship :lucia-vega\/n\/r1 ;
+    rpg:appearsInSession :sesion-1 , :sesion-2 , :sesion-3 .
+
+:lucia-vega\/n\/d1 a vtm:DisciplineRating ; rpg:source :lucia-vega ; vtm:discipline vtm:discipline-potence ; vtm:dots 2 .
+:lucia-vega\/n\/d2 a vtm:DisciplineRating ; rpg:source :lucia-vega ; vtm:discipline vtm:discipline-presence ; vtm:dots 1 .
+:lucia-vega\/n\/d3 a vtm:DisciplineRating ; rpg:source :lucia-vega ; vtm:discipline vtm:discipline-celerity ; vtm:dots 1 .
+:lucia-vega\/n\/c1 a vtm:Conviction ; rpg:source :lucia-vega ;
+    vtm:convictionText "Nunca abandonaré a alguien que no puede defenderse." ;
+    vtm:touchstone :clara-vega .
+:lucia-vega\/n\/b1 a vtm:Boon ; rpg:source :lucia-vega ;
+    rpg:target :dario-requena ;
+    rpg:relationshipType vtm:rel-boon ;
+    vtm:boonWeight vtm:boon-minor ;
+    schema:description "Darío la sacó de la comisaría de Leganitos sin hacer preguntas." ;
+    rpg:validFrom :sesion-1 .
+:lucia-vega\/n\/r1 a rpg:Relationship ; rpg:source :lucia-vega ;
+    rpg:target :isabel-sandoval ;
+    rpg:relationshipType rpg:rel-rival ;
+    rpg:strength -1 ;
+    rpg:validFrom :sesion-1 .
+
+:teo-almagro a rpg:PlayerCharacter , vtm:Vampire ;
+    rdfs:label "Teo Almagro" ;
+    schema:description "Escenógrafo del Teatro Real abrazado por Isabel de Sandoval. Encantador e inseguro." ;
+    rpg:playedBy :javi ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :teatro-real ;
+    rpg:memberOf :cuadrilla-viaducto , :camarilla-madrid ;
+    vtm:clan vtm:clan-toreador ;
+    vtm:sire :isabel-sandoval ;
+    vtm:generation 11 ;
+    vtm:embraceYear 2021 ; vtm:apparentAge 27 ;
+    vtm:bloodPotency 1 ; vtm:hunger 1 ; vtm:humanity 8 ; vtm:willpower 4 ;
+    vtm:predatorType vtm:predator-siren ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:ambition "Montar una obra que haga llorar a los Antiguos." ;
+    vtm:desire "Recuperar el favor de su sire." ;
+    vtm:hasDisciplineRating :teo-almagro\/n\/d1 , :teo-almagro\/n\/d2 , :teo-almagro\/n\/d3 ;
+    vtm:hasConviction :teo-almagro\/n\/c1 ;
+    vtm:hasBloodBond :teo-almagro\/n\/v1 ;
+    rpg:appearsInSession :sesion-1 , :sesion-2 , :sesion-3 .
+
+:teo-almagro\/n\/d1 a vtm:DisciplineRating ; rpg:source :teo-almagro ; vtm:discipline vtm:discipline-presence ; vtm:dots 2 .
+:teo-almagro\/n\/d2 a vtm:DisciplineRating ; rpg:source :teo-almagro ; vtm:discipline vtm:discipline-auspex ; vtm:dots 1 .
+:teo-almagro\/n\/d3 a vtm:DisciplineRating ; rpg:source :teo-almagro ; vtm:discipline vtm:discipline-celerity ; vtm:dots 1 .
+:teo-almagro\/n\/c1 a vtm:Conviction ; rpg:source :teo-almagro ;
+    vtm:convictionText "El arte debe sobrevivir a quien lo crea." ;
+    vtm:touchstone :hugo-pena .
+:teo-almagro\/n\/v1 a vtm:BloodBond ; rpg:source :teo-almagro ;
+    rpg:target :isabel-sandoval ;
+    rpg:relationshipType vtm:rel-blood-bond ;
+    vtm:bondLevel 1 ;
+    rpg:validFrom :sesion-2 .
+
+:nuria-sanz a rpg:PlayerCharacter , vtm:Vampire ;
+    rdfs:label "Núria Sanz" ;
+    schema:description "Informática barcelonesa convertida en Nosferatu. Vende datos a quien pague mejor." ;
+    rpg:playedBy :sara ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :tuneles-chamberi ;
+    rpg:memberOf :cuadrilla-viaducto ;
+    vtm:clan vtm:clan-nosferatu ;
+    vtm:generation 13 ;
+    vtm:embraceYear 2020 ; vtm:apparentAge 35 ;
+    vtm:bloodPotency 1 ; vtm:hunger 3 ; vtm:humanity 6 ; vtm:willpower 5 ;
+    vtm:predatorType vtm:predator-sandman ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:ambition "Saber más que nadie en la ciudad." ;
+    vtm:hasDisciplineRating :nuria-sanz\/n\/d1 , :nuria-sanz\/n\/d2 , :nuria-sanz\/n\/d3 ;
+    rpg:hasRelationship :nuria-sanz\/n\/r1 ;
+    rpg:appearsInSession :sesion-1 , :sesion-3 .
+
+:nuria-sanz\/n\/d1 a vtm:DisciplineRating ; rpg:source :nuria-sanz ; vtm:discipline vtm:discipline-obfuscate ; vtm:dots 2 .
+:nuria-sanz\/n\/d2 a vtm:DisciplineRating ; rpg:source :nuria-sanz ; vtm:discipline vtm:discipline-animalism ; vtm:dots 1 .
+:nuria-sanz\/n\/d3 a vtm:DisciplineRating ; rpg:source :nuria-sanz ; vtm:discipline vtm:discipline-potence ; vtm:dots 1 .
+:nuria-sanz\/n\/r1 a rpg:Relationship ; rpg:source :nuria-sanz ;
+    rpg:target :el-sordo ;
+    rpg:relationshipType rpg:rel-ally ;
+    rpg:strength 2 ;
+    schema:description "Intercambian secretos por profecías." ;
+    rpg:validFrom :sesion-1 .
+
+:elias-cobo a rpg:PlayerCharacter , vtm:Vampire ;
+    rdfs:label "Elías Cobo" ;
+    schema:description "Sangre débil, repartidor nocturno. Nadie sabe quién lo convirtió." ;
+    rpg:playedBy :dani ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :lavapies ;
+    rpg:memberOf :cuadrilla-viaducto ;
+    vtm:clan vtm:clan-thin-blood ;
+    vtm:generation 14 ;
+    vtm:embraceYear 2025 ; vtm:apparentAge 24 ;
+    vtm:bloodPotency 0 ; vtm:hunger 1 ; vtm:humanity 8 ; vtm:willpower 4 ;
+    vtm:predatorType vtm:predator-bagger ;
+    vtm:sect vtm:sect-autarkis ;
+    vtm:desire "Que Valeria Monforte le pague lo prometido." ;
+    vtm:hasDisciplineRating :elias-cobo\/n\/d1 ;
+    rpg:hasRelationship :elias-cobo\/n\/r1 ;
+    rpg:appearsInSession :sesion-2 , :sesion-3 .
+
+:elias-cobo\/n\/d1 a vtm:DisciplineRating ; rpg:source :elias-cobo ; vtm:discipline vtm:discipline-thin-blood-alchemy ; vtm:dots 1 .
+:elias-cobo\/n\/r1 a rpg:Relationship ; rpg:source :elias-cobo ;
+    rpg:target :valeria-monforte ;
+    rpg:relationshipType rpg:rel-employer ;
+    rpg:strength 1 ;
+    rpg:validFrom :sesion-2 .
+
+# ---------------------------------------------------------------
+# PNJ vástagos / Kindred NPCs
+# ---------------------------------------------------------------
+
+:fermin-arteaga a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Fermín de Arteaga" ;
+    skos:altLabel "El Príncipe" ;
+    schema:description "Príncipe de Madrid desde la posguerra. Banquero de día por persona interpuesta; implacable de noche." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :palacio-linares ;
+    rpg:memberOf :camarilla-madrid ;
+    vtm:clan vtm:clan-ventrue ;
+    vtm:generation 9 ;
+    vtm:embraceYear 1871 ; vtm:apparentAge 55 ;
+    vtm:bloodPotency 4 ; vtm:humanity 5 ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:position vtm:position-prince ;
+    vtm:hasDisciplineRating :fermin-arteaga\/n\/d1 , :fermin-arteaga\/n\/d2 ;
+    vtm:hasBoon :fermin-arteaga\/n\/b1 ;
+    rpg:appearsInSession :sesion-1 .
+
+:fermin-arteaga\/n\/d1 a vtm:DisciplineRating ; rpg:source :fermin-arteaga ; vtm:discipline vtm:discipline-dominate ; vtm:dots 4 .
+:fermin-arteaga\/n\/d2 a vtm:DisciplineRating ; rpg:source :fermin-arteaga ; vtm:discipline vtm:discipline-presence ; vtm:dots 3 .
+:fermin-arteaga\/n\/b1 a vtm:Boon ; rpg:source :fermin-arteaga ;
+    rpg:target :nuria-sanz ;
+    rpg:relationshipType vtm:rel-boon ;
+    vtm:boonWeight vtm:boon-trivial ;
+    schema:description "Núria borró las grabaciones de seguridad de la redada." ;
+    rpg:validFrom :sesion-2 .
+
+:isabel-sandoval a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Isabel de Sandoval" ;
+    schema:description "Arpía de la corte y sire de Teo. Coleccionista de pintura y de humillaciones ajenas." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :circulo-bellas-artes ;
+    rpg:memberOf :camarilla-madrid ;
+    vtm:clan vtm:clan-toreador ;
+    vtm:generation 10 ;
+    vtm:embraceYear 1924 ; vtm:apparentAge 38 ;
+    vtm:bloodPotency 3 ; vtm:humanity 6 ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:position vtm:position-harpy ;
+    vtm:hasDisciplineRating :isabel-sandoval\/n\/d1 ;
+    rpg:hasRelationship :isabel-sandoval\/n\/r1 , :isabel-sandoval\/n\/r2 ;
+    rpg:appearsInSession :sesion-1 , :sesion-2 .
+
+:isabel-sandoval\/n\/d1 a vtm:DisciplineRating ; rpg:source :isabel-sandoval ; vtm:discipline vtm:discipline-presence ; vtm:dots 4 .
+:isabel-sandoval\/n\/r1 a rpg:Relationship ; rpg:source :isabel-sandoval ;
+    rpg:target :bruno-calvo ;
+    rpg:relationshipType rpg:rel-lover ;
+    rpg:strength 2 ;
+    rpg:validFrom :sesion-1 ;
+    rpg:validUntil :sesion-2 .
+:isabel-sandoval\/n\/r2 a rpg:Relationship ; rpg:source :isabel-sandoval ;
+    rpg:target :bruno-calvo ;
+    rpg:relationshipType rpg:rel-rival ;
+    rpg:strength -2 ;
+    schema:description "Desde la ruptura en el Círculo de Bellas Artes." ;
+    rpg:validFrom :sesion-2 .
+
+:dario-requena a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Darío Requena" ;
+    schema:description "Barón anarquista de Lavapiés. Carismático, cansado y más peligroso de lo que parece." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :lavapies ;
+    rpg:memberOf :libres-lavapies ;
+    vtm:clan vtm:clan-brujah ;
+    vtm:generation 10 ;
+    vtm:embraceYear 1977 ; vtm:apparentAge 40 ;
+    vtm:bloodPotency 2 ; vtm:humanity 6 ;
+    vtm:sect vtm:sect-anarch ;
+    vtm:position vtm:position-baron ;
+    vtm:hasDisciplineRating :dario-requena\/n\/d1 , :dario-requena\/n\/d2 ;
+    rpg:hasRelationship :dario-requena\/n\/r1 .
+
+:dario-requena\/n\/d1 a vtm:DisciplineRating ; rpg:source :dario-requena ; vtm:discipline vtm:discipline-potence ; vtm:dots 3 .
+:dario-requena\/n\/d2 a vtm:DisciplineRating ; rpg:source :dario-requena ; vtm:discipline vtm:discipline-presence ; vtm:dots 2 .
+:dario-requena\/n\/r1 a rpg:Relationship ; rpg:source :dario-requena ;
+    rpg:target :fermin-arteaga ;
+    rpg:relationshipType rpg:rel-enemy ;
+    rpg:strength -3 .
+
+:bruno-calvo a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Bruno Calvo" ;
+    schema:description "Nuevo Sheriff del Príncipe, nombrado tras la muerte de Ferrer. Banu Haqim de pocas palabras." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :gran-via ;
+    rpg:memberOf :camarilla-madrid ;
+    vtm:clan vtm:clan-banu-haqim ;
+    vtm:generation 11 ;
+    vtm:bloodPotency 2 ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:position vtm:position-sheriff ;
+    vtm:hasDisciplineRating :bruno-calvo\/n\/d1 ;
+    rpg:appearsInSession :sesion-2 .
+
+:bruno-calvo\/n\/d1 a vtm:DisciplineRating ; rpg:source :bruno-calvo ; vtm:discipline vtm:discipline-celerity ; vtm:dots 3 .
+
+:gonzalo-ferrer a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Gonzalo Ferrer" ;
+    schema:description "Antiguo Sheriff de la ciudad. Sufrió la Muerte Definitiva en el Retiro; sus cenizas no explican quién lo hizo." ;
+    rpg:vitalStatus rpg:vital-dead ;
+    rpg:memberOf :camarilla-madrid ;
+    vtm:clan vtm:clan-gangrel ;
+    vtm:generation 10 ;
+    rpg:participatesIn :muerte-ferrer .
+
+:el-sordo a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "El Sordo" ;
+    schema:description "Malkavian que afirma haber conocido al pintor de la Quinta. Habla en acertijos y casi siempre acierta." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :ermita-florida ;
+    rpg:inspiredBy wd:Q5432 ;
+    vtm:clan vtm:clan-malkavian ;
+    vtm:generation 8 ;
+    vtm:embraceYear 1828 ;
+    vtm:bloodPotency 5 ;
+    vtm:sect vtm:sect-independent ;
+    vtm:hasDisciplineRating :el-sordo\/n\/d1 ;
+    rpg:possesses :carta-sordo ;
+    rpg:appearsInSession :sesion-3 .
+
+:el-sordo\/n\/d1 a vtm:DisciplineRating ; rpg:source :el-sordo ; vtm:discipline vtm:discipline-auspex ; vtm:dots 5 .
+
+:aurelio-benavente a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Aurelio Benavente" ;
+    schema:description "Regente de la capilla Tremere. Cortés, meticuloso y siempre un paso por delante." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :capilla-debod ;
+    rpg:memberOf :capilla-tremere ;
+    vtm:clan vtm:clan-tremere ;
+    vtm:generation 9 ;
+    vtm:sect vtm:sect-camarilla ;
+    vtm:position vtm:position-regent , vtm:position-primogen ;
+    vtm:hasDisciplineRating :aurelio-benavente\/n\/d1 ;
+    rpg:possesses :llave-capilla ;
+    rpg:appearsInSession :sesion-3 .
+
+:aurelio-benavente\/n\/d1 a vtm:DisciplineRating ; rpg:source :aurelio-benavente ; vtm:discipline vtm:discipline-blood-sorcery ; vtm:dots 4 .
+
+:valeria-monforte a rpg:NonPlayerCharacter , vtm:Vampire ;
+    rdfs:label "Valeria Monforte" ;
+    schema:description "Matriarca de la familia Monforte. Paga bien y nunca olvida una deuda." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :cementerio-almudena ;
+    rpg:memberOf :familia-monforte ;
+    vtm:clan vtm:clan-hecata ;
+    vtm:generation 10 ;
+    vtm:sect vtm:sect-independent ;
+    rpg:appearsInSession :sesion-2 .
+
+# ---------------------------------------------------------------
+# Ghoul y mortales / Ghoul and mortals
+# ---------------------------------------------------------------
+
+:manuel-arteaga a rpg:NonPlayerCharacter , vtm:Ghoul ;
+    rdfs:label "Manuel Arteaga" ;
+    schema:description "Chófer y hombre de confianza del Príncipe; sirve a la familia desde hace tres generaciones." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :palacio-linares ;
+    vtm:domitor :fermin-arteaga ;
+    vtm:hasBloodBond :manuel-arteaga\/n\/v1 ;
+    vtm:hasDisciplineRating :manuel-arteaga\/n\/d1 .
+
+:manuel-arteaga\/n\/v1 a vtm:BloodBond ; rpg:source :manuel-arteaga ;
+    rpg:target :fermin-arteaga ;
+    rpg:relationshipType vtm:rel-blood-bond ;
+    vtm:bondLevel 3 .
+:manuel-arteaga\/n\/d1 a vtm:DisciplineRating ; rpg:source :manuel-arteaga ; vtm:discipline vtm:discipline-fortitude ; vtm:dots 1 .
+
+:clara-vega a rpg:NonPlayerCharacter , vtm:Mortal ;
+    rdfs:label "Clara Vega" ;
+    schema:description "Hermana pequeña de Lucía, enfermera en el turno de noche. No sabe nada." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :lavapies ;
+    vtm:mortalRole vtm:role-touchstone ;
+    vtm:knowsOfKindred false ;
+    vtm:apparentAge 26 .
+
+:hugo-pena a rpg:NonPlayerCharacter , vtm:Mortal ;
+    rdfs:label "Hugo Peña" ;
+    schema:description "Pintor joven y sin dinero al que Teo protege en secreto." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:locatedIn :malasana ;
+    vtm:mortalRole vtm:role-touchstone ;
+    vtm:knowsOfKindred false .
+
+:ignacio-larra a rpg:NonPlayerCharacter , vtm:Mortal ;
+    rdfs:label "Padre Ignacio Larra" ;
+    schema:description "Sacerdote y cazador de la Sociedad de San Lorenzo. Ha visto demasiado para dudar." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    rpg:memberOf :sociedad-san-lorenzo ;
+    rpg:locatedIn :gran-via ;
+    vtm:mortalRole vtm:role-hunter ;
+    vtm:knowsOfKindred true ;
+    rpg:participatesIn :redada-gran-via ;
+    rpg:hasRelationship :ignacio-larra\/n\/r1 ;
+    rpg:appearsInSession :sesion-2 , :sesion-3 .
+
+:ignacio-larra\/n\/r1 a rpg:Relationship ; rpg:source :ignacio-larra ;
+    rpg:target :lucia-vega ;
+    rpg:relationshipType rpg:rel-enemy ;
+    rpg:strength -3 ;
+    schema:description "La reconoció durante la redada." ;
+    rpg:validFrom :sesion-3 .
+
+:paula-ibanez a rpg:NonPlayerCharacter , vtm:Mortal ;
+    rdfs:label "Inspectora Paula Ibáñez" ;
+    schema:description "Policía de la comisaría de Centro; contacto de Núria a cambio de información." ;
+    rpg:vitalStatus rpg:vital-alive ;
+    vtm:mortalRole vtm:role-contact ;
+    vtm:knowsOfKindred false ;
+    rpg:knows :nuria-sanz .
+
+# ---------------------------------------------------------------
+# Objetos / Items
+# ---------------------------------------------------------------
+
+:cuaderno-sordo a rpg:Item ;
+    rdfs:label "Cuaderno de la Quinta" ;
+    schema:description "Cuaderno de dibujos que El Sordo asegura haber perdido en 1940. Quien lo tenga sabrá dónde duermen los Antiguos." ;
+    rpg:inspiredBy wd:Q5432 .
+
+:carta-sordo a rpg:Item ;
+    rdfs:label "Carta lacrada del Sordo" ;
+    schema:description "Una carta que El Sordo entregará «a quien llegue a tiempo»." .
+
+:llave-capilla a rpg:Item ;
+    rdfs:label "Llave de bronce de la capilla" ;
+    schema:description "Abre la puerta oriental de la capilla tremere. Benavente nunca la presta." .
+
+# ---------------------------------------------------------------
+# Eventos / Events
+# ---------------------------------------------------------------
+
+:presentacion-principe a rpg:Event ;
+    rdfs:label "Presentación ante el Príncipe" ;
+    schema:description "La coterie es presentada en el Elíseo y recibe el encargo de investigar la muerte de Ferrer." ;
+    rpg:occursIn :palacio-linares ;
+    rpg:inWorldDateLabel "12 de octubre" ;
+    rpg:appearsInSession :sesion-1 .
+
+:muerte-ferrer a rpg:Event ;
+    rdfs:label "Muerte Definitiva de Gonzalo Ferrer" ;
+    schema:description "El Sheriff fue destruido junto al estanque del Retiro. Solo quedaron cenizas y una estaca de fresno." ;
+    rpg:occursIn :retiro ;
+    rpg:inWorldDateLabel "Julio, tres meses antes" .
+
+:redada-gran-via a rpg:Event ;
+    rdfs:label "Redada en la Gran Vía" ;
+    schema:description "La Sociedad de San Lorenzo irrumpe en un club donde cazaba Lucía." ;
+    rpg:occursIn :gran-via ;
+    rpg:inWorldDateLabel "15 de octubre" ;
+    rpg:appearsInSession :sesion-2 .
+
+# Participación de los PJ
+:lucia-vega rpg:participatesIn :presentacion-principe , :redada-gran-via .
+:teo-almagro rpg:participatesIn :presentacion-principe .
+:nuria-sanz rpg:participatesIn :presentacion-principe .
+:fermin-arteaga rpg:participatesIn :presentacion-principe .
+
+# Relaciones de conocimiento
+:lucia-vega rpg:knows :teo-almagro , :nuria-sanz , :elias-cobo .
+:teo-almagro rpg:knows :nuria-sanz .
+
+# ---------------------------------------------------------------
+# Tramas / Plots
+# ---------------------------------------------------------------
+
+:trama-ferrer a rpg:Plot ;
+    rdfs:label "¿Quién destruyó a Gonzalo Ferrer?" ;
+    schema:description "El Príncipe quiere un culpable; los anarquistas, que no sea uno de los suyos." ;
+    rpg:plotStatus rpg:plot-open ;
+    rpg:involves :gonzalo-ferrer , :bruno-calvo , :ignacio-larra , :muerte-ferrer , :retiro ;
+    rpg:appearsInSession :sesion-1 , :sesion-2 , :sesion-3 .
+
+:trama-cuaderno a rpg:Plot ;
+    rdfs:label "El cuaderno perdido del Sordo" ;
+    schema:description "El Sordo pide recuperar su cuaderno antes de que lo encuentre la capilla Tremere." ;
+    rpg:plotStatus rpg:plot-open ;
+    rpg:involves :el-sordo , :cuaderno-sordo , :aurelio-benavente , :teo-almagro ;
+    rpg:appearsInSession :sesion-3 .
+
+:trama-pacto-malasana a rpg:Plot ;
+    rdfs:label "El pacto de Malasaña" ;
+    schema:description "Antiguo acuerdo entre Isabel y Darío por el reparto de Malasaña. Se cerró antes de la crónica." ;
+    rpg:plotStatus rpg:plot-resolved ;
+    rpg:involves :isabel-sandoval , :dario-requena , :malasana .

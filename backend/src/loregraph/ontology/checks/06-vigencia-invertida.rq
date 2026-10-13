@@ -1,0 +1,15 @@
+# titulo: Vigencia invertida
+# titulo_en: Inverted validity
+# severidad: error
+# descripcion: Una relación o hecho termina antes de empezar.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?entidad ?relacionada ?mensaje WHERE {
+  ?f rpg:source ?entidad ;
+     rpg:validFrom/rpg:sessionNumber ?d ;
+     rpg:validUntil/rpg:sessionNumber ?u .
+  FILTER (?u <= ?d)
+  OPTIONAL { ?f rpg:target ?relacionada }
+  BIND (CONCAT("Vigente desde la sesión ", STR(?d), " hasta la ", STR(?u), ".") AS ?mensaje)
+}

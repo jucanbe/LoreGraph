@@ -1,0 +1,19 @@
+# Finales de línea normalizados (el proyecto se desarrolla también en Windows)
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.zip binary
+
+# Archivos generados: sin diff ruidoso en las revisiones
+backend/uv.lock linguist-generated=true -diff
+frontend/package-lock.json linguist-generated=true -diff
+frontend/openapi.json linguist-generated=true
+frontend/src/api/schema.d.ts linguist-generated=true

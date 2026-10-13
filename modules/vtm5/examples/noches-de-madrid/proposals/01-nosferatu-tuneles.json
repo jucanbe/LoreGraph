@@ -1,0 +1,29 @@
+{
+  "agente": "mcp:claude-code",
+  "peticion": "Crea un PNJ Nosferatu que vigile los túneles de la estación fantasma y conozca a Núria.",
+  "resumen": "Nuevo PNJ Nosferatu, guardián de los túneles, aliado ambiguo de Núria.",
+  "entidades": [
+    {
+      "ref": "nuevo:1",
+      "clases": ["rpg:NonPlayerCharacter", "vtm:Vampire"],
+      "valores": {
+        "rdfs:label": ["Remedios Ortiz «la Topo»"],
+        "schema:description": ["Nosferatu anciana que cobra peaje en los túneles del antiguo metro. Nadie pasa sin contarle un secreto."],
+        "rpg:locatedIn": ["tuneles-chamberi"],
+        "rpg:vitalStatus": ["rpg:vital-alive"],
+        "vtm:clan": ["vtm:clan-nosferatu"],
+        "vtm:generation": [10],
+        "vtm:sect": ["vtm:sect-camarilla"],
+        "vtm:position": ["vtm:position-primogen"],
+        "rpg:knows": ["nuria-sanz"],
+        "vtm:hasDisciplineRating": [
+          {"vtm:discipline": ["vtm:discipline-obfuscate"], "vtm:dots": [4]},
+          {"vtm:discipline": ["vtm:discipline-animalism"], "vtm:dots": [2]}
+        ]
+      }
+    }
+  ],
+  "anadir": [
+    {"s": "nuevo:1", "p": "rpg:memberOf", "o": "camarilla-madrid"}
+  ]
+}

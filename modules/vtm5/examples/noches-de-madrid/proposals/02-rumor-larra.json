@@ -1,0 +1,9 @@
+{
+  "agente": "local:qwen3:8b",
+  "peticion": "Añade a lo que sabe Lucía el rumor de que el padre Larra tiene un informante dentro de la Camarilla.",
+  "resumen": "Rumor en el conocimiento de Lucía: Larra conoce a Bruno Calvo.",
+  "destino": "conocimiento/lucia-vega",
+  "anadir": [
+    {"s": "ignacio-larra", "p": "rpg:knows", "o": "bruno-calvo"}
+  ]
+}

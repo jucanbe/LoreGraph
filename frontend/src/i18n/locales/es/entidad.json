@@ -1,0 +1,74 @@
+{
+  "pestanas": {
+    "ficha": "Ficha",
+    "relaciones": "Relaciones",
+    "conocimiento": "Lo que sabe",
+    "mundoReal": "Mundo real",
+    "procedencia": "Procedencia",
+    "historia": "Historia"
+  },
+  "modificada": "Modificada {{tiempo}}",
+  "vecindario": "Vecindario",
+  "si": "Sí",
+  "no": "No",
+  "relaciones": {
+    "vacio": "Esta entidad aún no tiene relaciones",
+    "salientes": "Salientes",
+    "entrantes": "Entrantes",
+    "ninguna": "Ninguna",
+    "desde": "desde {{s}}",
+    "hasta": "hasta {{s}}"
+  },
+  "procedencia": {
+    "agente": "agente de IA",
+    "humano": "humano",
+    "propuesta": "ver propuesta",
+    "detalle": "{{a}} añadidas · {{e}} eliminadas"
+  },
+  "conocimiento": {
+    "explicacion": "Creencias del personaje comparadas con el canon de la campaña.",
+    "verGrafo": "Ver el mundo como lo conoce",
+    "canon": "en el canon",
+    "estado": {
+      "confirmado": "Coincide con el canon",
+      "falso": "Contradice el canon",
+      "no_verificado": "No consta en el canon"
+    }
+  },
+  "retrato": {
+    "alt": "Retrato de {{nombre}}",
+    "vacio": "Sin retrato",
+    "pista": "Añade una imagen en el campo «imagen» (foaf:depiction).",
+    "soltar": "Suelta la imagen para subirla",
+    "formatoNoValido": "Formato no admitido: usa PNG, JPEG, WebP o GIF.",
+    "errorSubir": "No se pudo subir el retrato",
+    "subiendo": "Subiendo…",
+    "subir": "Subir retrato",
+    "pistaSubir": "Haz clic o arrastra una imagen (PNG, JPEG, WebP o GIF).",
+    "subido": "Retrato actualizado",
+    "cambiar": "Cambiar retrato",
+    "quitado": "Retrato quitado",
+    "quitar": "Quitar retrato"
+  },
+  "borrar": {
+    "titulo": "¿Borrar «{{nombre}}»?",
+    "aviso": "También se eliminarán las referencias a esta entidad y sus relaciones cualificadas. El cambio queda registrado en la procedencia.",
+    "hecho": "«{{nombre}}» borrada"
+  },
+  "coherencia": {
+    "titulo_one": "{{count}} incoherencia en esta entidad",
+    "titulo_other": "{{count}} incoherencias en esta entidad",
+    "ver": "Ver informe de coherencia"
+  },
+  "historia": {
+    "actual": "actualidad",
+    "explicacion": "Valores que ha tenido esta entidad a lo largo de las sesiones.",
+    "inicio": "el principio",
+    "tramo": "De {{desde}} a {{hasta}}",
+    "vigente": "Vigente"
+  },
+  "mapas": {
+    "titulo": "Aparece en mapas",
+    "ver": "Abrir mapa {{nombre}}"
+  }
+}

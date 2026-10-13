@@ -1,0 +1,81 @@
+# Contexto para modelos de lenguaje (basado en el SRD 5.1, CC-BY-4.0; redacción propia).
+# Las estadísticas con rango y valores se generan solas desde shapes.ttl;
+# aquí solo se explica qué significan.
+
+resumen:
+  es: >-
+    Fantasía heroica clásica. Un grupo de aventureros de distintas especies (humanos, elfos,
+    enanos, medianos…) y clases (guerrero, mago, clérigo, pícaro…) explora mazmorras, viaja por
+    tierras salvajes y se enfrenta a monstruos, cultos y conspiraciones. Los personajes suben de
+    nivel (del 1 al 20) con la experiencia y ganan poderes y conjuros. La magia es real y está
+    organizada en escuelas y niveles de conjuro. El mundo de cada campaña lo define quien dirige:
+    el SRD no impone una ambientación concreta.
+  en: >-
+    Classic heroic fantasy. A party of adventurers of various species (humans, elves, dwarves,
+    halflings…) and classes (fighter, wizard, cleric, rogue…) explores dungeons, travels the
+    wilds and faces monsters, cults and conspiracies. Characters level up (1 to 20) through
+    experience and gain powers and spells. Magic is real and organised in schools and spell
+    levels. Each campaign's world is defined by the game master: the SRD imposes no setting.
+
+estadisticas:
+  - clave: dnd:strength
+    explicacion: { es: "Fuerza física: atletismo, golpes cuerpo a cuerpo, carga.", en: "Physical might: athletics, melee hits, carrying." }
+    escala: { es: "10 = humano medio (modificador 0); cada 2 puntos = +1; 18 = excepcional; 20 = máximo normal de un aventurero", en: "10 = average human (modifier 0); every 2 points = +1; 18 = exceptional; 20 = usual adventurer maximum" }
+  - clave: dnd:dexterity
+    explicacion: { es: "Agilidad y reflejos: sigilo, armas a distancia, clase de armadura ligera.", en: "Agility and reflexes: stealth, ranged weapons, light-armour AC." }
+    escala: { es: "Igual que todas las características: 10 = media, modificador = (valor − 10) / 2 redondeado hacia abajo", en: "Like all abilities: 10 = average, modifier = (score − 10) / 2 rounded down" }
+  - clave: dnd:constitution
+    explicacion: { es: "Aguante y salud: suma a los puntos de golpe.", en: "Stamina and health: adds to hit points." }
+  - clave: dnd:intelligence
+    explicacion: { es: "Razonamiento y memoria; característica de lanzamiento de los magos.", en: "Reasoning and memory; wizards' spellcasting ability." }
+  - clave: dnd:wisdom
+    explicacion: { es: "Percepción e intuición; característica de clérigos, druidas y exploradores.", en: "Perception and insight; clerics', druids' and rangers' ability." }
+  - clave: dnd:charisma
+    explicacion: { es: "Presencia y persuasión; característica de bardos, hechiceros, brujos y paladines.", en: "Presence and persuasion; bards', sorcerers', warlocks' and paladins' ability." }
+  - clave: dnd:armorClass
+    explicacion: { es: "Dificultad para ser golpeado.", en: "How hard the creature is to hit." }
+    escala: { es: "10–12 = sin armadura; 14–16 = armadura media o escudo; 18+ = armadura pesada y escudo", en: "10–12 = unarmoured; 14–16 = medium armour or shield; 18+ = heavy armour and shield" }
+  - clave: dnd:hitPointMax
+    explicacion: { es: "Daño que aguanta antes de caer. Crece con el nivel.", en: "Damage it can take before dropping. Grows with level." }
+    escala: { es: "Nivel 1: 6–13; nivel 5: unos 30–50; nivel 10: unos 60–100", en: "Level 1: 6–13; level 5: about 30–50; level 10: about 60–100" }
+  - clave: dnd:challengeRating
+    explicacion: { es: "Peligrosidad de una criatura frente a un grupo de cuatro aventureros.", en: "How dangerous a creature is for a party of four adventurers." }
+    escala: { es: "Un VD igual al nivel del grupo es un reto serio para cuatro personajes", en: "A CR equal to the party's level is a serious challenge for four characters" }
+  - clave: dnd:levels
+    explicacion: { es: "Niveles en una clase; la suma de todas las clases es el nivel total (máximo 20).", en: "Levels in one class; the sum over all classes is the total level (max 20)." }
+  - clave: dnd:spellLevel
+    explicacion: { es: "Nivel del conjuro: 0 son trucos (ilimitados); 1–9 gastan espacios de conjuro.", en: "Spell level: 0 are cantrips (unlimited); 1–9 consume spell slots." }
+  - clave: dnd:exhaustionLevel
+    explicacion: { es: "Cansancio acumulado; cada nivel añade penalizaciones y el 6 es la muerte.", en: "Accumulated fatigue; each level adds penalties and level 6 is death." }
+  - clave: dnd:proficiencyBonus
+    explicacion: { es: "Bonificador de competencia (se deduce del nivel): +2 en niveles 1–4, +3 en 5–8, +4 en 9–12, +5 en 13–16, +6 en 17–20.", en: "Proficiency bonus (derived from level): +2 at levels 1–4, +3 at 5–8, +4 at 9–12, +5 at 13–16, +6 at 17–20." }
+
+reglas:
+  - { es: "Para resolver una acción incierta se tira un d20, se suma el modificador de característica y, si se es competente, el bonificador de competencia; se compara con una dificultad (10 fácil, 15 media, 20 difícil).", en: "To resolve an uncertain action roll a d20, add the ability modifier and, if proficient, the proficiency bonus; compare with a DC (10 easy, 15 medium, 20 hard)." }
+  - { es: "Ventaja: tirar dos d20 y quedarse con el mayor; desventaja: con el menor.", en: "Advantage: roll two d20 and keep the higher; disadvantage: the lower." }
+  - { es: "Un personaje con 0 puntos de golpe cae inconsciente y hace tiradas de salvación contra la muerte.", en: "A character at 0 hit points falls unconscious and makes death saving throws." }
+  - { es: "Los lanzadores tienen espacios de conjuro por nivel que recuperan con un descanso largo.", en: "Casters have spell slots per level, regained after a long rest." }
+  - { es: "Mantener un conjuro de concentración impide mantener otro a la vez.", en: "Maintaining a concentration spell prevents maintaining another at the same time." }
+  - { es: "El multiclase reparte los niveles entre varias clases; el nivel total no supera 20.", en: "Multiclassing splits levels among classes; total level never exceeds 20." }
+
+glosario:
+  - { termino: VD, clave: dnd:challengeRating, definicion: { es: "Valor de desafío de una criatura.", en: "Challenge rating of a creature." } }
+  - { termino: CA, clave: dnd:armorClass, definicion: { es: "Clase de armadura.", en: "Armour class." } }
+  - { termino: PG, clave: dnd:hitPointMax, definicion: { es: "Puntos de golpe.", en: "Hit points." } }
+  - { termino: Truco, definicion: { es: "Conjuro de nivel 0 que se lanza sin gastar espacios.", en: "Level-0 spell cast without spending slots." } }
+  - { termino: Descanso largo, definicion: { es: "Unas 8 horas de reposo; recupera puntos de golpe y espacios de conjuro.", en: "About 8 hours of rest; restores hit points and spell slots." } }
+  - { termino: Competencia, definicion: { es: "Entrenamiento en una habilidad, arma o salvación que permite sumar el bonificador de competencia.", en: "Training in a skill, weapon or save that adds the proficiency bonus." } }
+  - { termino: Sintonización, clave: dnd:requiresAttunement, definicion: { es: "Vínculo con un objeto mágico; como máximo tres a la vez.", en: "Bond with a magic item; at most three at a time." } }
+
+tono:
+  es: >-
+    Aventura heroica con peligro real: exploración, combate táctico, misterio y humor ocasional.
+    Los PNJ tienen motivaciones claras y los lugares guardan secretos y tesoros.
+  en: >-
+    Heroic adventure with real danger: exploration, tactical combat, mystery and occasional humour.
+    NPCs have clear motivations and places hide secrets and treasure.
+
+evitar:
+  - { es: "Usar nombres, lugares o dioses de mundos publicados que no estén en el SRD (p. ej. Reinos Olvidados).", en: "Using names, places or gods from published worlds not in the SRD (e.g. Forgotten Realms)." }
+  - { es: "Estadísticas fuera de rango: características de PJ por encima de 20 o niveles por encima de 20.", en: "Out-of-range stats: PC abilities above 20 or levels above 20." }
+  - { es: "Monstruos con VD muy por encima del nivel del grupo sin avisar de que es un encuentro mortal.", en: "Monsters with CR far above the party level without flagging a deadly encounter." }

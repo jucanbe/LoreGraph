@@ -1,0 +1,670 @@
+@prefix dnd:    <https://rpg-modules.example.net/dnd5e/ont#> .
+@prefix rpg:    <https://loregraph.example.org/ont/core#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+#################################################################
+# Vocabulario y catálogos del SRD 5.1 / SRD 5.1 vocabulary and catalogs
+#
+# Contiene material del System Reference Document 5.1 («SRD 5.1») de Wizards of
+# the Coast LLC, bajo licencia CC-BY-4.0. Solo se recogen nombres y datos
+# factuales breves; las descripciones son paráfrasis propias.
+#################################################################
+
+#################################################################
+# Características / Abilities
+#################################################################
+
+dnd:ability-str a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Fuerza"@es , "Strength"@en ; dnd:abbreviation "FUE / STR" ;
+    skos:definition "Potencia física y atletismo."@es , "Physical power and athletics."@en .
+dnd:ability-dex a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Destreza"@es , "Dexterity"@en ; dnd:abbreviation "DES / DEX" ;
+    skos:definition "Agilidad, reflejos y equilibrio."@es , "Agility, reflexes and balance."@en .
+dnd:ability-con a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Constitución"@es , "Constitution"@en ; dnd:abbreviation "CON / CON" ;
+    skos:definition "Salud, vigor y resistencia."@es , "Health, vigour and endurance."@en .
+dnd:ability-int a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Inteligencia"@es , "Intelligence"@en ; dnd:abbreviation "INT / INT" ;
+    skos:definition "Razonamiento, memoria y saber."@es , "Reasoning, memory and learning."@en .
+dnd:ability-wis a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Sabiduría"@es , "Wisdom"@en ; dnd:abbreviation "SAB / WIS" ;
+    skos:definition "Percepción, intuición y sentido común."@es , "Perception, intuition and common sense."@en .
+dnd:ability-cha a skos:Concept ; skos:inScheme dnd:Abilities ;
+    skos:prefLabel "Carisma"@es , "Charisma"@en ; dnd:abbreviation "CAR / CHA" ;
+    skos:definition "Presencia, persuasión y liderazgo."@es , "Presence, persuasion and leadership."@en .
+
+#################################################################
+# Habilidades (18) / Skills (18)
+#################################################################
+
+dnd:skill-acrobatics a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-dex ;
+    skos:prefLabel "Acrobacias"@es , "Acrobatics"@en .
+dnd:skill-animal-handling a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-wis ;
+    skos:prefLabel "Trato con animales"@es , "Animal Handling"@en .
+dnd:skill-arcana a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-int ;
+    skos:prefLabel "Conocimiento arcano"@es , "Arcana"@en .
+dnd:skill-athletics a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-str ;
+    skos:prefLabel "Atletismo"@es , "Athletics"@en .
+dnd:skill-deception a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-cha ;
+    skos:prefLabel "Engaño"@es , "Deception"@en .
+dnd:skill-history a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-int ;
+    skos:prefLabel "Historia"@es , "History"@en .
+dnd:skill-insight a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-wis ;
+    skos:prefLabel "Perspicacia"@es , "Insight"@en .
+dnd:skill-intimidation a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-cha ;
+    skos:prefLabel "Intimidación"@es , "Intimidation"@en .
+dnd:skill-investigation a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-int ;
+    skos:prefLabel "Investigación"@es , "Investigation"@en .
+dnd:skill-medicine a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-wis ;
+    skos:prefLabel "Medicina"@es , "Medicine"@en .
+dnd:skill-nature a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-int ;
+    skos:prefLabel "Naturaleza"@es , "Nature"@en .
+dnd:skill-perception a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-wis ;
+    skos:prefLabel "Percepción"@es , "Perception"@en .
+dnd:skill-performance a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-cha ;
+    skos:prefLabel "Interpretación"@es , "Performance"@en .
+dnd:skill-persuasion a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-cha ;
+    skos:prefLabel "Persuasión"@es , "Persuasion"@en .
+dnd:skill-religion a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-int ;
+    skos:prefLabel "Religión"@es , "Religion"@en .
+dnd:skill-sleight-of-hand a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-dex ;
+    skos:prefLabel "Juego de manos"@es , "Sleight of Hand"@en .
+dnd:skill-stealth a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-dex ;
+    skos:prefLabel "Sigilo"@es , "Stealth"@en .
+dnd:skill-survival a skos:Concept ; skos:inScheme dnd:Skills ; dnd:keyAbility dnd:ability-wis ;
+    skos:prefLabel "Supervivencia"@es , "Survival"@en .
+
+#################################################################
+# Alineamientos / Alignments
+#################################################################
+
+dnd:align-lg a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "legal bueno"@es , "lawful good"@en ;
+    skos:definition "Hace lo correcto dentro de un código o una ley."@es , "Does the right thing within a code or law."@en .
+dnd:align-ng a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "neutral bueno"@es , "neutral good"@en ;
+    skos:definition "Ayuda a los demás sin atarse a normas ni rebelarse contra ellas."@es , "Helps others without being bound by or rebelling against rules."@en .
+dnd:align-cg a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "caótico bueno"@es , "chaotic good"@en ;
+    skos:definition "Bondad guiada por la conciencia propia, no por la autoridad."@es , "Goodness guided by one's own conscience, not authority."@en .
+dnd:align-ln a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "legal neutral"@es , "lawful neutral"@en ;
+    skos:definition "El orden y la tradición por encima de todo."@es , "Order and tradition above all."@en .
+dnd:align-n a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "neutral"@es , "neutral"@en ;
+    skos:definition "Evita tomar partido en los grandes dilemas morales."@es , "Avoids taking sides in great moral dilemmas."@en .
+dnd:align-cn a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "caótico neutral"@es , "chaotic neutral"@en ;
+    skos:definition "Valora su libertad personal por encima de todo."@es , "Values personal freedom above everything."@en .
+dnd:align-le a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "legal malvado"@es , "lawful evil"@en ;
+    skos:definition "Usa el orden y las normas para dominar a otros."@es , "Uses order and rules to dominate others."@en .
+dnd:align-ne a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "neutral malvado"@es , "neutral evil"@en ;
+    skos:definition "Hace lo que le conviene sin remordimientos."@es , "Does whatever benefits it, without remorse."@en .
+dnd:align-ce a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "caótico malvado"@es , "chaotic evil"@en ;
+    skos:definition "Violencia arbitraria movida por la codicia o el odio."@es , "Arbitrary violence driven by greed or hatred."@en .
+dnd:align-unaligned a skos:Concept ; skos:inScheme dnd:Alignments ;
+    skos:prefLabel "sin alineamiento"@es , "unaligned"@en ;
+    skos:definition "Criaturas sin juicio moral: bestias, cienos, autómatas."@es , "Creatures without moral judgement: beasts, oozes, automata."@en .
+
+#################################################################
+# Tamaños / Sizes
+#################################################################
+
+dnd:size-tiny a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "1" ;
+    skos:prefLabel "Diminuto"@es , "Tiny"@en .
+dnd:size-small a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "2" ;
+    skos:prefLabel "Pequeño"@es , "Small"@en .
+dnd:size-medium a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "3" ;
+    skos:prefLabel "Mediano"@es , "Medium"@en .
+dnd:size-large a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "4" ;
+    skos:prefLabel "Grande"@es , "Large"@en .
+dnd:size-huge a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "5" ;
+    skos:prefLabel "Enorme"@es , "Huge"@en .
+dnd:size-gargantuan a skos:Concept ; skos:inScheme dnd:Sizes ; skos:notation "6" ;
+    skos:prefLabel "Gargantuesco"@es , "Gargantuan"@en .
+
+#################################################################
+# Tipos de criatura / Creature types
+#################################################################
+
+dnd:type-aberration a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "aberración"@es , "aberration"@en .
+dnd:type-beast a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "bestia"@es , "beast"@en .
+dnd:type-celestial a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "celestial"@es , "celestial"@en .
+dnd:type-construct a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "autómata"@es , "construct"@en .
+dnd:type-dragon a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "dragón"@es , "dragon"@en .
+dnd:type-elemental a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "elemental"@es , "elemental"@en .
+dnd:type-fey a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "feérico"@es , "fey"@en .
+dnd:type-fiend a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "infernal"@es , "fiend"@en .
+dnd:type-giant a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "gigante"@es , "giant"@en .
+dnd:type-humanoid a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "humanoide"@es , "humanoid"@en .
+dnd:type-monstrosity a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "monstruosidad"@es , "monstrosity"@en .
+dnd:type-ooze a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "cieno"@es , "ooze"@en .
+dnd:type-plant a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "planta"@es , "plant"@en .
+dnd:type-undead a skos:Concept ; skos:inScheme dnd:CreatureTypes ; skos:prefLabel "muerto viviente"@es , "undead"@en .
+
+#################################################################
+# Estados / Conditions
+#################################################################
+
+dnd:cond-blinded a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "cegado"@es , "blinded"@en ;
+    skos:definition "No ve; sus ataques tienen desventaja y los ataques contra él, ventaja."@es , "Cannot see; its attacks have disadvantage and attacks against it have advantage."@en .
+dnd:cond-charmed a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "hechizado"@es , "charmed"@en ;
+    skos:definition "No puede dañar a quien le hechizó y este tiene ventaja al tratar con él."@es , "Cannot harm its charmer, who has advantage when dealing with it."@en .
+dnd:cond-deafened a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "ensordecido"@es , "deafened"@en ;
+    skos:definition "No oye nada."@es , "Cannot hear anything."@en .
+dnd:cond-exhaustion a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "cansancio"@es , "exhaustion"@en ;
+    skos:definition "Penalizaciones acumulativas en seis niveles (ver dnd:exhaustionLevel)."@es , "Cumulative penalties in six levels (see dnd:exhaustionLevel)."@en .
+dnd:cond-frightened a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "asustado"@es , "frightened"@en ;
+    skos:definition "Desventaja mientras vea la fuente de su miedo; no puede acercarse a ella."@es , "Disadvantage while it sees the source of its fear; cannot approach it."@en .
+dnd:cond-grappled a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "agarrado"@es , "grappled"@en ;
+    skos:definition "Su velocidad pasa a ser 0."@es , "Its speed becomes 0."@en .
+dnd:cond-incapacitated a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "incapacitado"@es , "incapacitated"@en ;
+    skos:definition "No puede realizar acciones ni reacciones."@es , "Cannot take actions or reactions."@en .
+dnd:cond-invisible a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "invisible"@es , "invisible"@en ;
+    skos:definition "No puede ser visto sin magia o sentidos especiales."@es , "Cannot be seen without magic or special senses."@en .
+dnd:cond-paralyzed a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "paralizado"@es , "paralyzed"@en ;
+    skos:definition "Incapacitado e inmóvil; los golpes cercanos son críticos."@es , "Incapacitated and unable to move; nearby hits are critical."@en .
+dnd:cond-petrified a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "petrificado"@es , "petrified"@en ;
+    skos:definition "Convertido en sustancia inanimada, como la piedra."@es , "Turned into an inanimate substance, such as stone."@en .
+dnd:cond-poisoned a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "envenenado"@es , "poisoned"@en ;
+    skos:definition "Desventaja en ataques y pruebas de característica."@es , "Disadvantage on attacks and ability checks."@en .
+dnd:cond-prone a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "derribado"@es , "prone"@en ;
+    skos:definition "Tumbado en el suelo; solo puede arrastrarse."@es , "Lying on the ground; can only crawl."@en .
+dnd:cond-restrained a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "apresado"@es , "restrained"@en ;
+    skos:definition "Inmovilizado; sus ataques y salvaciones de Destreza sufren."@es , "Held fast; its attacks and Dexterity saves suffer."@en .
+dnd:cond-stunned a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "aturdido"@es , "stunned"@en ;
+    skos:definition "Incapacitado y apenas puede hablar."@es , "Incapacitated and can barely speak."@en .
+dnd:cond-unconscious a skos:Concept ; skos:inScheme dnd:Conditions ; skos:prefLabel "inconsciente"@es , "unconscious"@en ;
+    skos:definition "Sin sentido: incapacitado, derribado y ajeno a su entorno."@es , "Senseless: incapacitated, prone and unaware of its surroundings."@en .
+
+#################################################################
+# Tipos de daño / Damage types
+#################################################################
+
+dnd:dmg-acid a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "ácido"@es , "acid"@en .
+dnd:dmg-bludgeoning a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "contundente"@es , "bludgeoning"@en .
+dnd:dmg-cold a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "frío"@es , "cold"@en .
+dnd:dmg-fire a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "fuego"@es , "fire"@en .
+dnd:dmg-force a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "fuerza"@es , "force"@en .
+dnd:dmg-lightning a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "relámpago"@es , "lightning"@en .
+dnd:dmg-necrotic a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "necrótico"@es , "necrotic"@en .
+dnd:dmg-piercing a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "perforante"@es , "piercing"@en .
+dnd:dmg-poison a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "veneno"@es , "poison"@en .
+dnd:dmg-psychic a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "psíquico"@es , "psychic"@en .
+dnd:dmg-radiant a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "radiante"@es , "radiant"@en .
+dnd:dmg-slashing a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "cortante"@es , "slashing"@en .
+dnd:dmg-thunder a skos:Concept ; skos:inScheme dnd:DamageTypes ; skos:prefLabel "trueno"@es , "thunder"@en .
+
+#################################################################
+# Escuelas de magia / Schools of magic
+#################################################################
+
+dnd:school-abjuration a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "abjuración"@es , "abjuration"@en ;
+    skos:definition "Protección, bloqueo y destierro."@es , "Protection, warding and banishment."@en .
+dnd:school-conjuration a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "conjuración"@es , "conjuration"@en ;
+    skos:definition "Traer criaturas u objetos y teletransportarse."@es , "Summoning creatures or objects and teleporting."@en .
+dnd:school-divination a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "adivinación"@es , "divination"@en ;
+    skos:definition "Revelar información oculta."@es , "Revealing hidden information."@en .
+dnd:school-enchantment a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "encantamiento"@es , "enchantment"@en ;
+    skos:definition "Influir en la mente de otros."@es , "Influencing the minds of others."@en .
+dnd:school-evocation a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "evocación"@es , "evocation"@en ;
+    skos:definition "Manipular energía: fuego, rayos, luz, curación."@es , "Shaping energy: fire, lightning, light, healing."@en .
+dnd:school-illusion a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "ilusionismo"@es , "illusion"@en ;
+    skos:definition "Engañar a los sentidos."@es , "Deceiving the senses."@en .
+dnd:school-necromancy a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "nigromancia"@es , "necromancy"@en ;
+    skos:definition "Fuerzas de la vida y la muerte."@es , "Forces of life and death."@en .
+dnd:school-transmutation a skos:Concept ; skos:inScheme dnd:SpellSchools ; skos:prefLabel "transmutación"@es , "transmutation"@en ;
+    skos:definition "Cambiar las propiedades de criaturas y cosas."@es , "Changing the properties of creatures and things."@en .
+
+#################################################################
+# Categorías de equipo y rareza / Equipment categories and rarity
+#################################################################
+
+dnd:weapon-simple-melee a skos:Concept ; skos:inScheme dnd:WeaponCategories ;
+    skos:prefLabel "sencilla cuerpo a cuerpo"@es , "simple melee"@en .
+dnd:weapon-simple-ranged a skos:Concept ; skos:inScheme dnd:WeaponCategories ;
+    skos:prefLabel "sencilla a distancia"@es , "simple ranged"@en .
+dnd:weapon-martial-melee a skos:Concept ; skos:inScheme dnd:WeaponCategories ;
+    skos:prefLabel "marcial cuerpo a cuerpo"@es , "martial melee"@en .
+dnd:weapon-martial-ranged a skos:Concept ; skos:inScheme dnd:WeaponCategories ;
+    skos:prefLabel "marcial a distancia"@es , "martial ranged"@en .
+
+dnd:armor-light a skos:Concept ; skos:inScheme dnd:ArmorCategories ; skos:prefLabel "ligera"@es , "light"@en .
+dnd:armor-medium a skos:Concept ; skos:inScheme dnd:ArmorCategories ; skos:prefLabel "intermedia"@es , "medium"@en .
+dnd:armor-heavy a skos:Concept ; skos:inScheme dnd:ArmorCategories ; skos:prefLabel "pesada"@es , "heavy"@en .
+dnd:armor-shield a skos:Concept ; skos:inScheme dnd:ArmorCategories ; skos:prefLabel "escudo"@es , "shield"@en .
+
+dnd:rarity-common a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "1" ; skos:prefLabel "común"@es , "common"@en .
+dnd:rarity-uncommon a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "2" ; skos:prefLabel "poco común"@es , "uncommon"@en .
+dnd:rarity-rare a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "3" ; skos:prefLabel "raro"@es , "rare"@en .
+dnd:rarity-very-rare a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "4" ; skos:prefLabel "muy raro"@es , "very rare"@en .
+dnd:rarity-legendary a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "5" ; skos:prefLabel "legendario"@es , "legendary"@en .
+dnd:rarity-artifact a skos:Concept ; skos:inScheme dnd:Rarities ; skos:notation "6" ; skos:prefLabel "artefacto"@es , "artifact"@en .
+
+#################################################################
+# Clases (12) / Classes (12)
+#################################################################
+
+dnd:class-barbarian a dnd:CharacterClass ;
+    rdfs:label "Bárbaro"@es , "Barbarian"@en ;
+    schema:description "Combatiente feroz que se apoya en su furia y su aguante."@es , "Fierce warrior relying on rage and toughness."@en ;
+    dnd:hitDie 12 ; dnd:primaryAbility dnd:ability-str ;
+    dnd:classSavingThrow dnd:ability-str , dnd:ability-con .
+
+dnd:class-bard a dnd:CharacterClass ;
+    rdfs:label "Bardo"@es , "Bard"@en ;
+    schema:description "Artista cuya música y palabras tienen poder mágico."@es , "Performer whose music and words carry magical power."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-cha ; dnd:spellcastingAbility dnd:ability-cha ;
+    dnd:classSavingThrow dnd:ability-dex , dnd:ability-cha .
+
+dnd:class-cleric a dnd:CharacterClass ;
+    rdfs:label "Clérigo"@es , "Cleric"@en ;
+    schema:description "Sacerdote que canaliza el poder de una divinidad."@es , "Priest channelling the power of a deity."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-wis ; dnd:spellcastingAbility dnd:ability-wis ;
+    dnd:classSavingThrow dnd:ability-wis , dnd:ability-cha .
+
+dnd:class-druid a dnd:CharacterClass ;
+    rdfs:label "Druida"@es , "Druid"@en ;
+    schema:description "Guardián de la naturaleza capaz de adoptar formas animales."@es , "Guardian of nature able to take animal shapes."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-wis ; dnd:spellcastingAbility dnd:ability-wis ;
+    dnd:classSavingThrow dnd:ability-int , dnd:ability-wis .
+
+dnd:class-fighter a dnd:CharacterClass ;
+    rdfs:label "Guerrero"@es , "Fighter"@en ;
+    schema:description "Experto en armas y armaduras de todo tipo."@es , "Expert in all kinds of weapons and armor."@en ;
+    dnd:hitDie 10 ; dnd:primaryAbility dnd:ability-str , dnd:ability-dex ;
+    dnd:classSavingThrow dnd:ability-str , dnd:ability-con .
+
+dnd:class-monk a dnd:CharacterClass ;
+    rdfs:label "Monje"@es , "Monk"@en ;
+    schema:description "Artista marcial que domina la energía interior (ki)."@es , "Martial artist mastering inner energy (ki)."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-dex , dnd:ability-wis ;
+    dnd:classSavingThrow dnd:ability-str , dnd:ability-dex .
+
+dnd:class-paladin a dnd:CharacterClass ;
+    rdfs:label "Paladín"@es , "Paladin"@en ;
+    schema:description "Guerrero sagrado ligado por un juramento."@es , "Holy warrior bound by an oath."@en ;
+    dnd:hitDie 10 ; dnd:primaryAbility dnd:ability-str , dnd:ability-cha ; dnd:spellcastingAbility dnd:ability-cha ;
+    dnd:classSavingThrow dnd:ability-wis , dnd:ability-cha .
+
+dnd:class-ranger a dnd:CharacterClass ;
+    rdfs:label "Explorador"@es , "Ranger"@en ;
+    schema:description "Rastreador de las tierras salvajes y cazador de amenazas."@es , "Wilderness tracker and hunter of threats."@en ;
+    dnd:hitDie 10 ; dnd:primaryAbility dnd:ability-dex , dnd:ability-wis ; dnd:spellcastingAbility dnd:ability-wis ;
+    dnd:classSavingThrow dnd:ability-str , dnd:ability-dex .
+
+dnd:class-rogue a dnd:CharacterClass ;
+    rdfs:label "Pícaro"@es , "Rogue"@en ;
+    schema:description "Especialista en sigilo, trampas y golpes certeros."@es , "Specialist in stealth, traps and precise strikes."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-dex ;
+    dnd:classSavingThrow dnd:ability-dex , dnd:ability-int .
+
+dnd:class-sorcerer a dnd:CharacterClass ;
+    rdfs:label "Hechicero"@es , "Sorcerer"@en ;
+    schema:description "Lanzador con magia innata, heredada o recibida."@es , "Caster with innate, inherited or gifted magic."@en ;
+    dnd:hitDie 6 ; dnd:primaryAbility dnd:ability-cha ; dnd:spellcastingAbility dnd:ability-cha ;
+    dnd:classSavingThrow dnd:ability-con , dnd:ability-cha .
+
+dnd:class-warlock a dnd:CharacterClass ;
+    rdfs:label "Brujo"@es , "Warlock"@en ;
+    schema:description "Lanzador que obtiene su magia de un pacto con un ser poderoso."@es , "Caster drawing magic from a pact with a powerful being."@en ;
+    dnd:hitDie 8 ; dnd:primaryAbility dnd:ability-cha ; dnd:spellcastingAbility dnd:ability-cha ;
+    dnd:classSavingThrow dnd:ability-wis , dnd:ability-cha .
+
+dnd:class-wizard a dnd:CharacterClass ;
+    rdfs:label "Mago"@es , "Wizard"@en ;
+    schema:description "Estudioso de la magia arcana que guarda sus conjuros en un libro."@es , "Scholar of arcane magic who keeps spells in a book."@en ;
+    dnd:hitDie 6 ; dnd:primaryAbility dnd:ability-int ; dnd:spellcastingAbility dnd:ability-int ;
+    dnd:classSavingThrow dnd:ability-int , dnd:ability-wis .
+
+#################################################################
+# Subclases del SRD (una por clase) / SRD subclasses (one per class)
+#################################################################
+
+dnd:subclass-berserker a dnd:Subclass ; dnd:subclassOf dnd:class-barbarian ;
+    rdfs:label "Senda del berserker"@es , "Path of the Berserker"@en .
+dnd:subclass-lore a dnd:Subclass ; dnd:subclassOf dnd:class-bard ;
+    rdfs:label "Colegio del conocimiento"@es , "College of Lore"@en .
+dnd:subclass-life a dnd:Subclass ; dnd:subclassOf dnd:class-cleric ;
+    rdfs:label "Dominio de la vida"@es , "Life Domain"@en .
+dnd:subclass-land a dnd:Subclass ; dnd:subclassOf dnd:class-druid ;
+    rdfs:label "Círculo de la tierra"@es , "Circle of the Land"@en .
+dnd:subclass-champion a dnd:Subclass ; dnd:subclassOf dnd:class-fighter ;
+    rdfs:label "Campeón"@es , "Champion"@en .
+dnd:subclass-open-hand a dnd:Subclass ; dnd:subclassOf dnd:class-monk ;
+    rdfs:label "Camino de la mano abierta"@es , "Way of the Open Hand"@en .
+dnd:subclass-devotion a dnd:Subclass ; dnd:subclassOf dnd:class-paladin ;
+    rdfs:label "Juramento de devoción"@es , "Oath of Devotion"@en .
+dnd:subclass-hunter a dnd:Subclass ; dnd:subclassOf dnd:class-ranger ;
+    rdfs:label "Cazador"@es , "Hunter"@en .
+dnd:subclass-thief a dnd:Subclass ; dnd:subclassOf dnd:class-rogue ;
+    rdfs:label "Ladrón"@es , "Thief"@en .
+dnd:subclass-draconic a dnd:Subclass ; dnd:subclassOf dnd:class-sorcerer ;
+    rdfs:label "Linaje dracónico"@es , "Draconic Bloodline"@en .
+dnd:subclass-fiend a dnd:Subclass ; dnd:subclassOf dnd:class-warlock ;
+    rdfs:label "El infernal"@es , "The Fiend"@en .
+dnd:subclass-evocation a dnd:Subclass ; dnd:subclassOf dnd:class-wizard ;
+    rdfs:label "Escuela de evocación"@es , "School of Evocation"@en .
+
+#################################################################
+# Especies («razas» del SRD 5.1) / Species (SRD 5.1 "races")
+#################################################################
+
+dnd:species-dwarf a dnd:Species ; rdfs:label "Enano"@es , "Dwarf"@en ;
+    schema:description "Pueblo robusto de mineros y artesanos, resistente al veneno."@es , "Sturdy folk of miners and crafters, resistant to poison."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 25 .
+dnd:species-hill-dwarf a dnd:Species ; rdfs:label "Enano de las colinas"@es , "Hill Dwarf"@en ;
+    dnd:subspeciesOf dnd:species-dwarf ; dnd:size dnd:size-medium ; dnd:speed 25 .
+dnd:species-elf a dnd:Species ; rdfs:label "Elfo"@es , "Elf"@en ;
+    schema:description "Pueblo longevo y grácil, de sentidos agudos y ligado a la magia."@es , "Long-lived, graceful folk with keen senses and ties to magic."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-high-elf a dnd:Species ; rdfs:label "Alto elfo"@es , "High Elf"@en ;
+    dnd:subspeciesOf dnd:species-elf ; dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-halfling a dnd:Species ; rdfs:label "Mediano"@es , "Halfling"@en ;
+    schema:description "Gente menuda, afortunada y amante de las comodidades."@es , "Small, lucky folk fond of home comforts."@en ;
+    dnd:size dnd:size-small ; dnd:speed 25 .
+dnd:species-lightfoot-halfling a dnd:Species ; rdfs:label "Mediano piesligeros"@es , "Lightfoot Halfling"@en ;
+    dnd:subspeciesOf dnd:species-halfling ; dnd:size dnd:size-small ; dnd:speed 25 .
+dnd:species-human a dnd:Species ; rdfs:label "Humano"@es , "Human"@en ;
+    schema:description "Pueblo adaptable y ambicioso, presente en todas partes."@es , "Adaptable, ambitious folk found everywhere."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-dragonborn a dnd:Species ; rdfs:label "Dracónido"@es , "Dragonborn"@en ;
+    schema:description "Humanoides de linaje dragontino con aliento elemental."@es , "Humanoids of draconic lineage with an elemental breath."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-gnome a dnd:Species ; rdfs:label "Gnomo"@es , "Gnome"@en ;
+    schema:description "Pequeños inventores curiosos y entusiastas."@es , "Small, curious and enthusiastic tinkerers."@en ;
+    dnd:size dnd:size-small ; dnd:speed 25 .
+dnd:species-rock-gnome a dnd:Species ; rdfs:label "Gnomo de las rocas"@es , "Rock Gnome"@en ;
+    dnd:subspeciesOf dnd:species-gnome ; dnd:size dnd:size-small ; dnd:speed 25 .
+dnd:species-half-elf a dnd:Species ; rdfs:label "Semielfo"@es , "Half-Elf"@en ;
+    schema:description "Herederos de dos pueblos, sociables y versátiles."@es , "Heirs of two peoples, sociable and versatile."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-half-orc a dnd:Species ; rdfs:label "Semiorco"@es , "Half-Orc"@en ;
+    schema:description "Fuertes y tenaces, difíciles de abatir."@es , "Strong and tenacious, hard to bring down."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 .
+dnd:species-tiefling a dnd:Species ; rdfs:label "Tiflin"@es , "Tiefling"@en ;
+    schema:description "Humanos marcados por una herencia infernal; resisten el fuego."@es , "Humans marked by an infernal heritage; resist fire."@en ;
+    dnd:size dnd:size-medium ; dnd:speed 30 ; dnd:damageResistance dnd:dmg-fire .
+
+#################################################################
+# Trasfondos del SRD / SRD backgrounds
+#################################################################
+
+dnd:background-acolyte a dnd:Background ; rdfs:label "Acólito"@es , "Acolyte"@en ;
+    schema:description "Criado al servicio de un templo, conoce sus ritos y a sus fieles."@es , "Raised in a temple's service, knows its rites and faithful."@en ;
+    dnd:skillProficiency dnd:skill-insight , dnd:skill-religion .
+
+#################################################################
+# Conjuros / Spells
+#################################################################
+
+# --- Trucos (nivel 0) / Cantrips (level 0) ---
+dnd:spell-fire-bolt a dnd:Spell ; rdfs:label "Rayo de fuego"@es , "Fire Bolt"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-fire ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Lanza una mota ardiente contra un objetivo a distancia."@es , "Hurls a fiery mote at a distant target."@en .
+dnd:spell-light a dnd:Spell ; rdfs:label "Luz"@es , "Light"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Hace que un objeto brille como una antorcha."@es , "Makes an object shine like a torch."@en .
+dnd:spell-mage-hand a dnd:Spell ; rdfs:label "Mano de mago"@es , "Mage Hand"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-conjuration ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Una mano espectral manipula objetos ligeros a distancia."@es , "A spectral hand handles light objects at range."@en .
+dnd:spell-prestidigitation a dnd:Spell ; rdfs:label "Prestidigitación"@es , "Prestidigitation"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-transmutation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Pequeños trucos mágicos: limpiar, encender, dar sabor."@es , "Minor magical tricks: cleaning, lighting, flavouring."@en .
+dnd:spell-sacred-flame a dnd:Spell ; rdfs:label "Llama sagrada"@es , "Sacred Flame"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-radiant ;
+    dnd:spellOfClass dnd:class-cleric ;
+    schema:description "Un resplandor divino desciende sobre una criatura."@es , "Divine radiance descends on a creature."@en .
+dnd:spell-eldritch-blast a dnd:Spell ; rdfs:label "Descarga sobrenatural"@es , "Eldritch Blast"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-force ;
+    dnd:spellOfClass dnd:class-warlock ;
+    schema:description "Un haz de energía crepitante golpea a un objetivo."@es , "A beam of crackling energy strikes a target."@en .
+dnd:spell-vicious-mockery a dnd:Spell ; rdfs:label "Burla cruel"@es , "Vicious Mockery"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-enchantment ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-psychic ;
+    dnd:spellOfClass dnd:class-bard ;
+    schema:description "Insultos cargados de magia que hieren la mente."@es , "Magic-laced insults that wound the mind."@en .
+dnd:spell-guidance a dnd:Spell ; rdfs:label "Orientación divina"@es , "Guidance"@en ;
+    dnd:spellLevel 0 ; dnd:spellSchool dnd:school-divination ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-cleric , dnd:class-druid ;
+    schema:description "Un aliado suma un pequeño dado a una prueba."@es , "An ally adds a small die to one check."@en .
+
+# --- Nivel 1 / Level 1 ---
+dnd:spell-magic-missile a dnd:Spell ; rdfs:label "Proyectil mágico"@es , "Magic Missile"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-force ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Dardos de energía que nunca fallan."@es , "Darts of energy that never miss."@en .
+dnd:spell-cure-wounds a dnd:Spell ; rdfs:label "Curar heridas"@es , "Cure Wounds"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-druid , dnd:class-paladin , dnd:class-ranger ;
+    schema:description "Un toque devuelve puntos de golpe."@es , "A touch restores hit points."@en .
+dnd:spell-healing-word a dnd:Spell ; rdfs:label "Palabra de curación"@es , "Healing Word"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción adicional / 1 bonus action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-druid ;
+    schema:description "Una palabra pronunciada a distancia cura un poco."@es , "A word spoken at range heals a little."@en .
+dnd:spell-shield a dnd:Spell ; rdfs:label "Escudo"@es , "Shield"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-abjuration ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 reacción / 1 reaction" ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Barrera invisible que sube la CA hasta el siguiente turno."@es , "Invisible barrier raising AC until the next turn."@en .
+dnd:spell-bless a dnd:Spell ; rdfs:label "Bendición"@es , "Bless"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-enchantment ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-cleric , dnd:class-paladin ;
+    schema:description "Hasta tres aliados suman un dado a ataques y salvaciones."@es , "Up to three allies add a die to attacks and saves."@en .
+dnd:spell-detect-magic a dnd:Spell ; rdfs:label "Detectar magia"@es , "Detect Magic"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-divination ; dnd:concentration true ; dnd:ritual true ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-druid , dnd:class-paladin , dnd:class-ranger , dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Percibe auras mágicas cercanas."@es , "Senses nearby magical auras."@en .
+dnd:spell-identify a dnd:Spell ; rdfs:label "Identificar"@es , "Identify"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-divination ; dnd:concentration false ; dnd:ritual true ;
+    dnd:castingTime "1 minuto / 1 minute" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-wizard ;
+    schema:description "Revela las propiedades de un objeto mágico."@es , "Reveals the properties of a magic item."@en .
+dnd:spell-sleep a dnd:Spell ; rdfs:label "Dormir"@es , "Sleep"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-enchantment ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Sume en un sueño mágico a criaturas débiles."@es , "Puts weak creatures into a magical slumber."@en .
+dnd:spell-charm-person a dnd:Spell ; rdfs:label "Hechizar persona"@es , "Charm Person"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-enchantment ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-druid , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Un humanoide te considera un amigo durante un rato."@es , "A humanoid regards you as a friend for a while."@en .
+dnd:spell-thunderwave a dnd:Spell ; rdfs:label "Onda atronadora"@es , "Thunderwave"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-thunder ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-druid , dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Una onda de fuerza sonora empuja y daña."@es , "A wave of sonic force pushes and harms."@en .
+dnd:spell-hunters-mark a dnd:Spell ; rdfs:label "Marca del cazador"@es , "Hunter's Mark"@en ;
+    dnd:spellLevel 1 ; dnd:spellSchool dnd:school-divination ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción adicional / 1 bonus action" ;
+    dnd:spellOfClass dnd:class-ranger ;
+    schema:description "Marca una presa: más daño y más fácil de rastrear."@es , "Marks a quarry: extra damage and easier tracking."@en .
+
+# --- Nivel 2 / Level 2 ---
+dnd:spell-hold-person a dnd:Spell ; rdfs:label "Inmovilizar persona"@es , "Hold Person"@en ;
+    dnd:spellLevel 2 ; dnd:spellSchool dnd:school-enchantment ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-druid , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Paraliza a un humanoide que falle la salvación."@es , "Paralyses a humanoid that fails its save."@en .
+dnd:spell-misty-step a dnd:Spell ; rdfs:label "Paso brumoso"@es , "Misty Step"@en ;
+    dnd:spellLevel 2 ; dnd:spellSchool dnd:school-conjuration ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción adicional / 1 bonus action" ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Te teletransportas a corta distancia entre jirones de niebla."@es , "You teleport a short way amid wisps of mist."@en .
+dnd:spell-invisibility a dnd:Spell ; rdfs:label "Invisibilidad"@es , "Invisibility"@en ;
+    dnd:spellLevel 2 ; dnd:spellSchool dnd:school-illusion ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Una criatura se vuelve invisible hasta que ataca."@es , "A creature turns invisible until it attacks."@en .
+dnd:spell-spiritual-weapon a dnd:Spell ; rdfs:label "Arma espiritual"@es , "Spiritual Weapon"@en ;
+    dnd:spellLevel 2 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción adicional / 1 bonus action" ; dnd:damageType dnd:dmg-force ;
+    dnd:spellOfClass dnd:class-cleric ;
+    schema:description "Un arma flotante de energía ataca a tu orden."@es , "A floating weapon of energy attacks on your command."@en .
+
+# --- Nivel 3 / Level 3 ---
+dnd:spell-fireball a dnd:Spell ; rdfs:label "Bola de fuego"@es , "Fireball"@en ;
+    dnd:spellLevel 3 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-fire ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Una explosión de llamas envuelve una zona amplia."@es , "A burst of flame engulfs a wide area."@en .
+dnd:spell-counterspell a dnd:Spell ; rdfs:label "Contraconjuro"@es , "Counterspell"@en ;
+    dnd:spellLevel 3 ; dnd:spellSchool dnd:school-abjuration ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 reacción / 1 reaction" ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Interrumpe un conjuro mientras se lanza."@es , "Interrupts a spell as it is cast."@en .
+dnd:spell-dispel-magic a dnd:Spell ; rdfs:label "Disipar magia"@es , "Dispel Magic"@en ;
+    dnd:spellLevel 3 ; dnd:spellSchool dnd:school-abjuration ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-druid , dnd:class-paladin , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Termina los efectos mágicos sobre un objetivo."@es , "Ends magical effects on a target."@en .
+dnd:spell-revivify a dnd:Spell ; rdfs:label "Revivir"@es , "Revivify"@en ;
+    dnd:spellLevel 3 ; dnd:spellSchool dnd:school-necromancy ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-cleric , dnd:class-paladin ;
+    schema:description "Devuelve la vida a quien acaba de morir."@es , "Brings back someone who has just died."@en .
+
+# --- Nivel 4 / Level 4 ---
+dnd:spell-polymorph a dnd:Spell ; rdfs:label "Polimorfar"@es , "Polymorph"@en ;
+    dnd:spellLevel 4 ; dnd:spellSchool dnd:school-transmutation ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-druid , dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Transforma a una criatura en una bestia."@es , "Transforms a creature into a beast."@en .
+dnd:spell-banishment a dnd:Spell ; rdfs:label "Destierro"@es , "Banishment"@en ;
+    dnd:spellLevel 4 ; dnd:spellSchool dnd:school-abjuration ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-cleric , dnd:class-paladin , dnd:class-sorcerer , dnd:class-warlock , dnd:class-wizard ;
+    schema:description "Envía a una criatura a otro plano."@es , "Sends a creature to another plane."@en .
+
+# --- Nivel 5 / Level 5 ---
+dnd:spell-cone-of-cold a dnd:Spell ; rdfs:label "Cono de frío"@es , "Cone of Cold"@en ;
+    dnd:spellLevel 5 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ; dnd:damageType dnd:dmg-cold ;
+    dnd:spellOfClass dnd:class-sorcerer , dnd:class-wizard ;
+    schema:description "Una ráfaga helada en forma de cono."@es , "A freezing blast shaped as a cone."@en .
+dnd:spell-raise-dead a dnd:Spell ; rdfs:label "Alzar a los muertos"@es , "Raise Dead"@en ;
+    dnd:spellLevel 5 ; dnd:spellSchool dnd:school-necromancy ; dnd:concentration false ; dnd:ritual false ;
+    dnd:castingTime "1 hora / 1 hour" ;
+    dnd:spellOfClass dnd:class-bard , dnd:class-cleric , dnd:class-paladin ;
+    schema:description "Devuelve la vida a alguien muerto hace pocos días."@es , "Restores life to someone dead for a few days."@en .
+dnd:spell-wall-of-force a dnd:Spell ; rdfs:label "Muro de fuerza"@es , "Wall of Force"@en ;
+    dnd:spellLevel 5 ; dnd:spellSchool dnd:school-evocation ; dnd:concentration true ; dnd:ritual false ;
+    dnd:castingTime "1 acción / 1 action" ;
+    dnd:spellOfClass dnd:class-wizard ;
+    schema:description "Una pared invisible e infranqueable."@es , "An invisible, impassable wall."@en .
+
+#################################################################
+# Bestiario (SRD 5.1) / Bestiary (SRD 5.1)
+#################################################################
+
+dnd:monster-goblin a dnd:Monster ; rdfs:label "Trasgo"@es , "Goblin"@en ;
+    schema:description "Humanoide pequeño, ruin y escurridizo que ataca en grupo."@es , "Small, mean, sneaky humanoid that attacks in packs."@en ;
+    dnd:size dnd:size-small ; dnd:creatureType dnd:type-humanoid ; dnd:alignment dnd:align-ne ;
+    dnd:challengeRating 0.25 ; dnd:armorClass 15 ; dnd:hitPointMax 7 ; dnd:speed 30 ;
+    dnd:strength 8 ; dnd:dexterity 14 ; dnd:constitution 10 ; dnd:intelligence 10 ; dnd:wisdom 8 ; dnd:charisma 8 .
+
+dnd:monster-orc a dnd:Monster ; rdfs:label "Orco"@es , "Orc"@en ;
+    schema:description "Saqueador brutal que vive para la guerra."@es , "Brutal raider living for war."@en ;
+    dnd:size dnd:size-medium ; dnd:creatureType dnd:type-humanoid ; dnd:alignment dnd:align-ce ;
+    dnd:challengeRating 0.5 ; dnd:armorClass 13 ; dnd:hitPointMax 15 ; dnd:speed 30 ;
+    dnd:strength 16 ; dnd:dexterity 12 ; dnd:constitution 16 ; dnd:intelligence 7 ; dnd:wisdom 11 ; dnd:charisma 10 .
+
+dnd:monster-skeleton a dnd:Monster ; rdfs:label "Esqueleto"@es , "Skeleton"@en ;
+    schema:description "Huesos animados por magia oscura, obedientes y sin miedo."@es , "Bones animated by dark magic, obedient and fearless."@en ;
+    dnd:size dnd:size-medium ; dnd:creatureType dnd:type-undead ; dnd:alignment dnd:align-le ;
+    dnd:challengeRating 0.25 ; dnd:armorClass 13 ; dnd:hitPointMax 13 ; dnd:speed 30 ;
+    dnd:strength 10 ; dnd:dexterity 14 ; dnd:constitution 15 ; dnd:intelligence 6 ; dnd:wisdom 8 ; dnd:charisma 5 ;
+    dnd:damageVulnerability dnd:dmg-bludgeoning ; dnd:damageImmunity dnd:dmg-poison ;
+    dnd:conditionImmunity dnd:cond-exhaustion , dnd:cond-poisoned .
+
+dnd:monster-zombie a dnd:Monster ; rdfs:label "Zombi"@es , "Zombie"@en ;
+    schema:description "Cadáver tambaleante que se niega a caer."@es , "Shambling corpse that refuses to fall."@en ;
+    dnd:size dnd:size-medium ; dnd:creatureType dnd:type-undead ; dnd:alignment dnd:align-ne ;
+    dnd:challengeRating 0.25 ; dnd:armorClass 8 ; dnd:hitPointMax 22 ; dnd:speed 20 ;
+    dnd:strength 13 ; dnd:dexterity 6 ; dnd:constitution 16 ; dnd:intelligence 3 ; dnd:wisdom 6 ; dnd:charisma 5 ;
+    dnd:damageImmunity dnd:dmg-poison ; dnd:conditionImmunity dnd:cond-poisoned .
+
+dnd:monster-wolf a dnd:Monster ; rdfs:label "Lobo"@es , "Wolf"@en ;
+    schema:description "Cazador en manada que derriba a sus presas."@es , "Pack hunter that knocks its prey down."@en ;
+    dnd:size dnd:size-medium ; dnd:creatureType dnd:type-beast ; dnd:alignment dnd:align-unaligned ;
+    dnd:challengeRating 0.25 ; dnd:armorClass 13 ; dnd:hitPointMax 11 ; dnd:speed 40 ;
+    dnd:strength 12 ; dnd:dexterity 15 ; dnd:constitution 12 ; dnd:intelligence 3 ; dnd:wisdom 12 ; dnd:charisma 6 .
+
+dnd:monster-ogre a dnd:Monster ; rdfs:label "Ogro"@es , "Ogre"@en ;
+    schema:description "Gigantón glotón y de pocas luces."@es , "Gluttonous, dim-witted brute."@en ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-giant ; dnd:alignment dnd:align-ce ;
+    dnd:challengeRating 2.0 ; dnd:armorClass 11 ; dnd:hitPointMax 59 ; dnd:speed 40 ;
+    dnd:strength 19 ; dnd:dexterity 8 ; dnd:constitution 16 ; dnd:intelligence 5 ; dnd:wisdom 7 ; dnd:charisma 7 .
+
+dnd:monster-gelatinous-cube a dnd:Monster ; rdfs:label "Cubo gelatinoso"@es , "Gelatinous Cube"@en ;
+    schema:description "Masa transparente que limpia los pasillos engulléndolo todo."@es , "Transparent mass that scours corridors by engulfing everything."@en ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-ooze ; dnd:alignment dnd:align-unaligned ;
+    dnd:challengeRating 2.0 ; dnd:armorClass 6 ; dnd:hitPointMax 84 ; dnd:speed 15 ;
+    dnd:strength 14 ; dnd:dexterity 3 ; dnd:constitution 20 ; dnd:intelligence 1 ; dnd:wisdom 6 ; dnd:charisma 1 ;
+    dnd:conditionImmunity dnd:cond-blinded , dnd:cond-charmed , dnd:cond-deafened , dnd:cond-exhaustion , dnd:cond-frightened , dnd:cond-prone .
+
+dnd:monster-owlbear a dnd:Monster ; rdfs:label "Osolechuza"@es , "Owlbear"@en ;
+    schema:description "Híbrido feroz de oso y búho."@es , "Ferocious hybrid of bear and owl."@en ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-monstrosity ; dnd:alignment dnd:align-unaligned ;
+    dnd:challengeRating 3.0 ; dnd:armorClass 13 ; dnd:hitPointMax 59 ; dnd:speed 40 ;
+    dnd:strength 20 ; dnd:dexterity 12 ; dnd:constitution 17 ; dnd:intelligence 3 ; dnd:wisdom 12 ; dnd:charisma 7 .
+
+dnd:monster-basilisk a dnd:Monster ; rdfs:label "Basilisco"@es , "Basilisk"@en ;
+    schema:description "Reptil de ocho patas cuya mirada petrifica."@es , "Eight-legged reptile whose gaze petrifies."@en ;
+    dnd:size dnd:size-medium ; dnd:creatureType dnd:type-monstrosity ; dnd:alignment dnd:align-unaligned ;
+    dnd:challengeRating 3.0 ; dnd:armorClass 15 ; dnd:hitPointMax 52 ; dnd:speed 20 ;
+    dnd:strength 16 ; dnd:dexterity 8 ; dnd:constitution 15 ; dnd:intelligence 2 ; dnd:wisdom 8 ; dnd:charisma 7 .
+
+dnd:monster-minotaur a dnd:Monster ; rdfs:label "Minotauro"@es , "Minotaur"@en ;
+    schema:description "Humanoide con cabeza de toro que acecha en laberintos."@es , "Bull-headed humanoid lurking in labyrinths."@en ;
+    rpg:inspiredBy wd:Q129866 ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-monstrosity ; dnd:alignment dnd:align-ce ;
+    dnd:challengeRating 3.0 ; dnd:armorClass 14 ; dnd:hitPointMax 76 ; dnd:speed 40 ;
+    dnd:strength 18 ; dnd:dexterity 11 ; dnd:constitution 16 ; dnd:intelligence 6 ; dnd:wisdom 16 ; dnd:charisma 9 .
+
+dnd:monster-troll a dnd:Monster ; rdfs:label "Trol"@es , "Troll"@en ;
+    schema:description "Gigante voraz que se regenera salvo ante el fuego o el ácido."@es , "Ravenous giant that regenerates unless hit by fire or acid."@en ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-giant ; dnd:alignment dnd:align-ce ;
+    dnd:challengeRating 5.0 ; dnd:armorClass 15 ; dnd:hitPointMax 84 ; dnd:speed 30 ;
+    dnd:strength 18 ; dnd:dexterity 13 ; dnd:constitution 20 ; dnd:intelligence 7 ; dnd:wisdom 9 ; dnd:charisma 7 .
+
+dnd:monster-young-red-dragon a dnd:Monster ; rdfs:label "Dragón rojo joven"@es , "Young Red Dragon"@en ;
+    schema:description "Dragón codicioso y soberbio que exhala fuego."@es , "Greedy, arrogant dragon that breathes fire."@en ;
+    rpg:inspiredBy wd:Q7559 ;
+    dnd:size dnd:size-large ; dnd:creatureType dnd:type-dragon ; dnd:alignment dnd:align-ce ;
+    dnd:challengeRating 10.0 ; dnd:armorClass 18 ; dnd:hitPointMax 178 ; dnd:speed 40 ;
+    dnd:strength 23 ; dnd:dexterity 10 ; dnd:constitution 21 ; dnd:intelligence 14 ; dnd:wisdom 11 ; dnd:charisma 19 ;
+    dnd:damageImmunity dnd:dmg-fire .
+
+dnd:monster-tarrasque a dnd:Monster ; rdfs:label "Tarrasca"@es , "Tarrasque"@en ;
+    schema:description "Coloso legendario que devora todo a su paso."@es , "Legendary colossus devouring everything in its path."@en ;
+    rpg:inspiredBy wd:Q1063874 ;
+    dnd:size dnd:size-gargantuan ; dnd:creatureType dnd:type-monstrosity ; dnd:alignment dnd:align-unaligned ;
+    dnd:challengeRating 30.0 ; dnd:armorClass 25 ; dnd:hitPointMax 676 ; dnd:speed 40 ;
+    dnd:strength 30 ; dnd:dexterity 11 ; dnd:constitution 30 ; dnd:intelligence 3 ; dnd:wisdom 11 ; dnd:charisma 11 ;
+    dnd:damageImmunity dnd:dmg-fire , dnd:dmg-poison ;
+    dnd:conditionImmunity dnd:cond-charmed , dnd:cond-frightened , dnd:cond-paralyzed , dnd:cond-poisoned .

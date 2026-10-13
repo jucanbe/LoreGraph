@@ -1,0 +1,664 @@
+@prefix dnd:     <https://rpg-modules.example.net/dnd5e/ont#> .
+@prefix rpg:     <https://loregraph.example.org/ont/core#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+#################################################################
+# Ontología del módulo D&D 5.ª edición (SRD 5.1)
+# Dungeons & Dragons 5th edition module ontology (SRD 5.1)
+#
+# Contiene material del System Reference Document 5.1 de Wizards of the
+# Coast LLC, bajo licencia CC-BY-4.0. Ver README.md.
+#
+# Decisiones de modelado (resumen):
+# * dnd:Adventurer y dnd:Creature son VARIANTES de rpg:Character: se combinan
+#   con el rol del núcleo (PJ/PNJ). Un PNJ puede ser aventurero (con niveles de
+#   clase) o criatura (con bloque de estadísticas).
+# * dnd:Monster es una ENTRADA DE BESTIARIO (catálogo, vocabulary.ttl), no un
+#   personaje: una criatura concreta de la campaña la referencia con
+#   dnd:statBlock y puede sobrescribir sus valores.
+# * Multiclase: nodo cualificado dnd:ClassLevel (clase + nivel + subclase)
+#   anidado en el personaje con dnd:hasClassLevel. El nivel total y el bonificador
+#   de competencia se DERIVAN por regla (rules/), no se escriben a mano.
+# * Catálogos cerrados y pequeños (alineamientos, habilidades, estados…) son
+#   conceptos SKOS; catálogos ricos (clases, especies, conjuros, monstruos) son
+#   instancias de subclases de rpg:Entity, navegables como entidades de solo lectura.
+#################################################################
+
+<https://rpg-modules.example.net/dnd5e/ont> a owl:Ontology ;
+    rdfs:label "Ontología de D&D 5.ª edición (SRD 5.1)"@es , "D&D 5th edition ontology (SRD 5.1)"@en ;
+    rdfs:comment "Extiende la ontología base con aventureros, criaturas, clases, especies, conjuros y bestiario del SRD 5.1."@es ,
+                 "Extends the core ontology with adventurers, creatures, classes, species, spells and bestiary from the SRD 5.1."@en ;
+    owl:imports <https://loregraph.example.org/ont/core> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:source <https://dnd.wizards.com/resources/systems-reference-document> .
+
+#################################################################
+# Variantes de personaje / Character variants
+#################################################################
+
+dnd:Adventurer a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rpg:variantOf rpg:Character ;
+    rdfs:label "Aventurero"@es , "Adventurer"@en ;
+    rdfs:comment "Personaje con especie, trasfondo y niveles en una o más clases (PJ o PNJ). Se combina con rpg:PlayerCharacter o rpg:NonPlayerCharacter."@es ,
+                 "Character with species, background and levels in one or more classes (PC or NPC). Combined with rpg:PlayerCharacter or rpg:NonPlayerCharacter."@en .
+
+dnd:Creature a owl:Class ;
+    rdfs:subClassOf rpg:Character ;
+    rpg:variantOf rpg:Character ;
+    rdfs:label "Criatura"@es , "Creature"@en ;
+    rdfs:comment "Ser con bloque de estadísticas de monstruo (dragón, minotauro, trasgo…). Puede basarse en una entrada del bestiario con dnd:statBlock."@es ,
+                 "Being with a monster stat block (dragon, minotaur, goblin…). May be based on a bestiary entry through dnd:statBlock."@en .
+
+#################################################################
+# Catálogos / Catalogs (instancias en vocabulary.ttl)
+#################################################################
+
+dnd:CharacterClass a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Clase"@es , "Character class"@en ;
+    rdfs:comment "Clase de personaje del SRD (guerrero, mago…), con su dado de golpe y sus salvaciones."@es ,
+                 "SRD character class (fighter, wizard…), with its hit die and saving throws."@en .
+
+dnd:Subclass a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Subclase"@es , "Subclass"@en ;
+    rdfs:comment "Especialización de una clase (arquetipo, dominio, colegio…). El SRD incluye una por clase."@es ,
+                 "Specialisation of a class (archetype, domain, college…). The SRD includes one per class."@en .
+
+dnd:Species a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Especie"@es , "Species"@en ;
+    rdfs:comment "Especie (llamada «raza» en el SRD 5.1) de un aventurero: enano, elfo, mediano… Las subrazas se enlazan con dnd:subspeciesOf."@es ,
+                 "Species (called \"race\" in the SRD 5.1) of an adventurer: dwarf, elf, halfling… Subraces link with dnd:subspeciesOf."@en .
+
+dnd:Background a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Trasfondo"@es , "Background"@en ;
+    rdfs:comment "Pasado del personaje antes de aventurar; otorga competencias en habilidades."@es ,
+                 "Character's past before adventuring; grants skill proficiencies."@en .
+
+dnd:Spell a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Conjuro"@es , "Spell"@en ;
+    rdfs:comment "Efecto mágico con nivel (0 = truco), escuela y modo de lanzamiento. Las campañas pueden añadir conjuros propios."@es ,
+                 "Magical effect with a level (0 = cantrip), school and casting details. Campaigns may add their own spells."@en .
+
+dnd:Monster a owl:Class ;
+    rdfs:subClassOf rpg:Entity ;
+    rdfs:label "Monstruo (bestiario)"@es , "Monster (bestiary)"@en ;
+    rdfs:comment "Entrada de bestiario: bloque de estadísticas genérico (tipo, tamaño, VD, CA, PG). No es un personaje: las criaturas concretas lo referencian con dnd:statBlock."@es ,
+                 "Bestiary entry: generic stat block (type, size, CR, AC, HP). Not a character: concrete creatures reference it via dnd:statBlock."@en .
+
+#################################################################
+# Nodo cualificado de nivel de clase / Qualified class-level node
+#################################################################
+
+dnd:ClassLevel a owl:Class ;
+    rdfs:label "Nivel de clase"@es , "Class level"@en ;
+    rdfs:comment "Nodo anidado (patrón n-ario) que indica cuántos niveles tiene un personaje en una clase. Uno por clase: permite la multiclase."@es ,
+                 "Nested node (n-ary pattern) stating how many levels a character has in one class. One per class: enables multiclassing."@en .
+
+#################################################################
+# Objetos y lugares / Items and places
+#################################################################
+
+dnd:Weapon a owl:Class ;
+    rdfs:subClassOf rpg:Item ;
+    rdfs:label "Arma"@es , "Weapon"@en ;
+    rdfs:comment "Arma concreta de la campaña, con categoría, dado de daño y tipo de daño."@es ,
+                 "Concrete campaign weapon, with category, damage die and damage type."@en .
+
+dnd:Armor a owl:Class ;
+    rdfs:subClassOf rpg:Item ;
+    rdfs:label "Armadura"@es , "Armor"@en ;
+    rdfs:comment "Armadura o escudo concreto, con categoría y clase de armadura base."@es ,
+                 "Concrete armor or shield, with category and base armor class."@en .
+
+dnd:MagicItem a owl:Class ;
+    rdfs:subClassOf rpg:Item ;
+    rdfs:label "Objeto mágico"@es , "Magic item"@en ;
+    rdfs:comment "Objeto con propiedades mágicas, con rareza y, si procede, vinculación."@es ,
+                 "Item with magical properties, with rarity and, if needed, attunement."@en .
+
+dnd:Dungeon a owl:Class ;
+    rdfs:subClassOf rpg:Place ;
+    rdfs:label "Mazmorra"@es , "Dungeon"@en ;
+    rdfs:comment "Lugar peligroso para explorar: ruinas, cuevas, criptas, laberintos."@es ,
+                 "Dangerous place to explore: ruins, caves, crypts, labyrinths."@en .
+
+dnd:Settlement a owl:Class ;
+    rdfs:subClassOf rpg:Place ;
+    rdfs:label "Asentamiento"@es , "Settlement"@en ;
+    rdfs:comment "Lugar habitado: aldea, pueblo o ciudad."@es ,
+                 "Inhabited place: village, town or city."@en .
+
+#################################################################
+# Características / Ability scores (1–30)
+# Sin rdfs:domain: las usan dnd:Adventurer, dnd:Creature y dnd:Monster.
+# No rdfs:domain: shared by dnd:Adventurer, dnd:Creature and dnd:Monster.
+#################################################################
+
+dnd:strength a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Fuerza"@es , "Strength"@en ;
+    rdfs:comment "Puntuación de Fuerza (1–30): potencia física."@es , "Strength score (1–30): physical power."@en .
+
+dnd:dexterity a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Destreza"@es , "Dexterity"@en ;
+    rdfs:comment "Puntuación de Destreza (1–30): agilidad y reflejos."@es , "Dexterity score (1–30): agility and reflexes."@en .
+
+dnd:constitution a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Constitución"@es , "Constitution"@en ;
+    rdfs:comment "Puntuación de Constitución (1–30): salud y aguante."@es , "Constitution score (1–30): health and stamina."@en .
+
+dnd:intelligence a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Inteligencia"@es , "Intelligence"@en ;
+    rdfs:comment "Puntuación de Inteligencia (1–30): razonamiento y memoria."@es , "Intelligence score (1–30): reasoning and memory."@en .
+
+dnd:wisdom a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Sabiduría"@es , "Wisdom"@en ;
+    rdfs:comment "Puntuación de Sabiduría (1–30): percepción e intuición."@es , "Wisdom score (1–30): perception and insight."@en .
+
+dnd:charisma a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    schema:domainIncludes dnd:Adventurer , dnd:Creature , dnd:Monster ;
+    rdfs:label "Carisma"@es , "Charisma"@en ;
+    rdfs:comment "Puntuación de Carisma (1–30): fuerza de personalidad."@es , "Charisma score (1–30): force of personality."@en .
+
+#################################################################
+# Combate / Combat
+#################################################################
+
+dnd:armorClass a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "clase de armadura"@es , "armor class"@en ;
+    rdfs:comment "Clase de armadura (CA): lo difícil que es acertar a la criatura."@es ,
+                 "Armor class (AC): how hard the creature is to hit."@en .
+
+dnd:hitPointMax a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "puntos de golpe máximos"@es , "hit point maximum"@en ;
+    rdfs:comment "Puntos de golpe (PG) con la salud completa."@es , "Hit points (HP) at full health."@en .
+
+dnd:currentHitPoints a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rpg:isTemporal true ;
+    rdfs:range xsd:integer ;
+    rdfs:label "puntos de golpe actuales"@es , "current hit points"@en ;
+    rdfs:comment "Puntos de golpe que le quedan ahora mismo."@es , "Hit points remaining right now."@en .
+
+dnd:temporaryHitPoints a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "puntos de golpe temporales"@es , "temporary hit points"@en ;
+    rdfs:comment "Colchón de puntos de golpe que se pierde antes que los normales."@es ,
+                 "Buffer of hit points lost before regular ones."@en .
+
+dnd:speed a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "velocidad"@es , "speed"@en ;
+    rdfs:comment "Velocidad caminando, en pies por turno."@es , "Walking speed, in feet per turn."@en .
+
+dnd:size a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "tamaño"@es , "size"@en ;
+    rdfs:comment "Categoría de tamaño (esquema dnd:Sizes)."@es , "Size category (dnd:Sizes scheme)."@en .
+
+dnd:creatureType a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "tipo de criatura"@es , "creature type"@en ;
+    rdfs:comment "Tipo de criatura (esquema dnd:CreatureTypes): humanoide, dragón, muerto viviente…"@es ,
+                 "Creature type (dnd:CreatureTypes scheme): humanoid, dragon, undead…"@en .
+
+dnd:alignment a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "alineamiento"@es , "alignment"@en ;
+    rdfs:comment "Actitud moral y ética (esquema dnd:Alignments)."@es , "Moral and ethical outlook (dnd:Alignments scheme)."@en .
+
+dnd:challengeRating a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "valor de desafío"@es , "challenge rating"@en ;
+    rdfs:comment "Valor de desafío (VD) de 0 a 30; admite fracciones (0.125, 0.25, 0.5)."@es ,
+                 "Challenge rating (CR) from 0 to 30; allows fractions (0.125, 0.25, 0.5)."@en .
+
+dnd:currentCondition a owl:ObjectProperty ;
+    rpg:isTemporal true ;
+    rdfs:range skos:Concept ;
+    rdfs:label "estado actual"@es , "current condition"@en ;
+    rdfs:comment "Estado que sufre ahora (esquema dnd:Conditions): envenenado, derribado…"@es ,
+                 "Condition currently affecting it (dnd:Conditions scheme): poisoned, prone…"@en .
+
+dnd:exhaustionLevel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "nivel de cansancio"@es , "exhaustion level"@en ;
+    rdfs:comment "Niveles de cansancio acumulados (0–6); en 6 la criatura muere."@es ,
+                 "Accumulated exhaustion levels (0–6); at 6 the creature dies."@en .
+
+dnd:deathSaveSuccesses a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "éxitos contra la muerte"@es , "death save successes"@en ;
+    rdfs:comment "Tiradas de salvación contra la muerte superadas (0–3) mientras está a 0 PG."@es ,
+                 "Death saving throws passed (0–3) while at 0 HP."@en .
+
+dnd:deathSaveFailures a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "fallos contra la muerte"@es , "death save failures"@en ;
+    rdfs:comment "Tiradas de salvación contra la muerte falladas (0–3); con 3 muere."@es ,
+                 "Death saving throws failed (0–3); with 3 it dies."@en .
+
+dnd:damageResistance a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "resistencia al daño"@es , "damage resistance"@en ;
+    rdfs:comment "Tipo de daño que le afecta a la mitad (esquema dnd:DamageTypes)."@es ,
+                 "Damage type it takes half damage from (dnd:DamageTypes scheme)."@en .
+
+dnd:damageImmunity a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "inmunidad al daño"@es , "damage immunity"@en ;
+    rdfs:comment "Tipo de daño que no le afecta (esquema dnd:DamageTypes)."@es ,
+                 "Damage type it ignores (dnd:DamageTypes scheme)."@en .
+
+dnd:damageVulnerability a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "vulnerabilidad al daño"@es , "damage vulnerability"@en ;
+    rdfs:comment "Tipo de daño que le afecta el doble (esquema dnd:DamageTypes)."@es ,
+                 "Damage type it takes double damage from (dnd:DamageTypes scheme)."@en .
+
+dnd:conditionImmunity a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "inmunidad a estados"@es , "condition immunity"@en ;
+    rdfs:comment "Estado que no puede sufrir (esquema dnd:Conditions)."@es ,
+                 "Condition it cannot suffer (dnd:Conditions scheme)."@en .
+
+dnd:statBlock a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Creature ; rdfs:range dnd:Monster ;
+    rdfs:label "bloque de estadísticas"@es , "stat block"@en ;
+    rdfs:comment "Entrada del bestiario en la que se basa la criatura. Los valores propios de la criatura tienen prioridad."@es ,
+                 "Bestiary entry the creature is based on. The creature's own values take precedence."@en .
+
+#################################################################
+# Origen y clase / Origin and class
+#################################################################
+
+dnd:species a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range dnd:Species ;
+    rdfs:label "especie"@es , "species"@en ;
+    rdfs:comment "Especie (o subraza) del aventurero."@es , "Species (or subrace) of the adventurer."@en .
+
+dnd:subspeciesOf a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Species ; rdfs:range dnd:Species ;
+    rdfs:label "subraza de"@es , "subrace of"@en ;
+    rdfs:comment "Especie madre de una subraza (p. ej. elfo alto → elfo)."@es ,
+                 "Parent species of a subrace (e.g. high elf → elf)."@en .
+
+dnd:background a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range dnd:Background ;
+    rdfs:label "trasfondo"@es , "background"@en ;
+    rdfs:comment "Trasfondo del aventurero."@es , "Background of the adventurer."@en .
+
+dnd:experiencePoints a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range xsd:integer ;
+    rdfs:label "puntos de experiencia"@es , "experience points"@en ;
+    rdfs:comment "Puntos de experiencia (PX) acumulados."@es , "Accumulated experience points (XP)."@en .
+
+dnd:inspiration a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range xsd:boolean ;
+    rdfs:label "inspiración"@es , "inspiration"@en ;
+    rdfs:comment "Si el personaje tiene inspiración disponible para gastar."@es ,
+                 "Whether the character has inspiration available to spend."@en .
+
+dnd:hasClassLevel a owl:ObjectProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range dnd:ClassLevel ;
+    rdfs:label "niveles de clase"@es , "class levels"@en ;
+    rdfs:comment "Enlaza al aventurero con un nodo dnd:ClassLevel por cada clase que tiene (multiclase)."@es ,
+                 "Links the adventurer to one dnd:ClassLevel node per class it has (multiclassing)."@en .
+
+dnd:classLevelOf a owl:ObjectProperty , owl:FunctionalProperty ;
+    owl:inverseOf dnd:hasClassLevel ;
+    rdfs:domain dnd:ClassLevel ; rdfs:range dnd:Adventurer ;
+    rdfs:label "nivel de clase de"@es , "class level of"@en ;
+    rdfs:comment "Enlace inverso del nodo de nivel de clase a su personaje (se rellena solo)."@es ,
+                 "Backlink from the class-level node to its character (filled automatically)."@en .
+
+dnd:characterClass a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:ClassLevel ; rdfs:range dnd:CharacterClass ;
+    rdfs:label "clase"@es , "class"@en ;
+    rdfs:comment "Clase a la que se refieren los niveles."@es , "Class the levels refer to."@en .
+
+dnd:levels a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:ClassLevel ; rdfs:range xsd:integer ;
+    rdfs:label "niveles"@es , "levels"@en ;
+    rdfs:comment "Número de niveles en esa clase (1–20)."@es , "Number of levels in that class (1–20)."@en .
+
+dnd:subclass a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:ClassLevel ; rdfs:range dnd:Subclass ;
+    rdfs:label "subclase"@es , "subclass"@en ;
+    rdfs:comment "Subclase elegida en esa clase, si ya la tiene."@es , "Subclass chosen in that class, if any yet."@en .
+
+dnd:subclassOf a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Subclass ; rdfs:range dnd:CharacterClass ;
+    rdfs:label "subclase de"@es , "subclass of"@en ;
+    rdfs:comment "Clase a la que pertenece la subclase."@es , "Class the subclass belongs to."@en .
+
+dnd:hitDie a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:CharacterClass ; rdfs:range xsd:integer ;
+    rdfs:label "dado de golpe"@es , "hit die"@en ;
+    rdfs:comment "Caras del dado de golpe de la clase (6, 8, 10 o 12)."@es ,
+                 "Sides of the class hit die (6, 8, 10 or 12)."@en .
+
+dnd:primaryAbility a owl:ObjectProperty ;
+    rdfs:domain dnd:CharacterClass ; rdfs:range skos:Concept ;
+    rdfs:label "característica principal"@es , "primary ability"@en ;
+    rdfs:comment "Característica clave de la clase (esquema dnd:Abilities)."@es ,
+                 "Key ability of the class (dnd:Abilities scheme)."@en .
+
+dnd:classSavingThrow a owl:ObjectProperty ;
+    rdfs:domain dnd:CharacterClass ; rdfs:range skos:Concept ;
+    rdfs:label "salvación de clase"@es , "class saving throw"@en ;
+    rdfs:comment "Tirada de salvación en la que la clase otorga competencia."@es ,
+                 "Saving throw the class grants proficiency in."@en .
+
+#################################################################
+# Competencias / Proficiencies
+#################################################################
+
+dnd:skillProficiency a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "competencia en habilidad"@es , "skill proficiency"@en ;
+    rdfs:comment "Habilidad en la que es competente (esquema dnd:Skills). También la usan los trasfondos."@es ,
+                 "Skill it is proficient in (dnd:Skills scheme). Also used by backgrounds."@en .
+
+dnd:skillExpertise a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "pericia en habilidad"@es , "skill expertise"@en ;
+    rdfs:comment "Habilidad en la que duplica el bonificador de competencia."@es ,
+                 "Skill in which the proficiency bonus is doubled."@en .
+
+dnd:savingThrowProficiency a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "competencia en salvación"@es , "saving throw proficiency"@en ;
+    rdfs:comment "Característica en cuyas tiradas de salvación es competente (esquema dnd:Abilities)."@es ,
+                 "Ability whose saving throws it is proficient in (dnd:Abilities scheme)."@en .
+
+dnd:keyAbility a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "característica asociada"@es , "key ability"@en ;
+    rdfs:comment "Característica que modifica una habilidad (p. ej. Sigilo → Destreza)."@es ,
+                 "Ability that modifies a skill (e.g. Stealth → Dexterity)."@en .
+
+dnd:abbreviation a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "abreviatura"@es , "abbreviation"@en ;
+    rdfs:comment "Abreviatura habitual (FUE, DES… / STR, DEX…)."@es , "Usual abbreviation (FUE, DES… / STR, DEX…)."@en .
+
+#################################################################
+# Lanzamiento de conjuros / Spellcasting
+#################################################################
+
+dnd:spellcastingAbility a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "característica de lanzamiento"@es , "spellcasting ability"@en ;
+    rdfs:comment "Característica con la que lanza conjuros (esquema dnd:Abilities)."@es ,
+                 "Ability used to cast spells (dnd:Abilities scheme)."@en .
+
+dnd:spellSaveDC a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "CD de salvación de conjuros"@es , "spell save DC"@en ;
+    rdfs:comment "Dificultad que deben superar los objetivos de sus conjuros."@es ,
+                 "Difficulty the targets of its spells must beat."@en .
+
+dnd:spellAttackBonus a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "bonificador de ataque de conjuro"@es , "spell attack bonus"@en ;
+    rdfs:comment "Bonificador a las tiradas de ataque con conjuros."@es , "Bonus to spell attack rolls."@en .
+
+dnd:knowsSpell a owl:ObjectProperty ;
+    rdfs:range dnd:Spell ;
+    rdfs:label "conoce el conjuro"@es , "knows spell"@en ;
+    rdfs:comment "Conjuro que conoce o tiene en su libro (incluidos trucos)."@es ,
+                 "Spell it knows or has in its spellbook (cantrips included)."@en .
+
+dnd:preparedSpell a owl:ObjectProperty ;
+    rdfs:range dnd:Spell ;
+    rdfs:label "conjuro preparado"@es , "prepared spell"@en ;
+    rdfs:comment "Conjuro preparado para el día actual."@es , "Spell prepared for the current day."@en .
+
+#################################################################
+# Conjuros (catálogo) / Spells (catalog)
+#################################################################
+
+dnd:spellLevel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range xsd:integer ;
+    rdfs:label "nivel de conjuro"@es , "spell level"@en ;
+    rdfs:comment "Nivel del conjuro, de 0 (truco) a 9."@es , "Spell level, from 0 (cantrip) to 9."@en .
+
+dnd:spellSchool a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range skos:Concept ;
+    rdfs:label "escuela de magia"@es , "school of magic"@en ;
+    rdfs:comment "Escuela a la que pertenece el conjuro (esquema dnd:SpellSchools)."@es ,
+                 "School the spell belongs to (dnd:SpellSchools scheme)."@en .
+
+dnd:concentration a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range xsd:boolean ;
+    rdfs:label "concentración"@es , "concentration"@en ;
+    rdfs:comment "Si mantener el conjuro exige concentración."@es , "Whether keeping the spell requires concentration."@en .
+
+dnd:ritual a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range xsd:boolean ;
+    rdfs:label "ritual"@es , "ritual"@en ;
+    rdfs:comment "Si puede lanzarse como ritual, sin gastar espacio de conjuro."@es ,
+                 "Whether it can be cast as a ritual, without spending a spell slot."@en .
+
+dnd:castingTime a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range xsd:string ;
+    rdfs:label "tiempo de lanzamiento"@es , "casting time"@en ;
+    rdfs:comment "Tiempo necesario para lanzarlo (acción, acción adicional, reacción, minutos…)."@es ,
+                 "Time needed to cast it (action, bonus action, reaction, minutes…)."@en .
+
+dnd:spellOfClass a owl:ObjectProperty ;
+    rdfs:domain dnd:Spell ; rdfs:range dnd:CharacterClass ;
+    rdfs:label "en la lista de"@es , "on the list of"@en ;
+    rdfs:comment "Clase en cuya lista de conjuros aparece."@es , "Class whose spell list includes it."@en .
+
+dnd:damageType a owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "tipo de daño"@es , "damage type"@en ;
+    rdfs:comment "Tipo de daño que inflige un arma o conjuro (esquema dnd:DamageTypes)."@es ,
+                 "Damage type dealt by a weapon or spell (dnd:DamageTypes scheme)."@en .
+
+#################################################################
+# Objetos / Items
+#################################################################
+
+dnd:weaponCategory a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Weapon ; rdfs:range skos:Concept ;
+    rdfs:label "categoría de arma"@es , "weapon category"@en ;
+    rdfs:comment "Sencilla o marcial, cuerpo a cuerpo o a distancia (esquema dnd:WeaponCategories)."@es ,
+                 "Simple or martial, melee or ranged (dnd:WeaponCategories scheme)."@en .
+
+dnd:damageDice a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Weapon ; rdfs:range xsd:string ;
+    rdfs:label "dados de daño"@es , "damage dice"@en ;
+    rdfs:comment "Dados de daño en notación NdM (p. ej. 1d8)."@es , "Damage dice in NdM notation (e.g. 1d8)."@en .
+
+dnd:armorCategory a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Armor ; rdfs:range skos:Concept ;
+    rdfs:label "categoría de armadura"@es , "armor category"@en ;
+    rdfs:comment "Ligera, intermedia, pesada o escudo (esquema dnd:ArmorCategories)."@es ,
+                 "Light, medium, heavy or shield (dnd:ArmorCategories scheme)."@en .
+
+dnd:baseArmorClass a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Armor ; rdfs:range xsd:integer ;
+    rdfs:label "CA base"@es , "base AC"@en ;
+    rdfs:comment "Clase de armadura que otorga (en un escudo, la bonificación)."@es ,
+                 "Armor class it grants (for a shield, the bonus)."@en .
+
+dnd:rarity a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:MagicItem ; rdfs:range skos:Concept ;
+    rdfs:label "rareza"@es , "rarity"@en ;
+    rdfs:comment "Rareza del objeto mágico (esquema dnd:Rarities)."@es , "Magic item rarity (dnd:Rarities scheme)."@en .
+
+dnd:requiresAttunement a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:MagicItem ; rdfs:range xsd:boolean ;
+    rdfs:label "requiere vinculación"@es , "requires attunement"@en ;
+    rdfs:comment "Si hay que vincularse al objeto para usar su magia."@es ,
+                 "Whether one must attune to the item to use its magic."@en .
+
+dnd:weight a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "peso (lb)"@es , "weight (lb)"@en ;
+    rdfs:comment "Peso en libras."@es , "Weight in pounds."@en .
+
+dnd:costGp a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "precio (po)"@es , "cost (gp)"@en ;
+    rdfs:comment "Precio en piezas de oro."@es , "Cost in gold pieces."@en .
+
+#################################################################
+# Lugares / Places
+#################################################################
+
+dnd:population a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Settlement ; rdfs:range xsd:integer ;
+    rdfs:label "población"@es , "population"@en ;
+    rdfs:comment "Número aproximado de habitantes."@es , "Approximate number of inhabitants."@en .
+
+dnd:recommendedLevel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Dungeon ; rdfs:range xsd:integer ;
+    rdfs:label "nivel recomendado"@es , "recommended level"@en ;
+    rdfs:comment "Nivel de personaje aconsejado para explorarla (1–20)."@es ,
+                 "Character level advised to explore it (1–20)."@en .
+
+#################################################################
+# Propiedades derivadas por reglas (grafo <campaña>/derived)
+# Properties derived by rules (graph <campaign>/derived)
+#################################################################
+
+dnd:totalLevel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain dnd:Adventurer ; rdfs:range xsd:integer ;
+    rdfs:label "nivel total"@es , "total level"@en ;
+    rdfs:comment "DERIVADA: suma de los niveles de todas sus clases."@es ,
+                 "DERIVED: sum of the levels of all its classes."@en .
+
+dnd:proficiencyBonus a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "bonificador de competencia"@es , "proficiency bonus"@en ;
+    rdfs:comment "DERIVADA: +2 a +6 según el nivel total (aventureros) o el valor de desafío (criaturas)."@es ,
+                 "DERIVED: +2 to +6 from total level (adventurers) or challenge rating (creatures)."@en .
+
+dnd:abilityModifier a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "modificador de característica"@es , "ability modifier"@en ;
+    rdfs:comment "Superpropiedad de los modificadores derivados: (puntuación − 10) / 2, redondeando hacia abajo."@es ,
+                 "Super-property of derived modifiers: (score − 10) / 2, rounded down."@en .
+
+dnd:strengthModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Fuerza"@es , "Strength modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:strength."@es , "DERIVED from dnd:strength."@en .
+
+dnd:dexterityModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Destreza"@es , "Dexterity modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:dexterity."@es , "DERIVED from dnd:dexterity."@en .
+
+dnd:constitutionModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Constitución"@es , "Constitution modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:constitution."@es , "DERIVED from dnd:constitution."@en .
+
+dnd:intelligenceModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Inteligencia"@es , "Intelligence modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:intelligence."@es , "DERIVED from dnd:intelligence."@en .
+
+dnd:wisdomModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Sabiduría"@es , "Wisdom modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:wisdom."@es , "DERIVED from dnd:wisdom."@en .
+
+dnd:charismaModifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf dnd:abilityModifier ; rdfs:range xsd:integer ;
+    rdfs:label "modificador de Carisma"@es , "Charisma modifier"@en ;
+    rdfs:comment "DERIVADA de dnd:charisma."@es , "DERIVED from dnd:charisma."@en .
+
+#################################################################
+# Esquemas SKOS (conceptos en vocabulary.ttl)
+# SKOS schemes (concepts in vocabulary.ttl)
+#################################################################
+
+dnd:Abilities a skos:ConceptScheme ;
+    skos:prefLabel "Características"@es , "Abilities"@en ;
+    rdfs:comment "Las seis características."@es , "The six abilities."@en .
+dnd:Skills a skos:ConceptScheme ;
+    skos:prefLabel "Habilidades"@es , "Skills"@en ;
+    rdfs:comment "Las dieciocho habilidades, cada una ligada a una característica."@es ,
+                 "The eighteen skills, each tied to an ability."@en .
+dnd:Alignments a skos:ConceptScheme ;
+    skos:prefLabel "Alineamientos"@es , "Alignments"@en ;
+    rdfs:comment "Los nueve alineamientos más «sin alineamiento» para bestias y autómatas."@es ,
+                 "The nine alignments plus \"unaligned\" for beasts and automata."@en .
+dnd:Sizes a skos:ConceptScheme ;
+    skos:prefLabel "Tamaños"@es , "Sizes"@en ;
+    rdfs:comment "Categorías de tamaño, de diminuto a gargantuesco."@es , "Size categories, from tiny to gargantuan."@en .
+dnd:CreatureTypes a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de criatura"@es , "Creature types"@en ;
+    rdfs:comment "Los catorce tipos de criatura."@es , "The fourteen creature types."@en .
+dnd:Conditions a skos:ConceptScheme ;
+    skos:prefLabel "Estados"@es , "Conditions"@en ;
+    rdfs:comment "Estados que alteran las capacidades de una criatura."@es , "Conditions altering a creature's capabilities."@en .
+dnd:DamageTypes a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de daño"@es , "Damage types"@en ;
+    rdfs:comment "Los trece tipos de daño."@es , "The thirteen damage types."@en .
+dnd:SpellSchools a skos:ConceptScheme ;
+    skos:prefLabel "Escuelas de magia"@es , "Schools of magic"@en ;
+    rdfs:comment "Las ocho escuelas de magia."@es , "The eight schools of magic."@en .
+dnd:WeaponCategories a skos:ConceptScheme ;
+    skos:prefLabel "Categorías de arma"@es , "Weapon categories"@en ;
+    rdfs:comment "Sencillas o marciales, cuerpo a cuerpo o a distancia."@es , "Simple or martial, melee or ranged."@en .
+dnd:ArmorCategories a skos:ConceptScheme ;
+    skos:prefLabel "Categorías de armadura"@es , "Armor categories"@en ;
+    rdfs:comment "Ligera, intermedia, pesada y escudo."@es , "Light, medium, heavy and shield."@en .
+dnd:Rarities a skos:ConceptScheme ;
+    skos:prefLabel "Rarezas"@es , "Rarities"@en ;
+    rdfs:comment "Rareza de los objetos mágicos."@es , "Rarity of magic items."@en .
+
+#################################################################
+# Tipos de relación propios (en el esquema del núcleo)
+# Module relationship types (in the core scheme)
+#################################################################
+
+dnd:rel-patron a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "mecenas"@es , "patron"@en ;
+    skos:definition "El destino es mecenas del origen: le encarga trabajos, le paga o le protege."@es ,
+                    "The target is the source's patron: hires, pays or protects them."@en .
+
+dnd:rel-party-member a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "compañero de grupo"@es , "party member"@en ;
+    skos:definition "Ambos viajan en el mismo grupo de aventureros."@es ,
+                    "Both travel in the same adventuring party."@en .
+
+dnd:rel-sworn-enemy a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "enemigo jurado"@es , "sworn enemy"@en ;
+    skos:definition "El origen ha jurado acabar con el destino (venganza, enemigo predilecto…)."@es ,
+                    "The source has sworn to destroy the target (revenge, favored enemy…)."@en .
+
+dnd:rel-rival-party a skos:Concept ; skos:inScheme rpg:RelationshipTypes ;
+    skos:prefLabel "grupo rival"@es , "rival party"@en ;
+    skos:definition "El destino pertenece a otro grupo de aventureros que compite por los mismos encargos o tesoros."@es ,
+                    "The target belongs to another adventuring party competing for the same jobs or treasure."@en .

@@ -1,0 +1,18 @@
+{
+  "todas": "All entities",
+  "buscar": "Search by name or description…",
+  "faccion": "Faction",
+  "cualquierFaccion": "Any faction",
+  "orden": {
+    "etiqueta": "Sort by",
+    "nombre": "Name",
+    "reciente": "Most recent",
+    "relevancia": "Relevance"
+  },
+  "sinResultados": "No entity matches the search",
+  "vacio": "No {{tipo}} yet",
+  "paginacion": "Pagination",
+  "nuevo": "New: {{tipo}}",
+  "variante": "Variant",
+  "sinVariante": "No variant"
+}

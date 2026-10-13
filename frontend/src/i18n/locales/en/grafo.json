@@ -1,0 +1,99 @@
+{
+  "titulo": "Graph",
+  "resumen": "{{nodos}} nodes · {{aristas}} relations",
+  "lienzo": "Campaign graph with {{nodos}} nodes and {{aristas}} relations",
+  "actualizando": "Updating…",
+  "truncado": "Graph truncated: showing the most connected nodes",
+  "exportar": {
+    "png": "Export PNG",
+    "hecho": "Image exported",
+    "error": "Could not export the image"
+  },
+  "filtros": {
+    "titulo": "Graph filters",
+    "tipos": "Types",
+    "faccion": "Faction",
+    "todasFacciones": "All factions",
+    "relaciones": "Relations",
+    "etiquetasAristas": "Relation labels",
+    "limpiar": "Clear filters",
+    "ninguno": "None",
+    "sinOpciones": "No options"
+  },
+  "buscar": {
+    "etiqueta": "Find a node",
+    "placeholder": "Search the graph…",
+    "resultados": "Matching nodes"
+  },
+  "layout": {
+    "titulo": "Layout",
+    "fcose": "Organic",
+    "concentric": "Concentric",
+    "dagre": "Hierarchical",
+    "circle": "Circle",
+    "grid": "Grid"
+  },
+  "epistemico": {
+    "verComo": "View as…",
+    "canon": "Canon (what is true)",
+    "comoPersonaje": "View as {{nombre}}",
+    "chip": "What {{nombre}} believes",
+    "quitar": "Back to canon",
+    "leyenda": "What differs from canon",
+    "falso": "False",
+    "falsoDesc": "believed, but contradicts canon",
+    "no_verificado": "Unverified",
+    "noVerificadoDesc": "believed, but canon neither confirms nor denies it",
+    "desconocido": "Unknown",
+    "desconocidoDesc": "exists only in their mind: not in canon",
+    "confirmado": "Confirmed",
+    "confirmadoDesc": "matches canon"
+  },
+  "centro": {
+    "chip": "Centered on {{nombre}}",
+    "profundidad": "Depth",
+    "saltos_one": "{{count}} hop",
+    "saltos_other": "{{count}} hops",
+    "quitar": "Remove centering"
+  },
+  "tiempo": {
+    "titulo": "Campaign moment",
+    "sinSesiones": "Timeline: record numbered sessions to see how the world evolves.",
+    "enSesion": "After session {{n}}: {{titulo}}",
+    "actual": "Current",
+    "ahora": "Now",
+    "anterior": "Previous session",
+    "siguiente": "Next session",
+    "noEnVista": "The timeline does not apply to a character's view."
+  },
+  "vacio": {
+    "titulo": "The graph is empty",
+    "desc": "Create entities and relations to see them here.",
+    "filtrado": "No node matches",
+    "filtradoDesc": "Try removing a filter or picking another session."
+  },
+  "leyenda": {
+    "titulo": "Legend",
+    "tipos": "Types",
+    "relaciones": "Relations"
+  },
+  "panel": {
+    "titulo": "Selected entity",
+    "centrar": "Center here",
+    "noEntidad": "This node is not a campaign entity.",
+    "sinDescripcion": "No description.",
+    "relaciones": "Relations",
+    "saliente": "outgoing",
+    "entrante": "incoming",
+    "masRelaciones_one": "and {{count}} more relation on its sheet",
+    "masRelaciones_other": "and {{count}} more relations on its sheet"
+  },
+  "mini": {
+    "titulo": "Neighborhood",
+    "profundidad": "Neighborhood depth",
+    "abrir": "Open in graph",
+    "vacio": "No relations",
+    "vacioDesc": "This entity is not connected to others yet.",
+    "lienzo": "Entity neighborhood ({{nodos}} nodes)"
+  }
+}

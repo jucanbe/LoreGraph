@@ -1,0 +1,21 @@
+# Nivel total y bonificador de competencia de los aventureros (multiclase).
+# Total level and proficiency bonus of adventurers (multiclassing).
+#   nivel total = suma de dnd:levels de sus nodos dnd:ClassLevel
+#   bonificador = 2 + floor((nivel total - 1) / 4)   → +2 (1-4) … +6 (17-20)
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT {
+  ?pc dnd:totalLevel ?total ;
+      dnd:proficiencyBonus ?bonus .
+}
+WHERE {
+  {
+    SELECT ?pc (SUM(?n) AS ?sum) WHERE {
+      ?pc a dnd:Adventurer ;
+          dnd:hasClassLevel/dnd:levels ?n .
+    }
+    GROUP BY ?pc
+  }
+  BIND (xsd:integer(?sum) AS ?total)
+  BIND (xsd:integer(2 + FLOOR((?total - 1) / 4)) AS ?bonus)
+}

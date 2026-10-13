@@ -1,0 +1,42 @@
+{
+  "titulo": "Campañas",
+  "subtitulo": "Elige una crónica o empieza una nueva.",
+  "nueva": "Nueva campaña",
+  "entidades_one": "{{count}} entidad",
+  "entidades_other": "{{count}} entidades",
+  "vacio": {
+    "titulo": "Todavía no hay campañas",
+    "descripcion": "Crea una campaña o carga las de ejemplo con «make seed»."
+  },
+  "crear": {
+    "titulo": "Nueva campaña",
+    "descripcion": "Elige el nombre y los módulos de sistema de juego que usará.",
+    "nombre": "Nombre",
+    "resumen": "Descripción",
+    "modulos": "Módulos de juego",
+    "sinModulos": "No hay módulos instalados: la campaña usará solo el núcleo genérico.",
+    "nucleo": "El núcleo genérico (personajes, lugares, facciones…) siempre está incluido.",
+    "extension": "extensión",
+    "hecho": "Campaña «{{nombre}}» creada"
+  },
+  "borrar": {
+    "accion": "Borrar la campaña {{nombre}}",
+    "titulo": "¿Borrar «{{nombre}}»?",
+    "aviso": "Se eliminarán permanentemente todos sus datos, propuestas e historial. No se puede deshacer.",
+    "hecho": "Campaña borrada"
+  },
+  "importar": {
+    "accion": "Importar campaña",
+    "titulo": "Importar campaña",
+    "descripcion": "Sube un ZIP exportado desde LoreGraph. Puedes darle otro identificador o nombre para no chocar con una campaña existente.",
+    "archivo": "Archivo ZIP",
+    "id": "Nuevo identificador (opcional)",
+    "idAyuda": "Si lo dejas vacío se usa el del archivo.",
+    "nombre": "Nuevo nombre (opcional)",
+    "enviar": "Importar",
+    "hecho": "Campaña «{{nombre}}» importada",
+    "resultado": "{{tripletas}} tripletas · {{imagenes}} imágenes",
+    "avisos": "Avisos",
+    "conflicto": "Ya existe una campaña con ese identificador. Escribe otro en «Nuevo identificador»."
+  }
+}

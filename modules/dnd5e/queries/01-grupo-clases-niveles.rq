@@ -1,0 +1,20 @@
+# titulo: Grupo de aventureros: clases y niveles
+# descripcion: Cada personaje jugador con su jugador, especie y clases (multiclase incluida), con el nivel de cada clase y el nivel total.
+PREFIX rpg: <https://loregraph.example.org/ont/core#>
+PREFIX dnd: <https://rpg-modules.example.net/dnd5e/ont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?personaje ?nombre ?jugador ?especie
+       (GROUP_CONCAT(CONCAT(?clase, " ", STR(?niveles)); separator=" / ") AS ?clases)
+       (SUM(?niveles) AS ?nivelTotal)
+WHERE {
+  ?personaje a rpg:PlayerCharacter , dnd:Adventurer ;
+             rdfs:label ?nombre ;
+             dnd:hasClassLevel ?cl .
+  ?cl dnd:characterClass ?c ; dnd:levels ?niveles .
+  ?c rdfs:label ?clase . FILTER (lang(?clase) = "es")
+  OPTIONAL { ?personaje rpg:playedBy/rdfs:label ?jugador }
+  OPTIONAL { ?personaje dnd:species/rdfs:label ?especie . FILTER (lang(?especie) = "es") }
+}
+GROUP BY ?personaje ?nombre ?jugador ?especie
+ORDER BY ?nombre

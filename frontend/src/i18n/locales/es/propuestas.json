@@ -1,0 +1,141 @@
+{
+  "titulo": "Propuestas",
+  "subtitulo": "Cambios propuestos por agentes y personas. Nada entra en el canon sin tu aprobación.",
+  "pendientesTotal_one": "{{count}} pendiente",
+  "pendientesTotal_other": "{{count}} pendientes",
+  "filtro": {
+    "etiqueta": "Filtrar por estado",
+    "pendiente": "Pendientes",
+    "aprobada": "Aprobadas",
+    "rechazada": "Rechazadas",
+    "todas": "Todas"
+  },
+  "estado": {
+    "pendiente": "Pendiente",
+    "aprobada": "Aprobada",
+    "rechazada": "Rechazada"
+  },
+  "lista": {
+    "titulo": "Lista de propuestas",
+    "marcar": "Seleccionar la propuesta «{{peticion}}»",
+    "masEntidades_one": "y {{count}} más",
+    "masEntidades_other": "y {{count}} más"
+  },
+  "lote": {
+    "marcarTodas": "Seleccionar todas las pendientes",
+    "aprobar_one": "Aprobar seleccionada ({{count}})",
+    "aprobar_other": "Aprobar seleccionadas ({{count}})",
+    "resultado": "Lote revisado: {{aprobadas}} aprobadas, {{fallidas}} con errores",
+    "aprobadas_one": "Aprobada:",
+    "aprobadas_other": "Aprobadas:",
+    "fallidas_one": "No se pudo aprobar:",
+    "fallidas_other": "No se pudieron aprobar:",
+    "cerrarResultado": "Cerrar el resumen del lote"
+  },
+  "vacio": {
+    "pendiente": "No hay propuestas pendientes",
+    "aprobada": "No hay propuestas aprobadas",
+    "rechazada": "No hay propuestas rechazadas",
+    "todas": "Todavía no hay propuestas",
+    "ayuda": "Los agentes crean propuestas con la herramienta MCP <code>proponer_triples</code> o desde la página del <enlace>Asistente</enlace>."
+  },
+  "detalle": {
+    "region": "Detalle de la propuesta",
+    "ninguna": "Selecciona una propuesta",
+    "ningunaAyuda": "Verás sus cambios en lenguaje legible y podrás aprobarla, editarla o rechazarla.",
+    "volver": "Volver a la lista",
+    "cargando": "Cargando la propuesta…",
+    "tituloSinResumen": "Propuesta {{id}}",
+    "peticion": "Petición",
+    "destino": "Destino",
+    "cambios": "Cambios",
+    "entidades": "Entidades",
+    "revisada": "Revisada",
+    "notaRevision": "Nota de la revisión"
+  },
+  "agente": {
+    "ia": "Agente IA",
+    "humano": "Persona",
+    "canal": {
+      "mcp": "MCP",
+      "local": "modelo local"
+    }
+  },
+  "destino": {
+    "canon": "Canon",
+    "canonAyuda": "La verdad de la campaña: lo que ha ocurrido de verdad.",
+    "conocimientoDe": "Conocimiento de",
+    "conocimientoAyuda": "Lo que un personaje cree saber (puede no ser cierto)."
+  },
+  "conteo": {
+    "anadidas_one": "{{count}} tripleta añadida",
+    "anadidas_other": "{{count}} tripletas añadidas",
+    "eliminadas_one": "{{count}} tripleta eliminada",
+    "eliminadas_other": "{{count}} tripletas eliminadas"
+  },
+  "severidad": {
+    "violacion": "Error",
+    "aviso": "Aviso",
+    "info": "Información"
+  },
+  "errores": {
+    "valor": "Valor",
+    "tituloValidacion": "Los cambios no son válidos",
+    "tituloRevision": "No se pudo completar la revisión",
+    "tituloPendiente_one": "Esta propuesta tiene {{count}} problema con el canon actual",
+    "tituloPendiente_other": "Esta propuesta tiene {{count}} problemas con el canon actual",
+    "ayudaPendiente": "El canon puede haber cambiado desde que se creó. Corrígela con «Editar y aprobar» o recházala."
+  },
+  "acciones": {
+    "grupo": "Acciones de revisión",
+    "aprobar": "Aprobar",
+    "rechazar": "Rechazar",
+    "editarAprobar": "Editar y aprobar",
+    "aprobarBloqueado": "No se puede aprobar tal cual mientras tenga errores."
+  },
+  "diff": {
+    "titulo": "Cambios",
+    "verIris": "Ver IRIs",
+    "vacio": "Esta propuesta no contiene cambios.",
+    "anadidas_one": "Se añade {{count}} tripleta",
+    "anadidas_other": "Se añaden {{count}} tripletas",
+    "eliminadas_one": "Se elimina {{count}} tripleta",
+    "eliminadas_other": "Se eliminan {{count}} tripletas",
+    "marca": {
+      "anadida": "(se añade)",
+      "eliminada": "(se elimina)"
+    },
+    "nueva": "Nueva"
+  },
+  "revision": {
+    "tituloAprobar": "Aprobar propuesta",
+    "tituloRechazar": "Rechazar propuesta",
+    "ayudaAprobar": "Los cambios se aplicarán al destino y quedarán registrados con su procedencia.",
+    "ayudaRechazar": "La propuesta quedará archivada como rechazada. Explicar el motivo ayuda a los agentes a proponer mejor.",
+    "nota": "Nota (opcional)",
+    "motivo": "Motivo",
+    "notaPlaceholder": "Por qué la apruebas, matices…",
+    "motivoPlaceholder": "Por qué no encaja con la campaña…"
+  },
+  "avisos": {
+    "aprobada": "Propuesta aprobada",
+    "aprobadaEditada": "Propuesta editada y aprobada",
+    "rechazada": "Propuesta rechazada"
+  },
+  "edicion": {
+    "titulo": "Editar y aprobar",
+    "ayuda": "Quita las tripletas que no quieras y corrige los valores literales antes de aprobar.",
+    "anadir_one": "Tripleta a añadir ({{count}})",
+    "anadir_other": "Tripletas a añadir ({{count}})",
+    "eliminar_one": "Tripleta a eliminar ({{count}})",
+    "eliminar_other": "Tripletas a eliminar ({{count}})",
+    "nadaQueAprobar": "No queda ninguna tripleta: no hay nada que aprobar.",
+    "aprobar_one": "Aprobar {{count}} cambio",
+    "aprobar_other": "Aprobar {{count}} cambios",
+    "valorDe": "Valor de {{descripcion}}",
+    "quitar": "Quitar: {{descripcion}}",
+    "restaurar": "Restaurar: {{descripcion}}",
+    "quitarCorto": "Quitar",
+    "restaurarCorto": "Restaurar"
+  }
+}
